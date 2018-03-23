@@ -9,11 +9,11 @@ fun <T> Collection<T>?.isNullOrEmpty(): Boolean {
     return this == null || this.isEmpty()
 }
 
-fun  <T> Collection<T>?.isNotNullOrEmpty(): Boolean {
+fun <T> Collection<T>?.isNotNullOrEmpty(): Boolean {
     return this != null && !this.isEmpty()
 }
 
-fun  <T> MutableCollection<T>?.replace(source: MutableCollection<T>?) {
+fun <T> MutableCollection<T>?.replace(source: MutableCollection<T>?) {
     source?.let {
         this?.clear()
         this?.addAll(it)
