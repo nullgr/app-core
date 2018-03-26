@@ -7,7 +7,6 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.util.AttributeSet
 import android.util.Log
-import android.util.LruCache
 import android.widget.TextView
 import com.nullgr.corelibrary.R
 import java.lang.Exception
@@ -24,22 +23,19 @@ fun init(textView: TextView, context: Context, attrs: AttributeSet?) {
             textView.typeface = typeface
         }
     } catch (ignored: Exception) {
-        Log.d("FontsExtensions", "Error during init font to TextView: $textView")
+        Log.e("FontsExtensions", "Error during init font to TextView: $textView")
     } finally {
         ta.recycle()
     }
 }
 
 fun getTypeface(context: Context, fontFullName: String): Typeface? {
-    var typeface: Typeface? = FontsCache[fontFullName]
     try {
-        typeface = Typeface.createFromAsset(context.assets, fontFullName)
-        FontsCache[fontFullName] = typeface
+        return Typeface.createFromAsset(context.assets, fontFullName)
     } catch (ignored: Exception) {
-        Log.d("FontsExtensions", "Error during load font $fontFullName")
+        Log.e("FontsExtensions", "Error during load font $fontFullName")
     }
-
-    return typeface
+    return null
 }
 
 fun String?.applyFont(context: Context?, fontName: String): CharSequence? {
@@ -57,16 +53,4 @@ fun String?.applyFont(context: Context?, fontName: String): CharSequence? {
 
 fun ActionBar.setSpannableTitle(context: Context?, title: String, fontName: String) {
     this.title = title.applyFont(context, fontName)
-}
-
-object FontsCache {
-    private val lruCache = LruCache<String, Typeface>(8)
-
-    operator fun get(name: String): Typeface {
-        return lruCache[name]
-    }
-
-    operator fun set(name: String, typeface: Typeface) {
-        lruCache.put(name, typeface)
-    }
 }
