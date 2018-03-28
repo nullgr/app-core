@@ -74,12 +74,4 @@ class ResourceProvider(private val context: Context) {
     fun getDensity(): Float {
         return context.resources.displayMetrics.density
     }
-
-    fun px2dp(px: Float): Float {
-        return px / context.resources.displayMetrics.density
-    }
-
-    fun dp2px(dp: Float): Float {
-        return dp * context.resources.displayMetrics.density
-    }
 }
