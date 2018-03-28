@@ -1,4 +1,4 @@
-package com.nullgr.corelibrary.widgets.extensions
+package com.nullgr.corelibrary.ui
 
 import android.view.View
 import android.view.ViewGroup
