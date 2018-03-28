@@ -1,11 +1,9 @@
 package com.nullgr.corelibrary.resources
 
 import android.content.Context
-import android.graphics.Point
 import android.graphics.drawable.Drawable
 import android.support.annotation.*
 import android.support.v4.content.ContextCompat
-import android.view.WindowManager
 
 /**
  * Resource provider serves to provide any resource from context
@@ -50,13 +48,6 @@ class ResourceProvider(private val context: Context) {
 
     fun getPxSize(@DimenRes resId: Int): Int {
         return context.resources.getDimensionPixelSize(resId)
-    }
-
-    fun getDisplaySize(): Pair<Int, Int> {
-        val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val size = Point()
-        windowManager.defaultDisplay.getSize(size)
-        return Pair(size.x, size.y)
     }
 
     fun getBoolean(@BoolRes resId: Int): Boolean {
