@@ -79,6 +79,8 @@ dependencies {
     implementation commonDependencies.okHttp
     implementation commonDependencies.okHttpLogger
     implementation commonDependencies.jodaTime
+    implementation commonDependencies.location
+    implementation commonDependencies.rxLocation
 
     implementation commonDependencies.dagger
     kapt commonDependencies.daggerCompiler
