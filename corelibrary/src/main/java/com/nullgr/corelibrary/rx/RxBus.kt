@@ -19,3 +19,7 @@ class RxBus {
 
     val eventsObservable get() = eventsRelay.asObservable()
 }
+
+object SingletonRxBusProvider {
+    val BUS = RxBus()
+}

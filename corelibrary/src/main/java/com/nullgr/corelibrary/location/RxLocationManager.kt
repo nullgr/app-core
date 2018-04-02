@@ -2,7 +2,8 @@ package com.nullgr.corelibrary.location
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.IntentSender
+import android.content.Context
+import android.content.Intent
 import android.location.Location
 import android.support.annotation.RequiresPermission
 import android.util.Log
@@ -12,6 +13,9 @@ import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.nullgr.corelibrary.BuildConfig
+import com.nullgr.corelibrary.location.settings.LocationSettingsChangeEvent
+import com.nullgr.corelibrary.location.settings.LocationSettingsResolveActivity
+import com.nullgr.corelibrary.rx.SingletonRxBusProvider
 import com.nullgr.corelibrary.rx.asObservable
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -21,14 +25,9 @@ import pl.charmas.android.reactivelocation2.ReactiveLocationProvider
 /**
  * Created by Grishko Nikita on 01.02.18.
  */
-//TODO discuss this about implementation in MVVM
-class RxLocationManager(private var context: Activity,
+class RxLocationManager(private var context: Context,
                         private val updatesInterval: Long = 180000,
                         private val updateCount: Int? = null) {
-
-    companion object {
-        private const val REQUEST_CHECK_SETTINGS = 1001
-    }
 
     private val rxLocationProvider: ReactiveLocationProvider by lazy {
         ReactiveLocationProvider(context)
@@ -45,6 +44,7 @@ class RxLocationManager(private var context: Activity,
     private val locationSettingsRequest: LocationSettingsRequest by lazy {
         LocationSettingsRequest.Builder()
                 .addLocationRequest(locationRequest)
+                .setAlwaysShow(true)
                 .build()
     }
 
@@ -72,15 +72,16 @@ class RxLocationManager(private var context: Activity,
         return location.asObservable()
     }
 
-    fun onActivityResult(requestCode: Int, resultCode: Int) {
-        if (requestCode == REQUEST_CHECK_SETTINGS) {
-            if (resultCode == Activity.RESULT_OK) locationsSettingsStatus.accept(Status(LocationSettingsStatusCodes.SUCCESS))
-            else location.accept(LocationExtensions.EMPTY)
-        }
+    fun unBind() {
+        compositeDestroy.clear()
     }
 
-    fun onDestroy() {
-        compositeDestroy.clear()
+    fun getSubscribers(): CompositeDisposable {
+        return compositeDestroy
+    }
+
+    fun getLocation(): Location {
+        return if (location.hasValue()) location.value.emptyIfNull() else LocationExtensions.EMPTY
     }
 
     @SuppressLint("MissingPermission")
@@ -102,12 +103,34 @@ class RxLocationManager(private var context: Activity,
 
     private fun tryToEnableLocationSettings(status: Status) {
         try {
-            status.startResolutionForResult(context, REQUEST_CHECK_SETTINGS)
-        } catch (e: IntentSender.SendIntentException) {
+            if (status.hasResolution()) {
+                context.startActivity(Intent(context, LocationSettingsResolveActivity::class.java)
+                        .apply {
+                            putExtra(LocationSettingsResolveActivity.EXTRA_INTENT_SENDER, status.resolution.intentSender)
+                            addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                        })
+                val eventDisposable = SingletonRxBusProvider.BUS.eventsObservable
+                        .filter { it is LocationSettingsChangeEvent }
+                        .map { it as LocationSettingsChangeEvent }
+                        .subscribe(
+                                {
+                                    processSettingChangeResult(it)
+                                },
+                                {
+                                    location.accept(LocationExtensions.EMPTY)
+                                })
+                compositeDestroy.add(eventDisposable)
+            }
+        } catch (e: Throwable) {
             if (BuildConfig.DEBUG)
-                Log.e(this::class.java.simpleName, "PendingIntent unable to execute request. (%s)", e)
+                Log.e(this::class.java.simpleName, "Unable to start settings resolve activity. (%s)", e)
             location.accept(LocationExtensions.EMPTY)
         }
+    }
+
+    private fun processSettingChangeResult(result: LocationSettingsChangeEvent) {
+        if (result.resultCode == Activity.RESULT_OK) locationsSettingsStatus.accept(Status(LocationSettingsStatusCodes.SUCCESS))
+        else location.accept(LocationExtensions.EMPTY)
     }
 
     private fun checkLocationSettingsStatus(): Observable<Status> {
