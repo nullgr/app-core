@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.IntentSender
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.ViewStub
 import com.nullgr.corelibrary.rx.SingletonRxBusProvider
 
 /**
@@ -20,10 +19,9 @@ class LocationSettingsResolveActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(ViewStub(this))
         if (intent.hasExtra(EXTRA_INTENT_SENDER)) {
-            val intentSender = intent.getParcelableExtra(EXTRA_INTENT_SENDER) as IntentSender
-            startIntentSenderForResult(intentSender, REQUEST_CHECK_SETTINGS, null as Intent?, 0, 0, 0)
+            val intentSender = intent.extras[EXTRA_INTENT_SENDER] as IntentSender
+            startIntentSenderForResult(intentSender, REQUEST_CHECK_SETTINGS, null, 0, 0, 0)
         } else {
             sendResult(Activity.RESULT_CANCELED)
         }
