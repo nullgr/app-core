@@ -1,5 +1,6 @@
 package com.nullgr.corelibrary.date
 
+import android.util.LruCache
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -7,14 +8,14 @@ import java.util.*
  * Created by Grishko Nikita on 01.02.18.
  */
 object SimpleDateFormatterCache {
-    private val cache = WeakHashMap<String, SimpleDateFormat?>()
+    private val cache = LruCache<String, SimpleDateFormat?>(16)
 
     operator fun get(name: String): SimpleDateFormat? {
         return cache[name]
     }
 
     operator fun set(name: String, typeface: SimpleDateFormat) {
-        cache[name] = typeface
+        cache.put(name, typeface)
     }
 }
 
