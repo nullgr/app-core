@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AndroidCore</string>
+    <string name="title_location_example">RxLocationManager example</string>
+    <string name="mask_location_result">Update № %d\nDetected: %s</string>
+    <string name="error_empty_location">Unable to get location</string>
+    <string name="permission_not_granted">Permission %s not granted</string>
 </resources>

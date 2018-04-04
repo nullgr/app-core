@@ -2,33 +2,34 @@ package com.nullgr.corelibrary.location
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.IntentSender
+import android.content.Context
+import android.content.Intent
 import android.location.Location
 import android.support.annotation.RequiresPermission
-import android.util.Log
-import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsStatusCodes
-import com.jakewharton.rxrelay2.BehaviorRelay
-import com.nullgr.corelibrary.BuildConfig
-import com.nullgr.corelibrary.rx.asObservable
+import com.nullgr.corelibrary.location.settings.LocationSettingsChangeEvent
+import com.nullgr.corelibrary.location.settings.LocationSettingsResolveActivity
+import com.nullgr.corelibrary.rx.SingletonRxBusProvider
 import io.reactivex.Observable
-import io.reactivex.disposables.CompositeDisposable
 import pl.charmas.android.reactivelocation2.ReactiveLocationProvider
 
 
 /**
  * Created by Grishko Nikita on 01.02.18.
+ *
+ * Simple facade above [ReactiveLocationProvider] to receive location - both LastKnown and Updated.
+ * Also it checks and handle location settings state.
+ *
+ * @property context - Any context
+ * @property updatesInterval - interval between location updates in millis (default is 180000 ms.)
+ * @property updateCount - integer number of updates or **null** if need to update all time
+ * @constructor creates new instance of [RxLocationManager]
  */
-//TODO discuss this about implementation in MVVM
-class RxLocationManager(private var context: Activity,
+class RxLocationManager(private var context: Context,
                         private val updatesInterval: Long = 180000,
                         private val updateCount: Int? = null) {
-
-    companion object {
-        private const val REQUEST_CHECK_SETTINGS = 1001
-    }
 
     private val rxLocationProvider: ReactiveLocationProvider by lazy {
         ReactiveLocationProvider(context)
@@ -45,83 +46,45 @@ class RxLocationManager(private var context: Activity,
     private val locationSettingsRequest: LocationSettingsRequest by lazy {
         LocationSettingsRequest.Builder()
                 .addLocationRequest(locationRequest)
+                .setAlwaysShow(true)
                 .build()
     }
 
-    private var locationsSettingsStatus = BehaviorRelay.create<Status>()
-    private var location = BehaviorRelay.create<Location>()
-
-    private val compositeDestroy = CompositeDisposable()
-
+    /**
+     * Check location settings status and request location updates
+     * @return Observable that serves location updates
+     */
     @SuppressLint("MissingPermission")
     @RequiresPermission(android.Manifest.permission.ACCESS_FINE_LOCATION)
     fun requestLocation(): Observable<Location> {
-        val disposableLocationStatus = checkLocationSettingsStatus()
-                .subscribe(
-                        {
-                            when (it.statusCode) {
-                                LocationSettingsStatusCodes.SUCCESS -> resolveLocationRequest()
-                                LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> tryToEnableLocationSettings(it)
-                                LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> location.accept(LocationExtensions.EMPTY)
+        return rxLocationProvider.checkLocationSettings(locationSettingsRequest)
+                .flatMap {
+                    when (it.status.statusCode) {
+                        LocationSettingsStatusCodes.SUCCESS -> locationObservable()
+                        LocationSettingsStatusCodes.RESOLUTION_REQUIRED ->
+                            Observable.fromCallable {
+                                context.startActivity(Intent(context, LocationSettingsResolveActivity::class.java)
+                                        .apply {
+                                            putExtra(LocationSettingsResolveActivity.EXTRA_INTENT_SENDER, it.status.resolution.intentSender)
+                                            addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                                        })
+
+                            }.flatMap {
+                                SingletonRxBusProvider.BUS.eventsObservable
+                                        .filter { it is LocationSettingsChangeEvent }
+                                        .map { it as LocationSettingsChangeEvent }
+                                        .flatMap {
+                                            when (it.resultCode) {
+                                                Activity.RESULT_OK -> locationObservable()
+                                                else -> Observable.just(LocationExtensions.EMPTY)
+                                            }
+                                        }
                             }
-                        },
-                        {
-                            location.accept(LocationExtensions.EMPTY)
-                        })
-        compositeDestroy.add(disposableLocationStatus)
-        return location.asObservable()
-    }
-
-    fun onActivityResult(requestCode: Int, resultCode: Int) {
-        if (requestCode == REQUEST_CHECK_SETTINGS) {
-            if (resultCode == Activity.RESULT_OK) locationsSettingsStatus.accept(Status(LocationSettingsStatusCodes.SUCCESS))
-            else location.accept(LocationExtensions.EMPTY)
-        }
-    }
-
-    fun onDestroy() {
-        compositeDestroy.clear()
+                        else -> Observable.just(LocationExtensions.EMPTY)
+                    }
+                }
     }
 
     @SuppressLint("MissingPermission")
-    private fun resolveLocationRequest() {
-        val lastKnownLocationDisposable = rxLocationProvider.lastKnownLocation
-                .subscribe {
-                    location.accept(it.emptyIfNull())
-                }
-
-        val updatedLocationDisposable = rxLocationProvider.getUpdatedLocation(locationRequest)
-                .subscribe({
-                    location.accept(it.emptyIfNull())
-                }, {
-                    location.accept(LocationExtensions.EMPTY)
-                })
-
-        compositeDestroy.addAll(lastKnownLocationDisposable, updatedLocationDisposable)
-    }
-
-    private fun tryToEnableLocationSettings(status: Status) {
-        try {
-            status.startResolutionForResult(context, REQUEST_CHECK_SETTINGS)
-        } catch (e: IntentSender.SendIntentException) {
-            if (BuildConfig.DEBUG)
-                Log.e(this::class.java.simpleName, "PendingIntent unable to execute request. (%s)", e)
-            location.accept(LocationExtensions.EMPTY)
-        }
-    }
-
-    private fun checkLocationSettingsStatus(): Observable<Status> {
-        val disposableSettings = rxLocationProvider.checkLocationSettings(locationSettingsRequest)
-                .subscribe(
-                        {
-                            locationsSettingsStatus.accept(it.status
-                                    ?: Status(LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE))
-                        },
-                        {
-                            locationsSettingsStatus.accept(Status(LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE))
-                        }
-                )
-        compositeDestroy.add(disposableSettings)
-        return locationsSettingsStatus.asObservable()
-    }
+    private fun locationObservable() = Observable.merge(rxLocationProvider.lastKnownLocation, rxLocationProvider.getUpdatedLocation(locationRequest))
 }

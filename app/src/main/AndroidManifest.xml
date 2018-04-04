@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".location.RxLocationManagerExampleActivity" />
+        <!-- declare this activity in your manifest file to use RxLocationManager -->
+        <activity android:name="com.nullgr.corelibrary.location.settings.LocationSettingsResolveActivity" />
     </application>
 
 </manifest>
