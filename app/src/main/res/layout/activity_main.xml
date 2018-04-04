@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
     tools:context="com.nullgr.androidcore.MainActivity">
 
-    <Button
-        android:id="@+id/buttonLocationExample"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/title_location_example"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/buttonLocationExample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_location_example" />
+
+        <Button
+            android:id="@+id/buttonCommonIntentsExample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_intents_example" />
+
+    </LinearLayout>
+
+</ScrollView>

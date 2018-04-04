@@ -3,7 +3,9 @@ package com.nullgr.androidcore
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.nullgr.androidcore.intents.CommonIntentsExampleActivity
 import com.nullgr.androidcore.location.RxLocationManagerExampleActivity
+import com.nullgr.corelibrary.intents.launch
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -12,7 +14,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         buttonLocationExample.setOnClickListener {
-            startActivity(Intent(this@MainActivity, RxLocationManagerExampleActivity::class.java))
+            Intent(this@MainActivity, RxLocationManagerExampleActivity::class.java)
+                    .launch(this)
+        }
+
+        buttonCommonIntentsExample.setOnClickListener {
+            Intent(this, CommonIntentsExampleActivity::class.java)
+                    .launch(this)
         }
     }
 }

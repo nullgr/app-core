@@ -68,6 +68,7 @@ dependencies {
     implementation commonDependencies.supportCardView
     implementation commonDependencies.supportvectorDrawable
     implementation commonDependencies.supportConstraint
+    implementation commonDependencies.supportCustomTabs
     implementation commonDependencies.javaxAnnotation
     implementation commonDependencies.javaxInject
     implementation commonDependencies.rxKotlin

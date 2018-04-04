@@ -8,6 +8,7 @@ import android.support.annotation.RequiresPermission
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsStatusCodes
+import com.nullgr.corelibrary.intents.launch
 import com.nullgr.corelibrary.location.settings.LocationSettingsChangeEvent
 import com.nullgr.corelibrary.location.settings.LocationSettingsResolveActivity
 import com.nullgr.corelibrary.rx.SingletonRxBusProvider
@@ -65,7 +66,8 @@ class RxLocationManager(private var context: Context,
                                 Observable.just(LocationExtensions.EMPTY)
                             else
                                 Observable.fromCallable {
-                                    context.startActivity(LocationSettingsResolveActivity.newInstance(context, it.status.resolution.intentSender))
+                                    LocationSettingsResolveActivity.newInstance(context, it.status.resolution.intentSender)
+                                            .launch(context)
                                 }.flatMap {
                                     SingletonRxBusProvider.BUS.eventsObservable
                                             .filter { it is LocationSettingsChangeEvent }
