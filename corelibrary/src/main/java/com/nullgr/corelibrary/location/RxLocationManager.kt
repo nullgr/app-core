@@ -3,7 +3,6 @@ package com.nullgr.corelibrary.location
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.location.Location
 import android.support.annotation.RequiresPermission
 import com.google.android.gms.location.LocationRequest
@@ -62,24 +61,22 @@ class RxLocationManager(private var context: Context,
                     when (it.status.statusCode) {
                         LocationSettingsStatusCodes.SUCCESS -> locationObservable()
                         LocationSettingsStatusCodes.RESOLUTION_REQUIRED ->
-                            Observable.fromCallable {
-                                context.startActivity(Intent(context, LocationSettingsResolveActivity::class.java)
-                                        .apply {
-                                            putExtra(LocationSettingsResolveActivity.EXTRA_INTENT_SENDER, it.status.resolution.intentSender)
-                                            addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                                        })
-
-                            }.flatMap {
-                                SingletonRxBusProvider.BUS.eventsObservable
-                                        .filter { it is LocationSettingsChangeEvent }
-                                        .map { it as LocationSettingsChangeEvent }
-                                        .flatMap {
-                                            when (it.resultCode) {
-                                                Activity.RESULT_OK -> locationObservable()
-                                                else -> Observable.just(LocationExtensions.EMPTY)
+                            if (!it.status.hasResolution())
+                                Observable.just(LocationExtensions.EMPTY)
+                            else
+                                Observable.fromCallable {
+                                    context.startActivity(LocationSettingsResolveActivity.newInstance(context, it.status.resolution.intentSender))
+                                }.flatMap {
+                                    SingletonRxBusProvider.BUS.eventsObservable
+                                            .filter { it is LocationSettingsChangeEvent }
+                                            .map { it as LocationSettingsChangeEvent }
+                                            .flatMap {
+                                                when (it.resultCode) {
+                                                    Activity.RESULT_OK -> locationObservable()
+                                                    else -> Observable.just(LocationExtensions.EMPTY)
+                                                }
                                             }
-                                        }
-                            }
+                                }
                         else -> Observable.just(LocationExtensions.EMPTY)
                     }
                 }

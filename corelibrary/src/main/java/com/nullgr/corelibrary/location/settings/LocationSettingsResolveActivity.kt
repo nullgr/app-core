@@ -1,6 +1,7 @@
 package com.nullgr.corelibrary.location.settings
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import android.os.Bundle
@@ -15,6 +16,15 @@ class LocationSettingsResolveActivity : AppCompatActivity() {
     companion object {
         private const val REQUEST_CHECK_SETTINGS = 1001
         const val EXTRA_INTENT_SENDER = "extra_intent_sender"
+
+        fun newInstance(context: Context, intentSender: IntentSender): Intent {
+            return Intent(context, LocationSettingsResolveActivity::class.java)
+                    .apply {
+                        putExtra(LocationSettingsResolveActivity.EXTRA_INTENT_SENDER, intentSender)
+                        addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                    }
+
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
