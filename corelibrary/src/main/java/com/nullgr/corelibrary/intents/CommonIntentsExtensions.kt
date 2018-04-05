@@ -2,7 +2,6 @@ package com.nullgr.corelibrary.intents
 
 import android.Manifest
 import android.app.Activity
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -15,6 +14,7 @@ import android.support.annotation.RequiresPermission
 import android.support.customtabs.CustomTabsIntent
 import android.telephony.PhoneNumberUtils
 import android.text.TextUtils
+import android.widget.Toast
 import java.util.*
 
 
@@ -22,7 +22,7 @@ import java.util.*
  * Created by Grishko Nikita on 01.02.18.
  */
 fun callIntent(number: String): Intent {
-    return Intent(Intent.ACTION_CALL)
+    return Intent(Intent.ACTION_DIAL)
             .setData(Uri.parse(if (number.toLowerCase().startsWith("tel:")) number
             else String.format("tel:%s", PhoneNumberUtils.stripSeparators(number))))
 }
@@ -31,7 +31,7 @@ fun webIntent(url: String): Intent {
     return Intent(Intent.ACTION_VIEW).setData(Uri.parse(url))
 }
 
-fun emailIntent(to: String, subject: String?, body: String?): Intent {
+fun emailIntent(to: String, subject: String? = null, body: String? = null): Intent {
     return Intent(android.content.Intent.ACTION_SEND).apply {
         type = "plain/text"
         putExtra(android.content.Intent.EXTRA_EMAIL, arrayOf(to))
@@ -136,7 +136,7 @@ fun shareListOfImagesAndTextIntent(context: Context, images: List<Bitmap>, text:
     }
 }
 
-fun chormeTabsIntent(@ColorInt tabsColor: Int? = null): CustomTabsIntent {
+fun chromeTabsIntent(@ColorInt tabsColor: Int? = null): CustomTabsIntent {
     val builder = CustomTabsIntent.Builder()
     tabsColor?.let { builder.setToolbarColor(it) }
     return builder.build()
@@ -146,16 +146,30 @@ fun CustomTabsIntent.launch(context: Context, url: String) {
     launchUrl(context, Uri.parse(url))
 }
 
-fun Intent?.launch(context: Context?) {
-    try {
-        this?.let { context?.startActivity(this) }
-    } catch (ignore: ActivityNotFoundException) {
+fun Intent?.launch(context: Context?, noActivityErrorMessage: String? = null) {
+    if (this != null && context != null && this.resolveActivity(context.packageManager) != null) {
+        context.startActivity(this)
+    } else if (!noActivityErrorMessage.isNullOrEmpty()) {
+        Toast.makeText(context, noActivityErrorMessage, Toast.LENGTH_SHORT).show()
     }
 }
 
-fun Intent?.launchForResult(context: Activity?, requestCode: Int) {
-    try {
-        this?.let { context?.startActivityForResult(this, requestCode) }
-    } catch (ignore: ActivityNotFoundException) {
+fun Intent?.launchForResult(context: Activity?, requestCode: Int, noActivityErrorMessage: String? = null) {
+    if (this != null && context != null && this.resolveActivity(context.packageManager) != null) {
+        context.startActivityForResult(this, requestCode)
+    } else if (!noActivityErrorMessage.isNullOrEmpty()) {
+        Toast.makeText(context, noActivityErrorMessage, Toast.LENGTH_SHORT).show()
+    }
+}
+
+fun Intent?.sendBroadcast(context: Context?) {
+    if (this != null && context != null) {
+        context.sendBroadcast(this)
+    }
+}
+
+fun Intent?.launchService(context: Context?) {
+    if (this != null && context != null) {
+        context.startService(this)
     }
 }

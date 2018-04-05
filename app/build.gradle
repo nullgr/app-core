@@ -41,6 +41,7 @@ dependencies {
     implementation commonDependencies.supportCardView
     implementation commonDependencies.supportvectorDrawable
     implementation commonDependencies.supportConstraint
+    implementation commonDependencies.supportCustomTabs
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
