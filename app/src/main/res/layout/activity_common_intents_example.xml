@@ -10,6 +10,20 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/buttonRxSelectContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/btn_select_contact" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginBottom="16dp"
+            android:alpha="0.5"
+            android:background="@color/colorPrimaryDark" />
+
+        <Button
             android:id="@+id/buttonWebSimple"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,6 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/btn_null_gr_share" />
+
     </LinearLayout>
 
 </ScrollView>

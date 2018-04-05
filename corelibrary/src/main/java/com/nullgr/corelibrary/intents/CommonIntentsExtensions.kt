@@ -1,7 +1,9 @@
 package com.nullgr.corelibrary.intents
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -15,6 +17,10 @@ import android.support.customtabs.CustomTabsIntent
 import android.telephony.PhoneNumberUtils
 import android.text.TextUtils
 import android.widget.Toast
+import com.nullgr.corelibrary.intents.rxresult.RxActivityResult
+import com.nullgr.corelibrary.intents.rxresult.RxResolveResultActivity
+import com.nullgr.corelibrary.rx.SingletonRxBusProvider
+import io.reactivex.Observable
 import java.util.*
 
 
@@ -76,10 +82,19 @@ fun contactCardIntent(contactId: String): Intent {
     }
 }
 
-@RequiresPermission(Manifest.permission.READ_CONTACTS)
-fun selectContactIntent(): Intent {
+@SuppressLint("MissingPermission")
+@RequiresPermission(android.Manifest.permission.READ_CONTACTS)
+fun selectContactPhoneIntent(): Intent {
     return Intent(Intent.ACTION_PICK).apply {
         type = ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE
+    }
+}
+
+@SuppressLint("MissingPermission")
+@RequiresPermission(android.Manifest.permission.READ_CONTACTS)
+fun selectContactEmailIntent(): Intent {
+    return Intent(Intent.ACTION_PICK).apply {
+        type = ContactsContract.CommonDataKinds.Email.CONTENT_TYPE
     }
 }
 
@@ -172,4 +187,21 @@ fun Intent?.launchService(context: Context?) {
     if (this != null && context != null) {
         context.startService(this)
     }
+}
+
+fun Intent?.launchForResult(context: Activity?): Observable<RxActivityResult> {
+    return if (this != null && context != null && this.resolveActivity(context.packageManager) != null)
+        Observable
+                .fromCallable {
+                    RxResolveResultActivity
+                            .newInstance(context, this)
+                            .launch(context)
+                }.flatMap {
+                    SingletonRxBusProvider.BUS.eventsObservable
+                            .filter { it is RxActivityResult }
+                            .map { it as RxActivityResult }
+                            .flatMap { Observable.just(it) }
+                }
+    else
+        Observable.error<RxActivityResult>(ActivityNotFoundException())
 }

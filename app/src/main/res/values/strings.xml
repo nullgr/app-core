@@ -14,4 +14,6 @@
     <string name="btn_null_gr_share">Share</string>
     <string name="text_for_share">The only way to make digital revolution — is to make it.</string>
     <string name="error_activity_not_found">Activity not found</string>
+
+    <string name="btn_select_contact">Reactive Select Contact</string>
 </resources>
