@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import static com.nullgr.corelibrary.date.DateFormatExtensionsKt.getOrCreateFormatter;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotSame;
@@ -35,8 +34,8 @@ public class DateFormatExtensionsTest {
 
     @Test
     public void testGetOrCreateFormatterWithTheSameTimeZone() {
-        SimpleDateFormat dateFormat1 = getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, TimeZone.getTimeZone("UTC"));
-        SimpleDateFormat dateFormat2 = getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, TimeZone.getTimeZone("UTC"));
+        SimpleDateFormat dateFormat1 = SimpleDateFormatterCache.INSTANCE.getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, TimeZone.getTimeZone("UTC"), Locale.getDefault());
+        SimpleDateFormat dateFormat2 = SimpleDateFormatterCache.INSTANCE.getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, TimeZone.getTimeZone("UTC"), Locale.getDefault());
         assertSame("getOrCreateFormatter function, must return equals formatter for equal format and time zone",
                 dateFormat1, dateFormat2);
         assertEquals(dateFormat1, dateFormat2);
@@ -44,8 +43,8 @@ public class DateFormatExtensionsTest {
 
     @Test
     public void testGetOrCreateFormatterWithTheDifferentTimeZone() {
-        SimpleDateFormat dateFormat1 = getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, TimeZone.getDefault());
-        SimpleDateFormat dateFormat2 = getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, TimeZone.getTimeZone("UTC"));
+        SimpleDateFormat dateFormat1 = SimpleDateFormatterCache.INSTANCE.getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, TimeZone.getDefault(), Locale.getDefault());
+        SimpleDateFormat dateFormat2 = SimpleDateFormatterCache.INSTANCE.getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, TimeZone.getTimeZone("UTC"), Locale.getDefault());
         assertNotSame("getOrCreateFormatter function, must return different formatter for equal format and diff time zone",
                 dateFormat1, dateFormat2);
         assertNotEquals(dateFormat1, dateFormat2);
@@ -53,8 +52,8 @@ public class DateFormatExtensionsTest {
 
     @Test
     public void testGetOrCreateFormatterWithTheDifferentFormats() {
-        SimpleDateFormat dateFormat1 = getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE_TIME, TimeZone.getDefault());
-        SimpleDateFormat dateFormat2 = getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, TimeZone.getDefault());
+        SimpleDateFormat dateFormat1 = SimpleDateFormatterCache.INSTANCE.getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE_TIME, TimeZone.getDefault(), Locale.getDefault());
+        SimpleDateFormat dateFormat2 = SimpleDateFormatterCache.INSTANCE.getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, TimeZone.getDefault(), Locale.getDefault());
         assertNotSame("getOrCreateFormatter function, must return different formatter for diff format and equal time zone",
                 dateFormat1, dateFormat2);
         assertNotEquals(dateFormat1, dateFormat2);
@@ -62,10 +61,18 @@ public class DateFormatExtensionsTest {
 
     @Test
     public void testGetOrCreateFormatterWithNullTimeZone() {
-        SimpleDateFormat dateFormat1 = getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, null);
-        SimpleDateFormat dateFormat2 = getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, null);
+        SimpleDateFormat dateFormat1 = SimpleDateFormatterCache.INSTANCE.getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, null, Locale.getDefault());
+        SimpleDateFormat dateFormat2 = SimpleDateFormatterCache.INSTANCE.getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, null, Locale.getDefault());
         assertSame("getOrCreateFormatter function, must return equal formatter for equal format and null time zone",
                 dateFormat1, dateFormat2);
         assertEquals(dateFormat1, dateFormat2);
+    }
+
+    @Test
+    public void testGetOrCreateFormatterWithDifferentLocale() {
+        SimpleDateFormat dateFormat1 = SimpleDateFormatterCache.INSTANCE.getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, TimeZone.getDefault(), Locale.ENGLISH);
+        SimpleDateFormat dateFormat2 = SimpleDateFormatterCache.INSTANCE.getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, TimeZone.getDefault(), Locale.FRANCE);
+        assertNotEquals("getOrCreateFormatter function, must return different formatter for different locale",
+                dateFormat1, dateFormat2);
     }
 }
