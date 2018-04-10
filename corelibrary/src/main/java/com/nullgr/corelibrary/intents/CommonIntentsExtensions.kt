@@ -17,15 +17,16 @@ import android.support.customtabs.CustomTabsIntent
 import android.telephony.PhoneNumberUtils
 import android.text.TextUtils
 import android.widget.Toast
-import com.nullgr.corelibrary.intents.rxresult.RxActivityResult
-import com.nullgr.corelibrary.intents.rxresult.RxResolveResultActivity
 import com.nullgr.corelibrary.rx.SingletonRxBusProvider
+import com.nullgr.corelibrary.rx.rxresult.RxActivityResult
+import com.nullgr.corelibrary.rx.rxresult.RxResolveResultActivity
+import com.nullgr.corelibrary.rx.rxresult.delegates.SimpleResultActivityDelegate
 import io.reactivex.Observable
 import java.util.*
 
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * @author Grishko Nikita on 01.02.18.
  */
 fun callIntent(number: String): Intent {
     return Intent(Intent.ACTION_DIAL)
@@ -194,7 +195,7 @@ fun Intent?.launchForResult(context: Activity?): Observable<RxActivityResult> {
         Observable
                 .fromCallable {
                     RxResolveResultActivity
-                            .newInstance(context, this)
+                            .newInstance(context, this, SimpleResultActivityDelegate::class.java)
                             .launch(context)
                 }.flatMap {
                     SingletonRxBusProvider.BUS.eventsObservable
