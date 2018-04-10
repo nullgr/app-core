@@ -12,7 +12,6 @@ import com.nullgr.corelibrary.intents.launch
 import com.nullgr.corelibrary.rx.SingletonRxBusProvider
 import com.nullgr.corelibrary.rx.rxresult.RxActivityResult
 import com.nullgr.corelibrary.rx.rxresult.RxResolveResultActivity
-import com.nullgr.corelibrary.rx.rxresult.delegates.LocationSettingsResultActivityDelegate
 import io.reactivex.Observable
 import pl.charmas.android.reactivelocation2.ReactiveLocationProvider
 
@@ -68,8 +67,7 @@ class RxLocationManager(private var context: Context,
                             else
                                 Observable.fromCallable {
                                     RxResolveResultActivity.newInstance(context,
-                                            it.status.resolution.intentSender,
-                                            LocationSettingsResultActivityDelegate::class.java)
+                                            it.status.resolution.intentSender)
                                             .launch(context)
                                 }.flatMap {
                                     SingletonRxBusProvider.BUS.eventsObservable

@@ -14,23 +14,18 @@ internal class RxResolveResultActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_KEY = "extra_intent"
-        const val EXTRA_DELEGATE_KEY = "extra_delegate_clazz"
 
-        fun <T : BaseResolveResultActivityDelegate> newInstance(context: Context,
-                                                                argument: Parcelable,
-                                                                delegateClazz: Class<T>): Intent {
-
+        fun newInstance(context: Context, argument: Parcelable): Intent {
             return Intent(context, RxResolveResultActivity::class.java)
                     .apply {
                         putExtra(EXTRA_KEY, argument)
-                        putExtra(EXTRA_DELEGATE_KEY, delegateClazz)
                         addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                     }
         }
     }
 
     private val delegate: BaseResolveResultActivityDelegate by lazy {
-        BaseResolveResultActivityDelegate.newInstance(intent.extras[EXTRA_DELEGATE_KEY] as Class<*>, this)
+        BaseResolveResultActivityDelegate.newInstance(intent.extras[EXTRA_KEY], this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,5 +37,4 @@ internal class RxResolveResultActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         delegate.onActivityResult(requestCode, resultCode, data)
     }
-
 }

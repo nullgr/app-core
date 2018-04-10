@@ -8,7 +8,7 @@ import com.nullgr.corelibrary.rx.rxresult.RxResolveResultActivity
 /**
  * Created by Grishko Nikita on 01.02.18.
  */
-internal class SimpleResultActivityDelegate(activity: Activity) : BaseResolveResultActivityDelegate(activity) {
+internal class IntentActivityDelegate(activity: Activity) : BaseResolveResultActivityDelegate(activity) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (activity.intent.hasExtra(RxResolveResultActivity.EXTRA_KEY)) {

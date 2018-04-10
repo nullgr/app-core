@@ -2,6 +2,7 @@ package com.nullgr.corelibrary.rx.rxresult.delegates
 
 import android.app.Activity
 import android.content.Intent
+import android.content.IntentSender
 import android.os.Bundle
 import com.nullgr.corelibrary.rx.SingletonRxBusProvider
 import com.nullgr.corelibrary.rx.rxresult.RxActivityResult
@@ -14,11 +15,11 @@ internal abstract class BaseResolveResultActivityDelegate(val activity: Activity
     companion object {
         const val REQUEST_CODE = 1200
 
-        fun newInstance(clazz: Class<*>, activity: Activity): BaseResolveResultActivityDelegate {
-            return when (clazz) {
-                LocationSettingsResultActivityDelegate::class.java -> LocationSettingsResultActivityDelegate(activity)
-                SimpleResultActivityDelegate::class.java -> SimpleResultActivityDelegate(activity)
-                else -> throw IllegalArgumentException("No delegate for class $clazz")
+        fun newInstance(argument: Any, activity: Activity): BaseResolveResultActivityDelegate {
+            return when (argument::class.java) {
+                IntentSender::class.java -> IntentSenderActivityDelegate(activity)
+                Intent::class.java -> IntentActivityDelegate(activity)
+                else -> throw IllegalArgumentException("No delegate for class ${argument::class.java}")
             }
         }
     }
