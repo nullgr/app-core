@@ -26,7 +26,11 @@ internal abstract class BaseResolveResultActivityDelegate(val activity: Activity
 
     abstract fun onCreate(savedInstanceState: Bundle?)
 
-    abstract fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
+    open fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_CODE) {
+            sendResult(resultCode, data)
+        }
+    }
 
     protected fun sendResult(resultCode: Int, data: Intent?) {
         SingletonRxBusProvider.BUS.eventsConsumer.accept(RxActivityResult(data, resultCode))

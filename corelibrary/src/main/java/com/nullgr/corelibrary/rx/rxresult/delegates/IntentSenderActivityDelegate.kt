@@ -1,7 +1,6 @@
 package com.nullgr.corelibrary.rx.rxresult.delegates
 
 import android.app.Activity
-import android.content.Intent
 import android.content.IntentSender
 import android.os.Bundle
 import com.nullgr.corelibrary.rx.rxresult.RxResolveResultActivity
@@ -17,12 +16,6 @@ internal class IntentSenderActivityDelegate(activity: Activity) : BaseResolveRes
             activity.startIntentSenderForResult(intentSender, REQUEST_CODE, null, 0, 0, 0)
         } else {
             sendResult(Activity.RESULT_CANCELED, null)
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == REQUEST_CODE) {
-            sendResult(resultCode, data)
         }
     }
 }

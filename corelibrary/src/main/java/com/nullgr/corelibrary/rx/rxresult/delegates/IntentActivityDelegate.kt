@@ -18,10 +18,4 @@ internal class IntentActivityDelegate(activity: Activity) : BaseResolveResultAct
             sendResult(Activity.RESULT_CANCELED, null)
         }
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == REQUEST_CODE) {
-            sendResult(resultCode, data)
-        }
-    }
 }
