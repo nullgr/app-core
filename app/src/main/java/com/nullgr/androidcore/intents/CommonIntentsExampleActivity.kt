@@ -5,7 +5,6 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.widget.Toast
 import com.nullgr.androidcore.R
 import com.nullgr.corelibrary.intents.*
@@ -17,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_common_intents_example.*
  */
 class CommonIntentsExampleActivity : AppCompatActivity() {
 
-    lateinit var contactsDisposable: Disposable
+    private lateinit var contactsDisposable: Disposable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +57,7 @@ class CommonIntentsExampleActivity : AppCompatActivity() {
         // startActivityForResult in RX way
         // declare this activity in your manifest file to use
         // CommonIntentsExtensions#launchForResult (need only for rx version of this method)
-        // <activity android : name ="com.nullgr.corelibrary.intents.rxresult.RxResolveResultActivity" />
+        // <activity android : name ="com.nullgr.corelibrary.rx.rxresult.RxResolveResultActivity" />
 
         buttonRxSelectContact.setOnClickListener {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
@@ -68,8 +67,8 @@ class CommonIntentsExampleActivity : AppCompatActivity() {
                         .launchForResult(this)
                         .subscribe(
                                 {
-                                    Log.d(CommonIntentsExampleActivity::class.java.simpleName,
-                                            "resultCode=${it.resultCode}, data=${it.intent}")
+                                    Toast.makeText(this,
+                                            "resultCode=${it.resultCode}, data=${it.intent}", Toast.LENGTH_SHORT).show()
                                 },
                                 { Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show() })
             }

@@ -9,9 +9,9 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.nullgr.corelibrary.intents.launch
-import com.nullgr.corelibrary.location.settings.LocationSettingsChangeEvent
-import com.nullgr.corelibrary.location.settings.LocationSettingsResolveActivity
 import com.nullgr.corelibrary.rx.SingletonRxBusProvider
+import com.nullgr.corelibrary.rx.rxresult.RxActivityResult
+import com.nullgr.corelibrary.rx.rxresult.RxResolveResultActivity
 import io.reactivex.Observable
 import pl.charmas.android.reactivelocation2.ReactiveLocationProvider
 
@@ -66,12 +66,13 @@ class RxLocationManager(private var context: Context,
                                 Observable.just(LocationExtensions.EMPTY)
                             else
                                 Observable.fromCallable {
-                                    LocationSettingsResolveActivity.newInstance(context, it.status.resolution.intentSender)
+                                    RxResolveResultActivity.newInstance(context,
+                                            it.status.resolution.intentSender)
                                             .launch(context)
                                 }.flatMap {
                                     SingletonRxBusProvider.BUS.eventsObservable
-                                            .filter { it is LocationSettingsChangeEvent }
-                                            .map { it as LocationSettingsChangeEvent }
+                                            .filter { it is RxActivityResult }
+                                            .map { it as RxActivityResult }
                                             .flatMap {
                                                 when (it.resultCode) {
                                                     Activity.RESULT_OK -> locationObservable()

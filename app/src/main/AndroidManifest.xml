@@ -18,12 +18,13 @@
         </activity>
 
         <activity android:name=".location.RxLocationManagerExampleActivity" />
-        <!-- declare this activity in your manifest file to use RxLocationManager -->
-        <activity android:name="com.nullgr.corelibrary.location.settings.LocationSettingsResolveActivity" />
+
         <activity android:name=".intents.CommonIntentsExampleActivity" />
 
-        <!-- declare this activity in your manifest file to use CommonIntentsExtensions#launchForResult -->
-        <activity android:name="com.nullgr.corelibrary.intents.rxresult.RxResolveResultActivity" />
+        <!-- declare this activity in your manifest file to use CommonIntentsExtensions#launchForResult
+        or RxLocationManager-->
+        <activity android:name="com.nullgr.corelibrary.rx.rxresult.RxResolveResultActivity" />
+
         <activity android:name=".date.DateUtilsExampleActivity" />
     </application>
 

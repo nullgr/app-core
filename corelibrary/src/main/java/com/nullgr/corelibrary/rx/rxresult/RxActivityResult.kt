@@ -1,4 +1,4 @@
-package com.nullgr.corelibrary.intents.rxresult
+package com.nullgr.corelibrary.rx.rxresult
 
 import android.content.Intent
 
