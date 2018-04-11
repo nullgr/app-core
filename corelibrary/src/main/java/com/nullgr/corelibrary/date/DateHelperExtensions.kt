@@ -2,6 +2,7 @@ package com.nullgr.corelibrary.date
 
 import org.joda.time.DateTime
 import org.joda.time.Interval
+import org.joda.time.LocalDateTime
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -41,7 +42,7 @@ fun Date.isYesterday(): Boolean {
  * @author Grishko Nikita
  */
 infix fun Date.minusMonths(count: Int): Date {
-    return DateTime(this.time).withTimeAtStartOfDay().minusMonths(count).toDate()
+    return DateTime(this.time).minusMonths(count).toDate()
 }
 
 /**
@@ -52,7 +53,7 @@ infix fun Date.minusMonths(count: Int): Date {
  * @author Grishko Nikita
  */
 infix fun Date.plusMonths(count: Int): Date {
-    return DateTime(this.time).withTimeAtStartOfDay().plusMonths(count).toDate()
+    return DateTime(this.time).plusMonths(count).toDate()
 }
 
 /**
@@ -63,7 +64,7 @@ infix fun Date.plusMonths(count: Int): Date {
  * @author Grishko Nikita
  */
 infix fun Date.plusDay(count: Int): Date {
-    return DateTime(this.time).withTimeAtStartOfDay().plusDays(count).toDate()
+    return DateTime(this.time).plusDays(count).toDate()
 }
 
 /**
@@ -74,7 +75,7 @@ infix fun Date.plusDay(count: Int): Date {
  * @author Grishko Nikita
  */
 infix fun Date.minusDay(count: Int): Date {
-    return DateTime(this.time).withTimeAtStartOfDay().minusDays(count).toDate()
+    return DateTime(this.time).minusDays(count).toDate()
 }
 
 /**
@@ -128,7 +129,9 @@ fun Date.minusAny(timeUnit: TimeUnit, count: Long): Date {
  * @author Grishko Nikita
  */
 fun Date.withoutTime(): Date {
-    return DateTime(this.time).withTimeAtStartOfDay().toDate()
+    return LocalDateTime(this.time)
+            .withTime(0, 0, 0, 0)
+            .toDate()
 }
 
 /**

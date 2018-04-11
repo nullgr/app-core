@@ -16,4 +16,16 @@
     <string name="error_activity_not_found">Activity not found</string>
 
     <string name="btn_select_contact">Reactive Select Contact</string>
+
+    <string name="title_date_utils_example">Date utils example</string>
+    <string name="btn_select_date">Select date</string>
+    <string name="btn_reformat_1">Format date to HH:mm</string>
+    <string name="btn_reformat_2">Format date to dd.MM.yyyy HH:mm</string>
+    <string name="btn_reformat_3">Format date to dd LLL yyyy</string>
+
+    <string name="btn_is_today">Check is today date</string>
+    <string name="btn_plus_month">Plus month</string>
+    <string name="btn_minus_3_days">Minus 3 days</string>
+    <string name="btn_without_time">Without time</string>
+    <string name="btn_ok">OK</string>
 </resources>

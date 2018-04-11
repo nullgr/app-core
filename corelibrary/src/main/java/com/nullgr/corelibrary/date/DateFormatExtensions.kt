@@ -40,17 +40,49 @@ private object SimpleDateFormatterCache {
  * @author Grishko Nikita
  */
 object CommonFormats {
+    /**
+     * Date/time format: dd.MM.yyyy HH:mm:ss
+     */
     const val FORMAT_SIMPLE_DATE_TIME_SECONDS = "dd.MM.yyyy HH:mm:ss"
+    /**
+     * Date/time format: dd.MM.yyyy HH:mm
+     */
     const val FORMAT_SIMPLE_DATE_TIME = "dd.MM.yyyy HH:mm"
+    /**
+     * Date/time format: dd.MM.yyyy
+     */
     const val FORMAT_SIMPLE_DATE = "dd.MM.yyyy"
+    /**
+     * Date/time format: dd LLL yyyy
+     */
     const val FORMAT_DATE_WITH_MONTH_NAME = "dd LLL yyyy"
+    /**
+     * Date/time format: yyyy-MM-dd HH:mm:ss
+     */
     const val FORMAT_STANDARD_DATE_TIME_SECONDS = "yyyy-MM-dd HH:mm:ss"
+    /**
+     * Date/time format: yyyy-MM-dd HH:mm
+     */
     const val FORMAT_STANDARD_DATE_TIME = "yyyy-MM-dd HH:mm"
+    /**
+     * Date/time format: yyyy-MM-dd
+     */
     const val FORMAT_STANDARD_DATE = "yyyy-MM-dd"
+    /**
+     * Date/time format: yyyy-MM-dd'T'HH:mm:ss'Z'
+     */
     const val FORMAT_STANDARD_DATE_FULL_UTC = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+    /**
+     * Date/time format: yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
+     */
     const val FORMAT_STANDARD_DATE_FULL_MILLIS_UTC = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-
+    /**
+     * Date/time format: HH:mm
+     */
     const val FORMAT_TIME = "HH:mm"
+    /**
+     * Date/time format: HH:mm:ss
+     */
     const val FORMAT_TIME_2 = "HH:mm:ss"
 }
 

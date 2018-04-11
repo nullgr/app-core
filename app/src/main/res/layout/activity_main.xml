@@ -23,6 +23,12 @@
             android:layout_height="wrap_content"
             android:text="@string/title_intents_example" />
 
+        <Button
+            android:id="@+id/buttonDateUtilsExample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_date_utils_example" />
+
     </LinearLayout>
 
 </ScrollView>

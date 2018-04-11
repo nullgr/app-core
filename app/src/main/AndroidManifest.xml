@@ -24,6 +24,7 @@
 
         <!-- declare this activity in your manifest file to use CommonIntentsExtensions#launchForResult -->
         <activity android:name="com.nullgr.corelibrary.intents.rxresult.RxResolveResultActivity" />
+        <activity android:name=".date.DateUtilsExampleActivity" />
     </application>
 
 </manifest>
