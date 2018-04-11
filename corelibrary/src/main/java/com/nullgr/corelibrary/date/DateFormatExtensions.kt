@@ -64,7 +64,7 @@ object CommonFormats {
  * @param locale the locale whose date format symbols should be used. Can be null
  *
  * @return formatted date/time [String]
- * 
+ *
  * @author Grishko Nikita
  */
 fun Date.toStringWithFormat(dateFormat: String, @Nullable timeZone: TimeZone? = null, @Nullable locale: Locale? = Locale.getDefault()): String {
@@ -78,6 +78,8 @@ fun Date.toStringWithFormat(dateFormat: String, @Nullable timeZone: TimeZone? = 
  * @param format instance of [SimpleDateFormat]
  *
  * @return formatted date/time [String]
+ *
+ * @author Grishko Nikita
  */
 fun Date.toStringWithFormat(format: SimpleDateFormat): String =
         format.format(this)
@@ -93,6 +95,8 @@ fun Date.toStringWithFormat(format: SimpleDateFormat): String =
  * @param locale the locale whose date format symbols should be used. Can be null
  *
  * @return parsed [Date] object or <b>null</b> if something goes wrong while parsing date
+ *
+ * @author Grishko Nikita
  */
 fun String.toDate(dateFormat: String, @Nullable timeZone: TimeZone? = null, @Nullable locale: Locale? = Locale.getDefault()): Date? {
     return try {
@@ -108,6 +112,8 @@ fun String.toDate(dateFormat: String, @Nullable timeZone: TimeZone? = null, @Nul
  * @param format instance of [SimpleDateFormat]
  *
  * @return parsed [Date] object or <b>null</b> if something goes wrong while parsing date
+ *
+ * @author Grishko Nikita
  */
 fun String.toDate(format: SimpleDateFormat): Date? {
     return try {
