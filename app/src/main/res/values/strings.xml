@@ -16,4 +16,8 @@
     <string name="error_activity_not_found">Activity not found</string>
 
     <string name="btn_select_contact">Reactive Select Contact</string>
+
+    <string name="btn_fonts_and_spans_activity">Fonts and Spans</string>
+    <string name="fonts_example_text">Digital revolution</string>
+    <string name="fonts_example_text_2">Digital revolution. That\'s what we do.</string>
 </resources>

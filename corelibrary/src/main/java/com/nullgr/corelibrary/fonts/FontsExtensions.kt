@@ -3,54 +3,45 @@ package com.nullgr.corelibrary.fonts
 import android.content.Context
 import android.graphics.Typeface
 import android.support.v7.app.ActionBar
-import android.text.Spannable
-import android.text.SpannableString
-import android.util.AttributeSet
 import android.util.Log
-import android.widget.TextView
-import com.nullgr.corelibrary.R
+import android.widget.Toolbar
 import java.lang.Exception
 
 /**
- * Init and provide custom fonts
+ *Provide [Typeface] object, created from ***assets*** by using full path to font in assets.
+ *Simple usage:
+ *```
+ * val typeface = context.getTypeface("font/RobotoBold.otf")
+ *```
+ *@receiver [Context]
+ *@param fontFullName full path to font file in assets directory.
+ *@return created [Typeface] or ***null*** if something went wrong while typeface was creating
  */
-fun init(textView: TextView, context: Context, attrs: AttributeSet?) {
-    val ta = context.obtainStyledAttributes(attrs, R.styleable.TextView, 0, 0)
+fun Context.getTypeface(fontFullName: String): Typeface? {
     try {
-        val fontPath = ta.getString(R.styleable.TextView_fontPath)
-        if (fontPath != null && fontPath.isNotEmpty()) {
-            val typeface = getTypeface(context, fontPath)
-            textView.typeface = typeface
-        }
-    } catch (ignored: Exception) {
-        Log.e("FontsExtensions", "Error during init font to TextView: $textView")
-    } finally {
-        ta.recycle()
-    }
-}
-
-fun getTypeface(context: Context, fontFullName: String): Typeface? {
-    try {
-        return Typeface.createFromAsset(context.assets, fontFullName)
+        return Typeface.createFromAsset(this.assets, fontFullName)
     } catch (ignored: Exception) {
         Log.e("FontsExtensions", "Error during load font $fontFullName")
     }
     return null
 }
 
-fun String?.applyFont(context: Context?, fontName: String): CharSequence? {
-    if (context == null) return this
-    if (this.isNullOrEmpty()) return this
-
-    getTypeface(context, fontName)?.let {
-        val spannableString = SpannableString(this)
-        spannableString.setSpan(TypefaceSpan(context, it), 0, spannableString.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        return spannableString
-    }
-
-    return this
+/** Set [ActionBar]'s title with custom typeface
+ * @receiver [ActionBar]
+ * @param context [Context]
+ * @param title [String] which will be set as title
+ * @param fontFullName - full path to font file in assets directory.
+ */
+fun ActionBar.setSpannableTitle(context: Context?, title: String, fontFullName: String) {
+    this.title = title.applyFont(context, fontFullName)
 }
 
-fun ActionBar.setSpannableTitle(context: Context?, title: String, fontName: String) {
-    this.title = title.applyFont(context, fontName)
+/** Set [Toolbar]'s title with custom typeface
+ * @receiver [Toolbar]
+ * @param context [Context]
+ * @param title [String] which will be set as title
+ * @param fontFullName - full path to font file in assets directory.
+ */
+fun Toolbar.setSpannableTitle(context: Context?, title: String, fontFullName: String) {
+    this.title = title.applyFont(context, fontFullName)
 }
