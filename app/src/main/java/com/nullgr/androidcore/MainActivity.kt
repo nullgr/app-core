@@ -7,6 +7,7 @@ import com.nullgr.androidcore.date.DateUtilsExampleActivity
 import com.nullgr.androidcore.fonts.FontsAndSpansExampleActivity
 import com.nullgr.androidcore.intents.CommonIntentsExampleActivity
 import com.nullgr.androidcore.location.RxLocationManagerExampleActivity
+import com.nullgr.androidcore.resources.ResourcesExampleActivity
 import com.nullgr.corelibrary.intents.launch
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -31,8 +32,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         buttonDateUtilsExample.setOnClickListener {
-            Intent(this, DateUtilsExampleActivity::class.java).
-                    launch(this)
+            Intent(this, DateUtilsExampleActivity::class.java).launch(this)
+        }
+
+        buttonResourcesExample.setOnClickListener {
+            Intent(this, ResourcesExampleActivity::class.java).launch(this)
         }
     }
 }
