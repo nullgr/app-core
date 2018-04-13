@@ -16,6 +16,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".location.RxLocationManagerExampleActivity" />
+
+        <activity android:name=".intents.CommonIntentsExampleActivity" />
+
+        <!-- declare this activity in your manifest file to use CommonIntentsExtensions#launchForResult
+        or RxLocationManager-->
+        <activity android:name="com.nullgr.corelibrary.rx.rxresult.RxResolveResultActivity" />
+
+        <activity android:name=".fonts.FontsAndSpansExampleActivity" />
+
+        <activity android:name=".date.DateUtilsExampleActivity" />
+
+        <activity android:name=".resources.ResourcesExampleActivity" />
     </application>
 
 </manifest>

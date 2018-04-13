@@ -17,6 +17,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     compileOptions {
@@ -31,6 +32,14 @@ android {
         }
     }
 
+    lintOptions {
+        abortOnError false
+    }
+    buildToolsVersion '27.0.3'
+
+    packagingOptions {
+        pickFirst 'protobuf.meta'
+    }
 }
 
 configurations.all {
@@ -63,6 +72,7 @@ dependencies {
     implementation commonDependencies.supportCardView
     implementation commonDependencies.supportvectorDrawable
     implementation commonDependencies.supportConstraint
+    implementation commonDependencies.supportCustomTabs
     implementation commonDependencies.javaxAnnotation
     implementation commonDependencies.javaxInject
     implementation commonDependencies.rxKotlin
@@ -75,6 +85,8 @@ dependencies {
     implementation commonDependencies.okHttp
     implementation commonDependencies.okHttpLogger
     implementation commonDependencies.jodaTime
+    implementation commonDependencies.location
+    implementation commonDependencies.rxLocation
 
     implementation commonDependencies.dagger
     kapt commonDependencies.daggerCompiler
