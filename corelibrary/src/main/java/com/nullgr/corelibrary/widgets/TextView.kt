@@ -5,10 +5,12 @@ import android.graphics.Canvas
 import android.support.v7.widget.AppCompatTextView
 import android.util.AttributeSet
 import com.nullgr.corelibrary.R
-import com.nullgr.corelibrary.fonts.init
+import com.nullgr.corelibrary.widgets.extensions.initTypeface
 
 /**
- * TextView which can use custom font
+ * TextView - version of [AppCompatTextView] which can use custom typeface.
+ * Typeface can be set by attributes
+ * @attr ref com.nullgr.corelibrary.R.styleable#TextView_fontPath
  */
 class TextView : AppCompatTextView {
 
@@ -16,21 +18,21 @@ class TextView : AppCompatTextView {
 
     constructor(context: Context) : super(context) {
         if (!isInEditMode) {
-            init(this, context, null)
+            initTypeface(this, context, null)
             initialize(context, null)
         }
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         if (!isInEditMode) {
-            init(this, context, attrs)
+            initTypeface(this, context, attrs)
             initialize(context, attrs)
         }
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         if (!isInEditMode) {
-            init(this, context, attrs)
+            initTypeface(this, context, attrs)
             initialize(context, attrs)
         }
     }

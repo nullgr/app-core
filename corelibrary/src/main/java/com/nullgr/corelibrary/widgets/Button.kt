@@ -3,28 +3,30 @@ package com.nullgr.corelibrary.widgets
 import android.content.Context
 import android.support.v7.widget.AppCompatButton
 import android.util.AttributeSet
-import com.nullgr.corelibrary.fonts.init
+import com.nullgr.corelibrary.widgets.extensions.initTypeface
 
 /**
- * Button which can use custom font
+ * Button - version of [AppCompatButton] which can use custom typeface.
+ * Typeface can be set by attributes
+ * @attr ref com.nullgr.corelibrary.R.styleable#TextView_fontPath
  */
 class Button : AppCompatButton {
 
     constructor(context: Context) : super(context) {
-        if (!isInEditMode()) {
-            init(this, context, null)
+        if (!isInEditMode) {
+            initTypeface(this, context, null)
         }
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        if (!isInEditMode()) {
-            init(this, context, attrs)
+        if (!isInEditMode) {
+            initTypeface(this, context, attrs)
         }
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        if (!isInEditMode()) {
-            init(this, context, attrs)
+        if (!isInEditMode) {
+            initTypeface(this, context, attrs)
         }
     }
 }

@@ -24,6 +24,8 @@
         <!-- declare this activity in your manifest file to use CommonIntentsExtensions#launchForResult
         or RxLocationManager-->
         <activity android:name="com.nullgr.corelibrary.rx.rxresult.RxResolveResultActivity" />
+
+        <activity android:name=".fonts.FontsAndSpansExampleActivity" />
     </application>
 
 </manifest>
