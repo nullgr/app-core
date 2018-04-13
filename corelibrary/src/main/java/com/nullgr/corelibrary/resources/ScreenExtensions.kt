@@ -11,7 +11,7 @@ import android.view.WindowManager
  * @param resources instance of [Resources]
  * @return [Float] value in dpi
  */
-fun Float.pxTodp(resources: Resources): Float {
+fun Float.pxToDp(resources: Resources): Float {
     return this / resources.displayMetrics.density
 }
 
@@ -21,7 +21,7 @@ fun Float.pxTodp(resources: Resources): Float {
  * @param resources instance of [Resources]
  * @return [Float] value in physical pixels
  */
-fun Float.dpTopx(resources: Resources): Float {
+fun Float.dpToPx(resources: Resources): Float {
     return this * resources.displayMetrics.density
 }
 
@@ -31,7 +31,7 @@ fun Float.dpTopx(resources: Resources): Float {
  * @param context instance of [Context]
  * @return [Float] value in dpi
  */
-fun Float.pxTodp(context: Context): Float {
+fun Float.pxToDp(context: Context): Float {
     return this / context.resources.displayMetrics.density
 }
 
@@ -41,7 +41,7 @@ fun Float.pxTodp(context: Context): Float {
  * @param context instance of [Context]
  * @return [Float] value in physical pixels
  */
-fun Float.dpTopx(context: Context): Float {
+fun Float.dpToPx(context: Context): Float {
     return this * context.resources.displayMetrics.density
 }
 
