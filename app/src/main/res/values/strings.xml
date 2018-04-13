@@ -28,4 +28,8 @@
     <string name="btn_minus_3_days">Minus 3 days</string>
     <string name="btn_without_time">Without time</string>
     <string name="btn_ok">OK</string>
+
+    <string name="btn_fonts_and_spans_activity">Fonts and Spans</string>
+    <string name="fonts_example_text">Digital revolution</string>
+    <string name="fonts_example_text_2">Digital revolution. That\'s what we do.</string>
 </resources>

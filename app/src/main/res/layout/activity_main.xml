@@ -29,6 +29,12 @@
             android:layout_height="wrap_content"
             android:text="@string/title_date_utils_example" />
 
+        <Button
+            android:id="@+id/buttonFontsAndSpans"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_fonts_and_spans_activity" />
+
     </LinearLayout>
 
 </ScrollView>
