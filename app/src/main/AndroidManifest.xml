@@ -26,6 +26,8 @@
         <activity android:name="com.nullgr.corelibrary.rx.rxresult.RxResolveResultActivity" />
 
         <activity android:name=".fonts.FontsAndSpansExampleActivity" />
+
+        <activity android:name=".date.DateUtilsExampleActivity" />
     </application>
 
 </manifest>

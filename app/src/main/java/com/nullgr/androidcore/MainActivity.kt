@@ -3,6 +3,7 @@ package com.nullgr.androidcore
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.nullgr.androidcore.date.DateUtilsExampleActivity
 import com.nullgr.androidcore.fonts.FontsAndSpansExampleActivity
 import com.nullgr.androidcore.intents.CommonIntentsExampleActivity
 import com.nullgr.androidcore.location.RxLocationManagerExampleActivity
@@ -27,6 +28,11 @@ class MainActivity : AppCompatActivity() {
         buttonFontsAndSpans.setOnClickListener {
             Intent(this, FontsAndSpansExampleActivity::class.java)
                     .launch(this)
+        }
+
+        buttonDateUtilsExample.setOnClickListener {
+            Intent(this, DateUtilsExampleActivity::class.java).
+                    launch(this)
         }
     }
 }

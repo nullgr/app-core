@@ -36,6 +36,10 @@ android {
         abortOnError false
     }
     buildToolsVersion '27.0.3'
+
+    packagingOptions {
+        pickFirst 'protobuf.meta'
+    }
 }
 
 configurations.all {
