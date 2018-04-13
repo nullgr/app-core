@@ -22,11 +22,11 @@ private object SimpleDateFormatterCache {
         cache.put(name, typeface)
     }
 
-    fun getOrCreateFormatter(dateFormat: String, timeZone: TimeZone? = null, locale: Locale? = Locale.getDefault()): SimpleDateFormat {
-        val key = "$dateFormat${locale?.displayName ?: ""}${timeZone?.displayName ?: ""}"
+    fun getOrCreateFormatter(dateFormat: String, timeZone: TimeZone? = null, locale: Locale = Locale.getDefault()): SimpleDateFormat {
+        val key = "$dateFormat${locale.displayName ?: ""}${timeZone?.displayName ?: ""}"
         var format = this[key]
         if (format == null) {
-            format = SimpleDateFormat(dateFormat, locale ?: Locale.getDefault()).apply {
+            format = SimpleDateFormat(dateFormat, locale).apply {
                 timeZone?.let { this.timeZone = it }
             }
             this[key] = format
@@ -97,7 +97,7 @@ object CommonFormats {
  *
  * @return formatted date/time [String]
  */
-fun Date.toStringWithFormat(dateFormat: String, @Nullable timeZone: TimeZone? = null, @Nullable locale: Locale? = Locale.getDefault()): String {
+fun Date.toStringWithFormat(dateFormat: String, @Nullable timeZone: TimeZone? = null, @Nullable locale: Locale = Locale.getDefault()): String {
     return SimpleDateFormatterCache.getOrCreateFormatter(dateFormat, timeZone, locale)
             .format(this)
 }
@@ -124,7 +124,7 @@ fun Date.toStringWithFormat(format: SimpleDateFormat): String =
  *
  * @return parsed [Date] object or <b>null</b> if something goes wrong while parsing date
  */
-fun String.toDate(dateFormat: String, @Nullable timeZone: TimeZone? = null, @Nullable locale: Locale? = Locale.getDefault()): Date? {
+fun String.toDate(dateFormat: String, @Nullable timeZone: TimeZone? = null, @Nullable locale: Locale = Locale.getDefault()): Date? {
     return try {
         SimpleDateFormatterCache.getOrCreateFormatter(dateFormat, timeZone, locale).parse(this)
     } catch (t: Throwable) {
