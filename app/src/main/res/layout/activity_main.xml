@@ -35,6 +35,12 @@
             android:layout_height="wrap_content"
             android:text="@string/btn_fonts_and_spans_activity" />
 
+        <Button
+            android:id="@+id/buttonResourcesExample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_res_example" />
+
     </LinearLayout>
 
 </ScrollView>
