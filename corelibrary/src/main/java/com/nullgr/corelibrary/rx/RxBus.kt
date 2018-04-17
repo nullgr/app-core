@@ -7,7 +7,7 @@ import io.reactivex.Observable
 /**
  * Simple ***EVENT BUS*** built in a reactive manner. Provides publish-subscribe-style communication between components.
  * Can be used in two ways: with key or not. For each new key new [Relay] will be created.
- * Without key all events will be posted in in general [Relay]
+ * Without key all events will be posted in in general [Relay]. Usage of this class is thread safe.
  * Use key based relays to split logic in your application. For correct work of bus, you need to post events and subscribe
  * to receive them, on the same instance of [RxBus]. The best usage is ***Singleton*** pattern.
  * You can implement singleton bus provider by yourself, or use our [SingletonRxBusProvider]
@@ -34,8 +34,13 @@ import io.reactivex.Observable
  */
 class RxBus {
 
-    private val generalEventsRelay: PublishRelay<Any> = PublishRelay.create()
-    private val relayToTypeMap = hashMapOf<Any, PublishRelay<Any>>()
+    private val generalEventsRelay: Relay<Any> by lazy {
+        PublishRelay.create<Any>().toSerialized()
+    }
+
+    private val relayToTypeMap: HashMap<Any, Relay<Any>> by lazy {
+        hashMapOf<Any, Relay<Any>>()
+    }
 
     /**
      * Posts an event to all registered subscribers.
@@ -66,9 +71,9 @@ class RxBus {
         return getOrCreateRelay(type).asObservable()
     }
 
-    private fun getOrCreateRelay(type: Any): PublishRelay<Any> {
+    private fun getOrCreateRelay(type: Any): Relay<Any> {
         if (relayToTypeMap[type] == null) {
-            relayToTypeMap[type] = PublishRelay.create()
+            relayToTypeMap[type] = PublishRelay.create<Any>().toSerialized()
         }
         return relayToTypeMap[type]!!
     }
