@@ -2,12 +2,9 @@ package com.nullgr.corelibrary.rxcontacts
 
 import android.content.ContentResolver
 import android.content.Context
-import android.database.Cursor
 import android.net.Uri
 import android.provider.ContactsContract
 import com.nullgr.corelibrary.collections.isNotNullOrEmpty
-import com.nullgr.corelibrary.rx.applyBothSchedulers
-import com.nullgr.corelibrary.rx.schedulers.IoToMainSchedulersFacade
 import com.nullgr.corelibrary.rxcontacts.domain.Contact
 import com.nullgr.corelibrary.rxcontacts.mapper.CursorToContactsMapper
 import com.nullgr.corelibrary.rxcontacts.mapper.CursorToDataKindsMapper
@@ -19,71 +16,73 @@ import java.util.*
 /**
  * Created by Grishko Nikita on 01.02.18.
  */
-class RxContactsProvider private constructor(private val contentResolver: ContentResolver) {
+class RxContactsProvider private constructor(private val cursorBuilder: CursorBuilder) {
 
     companion object {
         fun with(context: Context): RxContactsProvider {
-            return RxContactsProvider(context.contentResolver)
+            return RxContactsProvider(CursorBuilder(context.contentResolver))
         }
 
         fun with(contentResolver: ContentResolver): RxContactsProvider {
-            return RxContactsProvider(contentResolver)
-        }
-
-        private val PROJECTION = arrayOf(ContactsContract.Contacts._ID,
-                ContactsContract.Contacts.LOOKUP_KEY,
-                ContactsContract.Contacts.DISPLAY_NAME_PRIMARY,
-                ContactsContract.Contacts.STARRED,
-                ContactsContract.Contacts.PHOTO_URI,
-                ContactsContract.Contacts.PHOTO_THUMBNAIL_URI,
-                ContactsContract.Contacts.HAS_PHONE_NUMBER)
-    }
-
-    @JvmOverloads
-    fun fetchAll(phoneInclude: Boolean = true, emailInclude: Boolean = true): Observable<List<Contact>> {
-        return Observable.fromCallable {
-            buildContactsCursor()
-        }.map {
-            CursorToContactsMapper.map(it)
-        }.map {
-            if (!phoneInclude && !emailInclude) return@map it
-
-            it.forEach { contact ->
-                Observables.zip(
-                        (if (phoneInclude && contact.hasPhones) readContactPhones(contact.id.toString()) else emptyList()),
-                        (if (emailInclude) readContactEmails(contact.id.toString()) else emptyList()))
-                        .subscribe {
-                            if (it.first.isNotNullOrEmpty()) contact.phones = it.first as ArrayList<String>
-                            if (it.second.isNotNullOrEmpty()) contact.emails = it.second as ArrayList<String>
-                        }
-            }
-            it
+            return RxContactsProvider(CursorBuilder(contentResolver))
         }
     }
 
-    //TODO in progress
-    fun findById(contactId: String): Observable<Contact> {
-        return findBy(ContactsContract.Data.CONTACT_ID, contactId)
+    private var includePhones = true
+    private var includeEmails = true
+
+    fun withPhones(includePhones: Boolean): RxContactsProvider {
+        this.includePhones = includePhones
+        return this
+    }
+
+    fun withEmails(includeEmails: Boolean): RxContactsProvider {
+        this.includeEmails = includeEmails
+        return this
+    }
+
+    fun fetchAll(): Observable<List<Contact>> {
+        return fetchContacts()
+    }
+
+    fun findByContactId(contactId: String): Observable<Contact> {
+        return fetchContacts(ContactsContract.Contacts._ID, arrayOf(contactId))
                 .flatMap {
                     Observable.just(it.firstOrNull())
                 }
     }
+
+    fun findByName(displayName: String): Observable<Contact> {
+        return fetchContacts(ContactsContract.Contacts.DISPLAY_NAME, arrayOf(displayName))
+                .flatMap {
+                    Observable.just(it.firstOrNull())
+                }
+    }
+
+    fun filterByContactIds(vararg contactId: String): Observable<List<Contact>> {
+        @Suppress("UNCHECKED_CAST")
+        return fetchContacts(ContactsContract.Contacts._ID, contactId as Array<String>)
+    }
+
+    fun filterByNames(vararg displayNames: String): Observable<List<Contact>> {
+        @Suppress("UNCHECKED_CAST")
+        return fetchContacts(ContactsContract.Contacts.DISPLAY_NAME, displayNames as Array<String>)
+    }
+
     //TODO in progress
     fun findByPhone(vararg arguments: String): Observable<List<Contact>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
     //TODO in progress
     fun findByEmail(vararg arguments: String): Observable<List<Contact>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
     //TODO in progress
     fun find(contactsUri: Uri): Observable<Contact?> {
         return Observable.fromCallable {
-            contentResolver.query(
-                    contactsUri,
-                    PROJECTION,
-                    null, null,
-                    null)
+            cursorBuilder.buildContactsCursor()
         }.map {
             CursorToContactsMapper.map(it)
         }.flatMap {
@@ -107,7 +106,7 @@ class RxContactsProvider private constructor(private val contentResolver: Conten
 
     private fun readContactPhones(contactId: String): Observable<List<String>> {
         return Observable.fromCallable {
-            buildDataKindsCursor(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+            cursorBuilder.buildDataKindsCursorForContactId(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                     ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
                     contactId)
         }.map {
@@ -117,7 +116,7 @@ class RxContactsProvider private constructor(private val contentResolver: Conten
 
     private fun readContactEmails(contactId: String): Observable<List<String>> {
         return Observable.fromCallable {
-            buildDataKindsCursor(ContactsContract.CommonDataKinds.Email.CONTENT_URI,
+            cursorBuilder.buildDataKindsCursorForContactId(ContactsContract.CommonDataKinds.Email.CONTENT_URI,
                     ContactsContract.CommonDataKinds.Email.CONTACT_ID,
                     contactId)
         }.map {
@@ -125,38 +124,30 @@ class RxContactsProvider private constructor(private val contentResolver: Conten
         }
     }
 
-    //TODO in progress
-    private fun findBy(column: String, vararg arguments: String): Observable<List<Contact>> {
-        return Observable.defer<List<Contact>> {
-            Observable
-                    .just(buildContactsCursor(column, arguments))
-                    .map {
-                        val contacts = CursorToContactsMapper.map(it)
-                        contacts
-                    }
+    private fun fetchContacts(selection: String? = null,
+                              selectionArguments: Array<String>? = null): Observable<List<Contact>> {
+        return Observable.fromCallable {
+            cursorBuilder.buildContactsCursor(selection, selectionArguments)
+        }.map {
+            CursorToContactsMapper.map(it)
+        }.map {
+            if (!includePhones && !includeEmails) return@map it
 
-        }.applyBothSchedulers(IoToMainSchedulersFacade())
+            it.forEach { contact ->
+                Observables.zip(
+                        (if (includePhones && contact.hasPhones) readContactPhones(contact.id.toString()) else emptyStringList()),
+                        (if (includeEmails) readContactEmails(contact.id.toString()) else emptyStringList()))
+                        .subscribe {
+                            if (it.first.isNotNullOrEmpty()) contact.phones = it.first as ArrayList<String>
+                            if (it.second.isNotNullOrEmpty()) contact.emails = it.second as ArrayList<String>
+                        }
+            }
+            it
+        }
     }
 
 
-    private fun emptyList(): Observable<List<String>> {
+    private fun emptyStringList(): Observable<List<String>> {
         return Observable.just(Collections.emptyList())
-    }
-
-    private fun buildContactsCursor(selection: String? = null, selectionArgs: Array<out String>? = null): Cursor {
-        return contentResolver.query(
-                ContactsContract.Contacts.CONTENT_URI,
-                PROJECTION,
-                selection, selectionArgs,
-                ContactsContract.Contacts._ID
-        )
-    }
-
-    private fun buildDataKindsCursor(dataKindsUri: Uri, dataKindsSelectionKey: String, contactId: String): Cursor {
-        return contentResolver.query(
-                dataKindsUri,
-                null,
-                "$dataKindsSelectionKey = $contactId", null,
-                null)
     }
 }

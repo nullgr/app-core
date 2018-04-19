@@ -5,9 +5,10 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
-import android.widget.Toast
+import android.util.Log
 import com.nullgr.androidcore.R
 import com.nullgr.corelibrary.intents.*
+import com.nullgr.corelibrary.rxcontacts.RxContactsProvider
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_common_intents_example.*
 
@@ -63,14 +64,26 @@ class CommonIntentsExampleActivity : AppCompatActivity() {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
                     == PackageManager.PERMISSION_GRANTED) {
 
-                contactsDisposable = selectContactPhoneIntent()
-                        .launchForResult(this)
-                        .subscribe(
-                                {
-                                    Toast.makeText(this,
-                                            "resultCode=${it.resultCode}, data=${it.intent}", Toast.LENGTH_SHORT).show()
-                                },
-                                { Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show() })
+                /*              contactsDisposable = selectContactPhoneIntent()
+                                      .launchForResult(this)
+                                      .subscribe(
+                                              {
+                                                  Toast.makeText(this,
+                                                          "resultCode=${it.resultCode}, data=${it.intent}", Toast.LENGTH_SHORT).show()
+                                                  RxContactsProvider.with(this)
+                                                          .getContactPhones(it.intent!!.data)
+                                                          .subscribe {
+                                                              Log.d("RESULT", "$it ")
+                                                          }
+                                              },
+                                              { Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show() })*/
+
+                RxContactsProvider.with(this)
+                        .filterByNames("Contact 1", "User 6")
+                        .subscribe {
+                            //  Log.d("RX", "$it")
+                            it.forEach { Log.d("RX", "$it") }
+                        }
             }
         }
     }
