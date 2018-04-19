@@ -84,6 +84,14 @@ fun contactCardIntent(contactId: String): Intent {
 
 @SuppressLint("MissingPermission")
 @RequiresPermission(android.Manifest.permission.READ_CONTACTS)
+fun selectContactIntent(): Intent {
+    return Intent(Intent.ACTION_PICK).apply {
+        type = ContactsContract.Contacts.CONTENT_TYPE
+    }
+}
+
+@SuppressLint("MissingPermission")
+@RequiresPermission(android.Manifest.permission.READ_CONTACTS)
 fun selectContactPhoneIntent(): Intent {
     return Intent(Intent.ACTION_PICK).apply {
         type = ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE

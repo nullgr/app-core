@@ -21,7 +21,6 @@ internal object CursorToDataKindsMapper {
                     } while (cursor.moveToNext())
                 }
             }
-
             return phonesResult
         }
         return emptyList()
