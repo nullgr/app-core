@@ -103,18 +103,16 @@ class RxContactsProvider private constructor(private val cursorBuilder: CursorBu
         }
     }
 
-    //TODO still not correct
     @Throws(IllegalArgumentException::class)
     fun fetchPhoneFromUri(phoneDataUri: Uri): Observable<List<String>> {
         UriToMethodValidator.validateUriToPickPhoneOrEmailData(phoneDataUri)
-        return readContactPhones(phoneDataUri.lastPathSegment.toString())
+        return readDataKindFromUri(CursorBuilder.SupportedDataKinds.PHONE, phoneDataUri)
     }
 
-    //TODO still not correct
     @Throws(IllegalArgumentException::class)
     fun fetchEmailFromUri(emailDataUri: Uri): Observable<List<String>> {
         UriToMethodValidator.validateUriToPickPhoneOrEmailData(emailDataUri)
-        return readContactEmails(emailDataUri.lastPathSegment.toString())
+        return readDataKindFromUri(CursorBuilder.SupportedDataKinds.EMAIL, emailDataUri)
     }
 
     private fun readContacts(selection: String? = null,
@@ -169,6 +167,18 @@ class RxContactsProvider private constructor(private val cursorBuilder: CursorBu
             cursorBuilder.buildDataKindsCursorForContactId(CursorBuilder.SupportedDataKinds.EMAIL, contactId)
         }.map {
             CursorToDataKindsMapper.mapEmails(it)
+        }
+    }
+
+    private fun readDataKindFromUri(dataKind: CursorBuilder.SupportedDataKinds,
+                                    uri: Uri): Observable<List<String>> {
+        return Observable.fromCallable {
+            cursorBuilder.buildDataKindCursorBySpecificUri(uri, dataKind)
+        }.map {
+            when (dataKind) {
+                CursorBuilder.SupportedDataKinds.EMAIL -> CursorToDataKindsMapper.mapEmails(it)
+                CursorBuilder.SupportedDataKinds.PHONE -> CursorToDataKindsMapper.mapPhones(it)
+            }
         }
     }
 

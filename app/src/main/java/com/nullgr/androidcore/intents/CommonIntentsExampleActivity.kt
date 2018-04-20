@@ -5,11 +5,9 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.widget.Toast
 import com.nullgr.androidcore.R
 import com.nullgr.corelibrary.intents.*
-import com.nullgr.corelibrary.rxcontacts.RxContactsProvider
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_common_intents_example.*
 
@@ -65,27 +63,14 @@ class CommonIntentsExampleActivity : AppCompatActivity() {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
                     == PackageManager.PERMISSION_GRANTED) {
 
-                contactsDisposable = selectContactIntent()
+                contactsDisposable = selectContactPhoneIntent()
                         .launchForResult(this)
                         .subscribe(
                                 {
-                                    Log.d(this@CommonIntentsExampleActivity::class.java.simpleName, "Result: $it ")
-
-                                    it.intent?.let {
-
-                                        RxContactsProvider.with(this)
-                                                .fetchContactFromUri(it.data)
-                                                .subscribe {
-                                                    Log.d(this@CommonIntentsExampleActivity::class.java.simpleName, "Result: $it ")
-                                                    /*     Toast.makeText(this,
-                                                                 "contacts found =${it[0]}", Toast.LENGTH_SHORT).show()*/
-                                                }
-                                    }
+                                    Toast.makeText(this,
+                                            "resultCode=${it.resultCode}, data=${it.intent}", Toast.LENGTH_SHORT).show()
                                 },
-                                {
-                                    Log.e(this@CommonIntentsExampleActivity::class.java.simpleName, "Error: $it ")
-                                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
-                                })
+                                { Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show() })
             }
         }
     }

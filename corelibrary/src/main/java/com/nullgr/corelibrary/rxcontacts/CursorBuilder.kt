@@ -40,11 +40,20 @@ internal class CursorBuilder(private val contentResolver: ContentResolver) {
         )
     }
 
+
     fun buildContactsCursor(selection: String? = null, selectionArgs: Array<out String>? = null): Cursor {
         return contentResolver.query(
                 ContactsContract.Contacts.CONTENT_URI, PROJECTION_CONTACT,
                 buildSelectionString(selection, selectionArgs), null,
                 ContactsContract.Contacts._ID
+        )
+    }
+
+
+    fun buildDataKindCursorBySpecificUri(uri: Uri, supportedDataKinds: SupportedDataKinds): Cursor {
+        return contentResolver.query(
+                uri, supportedDataKinds.projection,
+                null, null, null
         )
     }
 
