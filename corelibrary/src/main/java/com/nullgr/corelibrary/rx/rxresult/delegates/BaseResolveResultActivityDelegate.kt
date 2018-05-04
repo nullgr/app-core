@@ -33,7 +33,7 @@ internal abstract class BaseResolveResultActivityDelegate(val activity: Activity
     }
 
     protected fun sendResult(resultCode: Int, data: Intent?) {
-        SingletonRxBusProvider.BUS.eventsConsumer.accept(RxActivityResult(data, resultCode))
+        SingletonRxBusProvider.BUS.post(RxActivityResult(data, resultCode))
         activity.finish()
         activity.overridePendingTransition(0, 0)
     }

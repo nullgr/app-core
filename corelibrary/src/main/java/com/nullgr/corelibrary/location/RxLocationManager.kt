@@ -70,7 +70,7 @@ class RxLocationManager(private var context: Context,
                                             it.status.resolution.intentSender)
                                             .launch(context)
                                 }.flatMap {
-                                    SingletonRxBusProvider.BUS.eventsObservable
+                                    SingletonRxBusProvider.BUS.observable()
                                             .filter { it is RxActivityResult }
                                             .map { it as RxActivityResult }
                                             .flatMap {
