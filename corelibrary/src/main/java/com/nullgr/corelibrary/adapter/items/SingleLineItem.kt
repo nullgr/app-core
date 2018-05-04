@@ -1,6 +1,8 @@
 package com.nullgr.corelibrary.adapter.items
 
 /**
- * @author chernyshov.
+ * Interface marker that used with SpanSizeLookup to represent single line item.
+ *
+ * @author vchernyshov.
  */
 interface SingleLineItem

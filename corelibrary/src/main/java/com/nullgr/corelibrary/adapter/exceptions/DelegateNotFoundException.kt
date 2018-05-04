@@ -1,6 +1,6 @@
 package com.nullgr.corelibrary.adapter.exceptions
 
 /**
- * author a.komarovskyi
+ * @author a.komarovskyi
  */
-class DelegateNotFoundException : Exception()
+internal class DelegateNotFoundException : Exception()

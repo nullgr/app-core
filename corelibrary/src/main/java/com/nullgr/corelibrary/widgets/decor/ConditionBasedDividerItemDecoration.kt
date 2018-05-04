@@ -7,7 +7,7 @@ import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.nullgr.corelibrary.adapter.BaseAdapter
+import com.nullgr.corelibrary.adapter.DynamicAdapter
 import com.nullgr.corelibrary.adapter.items.ListItem
 
 /**
@@ -39,7 +39,7 @@ class ConditionBasedDividerItemDecoration(context: Context, @DrawableRes resId: 
             val view = parent.getChildAt(i)
             val position = parent.getChildAdapterPosition(view)
             val adapter = parent.adapter
-            if (adapter is BaseAdapter) {
+            if (adapter is DynamicAdapter) {
                 val item = adapter.getItem(position)
                 item?.let {
                     if (condition?.invoke(item, adapter.items) != false) {
