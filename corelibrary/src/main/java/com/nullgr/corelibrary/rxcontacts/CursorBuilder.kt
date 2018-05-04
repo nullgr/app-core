@@ -21,12 +21,16 @@ internal class CursorBuilder(private val contentResolver: ContentResolver) {
                 ContactsContract.Contacts.HAS_PHONE_NUMBER)
 
         private val PROJECTION_PHONES = arrayOf(
+                ContactsContract.CommonDataKinds.Phone._ID,
+                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
                 ContactsContract.CommonDataKinds.Phone.NUMBER,
                 ContactsContract.CommonDataKinds.Phone.NORMALIZED_NUMBER,
                 ContactsContract.CommonDataKinds.Phone.CONTACT_ID
         )
 
         private val PROJECTION_EMAILS = arrayOf(
+                ContactsContract.CommonDataKinds.Email._ID,
+                ContactsContract.CommonDataKinds.Email.DISPLAY_NAME,
                 ContactsContract.CommonDataKinds.Email.DATA,
                 ContactsContract.CommonDataKinds.Email.CONTACT_ID
         )
@@ -40,7 +44,6 @@ internal class CursorBuilder(private val contentResolver: ContentResolver) {
         )
     }
 
-
     fun buildContactsCursor(selection: String? = null, selectionArgs: Array<out String>? = null): Cursor {
         return contentResolver.query(
                 ContactsContract.Contacts.CONTENT_URI, PROJECTION_CONTACT,
@@ -48,7 +51,6 @@ internal class CursorBuilder(private val contentResolver: ContentResolver) {
                 ContactsContract.Contacts._ID
         )
     }
-
 
     fun buildDataKindCursorBySpecificUri(uri: Uri, supportedDataKinds: SupportedDataKinds): Cursor {
         return contentResolver.query(
@@ -88,5 +90,4 @@ internal class CursorBuilder(private val contentResolver: ContentResolver) {
                 PROJECTION_EMAILS,
                 ContactsContract.CommonDataKinds.Email.CONTACT_ID)
     }
-
 }

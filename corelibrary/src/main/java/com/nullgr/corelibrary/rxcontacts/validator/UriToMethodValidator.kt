@@ -15,7 +15,6 @@ object UriToMethodValidator {
                     "Should by uri specified by {${ContactsContract.Contacts.CONTENT_URI}}")
     }
 
-
     @Throws(IllegalArgumentException::class)
     fun validateUriToPickPhoneOrEmailData(uri: Uri) {
         if (ContactsContract.Data.CONTENT_URI.lastPathSegment !in uri.pathSegments)

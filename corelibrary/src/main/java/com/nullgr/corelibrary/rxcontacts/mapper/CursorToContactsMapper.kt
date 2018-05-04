@@ -3,18 +3,19 @@ package com.nullgr.corelibrary.rxcontacts.mapper
 import android.database.Cursor
 import android.net.Uri
 import android.provider.ContactsContract
-import com.nullgr.corelibrary.rxcontacts.domain.Contact
+import com.nullgr.corelibrary.rxcontacts.domain.UserContact
+import com.nullgr.corelibrary.rxcontacts.extensions.has
 import java.util.*
 
 
 /**
  * Created by Grishko Nikita on 01.02.18.
  */
-internal object CursorToContactsMapper {
+internal object CursorToContactsMapper : CursorMapper<List<UserContact>> {
 
-    fun map(cursor: Cursor?): List<Contact> {
+    override fun map(cursor: Cursor?, vararg arguments: String): List<UserContact> {
         cursor?.let {
-            val contactsResult = arrayListOf<Contact>()
+            val contactsResult = arrayListOf<UserContact>()
             cursor.use { cursor ->
                 if (cursor.moveToFirst()) {
                     do {
@@ -22,9 +23,9 @@ internal object CursorToContactsMapper {
 
                         if (!(contactsResult has contactId)) {
 
-                            contactsResult.add(Contact(contactId.toLong(),
-                                    getLookUpKey(cursor),
+                            contactsResult.add(UserContact(contactId.toLong(),
                                     getDisplayName(cursor),
+                                    getLookUpKey(cursor),
                                     getStarred(cursor),
                                     getPhoto(cursor),
                                     getThumbnail(cursor),
@@ -74,9 +75,5 @@ internal object CursorToContactsMapper {
 
     private fun getHasPhones(cursor: Cursor): Boolean {
         return cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) != 0
-    }
-
-    private infix fun List<Contact>.has(id: Int): Boolean {
-        return this.any { it.id == id.toLong() }
     }
 }

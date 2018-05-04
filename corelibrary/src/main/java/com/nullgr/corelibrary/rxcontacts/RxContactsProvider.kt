@@ -5,14 +5,18 @@ import android.content.Context
 import android.net.Uri
 import android.provider.ContactsContract
 import com.nullgr.corelibrary.collections.isNotNullOrEmpty
-import com.nullgr.corelibrary.rxcontacts.domain.Contact
+import com.nullgr.corelibrary.rxcontacts.domain.ContactEmail
+import com.nullgr.corelibrary.rxcontacts.domain.ContactPhone
+import com.nullgr.corelibrary.rxcontacts.domain.UserContact
+import com.nullgr.corelibrary.rxcontacts.extensions.emptyEmailContactsList
+import com.nullgr.corelibrary.rxcontacts.extensions.emptyPhoneContactsList
 import com.nullgr.corelibrary.rxcontacts.mapper.CursorToContactIdsMapper
 import com.nullgr.corelibrary.rxcontacts.mapper.CursorToContactsMapper
-import com.nullgr.corelibrary.rxcontacts.mapper.CursorToDataKindsMapper
+import com.nullgr.corelibrary.rxcontacts.mapper.CursorToEmailMapper
+import com.nullgr.corelibrary.rxcontacts.mapper.CursorToPhonesMapper
 import com.nullgr.corelibrary.rxcontacts.validator.UriToMethodValidator
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.Observables
-import java.util.*
 
 
 /**
@@ -43,16 +47,16 @@ class RxContactsProvider private constructor(private val cursorBuilder: CursorBu
         return this
     }
 
-    fun fetchAll(): Observable<List<Contact>> {
+    fun fetchAll(): Observable<List<UserContact>> {
         return readContacts()
     }
 
-    fun findContactsById(vararg contactId: String): Observable<List<Contact>> {
+    fun findContactsById(vararg contactId: String): Observable<List<UserContact>> {
         return readContacts(ContactsContract.Contacts._ID,
                 @Suppress("UNCHECKED_CAST") (contactId as Array<String>))
     }
 
-    fun findContactsByName(vararg displayNames: String): Observable<List<Contact>> {
+    fun findContactsByName(vararg displayNames: String): Observable<List<UserContact>> {
         return readContacts(ContactsContract.Contacts.DISPLAY_NAME,
                 @Suppress("UNCHECKED_CAST") (displayNames as Array<String>))
     }
@@ -60,7 +64,7 @@ class RxContactsProvider private constructor(private val cursorBuilder: CursorBu
     /**
      * Note: right now works only for exact matching
      */
-    fun findContactsByPhone(vararg arguments: String): Observable<List<Contact>> {
+    fun findContactsByPhone(vararg arguments: String): Observable<List<UserContact>> {
         return readContactsByDataKind(
                 CursorBuilder.SupportedDataKinds.PHONE,
                 ContactsContract.CommonDataKinds.Phone.NUMBER,
@@ -69,7 +73,7 @@ class RxContactsProvider private constructor(private val cursorBuilder: CursorBu
         )
     }
 
-    fun findContactsByEmail(vararg arguments: String): Observable<List<Contact>> {
+    fun findContactsByEmail(vararg arguments: String): Observable<List<UserContact>> {
         return readContactsByDataKind(
                 CursorBuilder.SupportedDataKinds.EMAIL,
                 ContactsContract.CommonDataKinds.Email.DATA,
@@ -79,24 +83,24 @@ class RxContactsProvider private constructor(private val cursorBuilder: CursorBu
     }
 
     @Throws(IllegalArgumentException::class)
-    fun fetchContactFromUri(contactsUri: Uri): Observable<Contact?> {
+    fun fetchContactFromUri(contactsUri: Uri): Observable<UserContact?> {
         UriToMethodValidator.validateUriToPickContact(contactsUri)
         return Observable.fromCallable {
             cursorBuilder.buildContactsCursorBySpecificUri(contactsUri)
         }.map {
             CursorToContactsMapper.map(it)
         }.flatMap {
-            if (it.isNotNullOrEmpty()) Observable.just<Contact?>(it.first())
+            if (it.isNotNullOrEmpty()) Observable.just<UserContact?>(it.first())
             else Observable.empty()
         }.map { contact ->
             if (!includePhones && !includeEmails) return@map contact
 
             Observables.zip(
-                    (if (includePhones && contact.hasPhones) readContactPhones(contact.id.toString()) else emptyStringList()),
-                    (if (includeEmails) readContactEmails(contact.id.toString()) else emptyStringList()))
+                    (if (includePhones && contact.hasPhones) readContactPhones(contact.id.toString()) else emptyPhoneContactsList),
+                    (if (includeEmails) readContactEmails(contact.id.toString()) else emptyEmailContactsList))
                     .subscribe {
-                        if (it.first.isNotNullOrEmpty()) contact.phones = it.first as ArrayList<String>
-                        if (it.second.isNotNullOrEmpty()) contact.emails = it.second as ArrayList<String>
+                        if (it.first.isNotNullOrEmpty()) contact.phones = it.first as ArrayList<ContactPhone>
+                        if (it.second.isNotNullOrEmpty()) contact.emails = it.second as ArrayList<ContactEmail>
                     }
 
             contact
@@ -104,19 +108,19 @@ class RxContactsProvider private constructor(private val cursorBuilder: CursorBu
     }
 
     @Throws(IllegalArgumentException::class)
-    fun fetchPhoneFromUri(phoneDataUri: Uri): Observable<List<String>> {
+    fun fetchPhoneFromUri(phoneDataUri: Uri): Observable<List<ContactPhone>> {
         UriToMethodValidator.validateUriToPickPhoneOrEmailData(phoneDataUri)
-        return readDataKindFromUri(CursorBuilder.SupportedDataKinds.PHONE, phoneDataUri)
+        return readPhoneFromUri(phoneDataUri)
     }
 
     @Throws(IllegalArgumentException::class)
-    fun fetchEmailFromUri(emailDataUri: Uri): Observable<List<String>> {
+    fun fetchEmailFromUri(emailDataUri: Uri): Observable<List<ContactEmail>> {
         UriToMethodValidator.validateUriToPickPhoneOrEmailData(emailDataUri)
-        return readDataKindFromUri(CursorBuilder.SupportedDataKinds.EMAIL, emailDataUri)
+        return readEmailFromUri(emailDataUri)
     }
 
     private fun readContacts(selection: String? = null,
-                             selectionArguments: Array<String>? = null): Observable<List<Contact>> {
+                             selectionArguments: Array<String>? = null): Observable<List<UserContact>> {
         return Observable.fromCallable {
             cursorBuilder.buildContactsCursor(selection, selectionArguments)
         }.map {
@@ -126,11 +130,11 @@ class RxContactsProvider private constructor(private val cursorBuilder: CursorBu
 
             it.forEach { contact ->
                 Observables.zip(
-                        (if (includePhones && contact.hasPhones) readContactPhones(contact.id.toString()) else emptyStringList()),
-                        (if (includeEmails) readContactEmails(contact.id.toString()) else emptyStringList()))
+                        (if (includePhones && contact.hasPhones) readContactPhones(contact.id.toString()) else emptyPhoneContactsList),
+                        (if (includeEmails) readContactEmails(contact.id.toString()) else emptyEmailContactsList))
                         .subscribe {
-                            if (it.first.isNotNullOrEmpty()) contact.phones = it.first as ArrayList<String>
-                            if (it.second.isNotNullOrEmpty()) contact.emails = it.second as ArrayList<String>
+                            if (it.first.isNotNullOrEmpty()) contact.phones = it.first as ArrayList<ContactPhone>
+                            if (it.second.isNotNullOrEmpty()) contact.emails = it.second as ArrayList<ContactEmail>
                         }
             }
             it
@@ -140,7 +144,7 @@ class RxContactsProvider private constructor(private val cursorBuilder: CursorBu
     private fun readContactsByDataKind(dataKinds: CursorBuilder.SupportedDataKinds,
                                        selection: String,
                                        selectionArguments: Array<String>,
-                                       contactIdRowName: String): Observable<List<Contact>> {
+                                       contactIdRowName: String): Observable<List<UserContact>> {
         return Observable.fromCallable {
             cursorBuilder.buildGeneralDataKindsCursor(
                     dataKinds,
@@ -154,35 +158,35 @@ class RxContactsProvider private constructor(private val cursorBuilder: CursorBu
         }
     }
 
-    private fun readContactPhones(contactId: String): Observable<List<String>> {
+    private fun readContactPhones(contactId: String): Observable<List<ContactPhone>> {
         return Observable.fromCallable {
             cursorBuilder.buildDataKindsCursorForContactId(CursorBuilder.SupportedDataKinds.PHONE, contactId)
         }.map {
-            CursorToDataKindsMapper.mapPhones(it)
+            CursorToPhonesMapper.map(it)
         }
     }
 
-    private fun readContactEmails(contactId: String): Observable<List<String>> {
+    private fun readContactEmails(contactId: String): Observable<List<ContactEmail>> {
         return Observable.fromCallable {
             cursorBuilder.buildDataKindsCursorForContactId(CursorBuilder.SupportedDataKinds.EMAIL, contactId)
         }.map {
-            CursorToDataKindsMapper.mapEmails(it)
+            CursorToEmailMapper.map(it)
         }
     }
 
-    private fun readDataKindFromUri(dataKind: CursorBuilder.SupportedDataKinds,
-                                    uri: Uri): Observable<List<String>> {
+    private fun readPhoneFromUri(uri: Uri): Observable<List<ContactPhone>> {
         return Observable.fromCallable {
-            cursorBuilder.buildDataKindCursorBySpecificUri(uri, dataKind)
+            cursorBuilder.buildDataKindCursorBySpecificUri(uri, CursorBuilder.SupportedDataKinds.PHONE)
         }.map {
-            when (dataKind) {
-                CursorBuilder.SupportedDataKinds.EMAIL -> CursorToDataKindsMapper.mapEmails(it)
-                CursorBuilder.SupportedDataKinds.PHONE -> CursorToDataKindsMapper.mapPhones(it)
-            }
+            CursorToPhonesMapper.map(it)
         }
     }
 
-    private fun emptyStringList(): Observable<List<String>> {
-        return Observable.just(Collections.emptyList())
+    private fun readEmailFromUri(uri: Uri): Observable<List<ContactEmail>> {
+        return Observable.fromCallable {
+            cursorBuilder.buildDataKindCursorBySpecificUri(uri, CursorBuilder.SupportedDataKinds.EMAIL)
+        }.map {
+            CursorToEmailMapper.map(it)
+        }
     }
 }
