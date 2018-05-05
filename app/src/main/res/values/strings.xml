@@ -42,4 +42,5 @@
     <string name="msg_screen_size" formatted="false">Size width = %d height %d</string>
     <string name="btn_set_image_by_name">Set image by name</string>
     <string name="msg_error_empty">Empty!</string>
+    <string name="btn_adapter_example">Adapter Example</string>
 </resources>

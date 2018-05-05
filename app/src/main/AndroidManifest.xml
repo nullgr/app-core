@@ -30,6 +30,8 @@
         <activity android:name=".date.DateUtilsExampleActivity" />
 
         <activity android:name=".resources.ResourcesExampleActivity" />
+
+        <activity android:name=".adapter.AdapterExampleActivity" />
     </application>
 
 </manifest>
