@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.nullgr.androidcore.adapter.AdapterExampleActivity
+import com.nullgr.androidcore.adapter.AdapterExampleWithPayloadsActivity
 import com.nullgr.androidcore.date.DateUtilsExampleActivity
 import com.nullgr.androidcore.fonts.FontsAndSpansExampleActivity
 import com.nullgr.androidcore.intents.CommonIntentsExampleActivity
@@ -42,6 +43,10 @@ class MainActivity : AppCompatActivity() {
 
         buttonAdapterExample.setOnClickListener {
             Intent(this, AdapterExampleActivity::class.java).launch(this)
+        }
+
+        buttonAdapterWithPayloadsExample.setOnClickListener {
+            Intent(this, AdapterExampleWithPayloadsActivity::class.java).launch(this)
         }
     }
 }

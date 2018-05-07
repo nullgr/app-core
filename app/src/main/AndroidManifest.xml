@@ -32,6 +32,9 @@
         <activity android:name=".resources.ResourcesExampleActivity" />
 
         <activity android:name=".adapter.AdapterExampleActivity" />
+
+        <activity android:name=".adapter.AdapterExampleWithPayloadsActivity" />
+
     </application>
 
 </manifest>
