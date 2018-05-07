@@ -8,12 +8,10 @@ import io.reactivex.Observable
 /**
  * Created by Grishko Nikita on 01.02.18.
  */
-internal infix fun List<BaseContact>.has(id: Int): Boolean {
-    return this.any { it.id == id.toLong() }
-}
+internal infix fun List<BaseContact>.has(id: Int): Boolean = this.any { it.id == id.toLong() }
 
-val emptyPhoneContactsList: Observable<ArrayList<ContactPhone>>
+internal val emptyPhoneContactsList: Observable<ArrayList<ContactPhone>>
         by lazy { Observable.just(arrayListOf<ContactPhone>()) }
 
-val emptyEmailContactsList: Observable<ArrayList<ContactEmail>>
+internal val emptyEmailContactsList: Observable<ArrayList<ContactEmail>>
         by lazy { Observable.just(arrayListOf<ContactEmail>()) }
