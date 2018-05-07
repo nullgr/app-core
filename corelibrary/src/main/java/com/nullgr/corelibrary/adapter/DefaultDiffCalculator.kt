@@ -1,6 +1,7 @@
 package com.nullgr.corelibrary.adapter
 
 import android.support.v7.util.DiffUtil
+import android.support.v7.util.ListUpdateCallback
 import com.nullgr.corelibrary.adapter.items.ListItem
 
 /**
@@ -16,5 +17,11 @@ class DefaultDiffCalculator : DiffCalculator {
         val diffResult = DiffUtil.calculateDiff(callback, detectMoves)
         adapter.setData(after)
         diffResult.dispatchUpdatesTo(adapter)
+    }
+
+    override fun calculateDiff(updateCallback: ListUpdateCallback, before: List<ListItem>, after: List<ListItem>, detectMoves: Boolean) {
+        val callback = Callback(before, after)
+        val diffResult = DiffUtil.calculateDiff(callback, detectMoves)
+        diffResult.dispatchUpdatesTo(updateCallback)
     }
 }
