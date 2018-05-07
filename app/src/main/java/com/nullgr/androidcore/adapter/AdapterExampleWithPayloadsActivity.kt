@@ -19,8 +19,8 @@ import kotlinx.android.synthetic.main.activity_adapter_example_with_payloads.*
  */
 class AdapterExampleWithPayloadsActivity : BaseAdapterExampleActivity(), ColorPickerCallback {
 
-
     private var useDiffUtils: Boolean = true
+
     @ColorInt
     private var itemColor: Int = Color.RED
 
@@ -50,6 +50,7 @@ class AdapterExampleWithPayloadsActivity : BaseAdapterExampleActivity(), ColorPi
                         }
                     }
                 }
+
         compositeDisposable.add(disposable)
 
         titleInputView.setText(item.title)
