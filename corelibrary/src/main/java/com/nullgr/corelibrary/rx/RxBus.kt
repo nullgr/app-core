@@ -2,6 +2,7 @@ package com.nullgr.corelibrary.rx
 
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
+import com.nullgr.corelibrary.rx.relay.SingleSubscriberRelay
 import io.reactivex.Observable
 
 /**
@@ -14,11 +15,11 @@ import io.reactivex.Observable
  *
  * <h2>Posting Events:</h2>
  * ```
- * SingletonRxBusProvider.BUS.post(SomeEventClass())
+ * SingletonRxBusProvider.BUS.post(event = SomeEventClass())
  * ```
  * or
  * ```
- * SingletonRxBusProvider.BUS.post(SomeEventClass(), TypeOfYourEvent::class.java) // you can use any type/class/object for event type
+ * SingletonRxBusProvider.BUS.post(TypeOfYourEvent::class.java, SomeEventClass()) // you can use any type/class/object for event type
  * ```
  * <h2>Receiving Events:</h2>
  * ```
@@ -34,12 +35,11 @@ import io.reactivex.Observable
  */
 class RxBus {
 
-    private val generalEventsRelay: Relay<Any> by lazy {
-        PublishRelay.create<Any>().toSerialized()
-    }
-
     private val relayToTypeMap: HashMap<Any, Relay<Any>> by lazy {
-        hashMapOf<Any, Relay<Any>>()
+        hashMapOf<Any, Relay<Any>>().apply {
+            put(KEYS.GENERAL, PublishRelay.create<Any>().toSerialized())
+            put(KEYS.SINGLE, SingleSubscriberRelay.create<Any>().toSerialized())
+        }
     }
 
     /**
@@ -50,25 +50,19 @@ class RxBus {
      * If null will be passed - event will be posted in general relay
      */
     @JvmOverloads
-    fun post(event: Any, key: Any? = null) {
-        if (key == null) {
-            generalEventsRelay.asConsumer().accept(event)
-        } else {
-            getOrCreateRelay(key).asConsumer().accept(event)
-        }
+    fun post(key: Any = KEYS.GENERAL, event: Any) {
+        getOrCreateRelay(key).asConsumer().accept(event)
     }
 
     /**
      * Returns an [Observable] of specific [Relay]
      *
-     * @param type key to get specific [Relay].
+     * @param key key to get specific [Relay].
      * If null will be passed - general [Relay] will be used
      */
     @JvmOverloads
-    fun observable(type: Any? = null): Observable<Any> {
-        if (type == null)
-            return generalEventsRelay.asObservable()
-        return getOrCreateRelay(type).asObservable()
+    fun observable(key: Any = KEYS.GENERAL): Observable<Any> {
+        return getOrCreateRelay(key).asObservable()
     }
 
     private fun getOrCreateRelay(type: Any): Relay<Any> {
@@ -76,6 +70,13 @@ class RxBus {
             relayToTypeMap[type] = PublishRelay.create<Any>().toSerialized()
         }
         return relayToTypeMap[type]!!
+    }
+
+    /**
+     * Enum set of default keys for RxBus.
+     */
+    enum class KEYS {
+        GENERAL, SINGLE
     }
 }
 

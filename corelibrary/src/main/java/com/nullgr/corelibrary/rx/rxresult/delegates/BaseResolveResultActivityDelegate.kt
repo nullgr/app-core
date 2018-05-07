@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.IntentSender
 import android.os.Bundle
+import com.nullgr.corelibrary.rx.RxBus
 import com.nullgr.corelibrary.rx.SingletonRxBusProvider
 import com.nullgr.corelibrary.rx.rxresult.RxActivityResult
 
@@ -33,7 +34,7 @@ internal abstract class BaseResolveResultActivityDelegate(val activity: Activity
     }
 
     protected fun sendResult(resultCode: Int, data: Intent?) {
-        SingletonRxBusProvider.BUS.post(RxActivityResult(data, resultCode))
+        SingletonRxBusProvider.BUS.post(RxBus.KEYS.SINGLE, RxActivityResult(data, resultCode))
         activity.finish()
         activity.overridePendingTransition(0, 0)
     }
