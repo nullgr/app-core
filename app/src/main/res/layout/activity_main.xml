@@ -41,6 +41,18 @@
             android:layout_height="wrap_content"
             android:text="@string/btn_res_example" />
 
+        <Button
+            android:id="@+id/buttonAdapterExample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_adapter_example" />
+
+        <Button
+            android:id="@+id/buttonAdapterWithPayloadsExample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_adapter_example_with_payloads" />
+
     </LinearLayout>
 
 </ScrollView>
