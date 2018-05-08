@@ -1,6 +1,7 @@
 package com.nullgr.corelibrary.rxcontacts.mapper
 
 import android.database.Cursor
+import android.util.Log
 
 /**
  * Created by Grishko Nikita on 01.02.18.
