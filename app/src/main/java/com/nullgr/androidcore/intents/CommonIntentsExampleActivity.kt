@@ -7,9 +7,23 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.nullgr.androidcore.R
-import com.nullgr.corelibrary.intents.*
+import com.nullgr.corelibrary.intents.callIntent
+import com.nullgr.corelibrary.intents.chromeTabsIntent
+import com.nullgr.corelibrary.intents.emailIntent
+import com.nullgr.corelibrary.intents.launch
+import com.nullgr.corelibrary.intents.launchForResult
+import com.nullgr.corelibrary.intents.navigationIntent
+import com.nullgr.corelibrary.intents.selectContactPhoneIntent
+import com.nullgr.corelibrary.intents.shareTextIntent
+import com.nullgr.corelibrary.intents.webIntent
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.activity_common_intents_example.*
+import kotlinx.android.synthetic.main.activity_common_intents_example.buttonCallTo
+import kotlinx.android.synthetic.main.activity_common_intents_example.buttonMailTo
+import kotlinx.android.synthetic.main.activity_common_intents_example.buttonRoteTo
+import kotlinx.android.synthetic.main.activity_common_intents_example.buttonRxSelectContact
+import kotlinx.android.synthetic.main.activity_common_intents_example.buttonShare
+import kotlinx.android.synthetic.main.activity_common_intents_example.buttonWebChrome
+import kotlinx.android.synthetic.main.activity_common_intents_example.buttonWebSimple
 
 /**
  * Created by Grishko Nikita on 01.02.18.
@@ -40,7 +54,7 @@ class CommonIntentsExampleActivity : AppCompatActivity() {
         }
 
         buttonMailTo.setOnClickListener {
-            emailIntent(getString(R.string.btn_null_gr_phone), body = getString(R.string.text_for_share))
+            emailIntent(getString(R.string.btn_null_gr_mail), body = getString(R.string.text_for_share))
                     .launch(this, errorText)
         }
 
