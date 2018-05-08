@@ -6,12 +6,17 @@ import android.view.ViewGroup
 import com.nullgr.corelibrary.adapter.exceptions.DelegateNotFoundException
 import com.nullgr.corelibrary.adapter.items.ListItem
 
-
-class AdapterDelegatesManager(
-        private val delegatesFactory: AdapterDelegatesFactory) {
+/**
+ * Responsed for delegates management process.
+ * Based on Hannes Dorfmann AdapterDelegates(https://github.com/sockeqwe/AdapterDelegates)
+ *
+ * @author vchernyshov
+ * @author a.komarovskyi
+ */
+internal class AdapterDelegatesManager(private val delegatesFactory: AdapterDelegatesFactory) {
 
     companion object {
-        internal val FALLBACK_DELEGATE_VIEW_TYPE = Integer.MAX_VALUE - 1
+        internal const val FALLBACK_DELEGATE_VIEW_TYPE = Integer.MAX_VALUE - 1
     }
 
     private var delegates = SparseArrayCompat<AdapterDelegate>()
@@ -80,12 +85,11 @@ class AdapterDelegatesManager(
             getDelegateForViewTypeOrThrowException(vh.itemViewType).onViewDetachedFromWindow(vh)
 
     private fun getDelegateForViewTypeOrThrowException(viewType: Int): AdapterDelegate {
-        checkDelegateForViewType(viewType)
-        return delegates[viewType]
-    }
-
-    private fun checkDelegateForViewType(viewType: Int) {
-        if (delegates[viewType] == null) throw DelegateNotFoundException()
+        val delegate =  delegates[viewType]
+        return when (delegate) {
+            null -> throw DelegateNotFoundException()
+            else -> delegate
+        }
     }
 
     private fun getDelegateForPosition(items: List<ListItem>, position: Int): AdapterDelegate? {

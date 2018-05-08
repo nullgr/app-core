@@ -17,6 +17,7 @@ import android.support.customtabs.CustomTabsIntent
 import android.telephony.PhoneNumberUtils
 import android.text.TextUtils
 import android.widget.Toast
+import com.nullgr.corelibrary.rx.RxBus
 import com.nullgr.corelibrary.rx.SingletonRxBusProvider
 import com.nullgr.corelibrary.rx.rxresult.RxActivityResult
 import com.nullgr.corelibrary.rx.rxresult.RxResolveResultActivity
@@ -205,7 +206,7 @@ fun Intent?.launchForResult(context: Activity?): Observable<RxActivityResult> {
                             .newInstance(context, this)
                             .launch(context)
                 }.flatMap {
-                    SingletonRxBusProvider.BUS.observable()
+                    SingletonRxBusProvider.BUS.observable(RxBus.KEYS.SINGLE)
                             .filter { it is RxActivityResult }
                             .map { it as RxActivityResult }
                             .flatMap { Observable.just(it) }

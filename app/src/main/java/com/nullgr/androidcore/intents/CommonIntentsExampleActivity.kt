@@ -54,7 +54,7 @@ class CommonIntentsExampleActivity : AppCompatActivity() {
         }
 
         buttonMailTo.setOnClickListener {
-            emailIntent(getString(R.string.btn_null_gr_phone), body = getString(R.string.text_for_share))
+            emailIntent(getString(R.string.btn_null_gr_mail), body = getString(R.string.text_for_share))
                     .launch(this, errorText)
         }
 
