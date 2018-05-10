@@ -1,6 +1,6 @@
 package com.nullgr.corelibrary.interactor
 
-import com.nullgr.corelibrary.rx.applySchedulers
+import com.nullgr.corelibrary.rx.applyScheduler
 import com.nullgr.corelibrary.rx.schedulers.SchedulersFacade
 import io.reactivex.Observable
 
@@ -19,6 +19,6 @@ abstract class ObservableUseCase<T, in Params> protected constructor(
      * Executes the current use case.
      */
     open fun execute(params: Params? = null): Observable<T> {
-        return buildUseCaseObservable(params).applySchedulers(schedulersFacade)
+        return buildUseCaseObservable(params).applyScheduler(schedulersFacade)
     }
 }

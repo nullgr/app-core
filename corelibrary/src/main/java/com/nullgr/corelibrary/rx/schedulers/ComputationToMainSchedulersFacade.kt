@@ -5,7 +5,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 /**
- * @author vchernyshov.
+ * Implementation of [SchedulersFacade] that provides [Schedulers.computation] for [subscribeOn] and
+ * [AndroidSchedulers.mainThread] for [observeOn].
+ *
+ * @author vchernyshov
  */
 class ComputationToMainSchedulersFacade : SchedulersFacade {
 

@@ -1,6 +1,6 @@
 package com.nullgr.corelibrary.interactor
 
-import com.nullgr.corelibrary.rx.applySchedulers
+import com.nullgr.corelibrary.rx.applyScheduler
 import com.nullgr.corelibrary.rx.schedulers.SchedulersFacade
 import io.reactivex.Completable
 
@@ -19,6 +19,6 @@ abstract class CompletableUseCase<in Params> protected constructor(
      * Executes the current use case.
      */
     open fun execute(params: Params? = null): Completable {
-        return buildUseCaseObservable(params).applySchedulers(schedulersFacade)
+        return buildUseCaseObservable(params).applyScheduler(schedulersFacade)
     }
 }
