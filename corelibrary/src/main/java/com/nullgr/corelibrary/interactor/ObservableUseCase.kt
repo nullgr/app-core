@@ -5,7 +5,9 @@ import com.nullgr.corelibrary.rx.schedulers.SchedulersFacade
 import io.reactivex.Observable
 
 /**
- * Abstract class for a UseCase that returns an instance of a [Observable].
+ * Abstract class for a UseCase that returns an instance of [Observable].
+ *
+ * @author vchernyshov
  */
 abstract class ObservableUseCase<T, in Params> protected constructor(
         private val schedulersFacade: SchedulersFacade) {

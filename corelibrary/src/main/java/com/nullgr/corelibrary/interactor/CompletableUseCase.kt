@@ -5,7 +5,9 @@ import com.nullgr.corelibrary.rx.schedulers.SchedulersFacade
 import io.reactivex.Completable
 
 /**
- * Abstract class for a UseCase that returns an instance of a [Completable].
+ * Abstract class for a UseCase that returns an instance of [Completable].
+ *
+ * @author vchernyshov
  */
 abstract class CompletableUseCase<in Params> protected constructor(
         private val schedulersFacade: SchedulersFacade) {
