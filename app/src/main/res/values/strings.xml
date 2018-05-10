@@ -52,4 +52,10 @@
     <string name="item">Item:</string>
     <string name="setup_section">Setup section:</string>
     <string name="use_diff_utils">Use diff utils</string>
+
+    <string name="title_rx_contacts_activity">Rx Contacts Provider</string>
+    <string name="title_no_contacts_found">Empty</string>
+    <string name="title_fav_contacts">Favorites</string>
+    <string name="title_other_contacts">Other</string>
+
 </resources>
