@@ -31,7 +31,7 @@ internal object ProjectionFactory {
 
     private val PROJECTION_EMAILS = arrayOf(
             ContactsContract.CommonDataKinds.Email._ID,
-            ContactsContract.CommonDataKinds.Email.DISPLAY_NAME,
+            ContactsContract.Data.DISPLAY_NAME,
             ContactsContract.CommonDataKinds.Email.STARRED,
             ContactsContract.CommonDataKinds.Email.DATA,
             ContactsContract.CommonDataKinds.Email.CONTACT_ID

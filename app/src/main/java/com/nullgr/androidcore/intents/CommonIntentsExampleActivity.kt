@@ -5,7 +5,6 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.widget.Toast
 import com.nullgr.androidcore.R
 import com.nullgr.corelibrary.intents.callIntent
@@ -17,9 +16,6 @@ import com.nullgr.corelibrary.intents.navigationIntent
 import com.nullgr.corelibrary.intents.selectContactPhoneIntent
 import com.nullgr.corelibrary.intents.shareTextIntent
 import com.nullgr.corelibrary.intents.webIntent
-import com.nullgr.corelibrary.rxcontacts.RxContactsProvider
-import com.nullgr.corelibrary.rxcontacts.domain.UserContact
-import com.nullgr.corelibrary.rxcontacts.engine.query.QueryProperty
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_common_intents_example.buttonCallTo
 import kotlinx.android.synthetic.main.activity_common_intents_example.buttonMailTo
@@ -87,15 +83,6 @@ class CommonIntentsExampleActivity : AppCompatActivity() {
                                 {
                                     Toast.makeText(this,
                                             "resultCode=${it.resultCode}, data=${it.intent}", Toast.LENGTH_SHORT).show()
-                                    it.intent?.let {
-                                        RxContactsProvider.with(this)
-                                                .query(UserContact::class.java)
-                                                .where(QueryProperty.NORMALIZED_PHONE)
-                                                .isEqualTo("+380989876543")
-                                                .fetchSingle()
-                                                .subscribe { Log.d("RX", "$it") }
-                                    }
-
                                 },
                                 { Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show() })
             }

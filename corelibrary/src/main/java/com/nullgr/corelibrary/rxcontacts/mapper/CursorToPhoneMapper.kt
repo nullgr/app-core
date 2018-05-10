@@ -21,11 +21,19 @@ internal object CursorToPhonesMapper : CursorMapper<List<ContactPhone>> {
                         if (!(phonesResult has id)) {
                             val displayName = cursor.getString(
                                     cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
+                            val isStarred = cursor.getInt(
+                                    cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.STARRED)) != 0
                             val phone = cursor.getString(
                                     cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
                             val normalizedPhone = cursor.getString(
                                     cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NORMALIZED_NUMBER))
-                            val contactPhone = ContactPhone(id.toLong(), displayName, phone, normalizedPhone)
+
+                            val contactPhone = ContactPhone(id.toLong(),
+                                    displayName,
+                                    isStarred,
+                                    phone,
+                                    normalizedPhone)
+
                             phonesResult.add(contactPhone)
                         }
                     } while (cursor.moveToNext())

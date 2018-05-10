@@ -37,7 +37,7 @@ internal object PropertyToColumnNameMapper {
             when (property) {
                 QueryProperty.ID -> ContactsContract.CommonDataKinds.Email._ID
                 QueryProperty.USER_CONTACT_ID -> ContactsContract.CommonDataKinds.Email.CONTACT_ID
-                QueryProperty.USER_NAME -> ContactsContract.CommonDataKinds.Email.DISPLAY_NAME
+                QueryProperty.USER_NAME -> ContactsContract.Data.DISPLAY_NAME
                 QueryProperty.FAVORITES -> ContactsContract.CommonDataKinds.Email.STARRED
                 QueryProperty.EMAIL -> ContactsContract.CommonDataKinds.Email.DATA1
                 else -> throw IllegalArgumentException("Not valid property: $property " +

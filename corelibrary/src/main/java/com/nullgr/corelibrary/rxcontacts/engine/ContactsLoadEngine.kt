@@ -96,8 +96,8 @@ internal class ContactsLoadEngine(private val contentResolver: ContentResolver) 
                 CursorFactory.getCursor(contentResolver,
                         configuration.clazz,
                         configuration.whereSelection)
-            }.flatMap {
-                Observable.just(CursorToContactsMapper.map(it))
+            }.map {
+                CursorToContactsMapper.map(it)
             }
         }.map { contactsList ->
             contactsList.forEach {
@@ -114,23 +114,23 @@ internal class ContactsLoadEngine(private val contentResolver: ContentResolver) 
                 QueryProperty.EMAIL -> ContactEmail::class.java
                 else -> ContactPhone::class.java
             }, configuration.whereSelection)
-        }.flatMap {
-            Observable.just(CursorToContactIdsMapper.map(it, ContactsContract.Data.CONTACT_ID))
-        }.flatMap {
-            Observable.just(CursorFactory.getCursor(contentResolver,
+        }.map {
+            CursorToContactIdsMapper.map(it, ContactsContract.Data.CONTACT_ID)
+        }.map {
+            CursorFactory.getCursor(contentResolver,
                     UserContact::class.java,
                     PropertyToColumnNameMapper.map(QueryProperty.ID, UserContact::class.java)
-                            + SelectionArgsBuilder.buildIn(it.toTypedArray())))
-        }.flatMap {
-            Observable.just(CursorToContactsMapper.map(it))
+                            + SelectionArgsBuilder.buildIn(it.toTypedArray()))
+        }.map {
+            CursorToContactsMapper.map(it)
         }
     }
 
     private fun loadUserContactsByUri(): Observable<List<UserContact>> {
         return Observable.fromCallable {
             CursorFactory.getCursor(contentResolver, configuration.clazz, configuration.specificUri!!)
-        }.flatMap {
-            Observable.just(CursorToContactsMapper.map(it))
+        }.map {
+            CursorToContactsMapper.map(it)
         }.map { contactsList ->
             contactsList.forEach {
                 fillContactWithData(it)
@@ -142,32 +142,32 @@ internal class ContactsLoadEngine(private val contentResolver: ContentResolver) 
     private fun loadContactPhonesByQuery(): Observable<List<ContactPhone>> {
         return Observable.fromCallable {
             CursorFactory.getCursor(contentResolver, configuration.clazz, configuration.whereSelection)
-        }.flatMap {
-            Observable.just(CursorToPhonesMapper.map(it))
+        }.map {
+            CursorToPhonesMapper.map(it)
         }
     }
 
     private fun loadContactPhonesByUri(): Observable<List<ContactPhone>> {
         return Observable.fromCallable {
             CursorFactory.getCursor(contentResolver, configuration.clazz, configuration.specificUri!!)
-        }.flatMap {
-            Observable.just(CursorToPhonesMapper.map(it))
+        }.map {
+            CursorToPhonesMapper.map(it)
         }
     }
 
     private fun loadContactEmailsByQuery(): Observable<List<ContactEmail>> {
         return Observable.fromCallable {
             CursorFactory.getCursor(contentResolver, configuration.clazz, configuration.whereSelection)
-        }.flatMap {
-            Observable.just(CursorToEmailMapper.map(it))
+        }.map {
+            CursorToEmailMapper.map(it)
         }
     }
 
     private fun loadContactEmailsByUri(): Observable<List<ContactEmail>> {
         return Observable.fromCallable {
             CursorFactory.getCursor(contentResolver, configuration.clazz, configuration.specificUri!!)
-        }.flatMap {
-            Observable.just(CursorToEmailMapper.map(it))
+        }.map {
+            CursorToEmailMapper.map(it)
         }
     }
 
