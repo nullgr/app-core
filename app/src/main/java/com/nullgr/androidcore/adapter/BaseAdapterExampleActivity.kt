@@ -1,5 +1,6 @@
 package com.nullgr.androidcore.adapter
 
+import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.nullgr.corelibrary.adapter.AdapterDelegatesFactory
 import com.nullgr.corelibrary.adapter.DiffCalculator
@@ -14,17 +15,26 @@ import com.nullgr.corelibrary.rx.schedulers.SchedulersFacade
  */
 abstract class BaseAdapterExampleActivity : AppCompatActivity() {
 
-    protected val schedulersFacade: SchedulersFacade
-    protected val diffCalculator: DiffCalculator
-    protected val bus: RxBus
-    protected val delegatesFactory: AdapterDelegatesFactory
-    protected val adapter: DynamicAdapter
+    protected lateinit var schedulersFacade: SchedulersFacade
+    protected lateinit var diffCalculator: DiffCalculator
+    protected lateinit var bus: RxBus
+    protected lateinit var delegatesFactory: AdapterDelegatesFactory
+    protected lateinit var adapter: DynamicAdapter
 
-    init {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        init()
+    }
+
+    private fun init() {
         schedulersFacade = ComputationToMainSchedulersFacade()
         diffCalculator = RxDiffCalculator(schedulersFacade)
         bus = RxBus()
-        delegatesFactory = ExampleDelegatesFactory(bus)
+        provideDelegatesFactory()
         adapter = DynamicAdapter(delegatesFactory, diffCalculator)
+    }
+
+    protected open fun provideDelegatesFactory() {
+        delegatesFactory = ExampleDelegatesFactory(bus)
     }
 }
