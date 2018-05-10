@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@android:color/white"
     android:orientation="horizontal"
     android:padding="16dp">
@@ -12,12 +12,12 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/photo"
+            android:id="@+id/photoImageView"
             android:layout_width="48dp"
             android:layout_height="48dp" />
 
         <TextView
-            android:id="@+id/photoPlaceholder"
+            android:id="@+id/photoPlaceholderTextView"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@drawable/drawable_round"
@@ -35,7 +35,7 @@
         android:paddingStart="16dp">
 
         <TextView
-            android:id="@+id/userName"
+            android:id="@+id/userNameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
@@ -44,7 +44,7 @@
             tools:text="User 1" />
 
         <TextView
-            android:id="@+id/userCredentials"
+            android:id="@+id/userCredentialsTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
