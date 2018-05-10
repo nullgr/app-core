@@ -9,6 +9,7 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.nullgr.corelibrary.intents.launch
+import com.nullgr.corelibrary.rx.RxBus
 import com.nullgr.corelibrary.rx.SingletonRxBusProvider
 import com.nullgr.corelibrary.rx.rxresult.RxActivityResult
 import com.nullgr.corelibrary.rx.rxresult.RxResolveResultActivity
@@ -70,7 +71,7 @@ class RxLocationManager(private var context: Context,
                                             it.status.resolution.intentSender)
                                             .launch(context)
                                 }.flatMap {
-                                    SingletonRxBusProvider.BUS.observable()
+                                    SingletonRxBusProvider.BUS.observable(RxBus.KEYS.SINGLE)
                                             .filter { it is RxActivityResult }
                                             .map { it as RxActivityResult }
                                             .flatMap {
