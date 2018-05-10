@@ -4,7 +4,10 @@ import io.reactivex.Scheduler
 import io.reactivex.schedulers.Schedulers
 
 /**
- * @author chernyshov.
+ * Implementation of [SchedulersFacade] that provides [Schedulers.computation]
+ * for both property [subscribeOn] and [observeOn].
+ *
+ * @author vchernyshov
  */
 class ComputationSchedulersFacade : SchedulersFacade {
 
