@@ -1,5 +1,6 @@
 package com.nullgr.corelibrary.rxcontacts.engine.cursor
 
+import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.database.Cursor
 import android.net.Uri
@@ -13,6 +14,7 @@ import com.nullgr.corelibrary.rxcontacts.domain.UserContact
  */
 internal object CursorFactory {
 
+    @SuppressLint("VisibleForTests")
     fun getCursor(contentResolver: ContentResolver, clazz: Class<*>, selectionString: String?): Cursor {
         return contentResolver.query(clazzToUri(clazz),
                 ProjectionFactory.getProjectionForClazz(clazz),
@@ -21,6 +23,7 @@ internal object CursorFactory {
                 null)
     }
 
+    @SuppressLint("VisibleForTests")
     fun getCursor(contentResolver: ContentResolver, clazz: Class<*>, uri: Uri): Cursor {
         return contentResolver.query(uri,
                 ProjectionFactory.getProjectionForClazz(clazz),

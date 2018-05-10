@@ -9,7 +9,7 @@ import android.support.annotation.VisibleForTesting
 internal object SelectionArgsBuilder {
 
     fun buildWhere(selectionArg: String): String {
-        return " = $selectionArg"
+        return " = '$selectionArg'"
     }
 
     fun buildIn(selectionArgs: Array<out String>): String {
