@@ -24,11 +24,11 @@ class ExampleDelegateWithPayloads(private val bus: RxBus) : AdapterDelegate() {
             subTitleView.text = item.subTitle
             colorView.setBackgroundColor(item.color)
             setOnClickListener {
-                bus.post(event = Event.Click(item))
+                bus.post(Event.Click(item))
             }
         }
 
-        bus.post(event = Event.Payload("onBindViewHolder"))
+        bus.post(Event.Payload("onBindViewHolder"))
     }
 
     override fun onBindViewHolder(items: List<ListItem>, position: Int, holder: RecyclerView.ViewHolder, payloads: List<Any>) {
@@ -50,9 +50,9 @@ class ExampleDelegateWithPayloads(private val bus: RxBus) : AdapterDelegate() {
                         }
                     }
                     holder.itemView.setOnClickListener {
-                        bus.post(event = Event.Click(item))
+                        bus.post(Event.Click(item))
                     }
-                    bus.post(event = Event.Payload(payload))
+                    bus.post(Event.Payload(payload))
                 }
             }
         }
