@@ -9,7 +9,7 @@ import com.nullgr.androidcore.R
 import com.nullgr.corelibrary.location.RxLocationManager
 import com.nullgr.corelibrary.location.isEmpty
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.activity_rx_location_manager_example.*
+import kotlinx.android.synthetic.main.activity_rx_location_manager_example.locationLog
 
 /**
  * Created by Grishko Nikita on 01.02.18.
@@ -34,7 +34,7 @@ class RxLocationManagerExampleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rx_location_manager_example)
 
-        val rxLocationManager = RxLocationManager(this, 300, 10)
+        val rxLocationManager = RxLocationManager(this, 1100, 10)
         var updatesCount = 0
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
