@@ -62,9 +62,19 @@ class RxBus {
      * @param key key to get specific [Relay] in which event will be posted.
      * Default key is [KEYS.GENERAL].
      */
-    @JvmOverloads
-    fun post(key: Any = KEYS.GENERAL, event: Any) {
+    fun post(key: Any, event: Any) {
         getOrCreateRelay(key).asConsumer().accept(event)
+    }
+
+    /**
+     * Posts an event to all registered subscribers.
+     * Event will be posted in relay with [GENERAL] key
+     *
+     * @param event [Any] event to post.
+     * Default key is [KEYS.GENERAL].
+     */
+    fun post(event: Any) {
+        post(KEYS.GENERAL, event)
     }
 
     /**
