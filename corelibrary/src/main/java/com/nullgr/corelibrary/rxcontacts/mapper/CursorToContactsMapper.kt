@@ -9,7 +9,9 @@ import java.util.*
 
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * Map given cursor to collection of unique [UserContact]
+ *
+ * @author Grishko Nikita
  */
 internal object CursorToContactsMapper : CursorMapper<List<UserContact>> {
 
