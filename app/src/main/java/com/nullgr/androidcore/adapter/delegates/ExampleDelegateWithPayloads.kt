@@ -7,7 +7,9 @@ import com.nullgr.androidcore.adapter.items.ExampleItemWithPayloads
 import com.nullgr.corelibrary.adapter.AdapterDelegate
 import com.nullgr.corelibrary.adapter.items.ListItem
 import com.nullgr.corelibrary.rx.RxBus
-import kotlinx.android.synthetic.main.item_example_with_payloads.view.*
+import kotlinx.android.synthetic.main.item_example_with_payloads.view.colorView
+import kotlinx.android.synthetic.main.item_example_with_payloads.view.subTitleView
+import kotlinx.android.synthetic.main.item_example_with_payloads.view.titleView
 
 class ExampleDelegateWithPayloads(private val bus: RxBus) : AdapterDelegate() {
 
@@ -22,11 +24,11 @@ class ExampleDelegateWithPayloads(private val bus: RxBus) : AdapterDelegate() {
             subTitleView.text = item.subTitle
             colorView.setBackgroundColor(item.color)
             setOnClickListener {
-                bus.post(event = Event.Click(item))
+                bus.post(Event.Click(item))
             }
         }
 
-        bus.post(event = Event.Payload("onBindViewHolder"))
+        bus.post(Event.Payload("onBindViewHolder"))
     }
 
     override fun onBindViewHolder(items: List<ListItem>, position: Int, holder: RecyclerView.ViewHolder, payloads: List<Any>) {
@@ -48,9 +50,9 @@ class ExampleDelegateWithPayloads(private val bus: RxBus) : AdapterDelegate() {
                         }
                     }
                     holder.itemView.setOnClickListener {
-                        bus.post(event = Event.Click(item))
+                        bus.post(Event.Click(item))
                     }
-                    bus.post(event = Event.Payload(payload))
+                    bus.post(Event.Payload(payload))
                 }
             }
         }

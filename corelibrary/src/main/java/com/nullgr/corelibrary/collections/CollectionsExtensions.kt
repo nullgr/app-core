@@ -13,6 +13,14 @@ fun <T> Collection<T>?.isNotNullOrEmpty(): Boolean {
     return this != null && !this.isEmpty()
 }
 
+fun <T> Array<T>?.isNullOrEmpty(): Boolean {
+    return this == null || this.isEmpty()
+}
+
+fun <T> Array<T>?.isNotNullOrEmpty(): Boolean {
+    return this != null && !this.isEmpty()
+}
+
 fun <T> MutableCollection<T>?.replace(source: MutableCollection<T>?) {
     source?.let {
         this?.clear()

@@ -13,9 +13,11 @@ import com.nullgr.corelibrary.intents.emailIntent
 import com.nullgr.corelibrary.intents.launch
 import com.nullgr.corelibrary.intents.launchForResult
 import com.nullgr.corelibrary.intents.navigationIntent
-import com.nullgr.corelibrary.intents.selectContactPhoneIntent
+import com.nullgr.corelibrary.intents.selectContactIntent
 import com.nullgr.corelibrary.intents.shareTextIntent
 import com.nullgr.corelibrary.intents.webIntent
+import com.nullgr.corelibrary.rxcontacts.RxContactsProvider
+import com.nullgr.corelibrary.rxcontacts.domain.UserContact
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_common_intents_example.buttonCallTo
 import kotlinx.android.synthetic.main.activity_common_intents_example.buttonMailTo
@@ -77,12 +79,25 @@ class CommonIntentsExampleActivity : AppCompatActivity() {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
                     == PackageManager.PERMISSION_GRANTED) {
 
-                contactsDisposable = selectContactPhoneIntent()
+                contactsDisposable = selectContactIntent()
                         .launchForResult(this)
                         .subscribe(
                                 {
-                                    Toast.makeText(this,
-                                            "resultCode=${it.resultCode}, data=${it.intent}", Toast.LENGTH_SHORT).show()
+                                    it.intent?.let { intent ->
+                                        RxContactsProvider.with(this)
+                                                .fromUri(UserContact::class.java, intent.data)
+                                                .subscribe(
+                                                        {
+                                                            Toast.makeText(this,
+                                                                    "Contact (${it.firstOrNull()?.displayName}) found, from uri ${intent.data}",
+                                                                    Toast.LENGTH_SHORT).show()
+                                                        },
+                                                        {
+                                                            Toast.makeText(this,
+                                                                    "Error while fetching contacts from uri ($it)",
+                                                                    Toast.LENGTH_SHORT).show()
+                                                        })
+                                    }
                                 },
                                 { Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show() })
             }
