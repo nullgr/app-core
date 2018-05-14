@@ -35,6 +35,8 @@
 
         <activity android:name=".adapter.AdapterExampleWithPayloadsActivity" />
 
+        <activity android:name=".interactor.presentation.InteractorExampleActivity" />
+
     </application>
 
 </manifest>

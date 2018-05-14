@@ -8,6 +8,7 @@ import com.nullgr.androidcore.adapter.AdapterExampleWithPayloadsActivity
 import com.nullgr.androidcore.date.DateUtilsExampleActivity
 import com.nullgr.androidcore.fonts.FontsAndSpansExampleActivity
 import com.nullgr.androidcore.intents.CommonIntentsExampleActivity
+import com.nullgr.androidcore.interactor.presentation.InteractorExampleActivity
 import com.nullgr.androidcore.location.RxLocationManagerExampleActivity
 import com.nullgr.androidcore.resources.ResourcesExampleActivity
 import com.nullgr.corelibrary.intents.launch
@@ -47,6 +48,10 @@ class MainActivity : AppCompatActivity() {
 
         buttonAdapterWithPayloadsExample.setOnClickListener {
             Intent(this, AdapterExampleWithPayloadsActivity::class.java).launch(this)
+        }
+
+        buttonInteractorsExample.setOnClickListener {
+            Intent(this, InteractorExampleActivity::class.java).launch(this)
         }
     }
 }
