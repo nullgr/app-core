@@ -13,14 +13,7 @@ import com.nullgr.androidcore.location.RxLocationManagerExampleActivity
 import com.nullgr.androidcore.resources.ResourcesExampleActivity
 import com.nullgr.androidcore.rxcontacts.RxContactsExampleActivity
 import com.nullgr.corelibrary.intents.launch
-import kotlinx.android.synthetic.main.activity_main.buttonAdapterExample
-import kotlinx.android.synthetic.main.activity_main.buttonAdapterWithPayloadsExample
-import kotlinx.android.synthetic.main.activity_main.buttonCommonIntentsExample
-import kotlinx.android.synthetic.main.activity_main.buttonDateUtilsExample
-import kotlinx.android.synthetic.main.activity_main.buttonFontsAndSpans
-import kotlinx.android.synthetic.main.activity_main.buttonLocationExample
-import kotlinx.android.synthetic.main.activity_main.buttonResourcesExample
-import kotlinx.android.synthetic.main.activity_main.buttonRxContactsProviderExample
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
