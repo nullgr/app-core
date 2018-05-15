@@ -58,4 +58,6 @@
     <string name="title_fav_contacts">Favorites</string>
     <string name="title_other_contacts">Other</string>
     <string name="credentials_mask">%s\n%s</string>
+    <string name="execute">Execute</string>
+    <string name="btn_interactors_example">Interactors example</string>
 </resources>

@@ -29,6 +29,8 @@ class AdapterExampleActivity : BaseAdapterExampleActivity() {
         adapter.updateData(newItems = items, enableDiffUtils = true, detectMoves = true)
     }
 
+    override fun provideDelegatesFactory() = ExampleDelegatesFactory(bus)
+
     private fun prepareExampleItems(): List<ListItem> =
             arrayListOf(
                     ExampleItem1(Data.URLS[random.nextInt(Data.URLS.size)], "ExampleItem1-1"),

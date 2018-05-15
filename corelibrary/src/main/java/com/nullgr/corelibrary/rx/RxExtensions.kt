@@ -137,6 +137,17 @@ inline fun <T> Flowable<T>.bindProgress(progressConsumer: Consumer<Boolean>): Fl
 
 /**
  * Extension function that applies side effect operators
+ * [Completable.doOnSubscribe] and [Completable.doFinally] to add progress visibility handling.
+ * Helps to ensure code readability.
+ */
+inline fun Completable.bindProgress(progressConsumer: Consumer<Boolean>): Completable {
+    return this
+            .doOnSubscribe { progressConsumer.accept(true) }
+            .doFinally { progressConsumer.accept(false) }
+}
+
+/**
+ * Extension function that applies side effect operators
  * [Single.doOnSuccess] and [Single.doOnError] to add empty state handling.
  * Helps to ensure code readability.
  */

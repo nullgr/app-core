@@ -84,9 +84,7 @@ class RxContactsExampleActivity : BaseAdapterExampleActivity() {
         }
     }
 
-    override fun provideDelegatesFactory() {
-        delegatesFactory = ContactsDelegateFactory()
-    }
+    override fun provideDelegatesFactory() = ContactsDelegateFactory()
 
     override fun onDestroy() {
         super.onDestroy()

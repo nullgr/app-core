@@ -37,6 +37,8 @@
 
         <activity android:name=".rxcontacts.RxContactsExampleActivity" />
 
+        <activity android:name=".interactor.presentation.InteractorExampleActivity" />
+
     </application>
 
 </manifest>
