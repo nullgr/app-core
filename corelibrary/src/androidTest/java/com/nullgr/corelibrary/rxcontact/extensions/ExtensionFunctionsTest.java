@@ -28,18 +28,27 @@ import static com.nullgr.corelibrary.rxcontacts.extensions.ExtensionFunctionsKt.
 public class ExtensionFunctionsTest {
 
     @Test
-    public void testHasFunction() {
+    public void has_AlreadyAddedId_True() {
         List<BaseContact> contacts = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             contacts.add(newContact(i));
         }
 
         Assert.assertTrue(has(contacts, 5));
+    }
+
+    @Test
+    public void has_ContactWithNewId_False() {
+        List<BaseContact> contacts = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            contacts.add(newContact(i));
+        }
+
         Assert.assertFalse(has(contacts, 11));
     }
 
     @Test
-    public void testEmptyEmailContactsList() {
+    public void getEmptyEmailContactList_ObservableWithEmptyList_True() {
         getEmptyEmailContactsList()
                 .subscribe(new Consumer<ArrayList<ContactEmail>>() {
                     @Override
@@ -50,7 +59,7 @@ public class ExtensionFunctionsTest {
     }
 
     @Test
-    public void testEmptyPhoneContactsList() {
+    public void getEmptyPhoneContactsList_ObservableWithEmptyList_True() {
         getEmptyPhoneContactsList()
                 .subscribe(new Consumer<ArrayList<ContactPhone>>() {
                     @Override

@@ -44,28 +44,28 @@ public class ProjectionFactoryTest {
             ContactsContract.CommonDataKinds.Email.CONTACT_ID};
 
     @Test
-    public void testGetProjectionForUserContact() {
+    public void getProjectionForClazz_UserContact_Success() {
         String[] projection = ProjectionFactory.INSTANCE.getProjectionForClazz(UserContact.class);
         Assert.assertNotNull(projection);
         Assert.assertTrue(Arrays.equals(userContactExpectedProjection, projection));
     }
 
     @Test
-    public void testGetProjectionForContactPhone() {
+    public void getProjectionForClazz_ContactPhone_Success() {
         String[] projection = ProjectionFactory.INSTANCE.getProjectionForClazz(ContactPhone.class);
         Assert.assertNotNull(projection);
         Assert.assertTrue(Arrays.equals(contactPhoneExpectedProjection, projection));
     }
 
     @Test
-    public void testGetProjectionForContactEmail() {
+    public void getProjectionForClazz_ContactEmail_Success() {
         String[] projection = ProjectionFactory.INSTANCE.getProjectionForClazz(ContactEmail.class);
         Assert.assertNotNull(projection);
         Assert.assertTrue(Arrays.equals(contactEmailExpectedProjection, projection));
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testGetProjectionForUnknownClazz() {
+    public void getProjectionForClazz_AnyOtherClass_Fails() {
         ProjectionFactory.INSTANCE.getProjectionForClazz(this.getClass());
     }
 }

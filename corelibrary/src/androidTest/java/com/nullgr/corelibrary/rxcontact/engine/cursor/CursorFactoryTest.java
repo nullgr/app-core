@@ -29,11 +29,11 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(AndroidJUnit4.class)
 public class CursorFactoryTest {
 
-    private static ContentResolver sContentResolver;
+    private static ContentResolver contentResolver;
 
     @BeforeClass
     public static void init() {
-        sContentResolver = InstrumentationRegistry.getContext().getContentResolver();
+        contentResolver = InstrumentationRegistry.getContext().getContentResolver();
     }
 
     @Rule
@@ -41,32 +41,39 @@ public class CursorFactoryTest {
             = GrantPermissionRule.grant(Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS);
 
     @Test
-    public void testGetCursorWithSelection() {
-        Cursor cursor = CursorFactory.INSTANCE.getCursor(sContentResolver, UserContact.class, (String) null);
+    public void getCursor_UserContactAndNullSelection_NotNull() {
+        Cursor cursor = CursorFactory.INSTANCE.getCursor(contentResolver, UserContact.class, (String) null);
         assertNotNull(cursor);
     }
 
     @Test
-    public void testGetCursorWithUri() {
-        Cursor cursor = CursorFactory.INSTANCE.getCursor(sContentResolver,
+    public void getCursor_ContactEmailAndEmailUri_NotNull() {
+        Cursor cursor = CursorFactory.INSTANCE.getCursor(contentResolver,
                 ContactEmail.class,
                 ContactsContract.CommonDataKinds.Email.CONTENT_URI);
         assertNotNull(cursor);
     }
 
     @Test
-    public void testClazzToUri() {
+    public void clazzToUri_UserContact_Equals() {
         Uri contactUri = CursorFactory.INSTANCE.clazzToUri(UserContact.class);
-        Uri emailUri = CursorFactory.INSTANCE.clazzToUri(ContactEmail.class);
-        Uri phoneUri = CursorFactory.INSTANCE.clazzToUri(ContactPhone.class);
-
         Assert.assertEquals(contactUri, ContactsContract.Contacts.CONTENT_URI);
-        Assert.assertEquals(emailUri, ContactsContract.CommonDataKinds.Email.CONTENT_URI);
+    }
+
+    @Test
+    public void clazzToUri_ContactPhone_Equals() {
+        Uri phoneUri = CursorFactory.INSTANCE.clazzToUri(ContactPhone.class);
         Assert.assertEquals(phoneUri, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
     }
 
+    @Test
+    public void clazzToUri_ContactEmail_Equals() {
+        Uri emailUri = CursorFactory.INSTANCE.clazzToUri(ContactEmail.class);
+        Assert.assertEquals(emailUri, ContactsContract.CommonDataKinds.Email.CONTENT_URI);
+    }
+
     @Test(expected = IllegalArgumentException.class)
-    public void testUnknownClazzToUri() {
+    public void clazzToUri_AnyOtherClass_Fails() {
         CursorFactory.INSTANCE.clazzToUri(this.getClass());
     }
 }

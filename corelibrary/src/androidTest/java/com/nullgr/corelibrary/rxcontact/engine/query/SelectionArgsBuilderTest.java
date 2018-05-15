@@ -16,19 +16,19 @@ import org.junit.runner.RunWith;
 public class SelectionArgsBuilderTest {
 
     @Test
-    public void testBuildWhere() {
+    public void buildWhere_SingleStringSelectionArg_Equals() {
         String whereArg = SelectionArgsBuilder.INSTANCE.buildWhere("Test User");
         Assert.assertEquals(" = 'Test User'", whereArg);
     }
 
     @Test
-    public void testBuildLike() {
+    public void buildLike_SingleStringSelectionArg_Equals() {
         String whereArg = SelectionArgsBuilder.INSTANCE.buildLike("Test User");
         Assert.assertEquals(" LIKE '%Test User%'", whereArg);
     }
 
     @Test
-    public void testBuildIn() {
+    public void buildIn_StringArraySelectionArg_Equals() {
         String whereArg = SelectionArgsBuilder.INSTANCE.buildIn(new String[]{"User1", "User2"});
         Assert.assertEquals(" IN ('User1','User2')", whereArg);
     }

@@ -17,19 +17,19 @@ import org.junit.runner.RunWith;
 public class UriToMethodValidatorTest {
 
     @Test
-    public void testCorrectUriForUserContacts() {
+    public void validateUriToPickContact_CorrectUri_Success() {
         Uri validUri = ContactsContract.Contacts.getLookupUri(1, "someKey");
         UriToMethodValidator.INSTANCE.validateUriToPickContact(validUri);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testNotCorrectUriForUserContacts() {
+    public void validateUriToPickContact_NotCorrectUri_Fails() {
         Uri validUri = ContactsContract.CommonDataKinds.Email.CONTENT_URI;
         UriToMethodValidator.INSTANCE.validateUriToPickContact(validUri);
     }
 
     @Test
-    public void testCorrectUriForDataKindContacts() {
+    public void validateUriToPickPhoneOrEmailData_CorrectUri_Success() {
         Uri validUri1 = ContactsContract.CommonDataKinds.Email.CONTENT_URI;
         UriToMethodValidator.INSTANCE.validateUriToPickPhoneOrEmailData(validUri1);
 
@@ -38,7 +38,7 @@ public class UriToMethodValidatorTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testNotCorrectUriForDataKindContacts() {
+    public void validateUriToPickPhoneOrEmailData_NotCorrectUri_Fails() {
         Uri validUri = ContactsContract.Contacts.getLookupUri(1, "someKey");
         UriToMethodValidator.INSTANCE.validateUriToPickPhoneOrEmailData(validUri);
     }
