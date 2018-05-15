@@ -10,7 +10,6 @@ import com.nullgr.corelibrary.rxcontacts.domain.UserContact
  * Inner factory class that provides projection [Array] for give class
  * @author Grishko Nikita
  */
-@VisibleForTesting
 internal object ProjectionFactory {
 
     private val PROJECTION_CONTACT = arrayOf(ContactsContract.Contacts._ID,

@@ -1,7 +1,6 @@
 package com.nullgr.corelibrary.date
 
 import android.support.annotation.Nullable
-import android.support.annotation.VisibleForTesting
 import android.util.LruCache
 import java.text.SimpleDateFormat
 import java.util.*
@@ -10,8 +9,7 @@ import java.util.*
  * Class to cache and provide SimpleDateFormat objects.
  * @author Grishko Nikita
  */
-@VisibleForTesting
-private object SimpleDateFormatterCache {
+internal object SimpleDateFormatterCache {
     private val cache = LruCache<String, SimpleDateFormat?>(16)
 
     operator fun get(name: String): SimpleDateFormat? {

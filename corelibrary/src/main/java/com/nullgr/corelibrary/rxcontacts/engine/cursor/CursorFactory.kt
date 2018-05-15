@@ -1,6 +1,5 @@
 package com.nullgr.corelibrary.rxcontacts.engine.cursor
 
-import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.database.Cursor
 import android.net.Uri
@@ -13,7 +12,6 @@ import com.nullgr.corelibrary.rxcontacts.domain.UserContact
  * Inner factory class that provides [Cursor] for different cases
  * @author Grishko Nikita
  */
-@SuppressLint("VisibleForTests")
 internal object CursorFactory {
 
     /**
@@ -23,7 +21,6 @@ internal object CursorFactory {
      * @param selectionString custom WHERE string
      * @return instance of [Cursor]
      */
-    @SuppressLint("VisibleForTests")
     fun getCursor(contentResolver: ContentResolver, clazz: Class<*>, selectionString: String?): Cursor {
         return contentResolver.query(clazzToUri(clazz),
                 ProjectionFactory.getProjectionForClazz(clazz),
