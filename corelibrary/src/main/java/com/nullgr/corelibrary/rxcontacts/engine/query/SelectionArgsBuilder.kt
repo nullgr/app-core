@@ -1,11 +1,10 @@
 package com.nullgr.corelibrary.rxcontacts.engine.query
 
-import android.support.annotation.VisibleForTesting
-
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * Inner helper to build selection argument string
+ *
+ * @author Grishko Nikita
  */
-@VisibleForTesting
 internal object SelectionArgsBuilder {
 
     fun buildWhere(selectionArg: String): String {

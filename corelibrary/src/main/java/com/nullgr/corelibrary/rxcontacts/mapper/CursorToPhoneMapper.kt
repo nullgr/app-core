@@ -6,7 +6,9 @@ import com.nullgr.corelibrary.rxcontacts.domain.ContactPhone
 import com.nullgr.corelibrary.rxcontacts.extensions.has
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * Map given cursor to collection of unique [ContactPhone]
+ *
+ * @author Grishko Nikita
  */
 internal object CursorToPhonesMapper : CursorMapper<List<ContactPhone>> {
 

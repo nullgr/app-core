@@ -7,7 +7,9 @@ import com.nullgr.corelibrary.rxcontacts.domain.ContactPhone
 import com.nullgr.corelibrary.rxcontacts.domain.UserContact
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * Inner helper for mapping [QueryProperty] to one of column names
+ *
+ * @author Grishko Nikita
  */
 @VisibleForTesting
 internal object PropertyToColumnNameMapper {

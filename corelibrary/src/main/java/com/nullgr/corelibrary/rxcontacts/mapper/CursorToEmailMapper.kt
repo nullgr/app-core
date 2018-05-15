@@ -6,7 +6,9 @@ import com.nullgr.corelibrary.rxcontacts.domain.ContactEmail
 import com.nullgr.corelibrary.rxcontacts.extensions.has
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * Map given cursor to collection of unique [ContactEmail]
+ *
+ * @author Grishko Nikita
  */
 internal object CursorToEmailMapper : CursorMapper<List<ContactEmail>> {
 

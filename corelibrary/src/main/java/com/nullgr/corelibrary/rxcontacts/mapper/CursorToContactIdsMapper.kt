@@ -1,10 +1,11 @@
 package com.nullgr.corelibrary.rxcontacts.mapper
 
 import android.database.Cursor
-import android.util.Log
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * Map given cursor to collection of unique contact ids
+ *
+ * @author Grishko Nikita
  */
 internal object CursorToContactIdsMapper : CursorMapper<List<String>> {
 
