@@ -72,14 +72,16 @@ class AdapterExampleWithPayloadsActivity : BaseAdapterExampleActivity(), ColorPi
         logView.movementMethod = ScrollingMovementMethod()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.clear()
+    }
+
+    override fun provideDelegatesFactory() = ExampleDelegatesFactory(bus)
+
     override fun onColorChosen(color: Int) {
         itemColor = color
         pickColorButtonView.setBackgroundColor(itemColor)
         colorPicker.dismiss()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        compositeDisposable.clear()
     }
 }

@@ -2,11 +2,11 @@ package com.nullgr.androidcore.interactor.presentation
 
 import android.app.ProgressDialog
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.nullgr.androidcore.R
+import com.nullgr.androidcore.adapter.BaseAdapterExampleActivity
 import com.nullgr.androidcore.interactor.data.UserDataRepositoryExample
 import com.nullgr.androidcore.interactor.domain.interactor.GetSuggestedFriendsUseCase
 import com.nullgr.androidcore.interactor.domain.interactor.GetUserFriendsPhotoUseCase
@@ -18,16 +18,9 @@ import com.nullgr.androidcore.interactor.domain.interactor.ResetPasswordUseCase
 import com.nullgr.androidcore.interactor.domain.repository.UserRepositoryExample
 import com.nullgr.androidcore.interactor.presentation.adapter.InteractorDelegatesFactory
 import com.nullgr.androidcore.interactor.presentation.adapter.items.InteractorItem
-import com.nullgr.corelibrary.adapter.AdapterDelegatesFactory
-import com.nullgr.corelibrary.adapter.DiffCalculator
-import com.nullgr.corelibrary.adapter.DynamicAdapter
-import com.nullgr.corelibrary.adapter.RxDiffCalculator
 import com.nullgr.corelibrary.adapter.items.ListItem
-import com.nullgr.corelibrary.rx.RxBus
 import com.nullgr.corelibrary.rx.asObservable
 import com.nullgr.corelibrary.rx.bindProgress
-import com.nullgr.corelibrary.rx.schedulers.ComputationToMainSchedulersFacade
-import com.nullgr.corelibrary.rx.schedulers.SchedulersFacade
 import com.nullgr.corelibrary.widgets.decor.DividerItemDecoration
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -40,25 +33,20 @@ import kotlinx.android.synthetic.main.activity_interactor_example.*
  * @author chernyshov.
  */
 class InteractorExampleActivity
-    : AppCompatActivity() {
+    : BaseAdapterExampleActivity() {
 
-    private val schedulersFacade: SchedulersFacade
-    private val diffCalculator: DiffCalculator
-    private val bus: RxBus
-    private val delegatesFactory: AdapterDelegatesFactory
-    private val adapter: DynamicAdapter
-    private val compositeDisposable: CompositeDisposable
+    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    private val repository: UserRepositoryExample
-    private val getSuggestedFriendsUseCase: GetSuggestedFriendsUseCase
-    private val getUserFriendsPhotoUseCase: GetUserFriendsPhotoUseCase
-    private val getUserPhoneUseCase: GetUserPhoneUseCase
-    private val getUserPhotoUseCase: GetUserPhotoUseCase
-    private val getUsersUseCase: GetUsersUseCase
-    private val getUserUseCase: GetUserUseCase
-    private val resetPasswordUseCase: ResetPasswordUseCase
+    private lateinit var repository: UserRepositoryExample
+    private lateinit var getSuggestedFriendsUseCase: GetSuggestedFriendsUseCase
+    private lateinit var getUserFriendsPhotoUseCase: GetUserFriendsPhotoUseCase
+    private lateinit var getUserPhoneUseCase: GetUserPhoneUseCase
+    private lateinit var getUserPhotoUseCase: GetUserPhotoUseCase
+    private lateinit var getUsersUseCase: GetUsersUseCase
+    private lateinit var getUserUseCase: GetUserUseCase
+    private lateinit var resetPasswordUseCase: ResetPasswordUseCase
 
-    private val progressState: BehaviorRelay<Boolean>
+    private lateinit var progressState: BehaviorRelay<Boolean>
     private val progressView by lazy {
         ProgressDialog(this)
                 .apply {
@@ -67,25 +55,6 @@ class InteractorExampleActivity
                     setCanceledOnTouchOutside(false)
                     isIndeterminate = true
                 }
-    }
-
-    init {
-        schedulersFacade = ComputationToMainSchedulersFacade()
-        diffCalculator = RxDiffCalculator(schedulersFacade)
-        bus = RxBus()
-        delegatesFactory = InteractorDelegatesFactory(bus)
-        adapter = DynamicAdapter(delegatesFactory, diffCalculator)
-        compositeDisposable = CompositeDisposable()
-
-        repository = UserDataRepositoryExample()
-        getSuggestedFriendsUseCase = GetSuggestedFriendsUseCase(repository, schedulersFacade)
-        getUserFriendsPhotoUseCase = GetUserFriendsPhotoUseCase(repository, schedulersFacade)
-        getUserPhoneUseCase = GetUserPhoneUseCase(repository, schedulersFacade)
-        getUserPhotoUseCase = GetUserPhotoUseCase(repository, schedulersFacade)
-        getUsersUseCase = GetUsersUseCase(repository, schedulersFacade)
-        getUserUseCase = GetUserUseCase(repository, schedulersFacade)
-        resetPasswordUseCase = ResetPasswordUseCase(repository, schedulersFacade)
-        progressState = BehaviorRelay.createDefault(false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -201,6 +170,21 @@ class InteractorExampleActivity
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.clear()
+    }
+
+    override fun provideDelegatesFactory() = InteractorDelegatesFactory(bus)
+
+    override fun init() {
+        super.init()
+        repository = UserDataRepositoryExample()
+        getSuggestedFriendsUseCase = GetSuggestedFriendsUseCase(repository, schedulersFacade)
+        getUserFriendsPhotoUseCase = GetUserFriendsPhotoUseCase(repository, schedulersFacade)
+        getUserPhoneUseCase = GetUserPhoneUseCase(repository, schedulersFacade)
+        getUserPhotoUseCase = GetUserPhotoUseCase(repository, schedulersFacade)
+        getUsersUseCase = GetUsersUseCase(repository, schedulersFacade)
+        getUserUseCase = GetUserUseCase(repository, schedulersFacade)
+        resetPasswordUseCase = ResetPasswordUseCase(repository, schedulersFacade)
+        progressState = BehaviorRelay.createDefault(false)
     }
 
     private fun prepareItems(): List<ListItem> {
