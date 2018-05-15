@@ -59,6 +59,12 @@
             android:layout_height="wrap_content"
             android:text="@string/title_rx_contacts_activity" />
 
+        <Button
+            android:id="@+id/buttonInteractorsExample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_interactors_example" />
+
     </LinearLayout>
 
 </ScrollView>

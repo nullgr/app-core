@@ -1,6 +1,7 @@
 package com.nullgr.androidcore.adapter
 
 import android.os.Bundle
+import android.support.annotation.CallSuper
 import android.support.v7.app.AppCompatActivity
 import com.nullgr.corelibrary.adapter.AdapterDelegatesFactory
 import com.nullgr.corelibrary.adapter.DiffCalculator
@@ -26,15 +27,14 @@ abstract class BaseAdapterExampleActivity : AppCompatActivity() {
         init()
     }
 
-    private fun init() {
+    abstract fun provideDelegatesFactory(): AdapterDelegatesFactory
+
+    @CallSuper
+    protected open fun init() {
         schedulersFacade = ComputationToMainSchedulersFacade()
         diffCalculator = RxDiffCalculator(schedulersFacade)
         bus = RxBus()
-        provideDelegatesFactory()
+        delegatesFactory = provideDelegatesFactory()
         adapter = DynamicAdapter(delegatesFactory, diffCalculator)
-    }
-
-    protected open fun provideDelegatesFactory() {
-        delegatesFactory = ExampleDelegatesFactory(bus)
     }
 }
