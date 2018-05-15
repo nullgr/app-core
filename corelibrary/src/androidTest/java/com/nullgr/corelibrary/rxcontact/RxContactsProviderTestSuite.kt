@@ -10,7 +10,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.Suite
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * @author Grishko Nikita
  */
 @RunWith(Suite::class)
 @Suite.SuiteClasses(value = [ExtensionFunctionsTest::class,

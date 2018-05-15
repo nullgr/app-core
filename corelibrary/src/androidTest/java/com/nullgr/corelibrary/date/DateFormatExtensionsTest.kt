@@ -15,7 +15,7 @@ import org.junit.Assert.assertNotSame
 import org.junit.Assert.assertSame
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * @author Grishko Nikita
  */
 @RunWith(AndroidJUnit4::class)
 class DateFormatExtensionsTest {

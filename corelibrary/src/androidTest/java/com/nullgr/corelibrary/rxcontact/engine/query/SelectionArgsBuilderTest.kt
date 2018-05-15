@@ -9,7 +9,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * @author Grishko Nikita
  */
 @RunWith(AndroidJUnit4::class)
 class SelectionArgsBuilderTest {

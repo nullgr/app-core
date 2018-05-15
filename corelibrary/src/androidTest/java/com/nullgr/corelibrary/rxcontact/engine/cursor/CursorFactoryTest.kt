@@ -18,10 +18,21 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * @author Grishko Nikita
  */
 @RunWith(AndroidJUnit4::class)
 class CursorFactoryTest {
+
+    companion object {
+
+        private var contentResolver: ContentResolver? = null
+
+        @BeforeClass
+        @JvmStatic
+        fun init() {
+            contentResolver = InstrumentationRegistry.getContext().contentResolver
+        }
+    }
 
     @get:Rule
     val runtimePermissionRule = GrantPermissionRule.grant(
@@ -63,16 +74,5 @@ class CursorFactoryTest {
     @Test(expected = IllegalArgumentException::class)
     fun clazzToUri_AnyOtherClass_Fails() {
         CursorFactory.clazzToUri(this.javaClass)
-    }
-
-    companion object {
-
-        private var contentResolver: ContentResolver? = null
-
-        @BeforeClass
-        @JvmStatic
-        fun init() {
-            contentResolver = InstrumentationRegistry.getContext().contentResolver
-        }
     }
 }

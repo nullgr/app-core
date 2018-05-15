@@ -12,7 +12,7 @@ import org.junit.runner.RunWith
 import java.util.*
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * @author Grishko Nikita
  */
 @RunWith(AndroidJUnit4::class)
 class ExtensionFunctionsTest {
