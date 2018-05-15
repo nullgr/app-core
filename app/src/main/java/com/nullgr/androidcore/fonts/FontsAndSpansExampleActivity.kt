@@ -6,8 +6,19 @@ import android.support.v7.app.AppCompatActivity
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import com.nullgr.androidcore.R
-import com.nullgr.corelibrary.fonts.*
-import kotlinx.android.synthetic.main.activity_fonts_and_spans_example.*
+import com.nullgr.corelibrary.fonts.applyColor
+import com.nullgr.corelibrary.fonts.applyFont
+import com.nullgr.corelibrary.fonts.applyRelativeSize
+import com.nullgr.corelibrary.fonts.color
+import com.nullgr.corelibrary.fonts.getTypeface
+import com.nullgr.corelibrary.fonts.newSpanSet
+import com.nullgr.corelibrary.fonts.relativeSize
+import com.nullgr.corelibrary.fonts.setSpannableTitle
+import com.nullgr.corelibrary.fonts.typeface
+import kotlinx.android.synthetic.main.activity_fonts_and_spans_example.textWithColor
+import kotlinx.android.synthetic.main.activity_fonts_and_spans_example.textWithComplicatedSpan
+import kotlinx.android.synthetic.main.activity_fonts_and_spans_example.textWithFont
+import kotlinx.android.synthetic.main.activity_fonts_and_spans_example.textWithRelativeSize
 
 /**
  * Created by Grishko Nikita on 01.02.18.
@@ -42,10 +53,10 @@ class FontsAndSpansExampleActivity : AppCompatActivity() {
             val start3 = text.indexOf("T", ignoreCase = false)
 
             text = (newSpanSet()
-                    add TypefaceSpan(getTypeface("Roboto-Bold.ttf")) to end1
-                    and TypefaceSpan(getTypeface("Roboto-Italic.ttf")) from start2 to end2
-                    and RelativeSizeSpan(1.8f) from start2 to end2
-                    and ForegroundColorSpan(Color.GREEN) from start3
+                    add typeface(getTypeface("Roboto-Bold.ttf")) to end1
+                    and typeface(getTypeface("Roboto-Italic.ttf")) from start2 to end2
+                    and relativeSize(1.8f) from start2 to end2
+                    and color(Color.GREEN) from start3
                     ).applyTo(text.toString())
 
         }

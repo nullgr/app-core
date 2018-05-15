@@ -1,6 +1,8 @@
 package com.nullgr.corelibrary.fonts
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.Typeface
 import android.support.annotation.ColorInt
 import android.text.Spannable
 import android.text.SpannableString
@@ -138,4 +140,20 @@ fun String.toSpannable(): SpannableString {
  */
 fun newSpanSet(): SpanSet {
     return SpanSet()
+}
+
+fun typeface(typeface: Typeface?): TypefaceSpan {
+    return TypefaceSpan(typeface)
+}
+
+fun relativeSize(proportion: Float): RelativeSizeSpan {
+    return RelativeSizeSpan(proportion)
+}
+
+fun absSize(pixelSize: Int): AbsoluteSizeSpan {
+    return AbsoluteSizeSpan(pixelSize)
+}
+
+fun color(color: Int): ForegroundColorSpan {
+    return ForegroundColorSpan(Color.GREEN)
 }
