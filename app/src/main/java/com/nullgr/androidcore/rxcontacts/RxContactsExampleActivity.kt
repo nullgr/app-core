@@ -22,7 +22,7 @@ import com.nullgr.corelibrary.rx.schedulers.IoToMainSchedulersFacade
 import com.nullgr.corelibrary.rx.zipWithTimer
 import com.nullgr.corelibrary.rxcontacts.RxContactsProvider
 import com.nullgr.corelibrary.rxcontacts.domain.UserContact
-import com.nullgr.corelibrary.ui.toggleView
+import com.nullgr.corelibrary.ui.extensions.toggleView
 import com.nullgr.corelibrary.widgets.decor.DividerItemDecoration
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer

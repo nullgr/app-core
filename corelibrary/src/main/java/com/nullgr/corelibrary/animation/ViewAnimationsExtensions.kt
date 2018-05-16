@@ -4,8 +4,8 @@ import android.os.Build
 import android.view.View
 import android.view.ViewAnimationUtils
 import com.nullgr.corelibrary.common.forVersion
-import com.nullgr.corelibrary.ui.disappear
-import com.nullgr.corelibrary.ui.show
+import com.nullgr.corelibrary.ui.extensions.disappear
+import com.nullgr.corelibrary.ui.extensions.show
 
 
 /**

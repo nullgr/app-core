@@ -1,4 +1,4 @@
-package com.nullgr.corelibrary.ui
+package com.nullgr.corelibrary.ui.extensions
 
 import android.os.Build
 import android.support.annotation.ColorRes
@@ -10,7 +10,7 @@ import android.view.Window
 import android.view.WindowManager
 
 /**
- * @author chernyshov.
+ * Set [fitsSystemWindows] for window content view
  */
 fun Window.applyInsetsToContentView(fitsSystemWindows: Boolean) {
     (findViewById<View>(Window.ID_ANDROID_CONTENT) as ViewGroup).getChildAt(0)?.let {
@@ -19,6 +19,11 @@ fun Window.applyInsetsToContentView(fitsSystemWindows: Boolean) {
     }
 }
 
+/**
+ * Set status bar color and switch icon to light or dark theme
+ * @param color [Int] color for status bar
+ * @param windowLightStatusBar [Boolean] flag that indicates, if dark or light theme should applied
+ */
 fun Window.setStatusBarColor(@ColorRes color: Int, windowLightStatusBar: Boolean) {
     clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
     addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
