@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.util.SparseArray
-import android.widget.Toast
 import com.nullgr.androidcore.R
 import com.nullgr.androidcore.adapter.BaseAdapterExampleActivity
 import com.nullgr.androidcore.rxcontacts.items.ContactItem
@@ -23,6 +22,7 @@ import com.nullgr.corelibrary.rx.zipWithTimer
 import com.nullgr.corelibrary.rxcontacts.RxContactsProvider
 import com.nullgr.corelibrary.rxcontacts.domain.UserContact
 import com.nullgr.corelibrary.ui.extensions.toggleView
+import com.nullgr.corelibrary.ui.toast.showToast
 import com.nullgr.corelibrary.widgets.decor.DividerItemDecoration
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
@@ -64,7 +64,7 @@ class RxContactsExampleActivity : BaseAdapterExampleActivity() {
                     }.subscribe({
                         adapter.updateData(it)
                     }, {
-                        Toast.makeText(this, "Error Occurred: $it", Toast.LENGTH_SHORT).show()
+                        "Error Occurred: $it".showToast(this)
                     })
         }
     }
