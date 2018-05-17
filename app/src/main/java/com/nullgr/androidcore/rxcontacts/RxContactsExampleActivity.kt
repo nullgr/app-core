@@ -21,9 +21,9 @@ import com.nullgr.corelibrary.rx.schedulers.IoToMainSchedulersFacade
 import com.nullgr.corelibrary.rx.zipWithTimer
 import com.nullgr.corelibrary.rxcontacts.RxContactsProvider
 import com.nullgr.corelibrary.rxcontacts.domain.UserContact
+import com.nullgr.corelibrary.ui.decor.DividerItemDecoration
 import com.nullgr.corelibrary.ui.extensions.toggleView
 import com.nullgr.corelibrary.ui.toast.showToast
-import com.nullgr.corelibrary.widgets.decor.DividerItemDecoration
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_adapter_example.itemsView
@@ -48,7 +48,7 @@ class RxContactsExampleActivity : BaseAdapterExampleActivity() {
 
         itemsView.layoutManager = LinearLayoutManager(this)
         itemsView.adapter = adapter
-        itemsView.addItemDecoration(DividerItemDecoration(this, R.drawable.divider_adapter_item))
+        itemsView.addItemDecoration(DividerItemDecoration(this, R.drawable.divider_adapter_item, false))
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
                 == PackageManager.PERMISSION_GRANTED) {
