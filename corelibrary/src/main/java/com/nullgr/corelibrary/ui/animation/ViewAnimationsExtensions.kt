@@ -1,4 +1,4 @@
-package com.nullgr.corelibrary.animation
+package com.nullgr.corelibrary.ui.animation
 
 import android.os.Build
 import android.view.View
@@ -9,7 +9,9 @@ import com.nullgr.corelibrary.ui.extensions.show
 
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * Simple extension function, that provides cross fade animation between to views
+ * @receiver Currently visible [View]
+ * @param other [View] thar will be visible after animation finish
  */
 infix fun <T : View> T.crossFadeTo(other: T) {
     this.animate().alpha(0f)?.doOnEnd {
@@ -21,6 +23,12 @@ infix fun <T : View> T.crossFadeTo(other: T) {
     }
 }
 
+/**
+ * Simple extension function, that provides reveal animation between to views.
+ * Can be used for [Build.VERSION_CODES] before [Build.VERSION_CODES.LOLLIPOP].
+ * @receiver Currently visible [View]
+ * @param other [View] thar will be visible after animation finish
+ */
 infix fun <T : View> T.revealTo(other: T) {
     forVersion(Build.VERSION_CODES.LOLLIPOP)
             .doIfHigher {

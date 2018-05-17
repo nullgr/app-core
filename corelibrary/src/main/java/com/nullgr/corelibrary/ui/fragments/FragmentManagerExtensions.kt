@@ -1,4 +1,4 @@
-package com.nullgr.corelibrary.common
+package com.nullgr.corelibrary.ui.fragments
 
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
