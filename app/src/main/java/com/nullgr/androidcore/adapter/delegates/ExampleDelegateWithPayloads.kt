@@ -7,25 +7,31 @@ import com.nullgr.androidcore.R
 import com.nullgr.androidcore.adapter.Event
 import com.nullgr.androidcore.adapter.items.ExampleItemWithPayloads
 import com.nullgr.corelibrary.adapter.AdapterDelegate
-import com.nullgr.corelibrary.adapter.DynamicAdapter
+import com.nullgr.corelibrary.adapter.OnClickHandler
+import com.nullgr.corelibrary.adapter.OnClickListener
 import com.nullgr.corelibrary.adapter.items.ListItem
 import com.nullgr.corelibrary.rx.RxBus
 import kotlinx.android.synthetic.main.item_example_with_payloads.view.*
 
 class ExampleDelegateWithPayloads(private val bus: RxBus) : AdapterDelegate() {
 
+    private val clickHandler = object : OnClickHandler {
+        override fun handle(view: View, item: ListItem, position: Int) {
+            when (view.id) {
+                R.id.colorView -> bus.post(Event.Click("child colorView"))
+                else -> bus.post(Event.Click(item))
+            }
+        }
+    }
+
     override val layoutResource: Int = R.layout.item_example_with_payloads
     override val itemType: Any = ExampleItemWithPayloads::class
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         return super.onCreateViewHolder(parent).apply {
-            val onClickListener = View.OnClickListener { view ->
-                val adapter = (itemView.parent as RecyclerView).adapter as DynamicAdapter
-                withValidPosition(adapter, { item ->
-                    bus.post(Event.Click(item))
-                })
-            }
-            itemView.setOnClickListener(onClickListener)
+            val onClickListener = OnClickListener(this, clickHandler)
+            this.itemView.colorView.setOnClickListener(onClickListener)
+            this.itemView.setOnClickListener(onClickListener)
         }
     }
 
@@ -55,12 +61,5 @@ class ExampleDelegateWithPayloads(private val bus: RxBus) : AdapterDelegate() {
             }
         }
         bus.post(Event.Payload(payload))
-    }
-
-    private fun RecyclerView.ViewHolder.withValidPosition(adapter: DynamicAdapter, block: (ListItem) -> Unit) {
-        val position = adapterPosition
-        if (position != RecyclerView.NO_POSITION) {
-            block(adapter.items[position])
-        }
     }
 }
