@@ -3,8 +3,8 @@ package com.nullgr.androidcore.adapter.delegates
 import android.support.v7.widget.RecyclerView
 import com.nullgr.androidcore.R
 import com.nullgr.androidcore.adapter.items.ExampleItem3
-import com.nullgr.corelibrary.adapter.AdapterDelegate
-import com.nullgr.corelibrary.adapter.items.ListItem
+import com.nullgr.core.adapter.AdapterDelegate
+import com.nullgr.core.adapter.items.ListItem
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_example_3.view.*
 

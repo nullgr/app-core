@@ -35,11 +35,6 @@ android {
     lintOptions {
         abortOnError false
     }
-    buildToolsVersion '27.0.3'
-
-    packagingOptions {
-        pickFirst 'protobuf.meta'
-    }
 }
 
 configurations.all {
@@ -124,4 +119,6 @@ dependencies {
 
     kaptTest commonTestDependencies.daggerCompiler
     kaptAndroidTest commonTestDependencies.daggerCompiler
+    implementation project(path: ':core-adapter')
+    implementation project(path: ':core-font')
 }

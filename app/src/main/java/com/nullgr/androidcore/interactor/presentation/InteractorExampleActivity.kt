@@ -18,9 +18,9 @@ import com.nullgr.androidcore.interactor.domain.interactor.ResetPasswordUseCase
 import com.nullgr.androidcore.interactor.domain.repository.UserRepositoryExample
 import com.nullgr.androidcore.interactor.presentation.adapter.InteractorDelegatesFactory
 import com.nullgr.androidcore.interactor.presentation.adapter.items.InteractorItem
-import com.nullgr.corelibrary.adapter.items.ListItem
-import com.nullgr.corelibrary.rx.asObservable
-import com.nullgr.corelibrary.rx.bindProgress
+import com.nullgr.core.adapter.items.ListItem
+import com.nullgr.core.rx.asObservable
+import com.nullgr.core.rx.bindProgress
 import com.nullgr.corelibrary.widgets.decor.DividerItemDecoration
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

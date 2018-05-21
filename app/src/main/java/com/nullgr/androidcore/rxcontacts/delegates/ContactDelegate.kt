@@ -8,15 +8,12 @@ import android.graphics.Shader
 import android.support.v7.widget.RecyclerView
 import com.nullgr.androidcore.R
 import com.nullgr.androidcore.rxcontacts.items.ContactItem
-import com.nullgr.corelibrary.adapter.AdapterDelegate
-import com.nullgr.corelibrary.adapter.items.ListItem
+import com.nullgr.core.adapter.AdapterDelegate
+import com.nullgr.core.adapter.items.ListItem
 import com.nullgr.corelibrary.ui.toggleView
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Transformation
-import kotlinx.android.synthetic.main.item_contact.view.photoImageView
-import kotlinx.android.synthetic.main.item_contact.view.photoPlaceholderTextView
-import kotlinx.android.synthetic.main.item_contact.view.userCredentialsTextView
-import kotlinx.android.synthetic.main.item_contact.view.userNameTextView
+import kotlinx.android.synthetic.main.item_contact.view.*
 
 /**
  * Created by Grishko Nikita on 01.02.18.

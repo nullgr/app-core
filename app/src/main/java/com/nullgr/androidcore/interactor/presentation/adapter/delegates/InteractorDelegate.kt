@@ -3,9 +3,9 @@ package com.nullgr.androidcore.interactor.presentation.adapter.delegates
 import android.support.v7.widget.RecyclerView
 import com.nullgr.androidcore.R
 import com.nullgr.androidcore.interactor.presentation.adapter.items.InteractorItem
-import com.nullgr.corelibrary.adapter.AdapterDelegate
-import com.nullgr.corelibrary.adapter.items.ListItem
-import com.nullgr.corelibrary.rx.RxBus
+import com.nullgr.core.adapter.AdapterDelegate
+import com.nullgr.core.adapter.items.ListItem
+import com.nullgr.core.rx.RxBus
 import kotlinx.android.synthetic.main.item_interactor.view.*
 
 class InteractorDelegate(private val bus: RxBus) : AdapterDelegate() {

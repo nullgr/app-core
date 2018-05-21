@@ -4,8 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
 import android.widget.TextView
+import com.nullgr.core.font.getTypeface
 import com.nullgr.corelibrary.R
-import com.nullgr.corelibrary.fonts.getTypeface
 import java.lang.Exception
 
 /**

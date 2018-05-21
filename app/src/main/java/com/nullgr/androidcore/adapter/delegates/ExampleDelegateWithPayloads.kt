@@ -4,12 +4,10 @@ import android.support.v7.widget.RecyclerView
 import com.nullgr.androidcore.R
 import com.nullgr.androidcore.adapter.Event
 import com.nullgr.androidcore.adapter.items.ExampleItemWithPayloads
-import com.nullgr.corelibrary.adapter.AdapterDelegate
-import com.nullgr.corelibrary.adapter.items.ListItem
-import com.nullgr.corelibrary.rx.RxBus
-import kotlinx.android.synthetic.main.item_example_with_payloads.view.colorView
-import kotlinx.android.synthetic.main.item_example_with_payloads.view.subTitleView
-import kotlinx.android.synthetic.main.item_example_with_payloads.view.titleView
+import com.nullgr.core.adapter.AdapterDelegate
+import com.nullgr.core.adapter.items.ListItem
+import com.nullgr.core.rx.RxBus
+import kotlinx.android.synthetic.main.item_example_with_payloads.view.*
 
 class ExampleDelegateWithPayloads(private val bus: RxBus) : AdapterDelegate() {
 

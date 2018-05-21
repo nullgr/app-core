@@ -1,1 +1,1 @@
-include ':app', ':corelibrary'
+include ':app', ':corelibrary', ':core-adapter', ':core-adapter', ':core-rx', ':core-date', ':core-interactor', ':core-interactor', ':core-font', ':core-rx-location', ':core-rx-contacts', ':core-intents', ':core-all', ':core-collections', ':core-preferences'

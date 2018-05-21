@@ -3,13 +3,13 @@ package com.nullgr.androidcore.adapter
 import android.os.Bundle
 import android.support.annotation.CallSuper
 import android.support.v7.app.AppCompatActivity
-import com.nullgr.corelibrary.adapter.AdapterDelegatesFactory
-import com.nullgr.corelibrary.adapter.DiffCalculator
-import com.nullgr.corelibrary.adapter.DynamicAdapter
-import com.nullgr.corelibrary.adapter.RxDiffCalculator
-import com.nullgr.corelibrary.rx.RxBus
-import com.nullgr.corelibrary.rx.schedulers.ComputationToMainSchedulersFacade
-import com.nullgr.corelibrary.rx.schedulers.SchedulersFacade
+import com.nullgr.core.adapter.AdapterDelegatesFactory
+import com.nullgr.core.adapter.DiffCalculator
+import com.nullgr.core.adapter.DynamicAdapter
+import com.nullgr.core.adapter.RxDiffCalculator
+import com.nullgr.core.rx.RxBus
+import com.nullgr.core.rx.schedulers.ComputationToMainSchedulersFacade
+import com.nullgr.core.rx.schedulers.SchedulersFacade
 
 /**
  * @author chernyshov.

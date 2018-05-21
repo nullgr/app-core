@@ -7,8 +7,8 @@ import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.nullgr.corelibrary.adapter.DynamicAdapter
-import com.nullgr.corelibrary.adapter.items.ListItem
+import com.nullgr.core.adapter.DynamicAdapter
+import com.nullgr.core.adapter.items.ListItem
 
 /**
  * Created by Grishko Nikita on 01.02.18.

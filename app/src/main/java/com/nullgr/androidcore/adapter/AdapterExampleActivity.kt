@@ -6,7 +6,7 @@ import com.nullgr.androidcore.R
 import com.nullgr.androidcore.adapter.items.ExampleItem1
 import com.nullgr.androidcore.adapter.items.ExampleItem2
 import com.nullgr.androidcore.adapter.items.ExampleItem3
-import com.nullgr.corelibrary.adapter.items.ListItem
+import com.nullgr.core.adapter.items.ListItem
 import com.nullgr.corelibrary.widgets.decor.DividerItemDecoration
 import kotlinx.android.synthetic.main.activity_adapter_example.*
 import java.util.*

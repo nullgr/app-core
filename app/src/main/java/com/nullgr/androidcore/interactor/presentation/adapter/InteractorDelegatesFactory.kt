@@ -2,10 +2,10 @@ package com.nullgr.androidcore.interactor.presentation.adapter
 
 import com.nullgr.androidcore.interactor.presentation.adapter.delegates.InteractorDelegate
 import com.nullgr.androidcore.interactor.presentation.adapter.items.InteractorItem
-import com.nullgr.corelibrary.adapter.AdapterDelegate
-import com.nullgr.corelibrary.adapter.AdapterDelegatesFactory
-import com.nullgr.corelibrary.adapter.items.ListItem
-import com.nullgr.corelibrary.rx.RxBus
+import com.nullgr.core.adapter.AdapterDelegate
+import com.nullgr.core.adapter.AdapterDelegatesFactory
+import com.nullgr.core.adapter.items.ListItem
+import com.nullgr.core.rx.RxBus
 
 class InteractorDelegatesFactory(private val bus: RxBus) : AdapterDelegatesFactory {
 

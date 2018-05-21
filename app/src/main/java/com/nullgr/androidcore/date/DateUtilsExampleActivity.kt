@@ -5,7 +5,13 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.nullgr.androidcore.R
-import com.nullgr.corelibrary.date.*
+import com.nullgr.core.date.CommonFormats
+import com.nullgr.core.date.isToday
+import com.nullgr.core.date.minusDay
+import com.nullgr.core.date.plusMonths
+import com.nullgr.core.date.toDate
+import com.nullgr.core.date.toStringWithFormat
+import com.nullgr.core.date.withoutTime
 import kotlinx.android.synthetic.main.activity_date_utils_example.*
 import java.util.*
 
