@@ -25,14 +25,14 @@ class DividerItemDecoration : RecyclerView.ItemDecoration {
     }
 
     private var divider: Drawable? = null
-    private var needToDrawLast = true
+    private var needToDrawLast = false
 
     /**
      * Default divider will be used, or divider provided by [android.R.attr.listDivider] in styles
      * @param context [Context]
      * @param drawLast [Boolean] flag that indicates if need to draw divider for last element
      */
-    constructor(context: Context, drawLast: Boolean = true) {
+    constructor(context: Context, drawLast: Boolean = false) {
         val styledAttributes = context.obtainStyledAttributes(ATTRS)
         divider = styledAttributes.getDrawable(0)
         styledAttributes.recycle()
