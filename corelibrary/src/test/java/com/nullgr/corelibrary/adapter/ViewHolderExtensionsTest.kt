@@ -19,7 +19,6 @@ class ViewHolderExtensionsTest {
     private lateinit var item: ListItem
     private lateinit var viewHolder: RecyclerView.ViewHolder
 
-
     @BeforeTest
     fun setUp(){
         item = mock { ListItem::class.java }
