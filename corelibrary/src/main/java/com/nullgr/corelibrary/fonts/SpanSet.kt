@@ -25,6 +25,7 @@ class SpanSet {
         private var spanSet: LinkedHashSet<SpanEntry> = linkedSetOf()
 
         private var tempSpan: Any? = null
+        private var tempTextPart: String? = null
         private var tempStartIndex: Int? = null
         private var tempEndIndex: Int? = null
         private var tempFlag: Int? = null
@@ -41,6 +42,11 @@ class SpanSet {
 
         infix fun to(end: Int): SpanBuilderStream {
             this.tempEndIndex = end
+            return this
+        }
+
+        infix fun toText(partOfText: String): SpanBuilderStream {
+            this.tempTextPart = partOfText
             return this
         }
 
@@ -65,11 +71,12 @@ class SpanSet {
             tempStartIndex = null
             tempEndIndex = null
             tempFlag = null
+            tempTextPart = null
         }
 
         private fun addTempSpanToSet() {
             tempSpan?.let {
-                spanSet.add(SpanEntry(tempStartIndex, tempEndIndex, tempSpan, tempFlag))
+                spanSet.add(SpanEntry(tempStartIndex, tempEndIndex, tempTextPart, tempSpan, tempFlag))
             }
         }
 
@@ -77,8 +84,19 @@ class SpanSet {
             val spannableString = text.toSpannable()
 
             spanSet.forEach {
-                spannableString.setSpan(it.span, it.startIndex ?: 0, it.endIndex
-                        ?: text.length, tempFlag ?: Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                var startIndex = it.startIndex ?: 0
+                var endIndex = it.endIndex ?: text.length
+
+                if (it.textPart != null) {
+                    val startIndexOfSubString = text.indexOf(it.textPart)
+                    if (startIndexOfSubString >= 0) {
+                        startIndex = startIndexOfSubString
+                        endIndex = startIndex + it.textPart.length
+                    }
+                }
+
+                spannableString.setSpan(it.span, startIndex, endIndex, tempFlag
+                        ?: Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             }
 
             return spannableString
@@ -87,6 +105,7 @@ class SpanSet {
 
     private data class SpanEntry(var startIndex: Int? = null,
                                  var endIndex: Int? = null,
+                                 val textPart: String? = null,
                                  var span: Any? = null,
                                  val flag: Int? = null)
 }

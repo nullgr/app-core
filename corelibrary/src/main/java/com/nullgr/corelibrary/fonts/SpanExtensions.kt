@@ -1,6 +1,7 @@
 package com.nullgr.corelibrary.fonts
 
 import android.content.Context
+import android.graphics.Typeface
 import android.support.annotation.ColorInt
 import android.text.Spannable
 import android.text.SpannableString
@@ -138,4 +139,40 @@ fun String.toSpannable(): SpannableString {
  */
 fun newSpanSet(): SpanSet {
     return SpanSet()
+}
+
+/**
+ * Simple fabric method to create new instance of [TypefaceSpan]
+ * @param typeface [Typeface]
+ * @return [TypefaceSpan]
+ */
+fun font(typeface: Typeface?): TypefaceSpan {
+    return TypefaceSpan(typeface)
+}
+
+/**
+ * Simple fabric method to create new instance of [RelativeSizeSpan]
+ * @param proportion [Float] proportion which will be passed to [RelativeSizeSpan]
+ * @return [RelativeSizeSpan]
+ */
+fun relativeSize(proportion: Float): RelativeSizeSpan {
+    return RelativeSizeSpan(proportion)
+}
+
+/**
+ * Simple fabric method to create new instance of [AbsoluteSizeSpan]
+ * @param pixelSize [Int] text size in physical pixels, which will be passed to [AbsoluteSizeSpan]
+ * @return [AbsoluteSizeSpan]
+ */
+fun absSize(pixelSize: Int): AbsoluteSizeSpan {
+    return AbsoluteSizeSpan(pixelSize)
+}
+
+/**
+ * Simple fabric method to create new instance of [ForegroundColorSpan]
+ * @param color [Int] color which will be passed to [ForegroundColorSpan]
+ * @return [ForegroundColorSpan]
+ */
+fun color(color: Int): ForegroundColorSpan {
+    return ForegroundColorSpan(color)
 }
