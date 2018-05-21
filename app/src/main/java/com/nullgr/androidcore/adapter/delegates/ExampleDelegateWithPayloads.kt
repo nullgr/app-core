@@ -6,12 +6,8 @@ import android.view.ViewGroup
 import com.nullgr.androidcore.R
 import com.nullgr.androidcore.adapter.Event
 import com.nullgr.androidcore.adapter.items.ExampleItemWithPayloads
-import com.nullgr.corelibrary.adapter.AdapterDelegate
-import com.nullgr.corelibrary.adapter.OnClickHandler
-import com.nullgr.corelibrary.adapter.OnClickListener
-import com.nullgr.corelibrary.adapter.items.ListItem
-import com.nullgr.corelibrary.rx.RxBus
-import kotlinx.android.synthetic.main.item_example_with_payloads.view.*
+import com.nullgr.core.adapter.OnClickHandler
+import com.nullgr.core.adapter.OnClickListener
 import com.nullgr.core.adapter.AdapterDelegate
 import com.nullgr.core.adapter.items.ListItem
 import com.nullgr.core.rx.RxBus

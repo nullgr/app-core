@@ -6,7 +6,8 @@ import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.spy
 import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
-import com.nullgr.corelibrary.adapter.items.ListItem
+import com.nullgr.core.adapter.items.ListItem
+import com.nullgr.core.adapter.withAdapterPosition
 import org.junit.Test
 import kotlin.test.BeforeTest
 import kotlin.test.assertEquals
