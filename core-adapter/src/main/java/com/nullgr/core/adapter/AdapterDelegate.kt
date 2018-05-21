@@ -40,16 +40,61 @@ abstract class AdapterDelegate {
     open fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder =
             BaseViewHolder(parent, layoutResource)
 
+    /**
+     * Place your bind logic here.
+     *
+     * @param items List of items.
+     * @param position Position of item in [items].
+     * @param holder ViewHolder for this item type.
+     */
     open fun onBindViewHolder(items: List<ListItem>,
                               position: Int,
                               holder: RecyclerView.ViewHolder) {
 
     }
 
+    /**
+     * Called when item changed with payloads.
+     *
+     * More that one property of item can be changed during particular update.
+     * In this case element in [payloads] can be Collection with nested payloads,
+     * by default this method iterate over each payload in [payloads]
+     * and call [onBindViewHolder] with nested payload
+     * or with [payloads] element if it is not Collection.
+     *
+     * @param items List of items.
+     * @param position Position of item in [items].
+     * @param holder ViewHolder for this item type.
+     * @param payloads List of payloads objects.
+     */
     open fun onBindViewHolder(items: List<ListItem>,
                               position: Int,
                               holder: RecyclerView.ViewHolder,
                               payloads: List<Any>) {
+        payloads.forEach { payload ->
+            when (payload) {
+                is Collection<*> -> payload.forEach { nestedPayload ->
+                    nestedPayload?.let {
+                        onBindViewHolder(items, position, holder, nestedPayload)
+                    }
+                }
+                else -> onBindViewHolder(items, position, holder, payload)
+            }
+        }
+    }
+
+    /**
+     * Extended version of [onBindViewHolder] with payloads.
+     *
+     * @param items List of items.
+     * @param position Position of item in items.
+     * @param holder ViewHolder for this item type.
+     * @param payload Nested payload.
+     */
+    open fun onBindViewHolder(items: List<ListItem>,
+                              position: Int,
+                              holder: RecyclerView.ViewHolder,
+                              payload: Any) {
     }
 
     /**
