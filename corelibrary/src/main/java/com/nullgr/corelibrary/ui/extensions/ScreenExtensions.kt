@@ -1,4 +1,4 @@
-package com.nullgr.corelibrary.resources
+package com.nullgr.corelibrary.ui.extensions
 
 import android.content.Context
 import android.content.res.Resources

@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.util.SparseArray
-import android.widget.Toast
 import com.nullgr.androidcore.R
 import com.nullgr.androidcore.adapter.BaseAdapterExampleActivity
 import com.nullgr.androidcore.rxcontacts.items.ContactItem
@@ -22,8 +21,9 @@ import com.nullgr.core.rx.contacts.RxContactsProvider
 import com.nullgr.core.rx.contacts.domain.UserContact
 import com.nullgr.core.rx.schedulers.IoToMainSchedulersFacade
 import com.nullgr.core.rx.zipWithTimer
-import com.nullgr.corelibrary.ui.toggleView
-import com.nullgr.corelibrary.widgets.decor.DividerItemDecoration
+import com.nullgr.corelibrary.ui.decor.DividerItemDecoration
+import com.nullgr.corelibrary.ui.extensions.toggleView
+import com.nullgr.corelibrary.ui.toast.showToast
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_adapter_example.itemsView
@@ -48,7 +48,7 @@ class RxContactsExampleActivity : BaseAdapterExampleActivity() {
 
         itemsView.layoutManager = LinearLayoutManager(this)
         itemsView.adapter = adapter
-        itemsView.addItemDecoration(DividerItemDecoration(this, R.drawable.divider_adapter_item))
+        itemsView.addItemDecoration(DividerItemDecoration(this, R.drawable.divider_adapter_item, false))
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -64,7 +64,7 @@ class RxContactsExampleActivity : BaseAdapterExampleActivity() {
                     }.subscribe({
                         adapter.updateData(it)
                     }, {
-                        Toast.makeText(this, "Error Occurred: $it", Toast.LENGTH_SHORT).show()
+                        "Error Occurred: $it".showToast(this)
                     })
         }
     }

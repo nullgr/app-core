@@ -18,6 +18,7 @@ import com.nullgr.core.intents.shareTextIntent
 import com.nullgr.core.intents.webIntent
 import com.nullgr.core.rx.contacts.RxContactsProvider
 import com.nullgr.core.rx.contacts.domain.UserContact
+import com.nullgr.corelibrary.ui.toast.showToast
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_common_intents_example.*
 
@@ -82,14 +83,12 @@ class CommonIntentsExampleActivity : AppCompatActivity() {
                                                 .fromUri(UserContact::class.java, intent.data)
                                                 .subscribe(
                                                         {
-                                                            Toast.makeText(this,
-                                                                    "Contact (${it.firstOrNull()?.displayName}) found, from uri ${intent.data}",
-                                                                    Toast.LENGTH_SHORT).show()
+                                                            ("Contact (${it.firstOrNull()?.displayName}) " +
+                                                                    "found, from uri ${intent.data}").showToast(this)
                                                         },
                                                         {
-                                                            Toast.makeText(this,
-                                                                    "Error while fetching contacts from uri ($it)",
-                                                                    Toast.LENGTH_SHORT).show()
+
+                                                            "Error while fetching contacts from uri ($it)".showToast(this)
                                                         })
                                     }
                                 },

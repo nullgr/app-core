@@ -1,9 +1,9 @@
-package com.nullgr.corelibrary.widgets
+package com.nullgr.corelibrary.ui.widgets
 
 import android.content.Context
 import android.support.v7.widget.AppCompatButton
 import android.util.AttributeSet
-import com.nullgr.corelibrary.widgets.extensions.initTypeface
+import com.nullgr.corelibrary.ui.widgets.extensions.initTypeface
 
 /**
  * Button - version of [AppCompatButton] which can use custom typeface.

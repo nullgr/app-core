@@ -1,4 +1,4 @@
-package com.nullgr.corelibrary.animation
+package com.nullgr.corelibrary.ui.animation
 
 import android.animation.Animator
 import android.support.annotation.RequiresApi

@@ -10,7 +10,7 @@ import com.nullgr.androidcore.R
 import com.nullgr.androidcore.rxcontacts.items.ContactItem
 import com.nullgr.core.adapter.AdapterDelegate
 import com.nullgr.core.adapter.items.ListItem
-import com.nullgr.corelibrary.ui.toggleView
+import com.nullgr.corelibrary.ui.extensions.toggleView
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Transformation
 import kotlinx.android.synthetic.main.item_contact.view.*

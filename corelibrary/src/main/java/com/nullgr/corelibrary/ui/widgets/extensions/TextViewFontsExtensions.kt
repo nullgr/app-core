@@ -1,4 +1,4 @@
-package com.nullgr.corelibrary.widgets.extensions
+package com.nullgr.corelibrary.ui.widgets.extensions
 
 import android.content.Context
 import android.util.AttributeSet
