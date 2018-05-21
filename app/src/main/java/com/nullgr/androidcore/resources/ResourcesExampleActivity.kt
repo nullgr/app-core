@@ -5,9 +5,9 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.nullgr.androidcore.R
 import com.nullgr.corelibrary.resources.ResourceProvider
-import com.nullgr.corelibrary.resources.dpToPx
-import com.nullgr.corelibrary.resources.getDisplaySize
-import com.nullgr.corelibrary.resources.pxToDp
+import com.nullgr.corelibrary.ui.extensions.dpToPx
+import com.nullgr.corelibrary.ui.extensions.getDisplaySize
+import com.nullgr.corelibrary.ui.extensions.pxToDp
 import kotlinx.android.synthetic.main.activity_resources_example.*
 
 /**

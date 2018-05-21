@@ -1,4 +1,4 @@
-package com.nullgr.corelibrary.common
+package com.nullgr.corelibrary.ui.extensions
 
 import android.app.Activity
 import android.content.Context

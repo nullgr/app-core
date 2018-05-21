@@ -1,11 +1,11 @@
-package com.nullgr.corelibrary.widgets
+package com.nullgr.corelibrary.ui.widgets
 
 import android.content.Context
 import android.graphics.Canvas
 import android.support.v7.widget.AppCompatTextView
 import android.util.AttributeSet
 import com.nullgr.corelibrary.R
-import com.nullgr.corelibrary.widgets.extensions.initTypeface
+import com.nullgr.corelibrary.ui.widgets.extensions.initTypeface
 
 /**
  * TextView - version of [AppCompatTextView] which can use custom typeface.

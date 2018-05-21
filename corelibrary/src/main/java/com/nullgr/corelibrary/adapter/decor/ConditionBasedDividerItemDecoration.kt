@@ -1,7 +1,8 @@
-package com.nullgr.corelibrary.widgets.decor
+package com.nullgr.corelibrary.adapter.decor
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.support.annotation.DrawableRes
 import android.support.v4.content.ContextCompat
@@ -11,7 +12,16 @@ import com.nullgr.corelibrary.adapter.DynamicAdapter
 import com.nullgr.corelibrary.adapter.items.ListItem
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ *
+ * ConditionBasedDividerItemDecoration is a {@link RecyclerView.ItemDecoration} that can be used as a divider
+ * between items of a {@link LinearLayoutManager} together with [DynamicAdapter].
+ * It supports [android.support.v7.widget.LinearLayoutManager.VERTICAL] orientation.
+ *
+ * Main feature of this decorator is that you can pass [condition] function and provide
+ * custom logic that subscribes where divider must be drawn
+ * Also Can be used with custom divider drawable
+ *
+ * @author Grishko Nikita
  */
 class ConditionBasedDividerItemDecoration(context: Context, @DrawableRes resId: Int? = null) : RecyclerView.ItemDecoration() {
 
@@ -48,6 +58,15 @@ class ConditionBasedDividerItemDecoration(context: Context, @DrawableRes resId: 
                 }
             }
         }
+    }
+
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView,
+                                state: RecyclerView.State?) {
+        if (divider == null) {
+            outRect.set(0, 0, 0, 0)
+            return
+        }
+        outRect.set(0, 0, 0, divider?.intrinsicHeight ?: 0)
     }
 
     private fun drawDecoration(parent: RecyclerView, view: View, c: Canvas) {

@@ -1,4 +1,4 @@
-package com.nullgr.corelibrary.widgets
+package com.nullgr.corelibrary.ui.widgets
 
 import android.content.Context
 import android.graphics.Point
