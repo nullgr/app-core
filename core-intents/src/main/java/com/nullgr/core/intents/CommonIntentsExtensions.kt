@@ -25,7 +25,7 @@ import io.reactivex.Observable
 import java.util.*
 
 /**
- * Fabric function that creates new [Intent] with [Intent.ACTION_DIAL] and given [number] as target
+ * Factory function that creates new [Intent] with [Intent.ACTION_DIAL] and given [number] as target
  */
 fun callIntent(number: String): Intent {
     return Intent(Intent.ACTION_DIAL)
@@ -34,14 +34,14 @@ fun callIntent(number: String): Intent {
 }
 
 /**
- * Fabric function that creates new [Intent] with [Intent.ACTION_VIEW] and given [url] as target.
+ * Factory function that creates new [Intent] with [Intent.ACTION_VIEW] and given [url] as target.
  */
 fun webIntent(url: String): Intent {
     return Intent(Intent.ACTION_VIEW).setData(Uri.parse(url))
 }
 
 /**
- * Fabric function that creates new [Intent] with [Intent.ACTION_SEND]
+ * Factory function that creates new [Intent] with [Intent.ACTION_SEND]
  * @param to an email address
  * @param subject subject of email (optional)
  * @param body email body (optional)
@@ -61,7 +61,7 @@ fun emailIntent(to: String, subject: String? = null, body: String? = null): Inte
 }
 
 /**
- * Fabric function that creates new [Intent] with [Intent.ACTION_SEND]
+ * Factory function that creates new [Intent] with [Intent.ACTION_SEND]
  * @param text [String] text to share
  */
 fun shareTextIntent(text: String): Intent {
@@ -72,7 +72,7 @@ fun shareTextIntent(text: String): Intent {
 }
 
 /**
- * Fabric function that creates new [Intent] to launch application by it [packageName], or launch
+ * Factory function that creates new [Intent] to launch application by it [packageName], or launch
  * GooglePlay to view application there (this case is optional, if you need to enable this case -
  * set true as value of [googlePlayRedirect] param)
  * @param context [Context].
@@ -100,7 +100,7 @@ fun applicationIntent(context: Context, packageName: String, googlePlayRedirect:
 }
 
 /**
- * Fabric function that creates new [Intent] with [Intent.ACTION_VIEW] to view contact with given [contactId]
+ * Factory function that creates new [Intent] with [Intent.ACTION_VIEW] to view contact with given [contactId]
  * @param contactId [String] id of contact
  */
 fun contactCardIntent(contactId: String): Intent {
@@ -111,7 +111,7 @@ fun contactCardIntent(contactId: String): Intent {
 }
 
 /**
- * Fabric function that creates new [Intent] with [Intent.ACTION_PICK] to pick contact.
+ * Factory function that creates new [Intent] with [Intent.ACTION_PICK] to pick contact.
  * Requires [Manifest.permission.READ_CONTACTS].
  * Common usage:
  * ```
@@ -131,7 +131,7 @@ fun selectContactIntent(): Intent {
 }
 
 /**
- * Fabric function that creates new [Intent] with [Intent.ACTION_PICK] to pick contact phone.
+ * Factory function that creates new [Intent] with [Intent.ACTION_PICK] to pick contact phone.
  * Requires [Manifest.permission.READ_CONTACTS].
  * Common usage:
  * ```
@@ -151,7 +151,7 @@ fun selectContactPhoneIntent(): Intent {
 }
 
 /**
- * Fabric function that creates new [Intent] with [Intent.ACTION_PICK] to pick contact email.
+ * Factory function that creates new [Intent] with [Intent.ACTION_PICK] to pick contact email.
  * Requires [Manifest.permission.READ_CONTACTS].
  * Common usage:
  * ```
@@ -171,7 +171,7 @@ fun selectContactEmailIntent(): Intent {
 }
 
 /**
- * Fabric function that creates new [Intent] with [Intent.ACTION_VIEW]
+ * Factory function that creates new [Intent] with [Intent.ACTION_VIEW]
  * to open GoogleMaps (com.google.android.apps.maps) application and build route to location with give
  * [lat], [lng]
  *
@@ -184,7 +184,7 @@ fun navigationIntent(lat: Double, lng: Double): Intent {
 }
 
 /**
- * Fabric function that creates new [Intent] with [Intent.ACTION_SEND], to share image and text.
+ * Factory function that creates new [Intent] with [Intent.ACTION_SEND], to share image and text.
  * Requires [Manifest.permission.WRITE_EXTERNAL_STORAGE] permission
  *
  * @param text [String] text to share
@@ -213,7 +213,7 @@ fun shareImageAndTextIntent(context: Context, image: Bitmap, text: String?): Int
 }
 
 /**
- * Fabric function that creates new [Intent] with [Intent.ACTION_SEND],to share list of images and text.
+ * Factory function that creates new [Intent] with [Intent.ACTION_SEND],to share list of images and text.
  * Requires [Manifest.permission.WRITE_EXTERNAL_STORAGE] permission
  *
  * @param text [String] text to share
@@ -246,7 +246,7 @@ fun shareListOfImagesAndTextIntent(context: Context, images: List<Bitmap>, text:
 }
 
 /**
- * Fabric function that creates new [CustomTabsIntent] with specified [tabsColor]
+ * Factory function that creates new [CustomTabsIntent] with specified [tabsColor]
  * Common usage (using [launch] function from this library):
  * ```
  * chromeTabsIntent().launch(context, "http://someurl.com")
