@@ -6,7 +6,7 @@ import android.os.Bundle
 import com.nullgr.core.rx.rxresult.RxResolveResultActivity
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * @author Grishko Nikita
  */
 internal class IntentSenderActivityDelegate(activity: Activity) : BaseResolveResultActivityDelegate(activity) {
 

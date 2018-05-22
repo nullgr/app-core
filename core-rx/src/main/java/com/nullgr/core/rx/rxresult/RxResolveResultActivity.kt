@@ -8,7 +8,8 @@ import android.support.v7.app.AppCompatActivity
 import com.nullgr.core.rx.rxresult.delegates.BaseResolveResultActivityDelegate
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * Wraps calling [android.app.Activity.startActivityForResult] and returns [RxActivityResult]
+ * @author Grishko Nikita
  */
 class RxResolveResultActivity : AppCompatActivity() {
 

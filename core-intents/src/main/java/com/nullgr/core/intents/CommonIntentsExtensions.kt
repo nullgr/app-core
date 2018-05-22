@@ -326,7 +326,7 @@ fun Intent?.launchService(context: Context?) {
  * ```
  * Its safe to call this function in onClick or etc.
  * Every new subscription will replace previous one.
- * So you can dispose it only one last time in onDestroy. 
+ * So you can dispose it only one last time in [Activity.onDestroy] or other lifecycle method.
  *
  * @param context [Activity]
  * @return [Observable] that emits [RxActivityResult]

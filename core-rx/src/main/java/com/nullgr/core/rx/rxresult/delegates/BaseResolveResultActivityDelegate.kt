@@ -9,7 +9,7 @@ import com.nullgr.core.rx.SingletonRxBusProvider
 import com.nullgr.core.rx.rxresult.RxActivityResult
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * @author Grishko Nikita
  */
 internal abstract class BaseResolveResultActivityDelegate(val activity: Activity) {
 
