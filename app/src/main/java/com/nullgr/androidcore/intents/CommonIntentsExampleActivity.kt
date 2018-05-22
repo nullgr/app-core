@@ -18,7 +18,7 @@ import com.nullgr.core.intents.shareTextIntent
 import com.nullgr.core.intents.webIntent
 import com.nullgr.core.rx.contacts.RxContactsProvider
 import com.nullgr.core.rx.contacts.domain.UserContact
-import com.nullgr.corelibrary.ui.toast.showToast
+import com.nullgr.core.ui.toast.showToast
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_common_intents_example.*
 

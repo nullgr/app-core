@@ -21,9 +21,9 @@ import com.nullgr.core.rx.contacts.RxContactsProvider
 import com.nullgr.core.rx.contacts.domain.UserContact
 import com.nullgr.core.rx.schedulers.IoToMainSchedulersFacade
 import com.nullgr.core.rx.zipWithTimer
-import com.nullgr.corelibrary.ui.decor.DividerItemDecoration
-import com.nullgr.corelibrary.ui.extensions.toggleView
-import com.nullgr.corelibrary.ui.toast.showToast
+import com.nullgr.core.ui.decor.DividerItemDecoration
+import com.nullgr.core.ui.extensions.toggleView
+import com.nullgr.core.ui.toast.showToast
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_adapter_example.itemsView

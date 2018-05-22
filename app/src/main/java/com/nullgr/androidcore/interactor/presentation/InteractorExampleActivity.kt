@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.nullgr.androidcore.R
+import com.nullgr.androidcore.R.id.itemsView
 import com.nullgr.androidcore.adapter.BaseAdapterExampleActivity
 import com.nullgr.androidcore.interactor.data.UserDataRepositoryExample
 import com.nullgr.androidcore.interactor.domain.interactor.GetSuggestedFriendsUseCase
@@ -21,17 +22,18 @@ import com.nullgr.androidcore.interactor.presentation.adapter.items.InteractorIt
 import com.nullgr.core.adapter.items.ListItem
 import com.nullgr.core.rx.asObservable
 import com.nullgr.core.rx.bindProgress
-import com.nullgr.corelibrary.ui.decor.DividerItemDecoration
+import com.nullgr.core.ui.decor.DividerItemDecoration
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.BiFunction
 import io.reactivex.rxkotlin.addTo
-import kotlinx.android.synthetic.main.activity_interactor_example.itemsView
+import kotlinx.android.synthetic.main.activity_interactor_example.*
 
 /**
  * @author chernyshov.
  */
+@Suppress("DEPRECATION", "NOTHING_TO_INLINE")
 class InteractorExampleActivity
     : BaseAdapterExampleActivity() {
 

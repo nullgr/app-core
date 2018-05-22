@@ -33,7 +33,7 @@ class DateUtilsExampleActivity : AppCompatActivity() {
             initialCalendar.time = selectedDate
 
             val datePickerDialog = DatePickerDialog(this,
-                    DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                    DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
 
                         val calendar = Calendar.getInstance()
                         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
@@ -85,7 +85,7 @@ class DateUtilsExampleActivity : AppCompatActivity() {
     private fun showResult(result: String) {
         AlertDialog.Builder(this)
                 .setMessage(result)
-                .setPositiveButton(R.string.btn_ok, { dialog, which -> dialog?.dismiss() })
+                .setPositiveButton(R.string.btn_ok, { dialog, _ -> dialog?.dismiss() })
                 .show()
     }
 }

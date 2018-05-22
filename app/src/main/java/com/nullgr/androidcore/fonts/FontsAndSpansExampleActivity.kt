@@ -14,7 +14,7 @@ import com.nullgr.core.font.getTypeface
 import com.nullgr.core.font.newSpanSet
 import com.nullgr.core.font.relativeSize
 import com.nullgr.core.font.setSpannableTitle
-import com.nullgr.corelibrary.resources.spToPx
+import com.nullgr.core.ui.extensions.spToPx
 import kotlinx.android.synthetic.main.activity_fonts_and_spans_example.*
 
 /**
