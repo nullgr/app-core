@@ -25,7 +25,7 @@ import io.reactivex.Observable
 import java.util.*
 
 /**
- * @author Grishko Nikita on 01.02.18.
+ * Fabric function that creates new [Intent] with [Intent.ACTION_DIAL] and given [number] as target
  */
 fun callIntent(number: String): Intent {
     return Intent(Intent.ACTION_DIAL)
@@ -33,14 +33,23 @@ fun callIntent(number: String): Intent {
             else String.format("tel:%s", PhoneNumberUtils.stripSeparators(number))))
 }
 
+/**
+ * Fabric function that creates new [Intent] with [Intent.ACTION_VIEW] and given [url] as target.
+ */
 fun webIntent(url: String): Intent {
     return Intent(Intent.ACTION_VIEW).setData(Uri.parse(url))
 }
 
+/**
+ * Fabric function that creates new [Intent] with [Intent.ACTION_SEND]
+ * @param to an email address
+ * @param subject subject of email (optional)
+ * @param body email body (optional)
+ */
 fun emailIntent(to: String, subject: String? = null, body: String? = null): Intent {
     return Intent(android.content.Intent.ACTION_SEND).apply {
         type = "plain/text"
-        putExtra(android.content.Intent.EXTRA_EMAIL, arrayOf(to))
+        putExtra(Intent.EXTRA_EMAIL, arrayOf(to))
         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         if (!subject.isNullOrEmpty()) {
             putExtra(android.content.Intent.EXTRA_SUBJECT, subject)
@@ -51,6 +60,10 @@ fun emailIntent(to: String, subject: String? = null, body: String? = null): Inte
     }
 }
 
+/**
+ * Fabric function that creates new [Intent] with [Intent.ACTION_SEND]
+ * @param text [String] text to share
+ */
 fun shareTextIntent(text: String): Intent {
     return Intent(Intent.ACTION_SEND).apply {
         type = "text/plain"
@@ -58,6 +71,17 @@ fun shareTextIntent(text: String): Intent {
     }
 }
 
+/**
+ * Fabric function that creates new [Intent] to launch application by it [packageName], or launch
+ * GooglePlay to view application there (this case is optional, if you need to enable this case -
+ * set true as value of [googlePlayRedirect] param)
+ * @param context [Context].
+ * @param packageName [String] value of application package name
+ * @param googlePlayRedirect [Boolean] flag that indicates if needs to redirect to GooglePlay
+ * in case when application dosen't exist
+ * @return [Intent] to open application or to open GooglePlay. Can be null if application dosen't exist,
+ * and [googlePlayRedirect] flag has false value
+ */
 fun applicationIntent(context: Context, packageName: String, googlePlayRedirect: Boolean = false): Intent? {
 
     val pm = context.packageManager
@@ -75,6 +99,10 @@ fun applicationIntent(context: Context, packageName: String, googlePlayRedirect:
     }
 }
 
+/**
+ * Fabric function that creates new [Intent] with [Intent.ACTION_VIEW] to view contact with given [contactId]
+ * @param contactId [String] id of contact
+ */
 fun contactCardIntent(contactId: String): Intent {
     return Intent(Intent.ACTION_VIEW).apply {
         data = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_URI, contactId)
@@ -82,22 +110,58 @@ fun contactCardIntent(contactId: String): Intent {
     }
 }
 
+/**
+ * Fabric function that creates new [Intent] with [Intent.ACTION_PICK] to pick contact.
+ * Requires [Manifest.permission.READ_CONTACTS].
+ * Common usage:
+ * ```
+ * startActivityForResult(selectContactIntent(), REQUEST_CODE)
+ * ```
+ * or use together with [launchForResult] or reactive [launchForResult] functions
+ * ```
+ * selectContactIntent().launchForResult(context, REQUEST_CODE)
+ * ```
+ */
 @SuppressLint("MissingPermission")
-@RequiresPermission(android.Manifest.permission.READ_CONTACTS)
+@RequiresPermission(Manifest.permission.READ_CONTACTS)
 fun selectContactIntent(): Intent {
     return Intent(Intent.ACTION_PICK).apply {
         type = ContactsContract.Contacts.CONTENT_TYPE
     }
 }
 
+/**
+ * Fabric function that creates new [Intent] with [Intent.ACTION_PICK] to pick contact phone.
+ * Requires [Manifest.permission.READ_CONTACTS].
+ * Common usage:
+ * ```
+ * startActivityForResult(selectContactPhoneIntent(), REQUEST_CODE)
+ * ```
+ * or use together with [launchForResult] or reactive [launchForResult] functions
+ * ```
+ * selectContactPhoneIntent().launchForResult(context, REQUEST_CODE)
+ * ```
+ */
 @SuppressLint("MissingPermission")
-@RequiresPermission(android.Manifest.permission.READ_CONTACTS)
+@RequiresPermission(Manifest.permission.READ_CONTACTS)
 fun selectContactPhoneIntent(): Intent {
     return Intent(Intent.ACTION_PICK).apply {
         type = ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE
     }
 }
 
+/**
+ * Fabric function that creates new [Intent] with [Intent.ACTION_PICK] to pick contact email.
+ * Requires [Manifest.permission.READ_CONTACTS].
+ * Common usage:
+ * ```
+ * startActivityForResult(selectContactEmailIntent(), REQUEST_CODE)
+ * ```
+ * or use together with [launchForResult] or reactive [launchForResult] functions
+ * ```
+ * selectContactEmailIntent().launchForResult(context, REQUEST_CODE)
+ * ```
+ */
 @SuppressLint("MissingPermission")
 @RequiresPermission(android.Manifest.permission.READ_CONTACTS)
 fun selectContactEmailIntent(): Intent {
@@ -106,11 +170,26 @@ fun selectContactEmailIntent(): Intent {
     }
 }
 
-fun navigationIntent(lat: Double, lon: Double): Intent {
-    return Intent(Intent.ACTION_VIEW, Uri.parse(String.format("google.navigation:q=%s,%s", lat, lon)))
+/**
+ * Fabric function that creates new [Intent] with [Intent.ACTION_VIEW]
+ * to open GoogleMaps (com.google.android.apps.maps) application and build route to location with give
+ * [lat], [lng]
+ *
+ * @param lat [Double] latitude
+ * @param lng [Double] longitude
+ */
+fun navigationIntent(lat: Double, lng: Double): Intent {
+    return Intent(Intent.ACTION_VIEW, Uri.parse(String.format("google.navigation:q=%s,%s", lat, lng)))
             .apply { `package` = "com.google.android.apps.maps" }
 }
 
+/**
+ * Fabric function that creates new [Intent] with [Intent.ACTION_SEND], to share image and text.
+ * Requires [Manifest.permission.WRITE_EXTERNAL_STORAGE] permission
+ *
+ * @param text [String] text to share
+ * @param image [Bitmap] to share
+ */
 @RequiresPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
 @Throws(IllegalStateException::class)
 fun shareImageAndTextIntent(context: Context, image: Bitmap, text: String?): Intent {
@@ -133,6 +212,13 @@ fun shareImageAndTextIntent(context: Context, image: Bitmap, text: String?): Int
     }
 }
 
+/**
+ * Fabric function that creates new [Intent] with [Intent.ACTION_SEND],to share list of images and text.
+ * Requires [Manifest.permission.WRITE_EXTERNAL_STORAGE] permission
+ *
+ * @param text [String] text to share
+ * @param images [List] of [Bitmap] to share
+ */
 @RequiresPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
 @Throws(IllegalStateException::class)
 fun shareListOfImagesAndTextIntent(context: Context, images: List<Bitmap>, text: String?): Intent {
@@ -159,16 +245,34 @@ fun shareListOfImagesAndTextIntent(context: Context, images: List<Bitmap>, text:
     }
 }
 
+/**
+ * Fabric function that creates new [CustomTabsIntent] with specified [tabsColor]
+ * Common usage (using [launch] function from this library):
+ * ```
+ * chromeTabsIntent().launch(context, "http://someurl.com")
+ * ```
+ * or you can use [CustomTabsIntent.launchUrl]
+ * @param tabsColor [Int] color
+ * @return instance of [CustomTabsIntent]
+ */
 fun chromeTabsIntent(@ColorInt tabsColor: Int? = null): CustomTabsIntent {
     val builder = CustomTabsIntent.Builder()
     tabsColor?.let { builder.setToolbarColor(it) }
     return builder.build()
 }
 
+/**
+ * Shorter version of [CustomTabsIntent.launchUrl],
+ * created to launch all any intent in the same code style.
+ */
 fun CustomTabsIntent.launch(context: Context, url: String) {
     launchUrl(context, Uri.parse(url))
 }
 
+/**
+ * Extension function to start activity in pretty way,
+ * or display [noActivityErrorMessage] if activity dosen't exist.
+ */
 fun Intent?.launch(context: Context?, noActivityErrorMessage: String? = null) {
     if (this != null && context != null && this.resolveActivity(context.packageManager) != null) {
         context.startActivity(this)
@@ -177,6 +281,10 @@ fun Intent?.launch(context: Context?, noActivityErrorMessage: String? = null) {
     }
 }
 
+/**
+ * Extension function to start activity for result in pretty way,
+ * or display [noActivityErrorMessage] if activity dosen't exist.
+ */
 fun Intent?.launchForResult(context: Activity?, requestCode: Int, noActivityErrorMessage: String? = null) {
     if (this != null && context != null && this.resolveActivity(context.packageManager) != null) {
         context.startActivityForResult(this, requestCode)
@@ -185,18 +293,46 @@ fun Intent?.launchForResult(context: Activity?, requestCode: Int, noActivityErro
     }
 }
 
+/**
+ * Extension function to send broadcast in pretty way
+ */
 fun Intent?.sendBroadcast(context: Context?) {
     if (this != null && context != null) {
         context.sendBroadcast(this)
     }
 }
 
+
+/**
+ * Extension function to start service in pretty way
+ */
 fun Intent?.launchService(context: Context?) {
     if (this != null && context != null) {
         context.startService(this)
     }
 }
 
+/**
+ * Extension function to get activity result, in reactive way.
+ * Can be called from any place in your application. With this function you have no need to override
+ * [Activity.onActivityResult]. Just do something like this:
+ * ```
+ * selectContactIntent()
+ *        .launchForResult()
+ *        .subscribe(
+ *            { doSomeThingWithResult(rxActivityResult)},
+ *            { handleResultError(throwable)})
+ *
+ * ```
+ * Its safe to call this function in onClick or etc.
+ * Every new subscription will replace previous one.
+ * So you can dispose it only one last time in onDestroy. 
+ *
+ * @param context [Activity]
+ * @return [Observable] that emits [RxActivityResult]
+ * which contains result code [RxActivityResult.resultCode] and result intent [RxActivityResult.intent],
+ * or [Observable.error] with [ActivityNotFoundException] if activity dosen't exist
+ */
 fun Intent?.launchForResult(context: Activity?): Observable<RxActivityResult> {
     return if (this != null && context != null && this.resolveActivity(context.packageManager) != null)
         Observable
