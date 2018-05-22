@@ -57,31 +57,10 @@ dependencies {
 
     implementation project(':core-rx')
 
-    implementation commonDependencies.timber
-    implementation commonDependencies.libs
-    implementation commonDependencies.supportCompatV7
-    implementation commonDependencies.supportAnnotations
-    implementation commonDependencies.supportV4
-    implementation commonDependencies.supportV13
-    implementation commonDependencies.supportCompatV7
-    implementation commonDependencies.supportRecyclerView
-    implementation commonDependencies.supportDesign
-    implementation commonDependencies.supportCardView
-    implementation commonDependencies.supportvectorDrawable
-    implementation commonDependencies.supportConstraint
-    implementation commonDependencies.supportCustomTabs
-    implementation commonDependencies.javaxAnnotation
-    implementation commonDependencies.javaxInject
     implementation commonDependencies.rxKotlin
     implementation commonDependencies.rxAndroid
     implementation commonDependencies.rxRelay
     implementation commonDependencies.kotlin
-    implementation commonDependencies.retrofit
-    implementation commonDependencies.retrofitConverter
-    implementation commonDependencies.retrofitAdapter
-    implementation commonDependencies.okHttp
-    implementation commonDependencies.okHttpLogger
-    implementation commonDependencies.jodaTime
     implementation commonDependencies.location
     implementation commonDependencies.rxLocation
 
