@@ -68,7 +68,7 @@ class CommonIntentsExampleActivity : AppCompatActivity() {
         // startActivityForResult in RX way
         // declare this activity in your manifest file to use
         // CommonIntentsExtensions#launchForResult (need only for rx version of this method)
-        // <activity android : name ="com.nullgr.corelibrary.rx.rxresult.RxResolveResultActivity" />
+        // <activity android : name ="com.nullgr.core.rx.rxresult.RxResolveResultActivity" />
 
         buttonRxSelectContact.setOnClickListener {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)

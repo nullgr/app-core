@@ -19,7 +19,7 @@ class RxLocationManagerExampleActivity : AppCompatActivity() {
     // Implementation steps:
     //
     // 1) Add LocationSettingsResolveActivity to your manifest file
-    // <activity android:name="com.nullgr.corelibrary.location.settings.LocationSettingsResolveActivity" />
+    // <activity android:name="com.nullgr.core.rx.location.settings.LocationSettingsResolveActivity" />
     // 2) Create or inject instance of RxLocationManger and setup configuration (updates count and updates interval)
     // 3) Check ACCESS_FINE_LOCATION permission
     // 4) Call requestLocation() which returns Observable<Location>

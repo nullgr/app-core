@@ -8,7 +8,7 @@ import com.nullgr.core.ui.widgets.extensions.initTypeface
 /**
  * Switch - version of [SwitchCompat] which can use custom typeface.
  * Typeface can be set by attributes
- * @attr ref com.nullgr.corelibrary.R.styleable#TextView_fontPath
+ * @attr ref com.nullgr.core.ui.R.styleable#TextView_fontPath
  */
 class Switch : SwitchCompat {
 

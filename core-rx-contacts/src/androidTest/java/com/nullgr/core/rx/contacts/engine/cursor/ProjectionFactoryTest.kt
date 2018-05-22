@@ -2,11 +2,9 @@ package com.nullgr.core.rx.contacts.engine.cursor
 
 import android.provider.ContactsContract
 import android.support.test.runner.AndroidJUnit4
-
-import com.nullgr.corelibrary.rxcontacts.domain.ContactEmail
-import com.nullgr.corelibrary.rxcontacts.domain.ContactPhone
-import com.nullgr.corelibrary.rxcontacts.domain.UserContact
-import com.nullgr.corelibrary.rxcontacts.engine.cursor.ProjectionFactory
+import com.nullgr.core.rx.contacts.domain.ContactEmail
+import com.nullgr.core.rx.contacts.domain.ContactPhone
+import com.nullgr.core.rx.contacts.domain.UserContact
 
 import junit.framework.Assert
 

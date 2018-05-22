@@ -1,8 +1,8 @@
 package com.nullgr.core.adapter.items
 
 /**
- * Base interface for all items that can be used in [com.nullgr.corelibrary.adapter.DynamicAdapter].
- * Contains method needed for [com.nullgr.corelibrary.adapter.Callback].
+ * Base interface for all items that can be used in [com.nullgr.core.adapter.DynamicAdapter].
+ * Contains method needed for [com.nullgr.core.adapter.Callback].
  *
  * @author vchernyshov
  * @author a.komarovskyi
@@ -10,7 +10,7 @@ package com.nullgr.core.adapter.items
 interface ListItem {
 
     /**
-     * Called by the [com.nullgr.corelibrary.adapter.Callback] to decide whether two object represent the same item.
+     * Called by the [com.nullgr.core.adapter.Callback] to decide whether two object represent the same item.
      * Method makes check by two parameters: class of item and unique property returned by [getUniqueProperty].
      * In most cases you should not override this method and use default implementation.
      */
@@ -19,7 +19,7 @@ interface ListItem {
     }
 
     /**
-     * Called by the [com.nullgr.corelibrary.adapter.Callback] when it wants to check whether two items have the same data.
+     * Called by the [com.nullgr.core.adapter.Callback] when it wants to check whether two items have the same data.
      * By default method checks equality using [Any.equals].
      * It is a good idea to use Kotlin data classes as items.
      * If you using Java you should specify equals method or override this.
@@ -29,7 +29,7 @@ interface ListItem {
     }
 
     /**
-     * Called by the [com.nullgr.corelibrary.adapter.Callback] to get info about particular changes in the item.
+     * Called by the [com.nullgr.core.adapter.Callback] to get info about particular changes in the item.
      * If item supports changes of few properties at same time return set of payloads to prevent many same changes and handle all changes at UI.
      */
     fun getChangePayload(other: ListItem): Any {

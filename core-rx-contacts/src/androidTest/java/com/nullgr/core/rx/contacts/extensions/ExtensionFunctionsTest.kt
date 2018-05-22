@@ -1,11 +1,8 @@
 package com.nullgr.core.rx.contacts.extensions
 
 import android.support.test.runner.AndroidJUnit4
-import com.nullgr.corelibrary.rxcontacts.domain.BaseContact
-import com.nullgr.corelibrary.rxcontacts.domain.UserContact
-import com.nullgr.corelibrary.rxcontacts.extensions.emptyEmailContactsList
-import com.nullgr.corelibrary.rxcontacts.extensions.emptyPhoneContactsList
-import com.nullgr.corelibrary.rxcontacts.extensions.has
+import com.nullgr.core.rx.contacts.domain.BaseContact
+import com.nullgr.core.rx.contacts.domain.UserContact
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
