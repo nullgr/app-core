@@ -13,10 +13,10 @@ class ExampleDelegate2 : AdapterDelegate() {
     override val layoutResource: Int = R.layout.item_example_2
     override val itemType: Any = ExampleItem2::class
 
-    override fun onBindViewHolder(items: List<ListItem>, position: Int, vh: RecyclerView.ViewHolder) {
+    override fun onBindViewHolder(items: List<ListItem>, position: Int, holder: RecyclerView.ViewHolder) {
         val item = items[position] as ExampleItem2
 
-        with(vh.itemView) {
+        with(holder.itemView) {
             Picasso.get().load(item.icon).into(iconView)
             text1View.text = item.text1
             text2View.text = item.text2

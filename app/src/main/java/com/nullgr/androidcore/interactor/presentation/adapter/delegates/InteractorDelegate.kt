@@ -13,10 +13,10 @@ class InteractorDelegate(private val bus: RxBus) : AdapterDelegate() {
     override val layoutResource: Int = R.layout.item_interactor
     override val itemType: Any = InteractorItem::class
 
-    override fun onBindViewHolder(items: List<ListItem>, position: Int, vh: RecyclerView.ViewHolder) {
+    override fun onBindViewHolder(items: List<ListItem>, position: Int, holder: RecyclerView.ViewHolder) {
         val item = items[position] as InteractorItem
 
-        with(vh.itemView) {
+        with(holder.itemView) {
             interactorTitleView.text = item.title
             executeButtonView.setOnClickListener {
                 bus.post(event = item)
