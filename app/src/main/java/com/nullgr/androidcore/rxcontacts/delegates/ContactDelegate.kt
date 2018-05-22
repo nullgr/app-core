@@ -8,15 +8,12 @@ import android.graphics.Shader
 import android.support.v7.widget.RecyclerView
 import com.nullgr.androidcore.R
 import com.nullgr.androidcore.rxcontacts.items.ContactItem
-import com.nullgr.corelibrary.adapter.AdapterDelegate
-import com.nullgr.corelibrary.adapter.items.ListItem
-import com.nullgr.corelibrary.ui.extensions.toggleView
+import com.nullgr.core.adapter.AdapterDelegate
+import com.nullgr.core.adapter.items.ListItem
+import com.nullgr.core.ui.extensions.toggleView
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Transformation
-import kotlinx.android.synthetic.main.item_contact.view.photoImageView
-import kotlinx.android.synthetic.main.item_contact.view.photoPlaceholderTextView
-import kotlinx.android.synthetic.main.item_contact.view.userCredentialsTextView
-import kotlinx.android.synthetic.main.item_contact.view.userNameTextView
+import kotlinx.android.synthetic.main.item_contact.view.*
 
 /**
  * Created by Grishko Nikita on 01.02.18.
@@ -26,10 +23,10 @@ class ContactDelegate : AdapterDelegate() {
     override val layoutResource: Int = R.layout.item_contact
     override val itemType: Any = ContactItem::class
 
-    override fun onBindViewHolder(items: List<ListItem>, position: Int, vh: RecyclerView.ViewHolder) {
+    override fun onBindViewHolder(items: List<ListItem>, position: Int, holder: RecyclerView.ViewHolder) {
         val item = items[position] as ContactItem
 
-        with(vh.itemView) {
+        with(holder.itemView) {
 
             photoImageView.toggleView(item.photo != null)
             photoPlaceholderTextView.toggleView(item.photo == null)

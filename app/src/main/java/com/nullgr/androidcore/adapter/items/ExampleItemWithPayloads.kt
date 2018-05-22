@@ -1,7 +1,7 @@
 package com.nullgr.androidcore.adapter.items
 
 import android.support.annotation.ColorInt
-import com.nullgr.corelibrary.adapter.items.ListItem
+import com.nullgr.core.adapter.items.ListItem
 
 /**
  * @author chernyshov.

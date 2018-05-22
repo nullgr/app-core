@@ -8,10 +8,10 @@ import com.nullgr.androidcore.adapter.items.ExampleItem1
 import com.nullgr.androidcore.adapter.items.ExampleItem2
 import com.nullgr.androidcore.adapter.items.ExampleItem3
 import com.nullgr.androidcore.adapter.items.ExampleItemWithPayloads
-import com.nullgr.corelibrary.adapter.AdapterDelegate
-import com.nullgr.corelibrary.adapter.AdapterDelegatesFactory
-import com.nullgr.corelibrary.adapter.items.ListItem
-import com.nullgr.corelibrary.rx.RxBus
+import com.nullgr.core.adapter.AdapterDelegate
+import com.nullgr.core.adapter.AdapterDelegatesFactory
+import com.nullgr.core.adapter.items.ListItem
+import com.nullgr.core.rx.RxBus
 
 class ExampleDelegatesFactory(val bus: RxBus) : AdapterDelegatesFactory {
 

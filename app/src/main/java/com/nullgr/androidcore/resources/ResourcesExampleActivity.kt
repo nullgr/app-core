@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.nullgr.androidcore.R
-import com.nullgr.corelibrary.resources.ResourceProvider
-import com.nullgr.corelibrary.ui.extensions.dpToPx
-import com.nullgr.corelibrary.ui.extensions.getDisplaySize
-import com.nullgr.corelibrary.ui.extensions.pxToDp
+import com.nullgr.core.resources.ResourceProvider
+import com.nullgr.core.ui.extensions.dpToPx
+import com.nullgr.core.ui.extensions.getDisplaySize
+import com.nullgr.core.ui.extensions.pxToDp
 import kotlinx.android.synthetic.main.activity_resources_example.*
 
 /**

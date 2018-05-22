@@ -4,21 +4,18 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.nullgr.androidcore.R
-import com.nullgr.corelibrary.fonts.absSize
-import com.nullgr.corelibrary.fonts.applyColor
-import com.nullgr.corelibrary.fonts.applyFont
-import com.nullgr.corelibrary.fonts.applyRelativeSize
-import com.nullgr.corelibrary.fonts.color
-import com.nullgr.corelibrary.fonts.font
-import com.nullgr.corelibrary.fonts.getTypeface
-import com.nullgr.corelibrary.fonts.newSpanSet
-import com.nullgr.corelibrary.fonts.relativeSize
-import com.nullgr.corelibrary.fonts.setSpannableTitle
-import com.nullgr.corelibrary.resources.spToPx
-import kotlinx.android.synthetic.main.activity_fonts_and_spans_example.textWithColor
-import kotlinx.android.synthetic.main.activity_fonts_and_spans_example.textWithComplicatedSpan
-import kotlinx.android.synthetic.main.activity_fonts_and_spans_example.textWithFont
-import kotlinx.android.synthetic.main.activity_fonts_and_spans_example.textWithRelativeSize
+import com.nullgr.core.font.absSize
+import com.nullgr.core.font.applyColor
+import com.nullgr.core.font.applyFont
+import com.nullgr.core.font.applyRelativeSize
+import com.nullgr.core.font.color
+import com.nullgr.core.font.font
+import com.nullgr.core.font.getTypeface
+import com.nullgr.core.font.newSpanSet
+import com.nullgr.core.font.relativeSize
+import com.nullgr.core.font.setSpannableTitle
+import com.nullgr.core.ui.extensions.spToPx
+import kotlinx.android.synthetic.main.activity_fonts_and_spans_example.*
 
 /**
  * Created by Grishko Nikita on 01.02.18.

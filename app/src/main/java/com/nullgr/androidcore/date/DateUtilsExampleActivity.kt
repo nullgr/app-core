@@ -5,7 +5,13 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.nullgr.androidcore.R
-import com.nullgr.corelibrary.date.*
+import com.nullgr.core.date.CommonFormats
+import com.nullgr.core.date.isToday
+import com.nullgr.core.date.minusDay
+import com.nullgr.core.date.plusMonths
+import com.nullgr.core.date.toDate
+import com.nullgr.core.date.toStringWithFormat
+import com.nullgr.core.date.withoutTime
 import kotlinx.android.synthetic.main.activity_date_utils_example.*
 import java.util.*
 
@@ -27,7 +33,7 @@ class DateUtilsExampleActivity : AppCompatActivity() {
             initialCalendar.time = selectedDate
 
             val datePickerDialog = DatePickerDialog(this,
-                    DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                    DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
 
                         val calendar = Calendar.getInstance()
                         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
@@ -79,7 +85,7 @@ class DateUtilsExampleActivity : AppCompatActivity() {
     private fun showResult(result: String) {
         AlertDialog.Builder(this)
                 .setMessage(result)
-                .setPositiveButton(R.string.btn_ok, { dialog, which -> dialog?.dismiss() })
+                .setPositiveButton(R.string.btn_ok, { dialog, _ -> dialog?.dismiss() })
                 .show()
     }
 }

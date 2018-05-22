@@ -4,9 +4,9 @@ import com.nullgr.androidcore.rxcontacts.delegates.ContactDelegate
 import com.nullgr.androidcore.rxcontacts.delegates.HeaderDelegate
 import com.nullgr.androidcore.rxcontacts.items.ContactItem
 import com.nullgr.androidcore.rxcontacts.items.HeaderItem
-import com.nullgr.corelibrary.adapter.AdapterDelegate
-import com.nullgr.corelibrary.adapter.AdapterDelegatesFactory
-import com.nullgr.corelibrary.adapter.items.ListItem
+import com.nullgr.core.adapter.AdapterDelegate
+import com.nullgr.core.adapter.AdapterDelegatesFactory
+import com.nullgr.core.adapter.items.ListItem
 
 /**
  * Created by Grishko Nikita on 01.02.18.

@@ -1,7 +1,7 @@
 package com.nullgr.androidcore.rxcontacts.items
 
 import android.net.Uri
-import com.nullgr.corelibrary.adapter.items.ListItem
+import com.nullgr.core.adapter.items.ListItem
 
 /**
  * Created by Grishko Nikita on 01.02.18.

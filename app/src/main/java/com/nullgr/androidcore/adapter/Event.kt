@@ -1,5 +1,7 @@
 package com.nullgr.androidcore.adapter
 
+import com.nullgr.core.adapter.items.ListItem
+
 /**
  * @author chernyshov.
  */

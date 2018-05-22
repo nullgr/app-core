@@ -1,6 +1,6 @@
 package com.nullgr.androidcore.interactor.presentation.adapter.items
 
-import com.nullgr.corelibrary.adapter.items.ListItem
+import com.nullgr.core.adapter.items.ListItem
 
 /**
  * @author chernyshov.

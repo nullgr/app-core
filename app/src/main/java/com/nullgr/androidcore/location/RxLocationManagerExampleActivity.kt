@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import com.nullgr.androidcore.R
-import com.nullgr.corelibrary.location.RxLocationManager
-import com.nullgr.corelibrary.location.isEmpty
+import com.nullgr.core.rx.location.RxLocationManager
+import com.nullgr.core.rx.location.isEmpty
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.activity_rx_location_manager_example.locationLog
+import kotlinx.android.synthetic.main.activity_rx_location_manager_example.*
 
 /**
  * Created by Grishko Nikita on 01.02.18.
@@ -19,7 +19,7 @@ class RxLocationManagerExampleActivity : AppCompatActivity() {
     // Implementation steps:
     //
     // 1) Add LocationSettingsResolveActivity to your manifest file
-    // <activity android:name="com.nullgr.corelibrary.location.settings.LocationSettingsResolveActivity" />
+    // <activity android:name="com.nullgr.core.rx.location.settings.LocationSettingsResolveActivity" />
     // 2) Create or inject instance of RxLocationManger and setup configuration (updates count and updates interval)
     // 3) Check ACCESS_FINE_LOCATION permission
     // 4) Call requestLocation() which returns Observable<Location>

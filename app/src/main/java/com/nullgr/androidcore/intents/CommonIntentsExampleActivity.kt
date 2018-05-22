@@ -7,26 +7,20 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.nullgr.androidcore.R
-import com.nullgr.corelibrary.intents.callIntent
-import com.nullgr.corelibrary.intents.chromeTabsIntent
-import com.nullgr.corelibrary.intents.emailIntent
-import com.nullgr.corelibrary.intents.launch
-import com.nullgr.corelibrary.intents.launchForResult
-import com.nullgr.corelibrary.intents.navigationIntent
-import com.nullgr.corelibrary.intents.selectContactIntent
-import com.nullgr.corelibrary.intents.shareTextIntent
-import com.nullgr.corelibrary.intents.webIntent
-import com.nullgr.corelibrary.rxcontacts.RxContactsProvider
-import com.nullgr.corelibrary.rxcontacts.domain.UserContact
-import com.nullgr.corelibrary.ui.toast.showToast
+import com.nullgr.core.intents.callIntent
+import com.nullgr.core.intents.chromeTabsIntent
+import com.nullgr.core.intents.emailIntent
+import com.nullgr.core.intents.launch
+import com.nullgr.core.intents.launchForResult
+import com.nullgr.core.intents.navigationIntent
+import com.nullgr.core.intents.selectContactIntent
+import com.nullgr.core.intents.shareTextIntent
+import com.nullgr.core.intents.webIntent
+import com.nullgr.core.rx.contacts.RxContactsProvider
+import com.nullgr.core.rx.contacts.domain.UserContact
+import com.nullgr.core.ui.toast.showToast
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.activity_common_intents_example.buttonCallTo
-import kotlinx.android.synthetic.main.activity_common_intents_example.buttonMailTo
-import kotlinx.android.synthetic.main.activity_common_intents_example.buttonRoteTo
-import kotlinx.android.synthetic.main.activity_common_intents_example.buttonRxSelectContact
-import kotlinx.android.synthetic.main.activity_common_intents_example.buttonShare
-import kotlinx.android.synthetic.main.activity_common_intents_example.buttonWebChrome
-import kotlinx.android.synthetic.main.activity_common_intents_example.buttonWebSimple
+import kotlinx.android.synthetic.main.activity_common_intents_example.*
 
 /**
  * Created by Grishko Nikita on 01.02.18.
@@ -74,7 +68,7 @@ class CommonIntentsExampleActivity : AppCompatActivity() {
         // startActivityForResult in RX way
         // declare this activity in your manifest file to use
         // CommonIntentsExtensions#launchForResult (need only for rx version of this method)
-        // <activity android : name ="com.nullgr.corelibrary.rx.rxresult.RxResolveResultActivity" />
+        // <activity android : name ="com.nullgr.core.rx.rxresult.RxResolveResultActivity" />
 
         buttonRxSelectContact.setOnClickListener {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)

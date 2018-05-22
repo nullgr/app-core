@@ -4,8 +4,8 @@ import android.support.v7.widget.RecyclerView
 import android.widget.TextView
 import com.nullgr.androidcore.R
 import com.nullgr.androidcore.rxcontacts.items.HeaderItem
-import com.nullgr.corelibrary.adapter.AdapterDelegate
-import com.nullgr.corelibrary.adapter.items.ListItem
+import com.nullgr.core.adapter.AdapterDelegate
+import com.nullgr.core.adapter.items.ListItem
 
 /**
  * Created by Grishko Nikita on 01.02.18.

@@ -12,7 +12,7 @@ import com.nullgr.androidcore.interactor.presentation.InteractorExampleActivity
 import com.nullgr.androidcore.location.RxLocationManagerExampleActivity
 import com.nullgr.androidcore.resources.ResourcesExampleActivity
 import com.nullgr.androidcore.rxcontacts.RxContactsExampleActivity
-import com.nullgr.corelibrary.intents.launch
+import com.nullgr.core.intents.launch
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
