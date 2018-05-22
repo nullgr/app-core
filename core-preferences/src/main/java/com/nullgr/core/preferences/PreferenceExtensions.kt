@@ -5,14 +5,26 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 
 /**
- * author a.komarovskyi
+ * Fabric function to create default [SharedPreferences]
+ * @param context [Context]
  */
-object PreferenceHelper {
-    fun defaultPrefs(context: Context): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+fun defaultPrefs(context: Context): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
-    fun customPrefs(context: Context, name: String): SharedPreferences = context.getSharedPreferences(name, Context.MODE_PRIVATE)
-}
+/**
+ * Fabric function to create custom [SharedPreferences] with give [name]
+ * @param context [Context]
+ * @param name [SharedPreferences] name
+ */
+fun customPrefs(context: Context, name: String): SharedPreferences = context.getSharedPreferences(name, Context.MODE_PRIVATE)
 
+/**
+ * Operator function to easy save, primitive types values in [SharedPreferences].
+ * Supported this types: [String], [Int], [Boolean], [Float], [Long]
+ * @param key [String] key for [SharedPreferences]
+ * @param value value to save in [SharedPreferences].
+ * Can be null. If null is passed, the entry with the specified [key] will be deleted
+ * @throws UnsupportedOperationException if any other type of [value] is set
+ */
 operator fun SharedPreferences.set(key: String, value: Any?) {
     if (value == null) {
         edit { it.remove(key) }
@@ -28,6 +40,13 @@ operator fun SharedPreferences.set(key: String, value: Any?) {
     }
 }
 
+/**
+ * Operator function to quick access for entry in [SharedPreferences].
+ * Supported types: [String], [Int], [Boolean], [Float], [Long]
+ * @param key [String] key for [SharedPreferences]
+ * @param defaultValue value to return if this preference does not exist.
+ * @throws UnsupportedOperationException
+ */
 inline operator fun <reified T : Any> SharedPreferences.get(key: String, defaultValue: T? = null): T? {
     return when (T::class) {
         String::class -> getString(key, defaultValue as? String) as T?
@@ -39,14 +58,24 @@ inline operator fun <reified T : Any> SharedPreferences.get(key: String, default
     }
 }
 
+/**
+ * Removes preference with give [key]
+ * @param key [String] key
+ */
 fun SharedPreferences.remove(key: String) {
     edit { it.remove(key) }
 }
 
+/**
+ * Removes ***all*** values from the preferences.
+ */
 fun SharedPreferences.clear() {
     edit { it.clear() }
 }
 
+/**
+ * Performs [operation] with [SharedPreferences.Editor] and applys changes.
+ */
 inline fun SharedPreferences.edit(operation: (SharedPreferences.Editor) -> Unit) {
     val editor = this.edit()
     operation(editor)
