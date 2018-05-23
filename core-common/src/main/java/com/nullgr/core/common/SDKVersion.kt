@@ -3,7 +3,8 @@ package com.nullgr.core.common
 import android.os.Build
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * A simple class for defining branching depending on the current version of the SDK
+ * @author Grishko Nikita
  */
 class SDKVersion(private val versionCode: Int) {
 
@@ -22,6 +23,9 @@ class SDKVersion(private val versionCode: Int) {
     }
 }
 
+/**
+ * The factory function to create a new SDKVersion instance with the specified version code
+ */
 fun forVersion(versionCode: Int): SDKVersion {
     return SDKVersion(versionCode)
 }

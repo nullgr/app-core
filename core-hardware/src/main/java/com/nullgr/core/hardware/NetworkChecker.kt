@@ -8,7 +8,7 @@ import android.net.ConnectivityManager
  */
 class NetworkChecker(context: Context) {
 
-    private val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    private val connectivityManager by lazy { context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager }
 
     /**
      * Checks if the device has any active internet connection.

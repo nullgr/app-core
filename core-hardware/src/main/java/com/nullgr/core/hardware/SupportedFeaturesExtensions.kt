@@ -9,33 +9,52 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * Extension function checks whether the [PackageManager.FEATURE_CAMERA] feature is available
  */
 fun Context?.isCammeraSupported(): Boolean {
     return this?.packageManager?.hasSystemFeature(PackageManager.FEATURE_CAMERA) ?: false
 }
 
+/**
+ * Extension function checks whether the [PackageManager.FEATURE_CAMERA_AUTOFOCUS] feature is available
+ */
 fun Context?.isCammeraAutoFocusSupported(): Boolean {
     return this?.packageManager?.hasSystemFeature(PackageManager.FEATURE_CAMERA_AUTOFOCUS) ?: false
 }
 
+/**
+ * Extension function checks whether the [PackageManager.FEATURE_TELEPHONY] feature is available
+ */
 fun Context?.isTelephonySupported(): Boolean {
     return this?.packageManager?.hasSystemFeature(PackageManager.FEATURE_TELEPHONY) ?: false
 }
 
+/**
+ * Extension function checks whether the [PackageManager.FEATURE_LOCATION] feature is available
+ */
 fun Context?.isGpsSupported(): Boolean {
     return this?.packageManager?.hasSystemFeature(PackageManager.FEATURE_LOCATION) ?: false
 }
 
+/**
+ * Extension function checks whether the [PackageManager.FEATURE_FINGERPRINT] feature is available
+ */
 @TargetApi(Build.VERSION_CODES.M)
 fun Context?.isFingerprintSupported(): Boolean {
     return this?.packageManager?.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT) ?: false
 }
 
+/**
+ * Extension function checks whether the [PackageManager.FEATURE_BLUETOOTH] feature is available
+ */
 fun Context?.isBluetoothSupported(): Boolean {
     return this?.packageManager?.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH) ?: false
 }
 
+/**
+ * Extension function checks whether the [Context.LOCATION_SERVICE] is available and one
+ * of the [LocationManager.GPS_PROVIDER] or [LocationManager.NETWORK_PROVIDER] providers is enabled.
+ */
 fun Context?.isLocationEnabled(): Boolean {
     var gpsEnabled = false
     var networkEnabled = false
@@ -55,7 +74,9 @@ fun Context?.isLocationEnabled(): Boolean {
     return gpsEnabled || networkEnabled
 }
 
-
+/**
+ * Extension function checks whether the GooglePlayServices are available
+ */
 fun Context?.isGoogleServicesPresent(): Boolean {
     return try {
         GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS

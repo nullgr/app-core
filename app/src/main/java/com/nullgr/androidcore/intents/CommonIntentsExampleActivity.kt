@@ -9,18 +9,24 @@ import android.widget.Toast
 import com.nullgr.androidcore.R
 import com.nullgr.core.intents.callIntent
 import com.nullgr.core.intents.chromeTabsIntent
+import com.nullgr.core.intents.contactCardIntent
 import com.nullgr.core.intents.emailIntent
 import com.nullgr.core.intents.launch
 import com.nullgr.core.intents.launchForResult
 import com.nullgr.core.intents.navigationIntent
 import com.nullgr.core.intents.selectContactIntent
 import com.nullgr.core.intents.shareTextIntent
-import com.nullgr.core.intents.webIntent
 import com.nullgr.core.rx.contacts.RxContactsProvider
 import com.nullgr.core.rx.contacts.domain.UserContact
 import com.nullgr.core.ui.toast.showToast
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.activity_common_intents_example.*
+import kotlinx.android.synthetic.main.activity_common_intents_example.buttonCallTo
+import kotlinx.android.synthetic.main.activity_common_intents_example.buttonMailTo
+import kotlinx.android.synthetic.main.activity_common_intents_example.buttonRoteTo
+import kotlinx.android.synthetic.main.activity_common_intents_example.buttonRxSelectContact
+import kotlinx.android.synthetic.main.activity_common_intents_example.buttonShare
+import kotlinx.android.synthetic.main.activity_common_intents_example.buttonWebChrome
+import kotlinx.android.synthetic.main.activity_common_intents_example.buttonWebSimple
 
 /**
  * Created by Grishko Nikita on 01.02.18.
@@ -36,8 +42,9 @@ class CommonIntentsExampleActivity : AppCompatActivity() {
         val errorText = getString(R.string.error_activity_not_found)
 
         buttonWebSimple.setOnClickListener {
-            webIntent(getString(R.string.btn_null_gr_web))
-                    .launch(this, errorText)
+            /* webIntent(getString(R.string.btn_null_gr_web))
+                     .launch(this, errorText)*/
+            contactCardIntent("1").launch(this)
         }
 
         buttonWebChrome.setOnClickListener {
