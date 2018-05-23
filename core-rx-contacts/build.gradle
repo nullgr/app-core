@@ -57,11 +57,12 @@ dependencies {
 
     implementation project(':core-collections')
 
-    implementation commonDependencies.supportAnnotations
+    compileOnly commonDependencies.supportAnnotations
+    compileOnly commonDependencies.kotlin
+
     implementation commonDependencies.rxKotlin
     implementation commonDependencies.rxAndroid
     implementation commonDependencies.rxRelay
-    implementation commonDependencies.kotlin
 
     testImplementation commonTestDependencies.kotlinJUnit
     testImplementation commonTestDependencies.junit
