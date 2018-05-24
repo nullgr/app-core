@@ -9,13 +9,13 @@ import android.widget.Toast
 import com.nullgr.androidcore.R
 import com.nullgr.core.intents.callIntent
 import com.nullgr.core.intents.chromeTabsIntent
-import com.nullgr.core.intents.contactCardIntent
 import com.nullgr.core.intents.emailIntent
 import com.nullgr.core.intents.launch
 import com.nullgr.core.intents.launchForResult
 import com.nullgr.core.intents.navigationIntent
 import com.nullgr.core.intents.selectContactIntent
 import com.nullgr.core.intents.shareTextIntent
+import com.nullgr.core.intents.webIntent
 import com.nullgr.core.rx.contacts.RxContactsProvider
 import com.nullgr.core.rx.contacts.domain.UserContact
 import com.nullgr.core.ui.toast.showToast
@@ -42,9 +42,8 @@ class CommonIntentsExampleActivity : AppCompatActivity() {
         val errorText = getString(R.string.error_activity_not_found)
 
         buttonWebSimple.setOnClickListener {
-            /* webIntent(getString(R.string.btn_null_gr_web))
-                     .launch(this, errorText)*/
-            contactCardIntent("1").launch(this)
+            webIntent(getString(R.string.btn_null_gr_web))
+                    .launch(this, errorText)
         }
 
         buttonWebChrome.setOnClickListener {
