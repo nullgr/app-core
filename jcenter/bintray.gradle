@@ -1,26 +1,25 @@
 apply plugin: 'com.jfrog.bintray'
+apply plugin: 'org.jetbrains.dokka'
 
 version = libraryVersion
 
-if (project.hasProperty("android")) { // Android libraries
-    task sourcesJar(type: Jar) {
-        classifier = 'sources'
-        from android.sourceSets.main.java.srcDirs
-    }
-
-//    task javadoc(type: Javadoc) {
-//        source = android.sourceSets.main.java.srcDirs
-//        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-//    }
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
 }
 
-//task javadocJar(type: Jar, dependsOn: javadoc) {
-//    classifier = 'javadoc'
-//    from javadoc.destinationDir
-//}
+dokka {
+    outputFormat = 'html'
+    outputDirectory = "$buildDir/documentation"
+}
+
+task dokkaJar(type: Jar, dependsOn: dokka) {
+    classifier = 'javadoc'
+    from dokka.outputDirectory
+}
 
 artifacts {
-//    archives javadocJar
+    archives dokkaJar
     archives sourcesJar
 }
 
