@@ -61,6 +61,7 @@ fun EditText.applyLengthFilter(length: Int) {
 fun EditText.applyAllCapsFilter() {
     editableText.filters = arrayOf(InputFilter.AllCaps())
 }
+
 /**
  * Removes all previously set [InputFilter]
  */
