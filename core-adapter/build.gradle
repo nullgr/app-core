@@ -56,10 +56,12 @@ dependencies {
     def commonTestDependencies = rootProject.ext.commonTestDependencies
 
     implementation project(':core-rx')
-    implementation commonDependencies.supportRecyclerView
+
+    compileOnly commonDependencies.supportRecyclerView
+    compileOnly commonDependencies.kotlin
+
     implementation commonDependencies.rxKotlin
     implementation commonDependencies.rxAndroid
-    implementation commonDependencies.kotlin
 
     testImplementation commonTestDependencies.kotlinJUnit
     testImplementation commonTestDependencies.junit

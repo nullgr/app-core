@@ -57,10 +57,11 @@ dependencies {
 
     implementation project(':core-common')
     implementation project(':core-font')
-    implementation commonDependencies.supportV4
-    implementation commonDependencies.supportCompatV7
-    implementation commonDependencies.supportRecyclerView
-    implementation commonDependencies.kotlin
+
+    compileOnly commonDependencies.supportV4
+    compileOnly commonDependencies.supportCompatV7
+    compileOnly commonDependencies.supportRecyclerView
+    compileOnly commonDependencies.kotlin
 
     testImplementation commonTestDependencies.kotlinJUnit
     testImplementation commonTestDependencies.junit

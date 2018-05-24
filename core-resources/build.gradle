@@ -55,9 +55,9 @@ dependencies {
     def commonDependencies = rootProject.ext.commonDependencies
     def commonTestDependencies = rootProject.ext.commonTestDependencies
 
-    implementation commonDependencies.supportAnnotations
-    implementation commonDependencies.supportV4
-    implementation commonDependencies.kotlin
+    compileOnly commonDependencies.supportAnnotations
+    compileOnly commonDependencies.supportV4
+    compileOnly commonDependencies.kotlin
 
     testImplementation commonTestDependencies.kotlinJUnit
     testImplementation commonTestDependencies.junit

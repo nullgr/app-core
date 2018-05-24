@@ -56,9 +56,9 @@ dependencies {
     def commonDependencies = rootProject.ext.commonDependencies
     def commonTestDependencies = rootProject.ext.commonTestDependencies
 
-    implementation commonDependencies.supportAnnotations
-    implementation commonDependencies.supportCompatV7
-    implementation commonDependencies.kotlin
+    compileOnly commonDependencies.supportCompatV7
+    compileOnly commonDependencies.kotlin
+
     implementation commonDependencies.location
 
     testImplementation commonTestDependencies.kotlinJUnit
