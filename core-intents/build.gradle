@@ -53,16 +53,11 @@ androidExtensions {
 
 dependencies {
     def commonDependencies = rootProject.ext.commonDependencies
-    def commonTestDependencies = rootProject.ext.commonTestDependencies
+
+    compileOnly commonDependencies.supportCustomTabs
+    compileOnly commonDependencies.supportAnnotations
+    compileOnly commonDependencies.kotlin
 
     implementation project(':core-rx')
-    implementation commonDependencies.supportCompatV7
-    implementation commonDependencies.supportAnnotations
-    implementation commonDependencies.supportCustomTabs
-    implementation commonDependencies.supportV4
-    implementation commonDependencies.supportV13
-    implementation commonDependencies.supportCompatV7
     implementation commonDependencies.rxKotlin
-    implementation commonDependencies.kotlin
-    implementation commonDependencies.rxLocation
 }

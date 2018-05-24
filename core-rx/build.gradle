@@ -55,11 +55,12 @@ dependencies {
     def commonDependencies = rootProject.ext.commonDependencies
     def commonTestDependencies = rootProject.ext.commonTestDependencies
 
-    implementation commonDependencies.supportCompatV7
+    compileOnly commonDependencies.supportCompatV7
+    compileOnly commonDependencies.kotlin
+
     implementation commonDependencies.rxKotlin
     implementation commonDependencies.rxAndroid
     implementation commonDependencies.rxRelay
-    implementation commonDependencies.kotlin
 
     testImplementation commonTestDependencies.kotlinJUnit
     testImplementation commonTestDependencies.junit
