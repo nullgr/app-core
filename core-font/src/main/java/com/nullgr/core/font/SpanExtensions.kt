@@ -127,18 +127,18 @@ fun String?.applyColor(@ColorInt color: Int,
 }
 
 /**
- * Create [SpannableString] from given [String]
+ * Create [SpannableString] from given [CharSequence]
  */
-fun String.toSpannable(): SpannableString {
+fun CharSequence.toSpannable(): SpannableString {
     return SpannableString(this)
 }
 
 /**
- * Create new instance of [SpanSet]
+ * Create new instance of [SpanSet] for given [CharSequence]
  * @return [SpanSet]
  */
-fun newSpanSet(): SpanSet {
-    return SpanSet()
+fun CharSequence?.applySpanSet(): SpanSet {
+    return SpanSet(this)
 }
 
 /**

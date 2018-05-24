@@ -8,14 +8,22 @@ import com.nullgr.core.font.absSize
 import com.nullgr.core.font.applyColor
 import com.nullgr.core.font.applyFont
 import com.nullgr.core.font.applyRelativeSize
+import com.nullgr.core.font.applySpanSet
+import com.nullgr.core.font.backgroundColor
 import com.nullgr.core.font.color
 import com.nullgr.core.font.font
+import com.nullgr.core.font.foregroundColor
 import com.nullgr.core.font.getTypeface
-import com.nullgr.core.font.newSpanSet
 import com.nullgr.core.font.relativeSize
 import com.nullgr.core.font.setSpannableTitle
+import com.nullgr.core.font.typeface
+import com.nullgr.core.font.withSpan
 import com.nullgr.core.ui.extensions.spToPx
-import kotlinx.android.synthetic.main.activity_fonts_and_spans_example.*
+import kotlinx.android.synthetic.main.activity_fonts_and_spans_example.textWithColor
+import kotlinx.android.synthetic.main.activity_fonts_and_spans_example.textWithComplicatedSpan
+import kotlinx.android.synthetic.main.activity_fonts_and_spans_example.textWithComplicatedSpan2
+import kotlinx.android.synthetic.main.activity_fonts_and_spans_example.textWithFont
+import kotlinx.android.synthetic.main.activity_fonts_and_spans_example.textWithRelativeSize
 
 /**
  * Created by Grishko Nikita on 01.02.18.
@@ -45,14 +53,48 @@ class FontsAndSpansExampleActivity : AppCompatActivity() {
             val end2 = "Digital revolution".length
             val start3 = text.indexOf("T", ignoreCase = false)
 
-            text = (newSpanSet()
+            text = (text.toString().applySpanSet()
                     add font(getTypeface("Roboto-Bold.ttf")) toText "Digital"
                     and font(getTypeface("Roboto-Italic.ttf")) from start2 to end2
                     and relativeSize(1.8f) toText "revolution"
                     and color(Color.GREEN) from start3
-                    and absSize(28f.spToPx(context).toInt()) toText "we do."
-                    ).applyTo(text.toString())
+                    and absSize(28f.spToPx(context).toInt()) toText "we do.").build()
+        }
 
+        with(textWithComplicatedSpan2) {
+
+            val start2 = text.indexOf("r")
+            val end2 = "Digital revolution".length
+            val start3 = text.indexOf("T", ignoreCase = false)
+
+            text = text.withSpan {
+
+                typeface {
+                    typeface = getTypeface("Roboto-Bold.ttf")
+                    toText = "Digital"
+                }
+
+                typeface {
+                    typeface = getTypeface("Roboto-Bold.ttf")
+                    from = start2
+                    to = end2
+                }
+
+                relativeSize {
+                    size = 1.8f
+                    toText = "revolution"
+                }
+
+                backgroundColor {
+                    color = Color.LTGRAY
+                    toText = "Digi"
+                }
+
+                foregroundColor {
+                    color = Color.GREEN
+                    from = start3
+                }
+            }
         }
     }
 }
