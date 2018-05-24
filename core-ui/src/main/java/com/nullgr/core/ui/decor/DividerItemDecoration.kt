@@ -10,8 +10,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 
 /**
- * DividerItemDecoration is a {@link RecyclerView.ItemDecoration} that can be used as a divider
- * between items of a {@link LinearLayoutManager}.
+ * DividerItemDecoration is a [RecyclerView.ItemDecoration] that can be used as a divider
+ * between items of a [android.support.v7.widget.LinearLayoutManager]
  * It supports [android.support.v7.widget.LinearLayoutManager.VERTICAL] orientation.
  * Can be used with custom divider drawable.
  *
