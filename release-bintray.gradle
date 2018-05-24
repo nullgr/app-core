@@ -11,9 +11,10 @@ ext {
     libraryDescription = POM_DESCRIPTION
 
     siteUrl = 'https://github.com/nullgr/app-core'
+    issueUrl = 'https://github.com/nullgr/app-core/issues'
     gitUrl = 'https://github.com/nullgr/app-core.git'
 
-    libraryVersion = POM_VERSION
+    libraryVersion = '0.0.7'
 
     developerId = 'nullgr-dev'
     developerName = 'Nullgravity Developer'
