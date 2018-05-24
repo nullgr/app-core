@@ -80,5 +80,6 @@ ext {
             espressoContrib: "com.android.support.test.espresso:espresso-contrib:${espressoVersion}",
             androidRunner  : "com.android.support.test:runner:${runnerVersion}",
             androidRules   : "com.android.support.test:rules:${runnerVersion}",
+            supportRecyclerView   : "com.android.support:recyclerview-v7:${supportLibraryVersion}"
     ]
 }
