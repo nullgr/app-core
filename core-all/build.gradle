@@ -53,11 +53,19 @@ androidExtensions {
 
 dependencies {
     implementation project(':core-adapter')
+    implementation project(':core-collections')
+    implementation project(':core-common')
     implementation project(':core-date')
     implementation project(':core-font')
+    implementation project(':core-hardware')
     implementation project(':core-intents')
     implementation project(':core-interactor')
+    implementation project(':core-preferences')
+    implementation project(':core-resources')
     implementation project(':core-rx')
     implementation project(':core-rx-contacts')
     implementation project(':core-rx-location')
+    implementation project(':core-ui')
 }
+
+apply from: rootProject.file('release-bintray.gradle')

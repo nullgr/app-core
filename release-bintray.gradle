@@ -1,0 +1,31 @@
+// Bintray release configuration
+ext {
+    bintrayRepo = 'maven-test'
+    bintrayName = POM_BINTRAY_NAME
+
+    publishedGroupId = 'com.nullgr.core'
+    libraryName = 'core'
+    artifact = POM_ARTIFACT_ID
+    packagingType = POM_PACKAGING
+
+    libraryDescription = POM_DESCRIPTION
+
+    siteUrl = 'https://github.com/nullgr/app-core'
+    gitUrl = 'https://github.com/nullgr/app-core.git'
+
+    libraryVersion = POM_VERSION
+
+    developerId = 'nullgr-dev'
+    developerName = 'Nullgravity Developer'
+    developerEmail = 'dev@nullgr.com'
+
+    licenseName = 'MIT'
+    licenseUrl = 'https://opensource.org/licenses/mit-license.php'
+    allLicenses = ["MIT"]
+}
+
+// Set up the Android Maven publication.
+apply from: rootProject.file('jcenter/maven-install.gradle')
+
+// Publish on Bintray.
+apply from: rootProject.file('jcenter/bintray.gradle')
