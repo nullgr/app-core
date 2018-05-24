@@ -27,7 +27,7 @@ ext {
     glassfishAnnotationVersion = '10.0-b28'
     supportLibraryVersion = '27.1.0'
     constraintVersion = '1.0.2'
-    customTabsVersion = '27.0.2'
+    customTabsVersion = '27.1.0'
     timberVersion = '4.5.1'
     daggerVersion = '2.13'
     rxLocationVersion = '2.1@aar'
