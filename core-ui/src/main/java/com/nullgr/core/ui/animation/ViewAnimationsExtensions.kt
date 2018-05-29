@@ -3,7 +3,7 @@ package com.nullgr.core.ui.animation
 import android.os.Build
 import android.view.View
 import android.view.ViewAnimationUtils
-import com.nullgr.core.common.forVersion
+import com.nullgr.core.common.withVersion
 import com.nullgr.core.ui.extensions.disappear
 import com.nullgr.core.ui.extensions.show
 
@@ -30,18 +30,19 @@ infix fun <T : View> T.crossFadeTo(other: T) {
  * @param other [View] thar will be visible after animation finish
  */
 infix fun <T : View> T.revealTo(other: T) {
-    forVersion(Build.VERSION_CODES.LOLLIPOP)
-            .doIfHigher {
-                val width = this.width
-                val height = this.height
-                val maxRadius = Math.sqrt((width * width / 4 + height * height / 4).toDouble()).toFloat()
-                val reveal = ViewAnimationUtils.createCircularReveal(other, width / 2, height / 2, 0f, maxRadius)
-                other.show()
-                this.disappear()
-                reveal.start()
-            }
-            .doIfLower {
-                this.disappear()
-                other.show()
-            }
+    withVersion(Build.VERSION_CODES.LOLLIPOP) {
+        higherOrEqaul {
+            val width = this@revealTo.measuredWidth
+            val height = this@revealTo.measuredHeight
+            val maxRadius = Math.max(width, height).toFloat()
+            val reveal = ViewAnimationUtils.createCircularReveal(other, width / 2, height / 2, 0f, maxRadius)
+            other.show()
+            this@revealTo.disappear()
+            reveal.start()
+        }
+        lower {
+            this@revealTo.disappear()
+            other.show()
+        }
+    }
 }

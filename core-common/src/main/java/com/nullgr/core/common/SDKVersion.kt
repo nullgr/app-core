@@ -6,17 +6,31 @@ import android.os.Build
  * A simple class for defining branching depending on the current version of the SDK
  * @author Grishko Nikita
  */
-class SDKVersion(private val versionCode: Int) {
+class SDKVersion constructor(val versionCode: Int) {
 
-    fun doIfHigher(function: () -> Unit): SDKVersion {
+    inline fun higher(function: () -> Unit): SDKVersion {
+        if (Build.VERSION.SDK_INT > versionCode) {
+            function.invoke()
+        }
+        return this
+    }
+
+    inline fun higherOrEqaul(function: () -> Unit): SDKVersion {
         if (Build.VERSION.SDK_INT >= versionCode) {
             function.invoke()
         }
         return this
     }
 
-    fun doIfLower(function: () -> Unit): SDKVersion {
+    inline fun lower(function: () -> Unit): SDKVersion {
         if (Build.VERSION.SDK_INT < versionCode) {
+            function.invoke()
+        }
+        return this
+    }
+
+    inline fun lowerOrEqual(function: () -> Unit): SDKVersion {
+        if (Build.VERSION.SDK_INT <= versionCode) {
             function.invoke()
         }
         return this
@@ -26,6 +40,6 @@ class SDKVersion(private val versionCode: Int) {
 /**
  * The factory function to create a new SDKVersion instance with the specified version code
  */
-fun forVersion(versionCode: Int): SDKVersion {
-    return SDKVersion(versionCode)
+fun Any.withVersion(versionCode: Int, function: SDKVersion.() -> Unit) {
+    function.invoke(SDKVersion(versionCode))
 }
