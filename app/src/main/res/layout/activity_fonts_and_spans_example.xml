@@ -41,6 +41,14 @@
             android:text="@string/fonts_example_text_2"
             android:textSize="18sp" />
 
+        <TextView
+            android:id="@+id/textWithComplicatedSpan2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:text="@string/fonts_example_text_2"
+            android:textSize="18sp" />
+
     </LinearLayout>
 
 </ScrollView>
