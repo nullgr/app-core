@@ -35,6 +35,13 @@ class SDKVersion(val versionCode: Int) {
         }
         return this
     }
+
+    inline fun equal(function: () -> Unit): SDKVersion {
+        if (Build.VERSION.SDK_INT == versionCode) {
+            function.invoke()
+        }
+        return this
+    }
 }
 
 /**
