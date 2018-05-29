@@ -31,7 +31,7 @@ infix fun <T : View> T.crossFadeTo(other: T) {
  */
 infix fun <T : View> T.revealTo(other: T) {
     withVersion(Build.VERSION_CODES.LOLLIPOP) {
-        higherOrEqaul {
+        higherOrEqual {
             val width = this@revealTo.measuredWidth
             val height = this@revealTo.measuredHeight
             val maxRadius = Math.max(width, height).toFloat()
