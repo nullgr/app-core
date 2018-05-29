@@ -5,12 +5,11 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.nullgr.androidcore.R
 import com.nullgr.core.font.absSize
-import com.nullgr.core.font.applyColor
+import com.nullgr.core.font.applyForegroundColor
 import com.nullgr.core.font.applyFont
 import com.nullgr.core.font.applyRelativeSize
 import com.nullgr.core.font.applySpanSet
 import com.nullgr.core.font.backgroundColor
-import com.nullgr.core.font.color
 import com.nullgr.core.font.font
 import com.nullgr.core.font.foregroundColor
 import com.nullgr.core.font.getTypeface
@@ -37,7 +36,7 @@ class FontsAndSpansExampleActivity : AppCompatActivity() {
         supportActionBar?.setSpannableTitle(this, "Awesome title", "Roboto-Bold.ttf")
 
         with(textWithColor) {
-            text = text.toString().applyColor(Color.RED, 0, 7)
+            text = text.toString().applyForegroundColor(Color.RED, 0, 7)
         }
 
         with(textWithFont) {
@@ -57,7 +56,7 @@ class FontsAndSpansExampleActivity : AppCompatActivity() {
                     add font(getTypeface("Roboto-Bold.ttf")) toText "Digital"
                     and font(getTypeface("Roboto-Italic.ttf")) from start2 to end2
                     and relativeSize(1.8f) toText "revolution"
-                    and color(Color.GREEN) from start3
+                    and foregroundColor(Color.GREEN) from start3
                     and absSize(28f.spToPx(context).toInt()) toText "we do.").build()
         }
 
