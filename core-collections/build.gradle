@@ -56,3 +56,5 @@ dependencies {
 
     compileOnly commonDependencies.kotlin
 }
+
+apply from: rootProject.file('release-bintray.gradle')

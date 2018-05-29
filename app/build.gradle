@@ -25,7 +25,6 @@ android {
 dependencies {
     def commonDependencies = rootProject.ext.commonDependencies
 
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':core-adapter')
     implementation project(':core-collections')
     implementation project(':core-date')

@@ -67,3 +67,5 @@ dependencies {
     implementation project(':core-rx-location')
     implementation project(':core-ui')
 }
+
+apply from: rootProject.file('release-bintray.gradle')

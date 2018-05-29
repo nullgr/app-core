@@ -13,8 +13,8 @@ import com.nullgr.core.adapter.items.ListItem
 
 /**
  *
- * ConditionBasedDividerItemDecoration is a {@link RecyclerView.ItemDecoration} that can be used as a divider
- * between items of a {@link LinearLayoutManager} together with [DynamicAdapter].
+ * ConditionBasedDividerItemDecoration is a [RecyclerView.ItemDecoration] that can be used as a divider
+ * between items of a [android.support.v7.widget.LinearLayoutManager] together with [DynamicAdapter].
  * It supports [android.support.v7.widget.LinearLayoutManager.VERTICAL] orientation.
  *
  * Main feature of this decorator is that you can pass [condition] function and provide

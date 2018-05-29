@@ -90,3 +90,5 @@ dependencies {
         exclude module: 'design'
     }
 }
+
+apply from: rootProject.file('release-bintray.gradle')

@@ -1,7 +1,7 @@
 package com.nullgr.core.adapter
 
-import android.support.v7.widget.RecyclerView
-import com.nullgr.core.adapter.items.ListItem
+import android.support.v7.widget.*
+import com.nullgr.core.adapter.items.*
 
 /**
  * Extension function that allows to get items from adapter via ViewHolder.
@@ -13,14 +13,16 @@ inline fun RecyclerView.ViewHolder.items(): List<ListItem>? {
 }
 
 /**
- * Extension function that invoke given [block] with [ListItem] and adapterPosition
- * if position not equals [RecyclerView.NO_POSITION], passed [items] not null
- * and position in [items] bounds.
+ * Extension function that invoke given [block] if position not equals [RecyclerView.NO_POSITION],
+ * list of items that returned by [items] extension not null and if position in [items] bounds.
  */
-inline fun RecyclerView.ViewHolder.withAdapterPosition(items: List<ListItem>?, block: (item: ListItem, position: Int) -> Unit) {
+inline fun RecyclerView.ViewHolder.withAdapterPosition(block: (items: List<ListItem>, item: ListItem, position: Int) -> Unit) {
     with(adapterPosition) {
-        if (this != RecyclerView.NO_POSITION && items != null && this in 0 until items.size) {
-            block.invoke(items[this], this)
+        if (this != RecyclerView.NO_POSITION) {
+            val items = items()
+            if (items != null && this >= 0 && this < items.size) {
+                block.invoke(items, items[this], this)
+            }
         }
     }
 }

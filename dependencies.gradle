@@ -14,7 +14,7 @@ ext {
     supportLibraryVersion = '27.1.1'
     playServicesVersion = '11.8.0'
     constraintVersion = '1.0.2'
-    customTabsVersion = '27.0.2'
+    customTabsVersion = '27.1.0'
 
     //Libraries
     rxJavaVersion = '2.0.2'
@@ -43,43 +43,44 @@ ext {
     runnerVersion = '0.5'
 
     commonDependencies = [
-            libs                  : fileTree(dir: 'libs', include: ['*.jar']),
-            supportAnnotations    : "com.android.support:support-annotations:${supportLibraryVersion}",
-            supportV4             : "com.android.support:support-v4:${supportLibraryVersion}",
-            supportV13            : "com.android.support:support-v13:${supportLibraryVersion}",
-            supportCompatV7       : "com.android.support:appcompat-v7:${supportLibraryVersion}",
-            supportRecyclerView   : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
-            supportCardView       : "com.android.support:cardview-v7:${supportLibraryVersion}",
-            supportDesign         : "com.android.support:design:${supportLibraryVersion}",
-            supportvectorDrawable : "com.android.support:support-vector-drawable:${supportLibraryVersion}",
-            supportConstraint     : "com.android.support.constraint:constraint-layout:${constraintVersion}",
-            supportCustomTabs     : "com.android.support:customtabs:${customTabsVersion}",
+            libs                 : fileTree(dir: 'libs', include: ['*.jar']),
+            supportAnnotations   : "com.android.support:support-annotations:${supportLibraryVersion}",
+            supportV4            : "com.android.support:support-v4:${supportLibraryVersion}",
+            supportV13           : "com.android.support:support-v13:${supportLibraryVersion}",
+            supportCompatV7      : "com.android.support:appcompat-v7:${supportLibraryVersion}",
+            supportRecyclerView  : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
+            supportCardView      : "com.android.support:cardview-v7:${supportLibraryVersion}",
+            supportDesign        : "com.android.support:design:${supportLibraryVersion}",
+            supportvectorDrawable: "com.android.support:support-vector-drawable:${supportLibraryVersion}",
+            supportConstraint    : "com.android.support.constraint:constraint-layout:${constraintVersion}",
+            supportCustomTabs    : "com.android.support:customtabs:${customTabsVersion}",
 
-            rxKotlin              : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
-            rxAndroid             : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
-            rxRelay               : "com.jakewharton.rxrelay2:rxrelay:${rxRelay}",
+            rxKotlin             : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
+            rxAndroid            : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            rxRelay              : "com.jakewharton.rxrelay2:rxrelay:${rxRelay}",
 
-            kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlin_version}",
-            location              : "com.google.android.gms:play-services-location:${playServicesVersion}",
-            rxLocation            : "pl.charmas.android:android-reactive-location2:${rxLocationVersion}",
-            jodaTime              : "net.danlew:android.joda:${jodaTimeVersion}",
-            picasso               : "com.squareup.picasso:picasso:${picassoVersion}",
-            colorPicker           : "com.pes.materialcolorpicker:library:${colorPickerVersion}"
+            kotlin               : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlin_version}",
+            location             : "com.google.android.gms:play-services-location:${playServicesVersion}",
+            rxLocation           : "pl.charmas.android:android-reactive-location2:${rxLocationVersion}",
+            jodaTime             : "net.danlew:android.joda:${jodaTimeVersion}",
+            picasso              : "com.squareup.picasso:picasso:${picassoVersion}",
+            colorPicker          : "com.pes.materialcolorpicker:library:${colorPickerVersion}"
     ]
 
     commonTestDependencies = [
-            junit          : "junit:junit:${jUnitVersion}",
-            kotlinJUnit    : "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}",
-            assertj        : "org.assertj:assertj-core:${assertJVersion}",
-            mockito        : "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
-            robolectric    : "org.robolectric:robolectric:${robolectricVersion}",
-            supportRunner  : "com.android.support.test:runner:${androidSupportRunnerVersion}",
-            supportRules   : "com.android.support.test:rules:${androidSupportRulesVersion}",
-            mockitoAndroid : "org.mockito:mockito-android:${mockitoAndroidVersion}",
-            espressoCore   : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
-            espressoIntents: "com.android.support.test.espresso:espresso-intents:${espressoVersion}",
-            espressoContrib: "com.android.support.test.espresso:espresso-contrib:${espressoVersion}",
-            androidRunner  : "com.android.support.test:runner:${runnerVersion}",
-            androidRules   : "com.android.support.test:rules:${runnerVersion}",
+            junit              : "junit:junit:${jUnitVersion}",
+            kotlinJUnit        : "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}",
+            assertj            : "org.assertj:assertj-core:${assertJVersion}",
+            mockito            : "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
+            robolectric        : "org.robolectric:robolectric:${robolectricVersion}",
+            supportRunner      : "com.android.support.test:runner:${androidSupportRunnerVersion}",
+            supportRules       : "com.android.support.test:rules:${androidSupportRulesVersion}",
+            mockitoAndroid     : "org.mockito:mockito-android:${mockitoAndroidVersion}",
+            espressoCore       : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
+            espressoIntents    : "com.android.support.test.espresso:espresso-intents:${espressoVersion}",
+            espressoContrib    : "com.android.support.test.espresso:espresso-contrib:${espressoVersion}",
+            androidRunner      : "com.android.support.test:runner:${runnerVersion}",
+            androidRules       : "com.android.support.test:rules:${runnerVersion}",
+            supportRecyclerView: "com.android.support:recyclerview-v7:${supportLibraryVersion}"
     ]
 }

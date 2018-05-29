@@ -6,30 +6,27 @@ import android.view.ViewGroup
 import com.nullgr.androidcore.R
 import com.nullgr.androidcore.adapter.Event
 import com.nullgr.androidcore.adapter.items.ExampleItemWithPayloads
-import com.nullgr.core.adapter.OnClickHandler
-import com.nullgr.core.adapter.OnClickListener
 import com.nullgr.core.adapter.AdapterDelegate
 import com.nullgr.core.adapter.items.ListItem
+import com.nullgr.core.adapter.withAdapterPosition
 import com.nullgr.core.rx.RxBus
 import kotlinx.android.synthetic.main.item_example_with_payloads.view.*
 
 class ExampleDelegateWithPayloads(private val bus: RxBus) : AdapterDelegate() {
-
-    private val clickHandler = object : OnClickHandler {
-        override fun handle(view: View, item: ListItem, position: Int) {
-            when (view.id) {
-                R.id.colorView -> bus.post(Event.Click("child colorView"))
-                else -> bus.post(Event.Click(item))
-            }
-        }
-    }
 
     override val layoutResource: Int = R.layout.item_example_with_payloads
     override val itemType: Any = ExampleItemWithPayloads::class
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         return super.onCreateViewHolder(parent).apply {
-            val onClickListener = OnClickListener(this, clickHandler)
+            val onClickListener = View.OnClickListener { view ->
+                this.withAdapterPosition { _, item, _ ->
+                    when (view.id) {
+                        R.id.colorView -> bus.post(Event.Click("child colorView"))
+                        else -> bus.post(Event.Click(item))
+                    }
+                }
+            }
             this.itemView.colorView.setOnClickListener(onClickListener)
             this.itemView.setOnClickListener(onClickListener)
         }

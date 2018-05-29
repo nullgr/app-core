@@ -61,3 +61,5 @@ dependencies {
     implementation project(':core-rx')
     implementation commonDependencies.rxKotlin
 }
+
+apply from: rootProject.file('release-bintray.gradle')
