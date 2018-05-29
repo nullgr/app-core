@@ -11,18 +11,19 @@ ext {
     androidTargetSdkVersion = 27
     androidCompileSdkVersion = 27
 
+    supportLibraryVersion = '27.1.1'
+    playServicesVersion = '11.8.0'
+    constraintVersion = '1.0.2'
+    customTabsVersion = '27.0.2'
+
     //Libraries
     rxJavaVersion = '2.0.2'
     rxKotlinVersion = '2.1.0'
     rxAndroidVersion = '2.0.1'
     rxRelay = '2.0.0'
     androidAnnotationsVersion = '21.0.3'
-    supportLibraryVersion = '27.1.0'
-    constraintVersion = '1.0.2'
-    customTabsVersion = '27.0.2'
     rxLocationVersion = '2.1@aar'
     jodaTimeVersion = '2.9.9.2'
-    playServicesVersion = '11.8.0'
     picassoVersion = '2.71828'
     colorPickerVersion = '1.2.0'
 

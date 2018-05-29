@@ -4,32 +4,52 @@ import android.text.Spannable
 import java.util.*
 
 /**
- * Class that provides ability to build complicated span decor to text in DSL way
+ * Class that provides ability to build complicated span decor to text in easy way
+ * Can be used as a method call chain (builder style) or in infix style
  *
- * Sample usage:
+ * Sample usage (Infix style):
  * ```
- *  val spannedText = (newSpanSet()
+ *  val spannedText = ("Lorem ipsum dolor sit amet".applySpanSet()
  *                      add TypefaceSpan(context.getTypeface("Some.otf")) from 0 to 5
- *                      and RelativeSizeSpan(1.4f) from 7 to 9
- *                      applyTo ("Lorem ipsum dolor sit amet"))
+ *                      and RelativeSizeSpan(1.4f) from 7 to 9).build()
+ * ```
+ * Or like this (Builder style):
+ * ```
+ * val spannedText = SpanSet.applySpanSet("Lorem ipsum dolor sit amet")
+ *                      .add(TypefaceSpan(context.getTypeface("Some.otf"))).from(0).to(5)
+ *                      .and(RelativeSizeSpan(1.4f)).from(7).to(9).build()
  * ```
  * @author Nikita Grishko
  */
-class SpanSet {
+class SpanSet internal constructor(private var target: CharSequence?) {
+
+    companion object {
+
+        @JvmStatic
+        fun applySpanSet(target: CharSequence?): SpanSet {
+            return SpanSet(target)
+        }
+    }
 
     infix fun add(span: Any): SpanBuilderStream {
-        return SpanBuilderStream().setFirstSpanAndStartStream(span)
+        return SpanBuilderStream().setTarget(target).setFirstSpanAndStartStream(span)
     }
 
     class SpanBuilderStream internal constructor() {
 
         private var spanSet: LinkedHashSet<SpanEntry> = linkedSetOf()
+        private var target: CharSequence? = null
 
         private var tempSpan: Any? = null
         private var tempTextPart: String? = null
         private var tempStartIndex: Int? = null
         private var tempEndIndex: Int? = null
         private var tempFlag: Int? = null
+
+        fun setTarget(text: CharSequence?): SpanBuilderStream {
+            target = text
+            return this
+        }
 
         fun setFirstSpanAndStartStream(span: Any): SpanBuilderStream {
             tempSpan = span
@@ -62,9 +82,9 @@ class SpanSet {
             return this
         }
 
-        infix fun applyTo(text: String): CharSequence? {
+        fun build(): CharSequence? {
             addTempSpanToSet()
-            return applySpanSetToString(text)
+            return applySpanSetToString()
         }
 
         private fun startNewEntryBuilding(newSpan: Any) {
@@ -81,26 +101,29 @@ class SpanSet {
             }
         }
 
-        private fun applySpanSetToString(text: String): CharSequence? {
-            val spannableString = text.toSpannable()
+        private fun applySpanSetToString(): CharSequence? {
+            target?.let { nonNullTarget ->
+                val spannableString = nonNullTarget.toSpannable()
 
-            spanSet.forEach {
-                var startIndex = it.startIndex ?: 0
-                var endIndex = it.endIndex ?: text.length
+                spanSet.forEach {
+                    var startIndex = it.startIndex ?: 0
+                    var endIndex = it.endIndex ?: nonNullTarget.length
 
-                if (it.textPart != null) {
-                    val startIndexOfSubString = text.indexOf(it.textPart)
-                    if (startIndexOfSubString >= 0) {
-                        startIndex = startIndexOfSubString
-                        endIndex = startIndex + it.textPart.length
+                    if (it.textPart != null) {
+                        val startIndexOfSubString = nonNullTarget.indexOf(it.textPart)
+                        if (startIndexOfSubString >= 0) {
+                            startIndex = startIndexOfSubString
+                            endIndex = startIndex + it.textPart.length
+                        }
                     }
+
+                    spannableString.setSpan(it.span, startIndex, endIndex, it.flag
+                            ?: Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
                 }
 
-                spannableString.setSpan(it.span, startIndex, endIndex, tempFlag
-                        ?: Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                return spannableString
             }
-
-            return spannableString
+            return null
         }
     }
 
