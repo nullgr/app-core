@@ -8,7 +8,14 @@ import com.nullgr.core.resources.ResourceProvider
 import com.nullgr.core.ui.extensions.dpToPx
 import com.nullgr.core.ui.extensions.getDisplaySize
 import com.nullgr.core.ui.extensions.pxToDp
-import kotlinx.android.synthetic.main.activity_resources_example.*
+import kotlinx.android.synthetic.main.activity_resources_example.buttonConvertDpToPx
+import kotlinx.android.synthetic.main.activity_resources_example.buttonConvertPxToDp
+import kotlinx.android.synthetic.main.activity_resources_example.buttonSetImageByName
+import kotlinx.android.synthetic.main.activity_resources_example.buttonShowScreenSize
+import kotlinx.android.synthetic.main.activity_resources_example.dpToPxExampleInput
+import kotlinx.android.synthetic.main.activity_resources_example.imageByName
+import kotlinx.android.synthetic.main.activity_resources_example.pxToDpExampleInput
+import kotlinx.android.synthetic.main.activity_resources_example.stringSampleTitle
 
 /**
  * Created by Grishko Nikita on 01.02.18.
