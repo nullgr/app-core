@@ -6,6 +6,7 @@ import android.support.annotation.ColorInt
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.AbsoluteSizeSpan
+import android.text.style.BackgroundColorSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 
@@ -103,7 +104,7 @@ fun String?.applyAbsoluteSize(pixelSize: Int,
  *Can be used for full length or some parts of original string
  *Simple usage
  *```
- * "Some String".applyColor(Color.BLUE)
+ * "Some String".applyForegroundColor(Color.BLUE)
  *```
  *@receiver [String] object. Can be nullable
  *@param color [Int] color which will be passed to [ForegroundColorSpan]
@@ -114,9 +115,9 @@ fun String?.applyAbsoluteSize(pixelSize: Int,
  *@return [CharSequence] child. If typeface span will be attached successfully it will be an instance of [SpannableString].
  *If something went wrong,  [this] receiver will have a null value - original [String] will be returned
  */
-fun String?.applyColor(@ColorInt color: Int,
-                       start: Int? = null,
-                       end: Int? = null): CharSequence? {
+fun String?.applyForegroundColor(@ColorInt color: Int,
+                                 start: Int? = null,
+                                 end: Int? = null): CharSequence? {
 
     if (this.isNullOrEmpty()) return this
 
@@ -127,18 +128,46 @@ fun String?.applyColor(@ColorInt color: Int,
 }
 
 /**
- * Create [SpannableString] from given [String]
+ *This method create [SpannableString] from original [String] with attaching [BackgroundColorSpan] to it.
+ *Can be used for full length or some parts of original string
+ *Simple usage
+ *```
+ * "Some String".applyBackgroundColor(Color.BLUE)
+ *```
+ *@receiver [String] object. Can be nullable
+ *@param color [Int] color which will be passed to [BackgroundColorSpan]
+ *@param start start index in string, from which [BackgroundColorSpan] will be attached. Default value - ***null***.
+ * If ***null value*** will be passed - span will starts from zero index.
+ *@param end end index in string, until which [BackgroundColorSpan] will be attached. Default value - ***null***.
+ * If ***null value*** will be passed - span's end will be in the end of the string.
+ *@return [CharSequence] child. If typeface span will be attached successfully it will be an instance of [SpannableString].
+ *If something went wrong,  [this] receiver will have a null value - original [String] will be returned
  */
-fun String.toSpannable(): SpannableString {
+fun String?.applyBackgroundColor(@ColorInt color: Int,
+                                 start: Int? = null,
+                                 end: Int? = null): CharSequence? {
+
+    if (this.isNullOrEmpty()) return this
+
+    return SpannableString(this).apply {
+        setSpan(BackgroundColorSpan(color), start ?: 0, end
+                ?: length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+    }
+}
+
+/**
+ * Create [SpannableString] from given [CharSequence]
+ */
+fun CharSequence.toSpannable(): SpannableString {
     return SpannableString(this)
 }
 
 /**
- * Create new instance of [SpanSet]
+ * Create new instance of [SpanSet] for given [CharSequence]
  * @return [SpanSet]
  */
-fun newSpanSet(): SpanSet {
-    return SpanSet()
+fun CharSequence?.applySpanSet(): SpanSet {
+    return SpanSet(this)
 }
 
 /**
@@ -173,6 +202,15 @@ fun absSize(pixelSize: Int): AbsoluteSizeSpan {
  * @param color [Int] color which will be passed to [ForegroundColorSpan]
  * @return [ForegroundColorSpan]
  */
-fun color(color: Int): ForegroundColorSpan {
+fun foregroundColor(color: Int): ForegroundColorSpan {
     return ForegroundColorSpan(color)
+}
+
+/**
+ * Simple fabric method to create new instance of [BackgroundColorSpan]
+ * @param color [Int] color which will be passed to [BackgroundColorSpan]
+ * @return [BackgroundColorSpan]
+ */
+fun backgroundColor(color: Int): BackgroundColorSpan {
+    return BackgroundColorSpan(color)
 }
