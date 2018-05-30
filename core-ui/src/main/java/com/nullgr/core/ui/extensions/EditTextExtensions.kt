@@ -8,7 +8,7 @@ import android.widget.EditText
  * Allowed characters is any character that is not specified in the [validationString]
  */
 fun EditText.applyFilterAllowedDigits(validationString: String) {
-    val filter = InputFilter { inputString, start, end, dest, dstart, dend ->
+    val filter = InputFilter { inputString, start, end, _, _, _ ->
         for (i in start until end) {
             if (!validationString.contains(inputString[i])) return@InputFilter ""
         }
@@ -21,7 +21,7 @@ fun EditText.applyFilterAllowedDigits(validationString: String) {
  * Set [InputFilter] to [EditText] which skips only digits.
  */
 fun EditText.applyFilterOnlyDigits() {
-    val filter = InputFilter { source, start, end, dest, dstart, dend ->
+    val filter = InputFilter { source, start, end, _, _, _ ->
         if (end != 0 && !Character.isDigit(source[end - 1])) {
             return@InputFilter source.subSequence(start, end - 1)
         }
@@ -34,7 +34,7 @@ fun EditText.applyFilterOnlyDigits() {
  * Set [InputFilter] to [EditText] which allows only digits and letters.
  */
 fun EditText.applyFilterOnlyLetersOrDigits() {
-    val filter = InputFilter { source, start, end, dest, dstart, dend ->
+    val filter = InputFilter { source, start, end, _, _, _ ->
         if (end != 0 && !Character.isLetterOrDigit(source[end - 1])) {
             return@InputFilter source.subSequence(start, end - 1)
         }
