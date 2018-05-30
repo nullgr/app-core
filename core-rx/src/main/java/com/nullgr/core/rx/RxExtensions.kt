@@ -1,3 +1,5 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package com.nullgr.core.rx
 
 import com.jakewharton.rxrelay2.Relay
