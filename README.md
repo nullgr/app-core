@@ -2,6 +2,7 @@
 
 App Core
 ===========
+
 A set of extensions for Kotlin and RX utilities for more comfortable development of android applications. 
 This library is designed to combine often used functions in development and provide 
 a convenient API for working with widespread, boilerplate tasks. 
@@ -9,7 +10,6 @@ Each project contains an utility package, so this project is called upon to repl
 as well as find a quick solution for everyday tasks. 
 You can add the library completely or select only the modules you need. 
 See [Getting Started](#getting-started) for more information about how to start using this library7
-----
 
 Few samples:
 ===========
