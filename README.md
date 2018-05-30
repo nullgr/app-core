@@ -9,7 +9,8 @@ a convenient API for working with widespread, boilerplate tasks.
 Each project contains an utility package, so this project is called upon to replace it, 
 as well as find a quick solution for everyday tasks. 
 You can add the library completely or select only the modules you need. 
-See [Getting Started](#getting-started) for more information about how to start using this library7
+
+See [Getting Started](#getting-started) for more information about how to start using this library.
 
 Few samples:
 ===========
@@ -49,7 +50,7 @@ var spannableText = (someStringText.applySpanSet()
              it.message.toString.showToast(contxt)
            })
 ```
-For full list of provided functions view detailed readme below:
+For full list of provided functions select one of detailed readme in list below:
 ----------------
 * <a href="https://github.com/nullgr/app-core/tree/feature/readme/core-adapter/README.md">Adapter</a>
 * <a href="https://github.com/nullgr/app-core/tree/feature/readme/core-collections/README.md">Collections</a>
