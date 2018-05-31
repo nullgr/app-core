@@ -1,3 +1,5 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package com.nullgr.core.adapter
 
 import android.support.v7.widget.*

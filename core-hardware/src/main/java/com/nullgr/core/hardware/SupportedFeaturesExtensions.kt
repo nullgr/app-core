@@ -5,8 +5,6 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Build
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.GoogleApiAvailability
 
 /**
  * Extension function checks whether the [PackageManager.FEATURE_CAMERA] feature is available
@@ -72,16 +70,5 @@ fun Context?.isLocationEnabled(): Boolean {
     }
 
     return gpsEnabled || networkEnabled
-}
-
-/**
- * Extension function checks whether the GooglePlayServices are available
- */
-fun Context?.isGoogleServicesPresent(): Boolean {
-    return try {
-        GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS
-    } catch (err: Throwable) {
-        false
-    }
 }
 

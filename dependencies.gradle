@@ -59,7 +59,7 @@ ext {
             rxAndroid            : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             rxRelay              : "com.jakewharton.rxrelay2:rxrelay:${rxRelay}",
 
-            kotlin               : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlin_version}",
+            kotlin               : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin_version}",
             location             : "com.google.android.gms:play-services-location:${playServicesVersion}",
             rxLocation           : "pl.charmas.android:android-reactive-location2:${rxLocationVersion}",
             jodaTime             : "net.danlew:android.joda:${jodaTimeVersion}",

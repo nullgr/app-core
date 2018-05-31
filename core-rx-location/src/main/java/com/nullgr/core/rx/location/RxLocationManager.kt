@@ -62,24 +62,24 @@ class RxLocationManager(private var context: Context,
                         LocationSettingsStatusCodes.SUCCESS -> locationObservable()
                         LocationSettingsStatusCodes.RESOLUTION_REQUIRED ->
                             if (!it.status.hasResolution())
-                                Observable.just(LocationExtensions.EMPTY)
+                                Observable.just(EMPTY_LOCATION)
                             else
                                 Observable.fromCallable {
                                     val intent = RxResolveResultActivity.newInstance(context,
                                             it.status.resolution.intentSender)
                                     context.startActivity(intent)
                                 }.flatMap {
-                                    SingletonRxBusProvider.BUS.observable(RxBus.KEYS.SINGLE)
+                                    SingletonRxBusProvider.BUS.observable(RxBus.Keys.SINGLE)
                                             .filter { it is RxActivityResult }
                                             .map { it as RxActivityResult }
                                             .flatMap {
                                                 when (it.resultCode) {
                                                     Activity.RESULT_OK -> locationObservable()
-                                                    else -> Observable.just(LocationExtensions.EMPTY)
+                                                    else -> Observable.just(EMPTY_LOCATION)
                                                 }
                                             }
                                 }
-                        else -> Observable.just(LocationExtensions.EMPTY)
+                        else -> Observable.just(EMPTY_LOCATION)
                     }
                 }
     }

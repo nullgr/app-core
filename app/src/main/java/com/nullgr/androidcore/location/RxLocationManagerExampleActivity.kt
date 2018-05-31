@@ -25,7 +25,7 @@ class RxLocationManagerExampleActivity : AppCompatActivity() {
     // 4) Call requestLocation() which returns Observable<Location>
     // 5) Don't forget unsubscribe in onDestroy (this will automatically stops location updates),
     // or in the case when location updates are no longer required
-    // 6) Note in that case if location updates is failed in some reasons, will be returned LocationExtensions.EMPTY instance,
+    // 6) Note in that case if location updates is failed in some reasons, will be returned LocationExtensions.EMPTY_LOCATION instance,
     // you can check is with Location.isEmpty method as shown below
 
     private lateinit var disposable: Disposable

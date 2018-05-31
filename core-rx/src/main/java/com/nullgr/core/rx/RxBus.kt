@@ -2,21 +2,21 @@ package com.nullgr.core.rx
 
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
-import com.nullgr.core.rx.RxBus.KEYS
-import com.nullgr.core.rx.RxBus.KEYS.GENERAL
-import com.nullgr.core.rx.RxBus.KEYS.SINGLE
+import com.nullgr.core.rx.RxBus.Keys
+import com.nullgr.core.rx.RxBus.Keys.GENERAL
+import com.nullgr.core.rx.RxBus.Keys.SINGLE
 import com.nullgr.core.rx.relay.SingleSubscriberRelay
 import io.reactivex.Observable
 
 /**
  * Simple ***EVENT BUS*** built in a reactive manner. Provides publish-subscribe-style communication between components.
  * Can be used in two ways: with key or not. For each new key new [Relay] will be created.
- * Without key all events will be posted in in general [Relay]. The same behaviour if use [KEYS.GENERAL].
+ * Without key all events will be posted in in general [Relay]. The same behaviour if use [Keys.GENERAL].
  * Usage of this class is thread safe.
  *
  * Use key based relays to split logic in your application.
- * Or you can use keys specified in [KEYS] to access some specific relays, provided with this class.
- * To get more information about this relays read documentation of [KEYS]
+ * Or you can use keys specified in [Keys] to access some specific relays, provided with this class.
+ * To get more information about this relays read documentation of [Keys]
  *
  * For correct work of bus, you need to post events and subscribe
  * to receive them, on the same instance of [RxBus]. The best usage is ***Singleton*** pattern.
@@ -32,7 +32,7 @@ import io.reactivex.Observable
  * ```
  * or
  * ```
- * SingletonRxBusProvider.BUS.post(RxBus.KEYS.SINGLE, SomeEventClass()) // to use SingleSubscriberRelay as events bus
+ * SingletonRxBusProvider.BUS.post(RxBus.Keys.SINGLE, SomeEventClass()) // to use SingleSubscriberRelay as events bus
  * ```
  * <h2>Receiving Events:</h2>
  * ```
@@ -50,8 +50,8 @@ class RxBus {
 
     private val relayToTypeMap: HashMap<Any, Relay<Any>> by lazy {
         hashMapOf<Any, Relay<Any>>().apply {
-            put(KEYS.GENERAL, PublishRelay.create<Any>().toSerialized())
-            put(KEYS.SINGLE, SingleSubscriberRelay.create<Any>().toSerialized())
+            put(Keys.GENERAL, PublishRelay.create<Any>().toSerialized())
+            put(Keys.SINGLE, SingleSubscriberRelay.create<Any>().toSerialized())
         }
     }
 
@@ -60,7 +60,7 @@ class RxBus {
      *
      * @param event [Any] event to post.
      * @param key key to get specific [Relay] in which event will be posted.
-     * Default key is [KEYS.GENERAL].
+     * Default key is [Keys.GENERAL].
      */
     fun post(key: Any, event: Any) {
         getOrCreateRelay(key).asConsumer().accept(event)
@@ -71,20 +71,20 @@ class RxBus {
      * Event will be posted in relay with [GENERAL] key
      *
      * @param event [Any] event to post.
-     * Default key is [KEYS.GENERAL].
+     * Default key is [Keys.GENERAL].
      */
     fun post(event: Any) {
-        post(KEYS.GENERAL, event)
+        post(Keys.GENERAL, event)
     }
 
     /**
      * Returns an [Observable] of specific [Relay]
      *
      * @param key key to get specific [Relay].
-     * Default key is [KEYS.GENERAL].
+     * Default key is [Keys.GENERAL].
      */
     @JvmOverloads
-    fun observable(key: Any = KEYS.GENERAL): Observable<Any> {
+    fun observable(key: Any = Keys.GENERAL): Observable<Any> {
         return getOrCreateRelay(key).asObservable()
     }
 
@@ -102,7 +102,7 @@ class RxBus {
      * The main feature of this relay is that it always provides communication with only one subscriber.
      * Any new subscriber will automatically overrides previous
      */
-    enum class KEYS {
+    enum class Keys {
         /**
          * Provides access to general [PublishRelay] which used as events bus
          */
