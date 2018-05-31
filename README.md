@@ -59,11 +59,77 @@ To add App Core to your project, add the following to your app module's `build.g
 
 ```groovy
 repositories {
-  //TODO
+    maven {
+        url  "https://dl.bintray.com/nullgr-dev/maven"
+    }
 }
 
 dependencies {
-   //TODO
+    // for all modules
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$KOTLIN_VERSION"
+    
+    // core-all
+    implementation "com.nullgr.core:core-all:$CORE_VERSION"
+    implementation "com.android.support:recyclerview-v7:$SUPPORT_VERSION"
+    implementation "com.android.support:appcompat-v7:$SUPPORT_VERSION"
+    implementation "com.android.support:customtabs:$SUPPORT_VERSION"
+    implementation "com.android.support:support-annotations:$SUPPORT_VERSION"
+    implementation "com.android.support:support-v4:$SUPPORT_VERSION"
+    implementation "com.google.android.gms:play-services-location:$PLAY_SERVICES_VERSION"
+    
+    // core-adapter
+    implementation "com.nullgr.core:core-adapter:$CORE_VERSION"
+    implementation "com.android.support:recyclerview-v7:$SUPPORT_VERSION"
+    
+    // core-collections
+    implementation "com.nullgr.core:core-collections:$CORE_VERSION"
+    
+    // core-common
+    implementation "com.nullgr.core:core-common:$CORE_VERSION"
+    
+    // core-date
+    implementation "com.nullgr.core:core-date:$CORE_VERSION"
+    
+    // core-font
+    implementation "com.nullgr.core:core-font:$CORE_VERSION"
+    implementation "com.android.support:appcompat-v7:$SUPPORT_VERSION"
+    
+    // core-hardware
+    implementation "com.nullgr.core:core-hardware:$CORE_VERSION"
+     
+    // core-intents
+    implementation "com.nullgr.core:core-intents:$CORE_VERSION"
+    implementation "com.android.support:customtabs:$SUPPORT_VERSION"
+    implementation "com.android.support:support-annotations:$SUPPORT_VERSION"
+    
+    // core-interactor
+    implementation "com.nullgr.core:core-interactor:$CORE_VERSION"
+    
+    // core-preferences
+    implementation "com.nullgr.core:core-preferences:$CORE_VERSION"
+    
+    // core-resources
+    implementation "com.nullgr.core:core-resources:$CORE_VERSION"
+    implementation "com.android.support:support-v4:$SUPPORT_VERSION"
+    implementation "com.android.support:support-annotations:$SUPPORT_VERSION"
+    
+    // core-rx
+    implementation "com.nullgr.core:core-rx:$CORE_VERSION"
+    implementation "com.android.support:appcompat-v7:$SUPPORT_VERSION"
+    
+    // core-rx-contacts
+    implementation "com.nullgr.core:core-rx-contacts:$CORE_VERSION"
+    implementation "com.android.support:support-annotations:$SUPPORT_VERSION"
+    
+    // core-rx-location
+    implementation "com.nullgr.core:core-rx-location:$CORE_VERSION"
+    implementation "com.google.android.gms:play-services-location:$PLAY_SERVICES_VERSION"
+    
+    // core-ui
+    implementation "com.nullgr.core:core-ui:$CORE_VERSION"
+    implementation "com.android.support:recyclerview-v7:$SUPPORT_VERSION"
+    implementation "com.android.support:support-v4:$SUPPORT_VERSION"
+    implementation "com.android.support:appcompat-v7:$SUPPORT_VERSION"
 }
 ```
 
