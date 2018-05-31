@@ -52,20 +52,20 @@ var spannableText = (someStringText.applySpanSet()
 ```
 For full list of provided functions select one of detailed readme in list below:
 ----------------
-* <a href="https://github.com/nullgr/app-core/tree/feature/readme/core-adapter/README.md">Adapter</a>
-* <a href="https://github.com/nullgr/app-core/tree/feature/readme/core-collections/README.md">Collections</a>
-* <a href="https://github.com/nullgr/app-core/tree/feature/readme/core-common/README.md">Common</a>
-* <a href="https://github.com/nullgr/app-core/tree/feature/readme/core-date/README.md">Date</a>
-* <a href="https://github.com/nullgr/app-core/tree/feature/readme/core-font/README.md">Font</a>
-* <a href="https://github.com/nullgr/app-core/tree/feature/readme/core-hardware/README.md">Hardware</a>
-* <a href="https://github.com/nullgr/app-core/tree/feature/readme/core-intents/README.md">Intents</a>
-* <a href="https://github.com/nullgr/app-core/tree/feature/readme/core-interactor/README.md">Interactor</a>
-* <a href="https://github.com/nullgr/app-core/tree/feature/readme/core-preferences/README.md">Preferences</a>
-* <a href="https://github.com/nullgr/app-core/tree/feature/readme/core-resources/README.md">Resources</a>
-* <a href="https://github.com/nullgr/app-core/tree/feature/readme/core-rx/README.md">Rx</a>
-* <a href="https://github.com/nullgr/app-core/tree/feature/readme/core-rx-contacts/README.md">Rx Contacts</a>
-* <a href="https://github.com/nullgr/app-core/tree/feature/readme/core-rx-location/README.md">Rx Location</a>
-* <a href="https://github.com/nullgr/app-core/tree/feature/readme/core-ui/README.md">UI</a>
+* <a href="https://github.com/nullgr/app-core/tree/develop/core-adapter/README.md">Adapter</a>
+* <a href="https://github.com/nullgr/app-core/tree/develop/core-collections/README.md">Collections</a>
+* <a href="https://github.com/nullgr/app-core/tree/develop/core-common/README.md">Common</a>
+* <a href="https://github.com/nullgr/app-core/tree/develop/core-date/README.md">Date</a>
+* <a href="https://github.com/nullgr/app-core/tree/develop/core-font/README.md">Font</a>
+* <a href="https://github.com/nullgr/app-core/tree/develop/core-hardware/README.md">Hardware</a>
+* <a href="https://github.com/nullgr/app-core/tree/develop/core-intents/README.md">Intents</a>
+* <a href="https://github.com/nullgr/app-core/tree/develop/core-interactor/README.md">Interactor</a>
+* <a href="https://github.com/nullgr/app-core/tree/develop/core-preferences/README.md">Preferences</a>
+* <a href="https://github.com/nullgr/app-core/tree/develop/core-resources/README.md">Resources</a>
+* <a href="https://github.com/nullgr/app-core/tree/develop/core-rx/README.md">Rx</a>
+* <a href="https://github.com/nullgr/app-core/tree/develop/core-rx-contacts/README.md">Rx Contacts</a>
+* <a href="https://github.com/nullgr/app-core/tree/develop/core-rx-location/README.md">Rx Location</a>
+* <a href="https://github.com/nullgr/app-core/tree/develop/core-ui/README.md">UI</a>
 
 For more information about how to use - look into <a href="https://github.com/nullgr/app-core/tree/develop/app">sample project</a>.</b>
 
@@ -165,32 +165,7 @@ For all new versions we will log changes in [CHANGELOG](https://github.com/nullg
 
 How to Contribute
 -----------------
-We welcome your contributions to this project. There are various ways to contribute:
-
-**Reporting issues**
-
-Help improve the project by reporting issues that you find by filing a new issue at the
-[App Core issue tracker](https://github.com/nullgr/app-core/issues/new).
-
-**Features and ideas suggestions**
-
-You can also add feature suggestions by filing a new issue at the
-[App Core issue tracker](https://github.com/nullgr/app-core/issues/new).
-
-**Pull requests**
-
-Pull requests are welcome for minor bug fixes that do not involve any changes to existing API.
-Also you can create pull request for new features, new modules and additions to existing classes.
-
-For success pull request you need to:
-* Provide documentation for all new functions.
-* Provide a test case for new functions.
-* Provide an example for new functions 
-* Request review from:
-[vchernyshov](https://github.com/vchernyshov) and [grishko188](https://github.com/grishko188)
-
-Pull request must meet the requirements below:
-* //TODO
+Please read carefully the file [CONTRIBUTION](https://github.com/nullgr/app-core/blob/develop/CONTRIBUTION.md)
 
 License
 =======
