@@ -11,22 +11,22 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 
 /**
- *This method create [SpannableString] from original [String] by attaching [TypefaceSpan] to it.
- *Can be used for full length or some parts of original string
- *Simple usage
- *```
- * "Some String".applyFont(context, "fonts/RobotoBold.otf")
- *```
- *@receiver [String] object. Can be nullable
- *@param context [Context]
- *@param fontFullName full path to font file in assets directory.
- *@param start start index in string, from which [TypefaceSpan] will be attached. Default value - ***null***.
+ * This method create [SpannableString] from original [String] by attaching [TypefaceSpan] to it.
+ * Can be used for full length or some parts of original string
+ * Simple usage
+ * ```
+ *  "Some String".applyFont(context, "fonts/RobotoBold.otf")
+ * ```
+ * @receiver [String] object. Can be nullable
+ * @param context [Context]
+ * @param fontFullName full path to font file in assets directory.
+ * @param start start index in string, from which [TypefaceSpan] will be attached. Default value - ***null***.
  * If ***null value*** will be passed - span will starts from zero index.
- *@param end end index in string, until which [TypefaceSpan] will be attached. Default value - ***null***.
+ * @param end end index in string, until which [TypefaceSpan] will be attached. Default value - ***null***.
  * If ***null value*** will be passed - span's end will be in the end of the string.
- *@return [CharSequence] child. If typeface span will be attached successfully it will be an instance of [SpannableString].
- *If something went wrong, or if [context], [fontFullName] or [this]
- *receiver will have a null value - original [String] will be returned
+ * @return [CharSequence] child. If typeface span will be attached successfully it will be an instance of [SpannableString].
+ * If something went wrong, or if [context], [fontFullName] or [this]
+ * receiver will have a null value - original [String] will be returned
  */
 fun String?.applyFont(context: Context?,
                       fontFullName: String,
@@ -44,20 +44,20 @@ fun String?.applyFont(context: Context?,
 }
 
 /**
- *This method create [SpannableString] from original [String] with attaching [RelativeSizeSpan] to it.
- *Can be used for full length or some parts of original string
- *Simple usage
- *```
- * "Some String".applyRelativeSize(0.7f)
- *```
- *@receiver [String] object. Can be nullable
- *@param size [Float] proportion which will be passed to [RelativeSizeSpan]
- *@param start start index in string, from which [RelativeSizeSpan] will be attached. Default value - ***null***.
- * If ***null value*** will be passed - span will starts from zero index.
- *@param end end index in string, until which [RelativeSizeSpan] will be attached. Default value - ***null***.
- * If ***null value*** will be passed - span's end will be in the end of the string.
- *@return [CharSequence] child. If typeface span will be attached successfully it will be an instance of [SpannableString].
- *If something went wrong,  [this] receiver will have a null value - original [String] will be returned
+ * This method create [SpannableString] from original [String] with attaching [RelativeSizeSpan] to it.
+ * Can be used for full length or some parts of original string
+ * Simple usage
+ * ```
+ *  "Some String".applyRelativeSize(0.7f)
+ * ```
+ * @receiver [String] object. Can be nullable
+ * @param size [Float] proportion which will be passed to [RelativeSizeSpan]
+ * @param start start index in string, from which [RelativeSizeSpan] will be attached. Default value - ***null***.
+ *  If ***null value*** will be passed - span will starts from zero index.
+ * @param end end index in string, until which [RelativeSizeSpan] will be attached. Default value - ***null***.
+ *  If ***null value*** will be passed - span's end will be in the end of the string.
+ * @return [CharSequence] child. If typeface span will be attached successfully it will be an instance of [SpannableString].
+ * If something went wrong,  [this] receiver will have a null value - original [String] will be returned
  */
 fun String?.applyRelativeSize(size: Float,
                               start: Int? = null,
@@ -72,20 +72,20 @@ fun String?.applyRelativeSize(size: Float,
 }
 
 /**
- *This method create [SpannableString] from original [String] with attaching [AbsoluteSizeSpan] to it.
- *Can be used for full length or some parts of original string
- *Simple usage
- *```
- * "Some String".applyRelativeSize(0.7f)
- *```
- *@receiver [String] object. Can be nullable
- *@param pixelSize [Int] text size in physical pixels, which will be passed to [AbsoluteSizeSpan]
- *@param start start index in string, from which [AbsoluteSizeSpan] will be attached. Default value - ***null***.
- * If ***null value*** will be passed - span will starts from zero index.
- *@param end end index in string, until which [AbsoluteSizeSpan] will be attached. Default value - ***null***.
- * If ***null value*** will be passed - span's end will be in the end of the string.
- *@return [CharSequence] child. If typeface span will be attached successfully it will be an instance of [SpannableString].
- *If something went wrong,  [this] receiver will have a null value - original [String] will be returned
+ * This method create [SpannableString] from original [String] with attaching [AbsoluteSizeSpan] to it.
+ * Can be used for full length or some parts of original string
+ * Simple usage
+ * ```
+ *  "Some String".applyRelativeSize(0.7f)
+ * ```
+ * @receiver [String] object. Can be nullable
+ * @param pixelSize [Int] text size in physical pixels, which will be passed to [AbsoluteSizeSpan]
+ * @param start start index in string, from which [AbsoluteSizeSpan] will be attached. Default value - ***null***.
+ *  If ***null value*** will be passed - span will starts from zero index.
+ * @param end end index in string, until which [AbsoluteSizeSpan] will be attached. Default value - ***null***.
+ *  If ***null value*** will be passed - span's end will be in the end of the string.
+ * @return [CharSequence] child. If typeface span will be attached successfully it will be an instance of [SpannableString].
+ * If something went wrong,  [this] receiver will have a null value - original [String] will be returned
  */
 fun String?.applyAbsoluteSize(pixelSize: Int,
                               start: Int? = null,
@@ -100,20 +100,20 @@ fun String?.applyAbsoluteSize(pixelSize: Int,
 }
 
 /**
- *This method create [SpannableString] from original [String] with attaching [ForegroundColorSpan] to it.
- *Can be used for full length or some parts of original string
- *Simple usage
- *```
- * "Some String".applyForegroundColor(Color.BLUE)
- *```
- *@receiver [String] object. Can be nullable
- *@param color [Int] color which will be passed to [ForegroundColorSpan]
- *@param start start index in string, from which [ForegroundColorSpan] will be attached. Default value - ***null***.
- * If ***null value*** will be passed - span will starts from zero index.
- *@param end end index in string, until which [ForegroundColorSpan] will be attached. Default value - ***null***.
- * If ***null value*** will be passed - span's end will be in the end of the string.
- *@return [CharSequence] child. If typeface span will be attached successfully it will be an instance of [SpannableString].
- *If something went wrong,  [this] receiver will have a null value - original [String] will be returned
+ * This method create [SpannableString] from original [String] with attaching [ForegroundColorSpan] to it.
+ * Can be used for full length or some parts of original string
+ * Simple usage
+ * ```
+ *  "Some String".applyForegroundColor(Color.BLUE)
+ * ```
+ * @receiver [String] object. Can be nullable
+ * @param color [Int] color which will be passed to [ForegroundColorSpan]
+ * @param start start index in string, from which [ForegroundColorSpan] will be attached. Default value - ***null***.
+ *  If ***null value*** will be passed - span will starts from zero index.
+ * @param end end index in string, until which [ForegroundColorSpan] will be attached. Default value - ***null***.
+ *  If ***null value*** will be passed - span's end will be in the end of the string.
+ * @return [CharSequence] child. If typeface span will be attached successfully it will be an instance of [SpannableString].
+ * If something went wrong,  [this] receiver will have a null value - original [String] will be returned
  */
 fun String?.applyForegroundColor(@ColorInt color: Int,
                                  start: Int? = null,
@@ -128,20 +128,20 @@ fun String?.applyForegroundColor(@ColorInt color: Int,
 }
 
 /**
- *This method create [SpannableString] from original [String] with attaching [BackgroundColorSpan] to it.
- *Can be used for full length or some parts of original string
- *Simple usage
- *```
- * "Some String".applyBackgroundColor(Color.BLUE)
- *```
- *@receiver [String] object. Can be nullable
- *@param color [Int] color which will be passed to [BackgroundColorSpan]
- *@param start start index in string, from which [BackgroundColorSpan] will be attached. Default value - ***null***.
- * If ***null value*** will be passed - span will starts from zero index.
- *@param end end index in string, until which [BackgroundColorSpan] will be attached. Default value - ***null***.
- * If ***null value*** will be passed - span's end will be in the end of the string.
- *@return [CharSequence] child. If typeface span will be attached successfully it will be an instance of [SpannableString].
- *If something went wrong,  [this] receiver will have a null value - original [String] will be returned
+ * This method create [SpannableString] from original [String] with attaching [BackgroundColorSpan] to it.
+ * Can be used for full length or some parts of original string
+ * Simple usage
+ * ```
+ *  "Some String".applyBackgroundColor(Color.BLUE)
+ * ```
+ * @receiver [String] object. Can be nullable
+ * @param color [Int] color which will be passed to [BackgroundColorSpan]
+ * @param start start index in string, from which [BackgroundColorSpan] will be attached. Default value - ***null***.
+ *  If ***null value*** will be passed - span will starts from zero index.
+ * @param end end index in string, until which [BackgroundColorSpan] will be attached. Default value - ***null***.
+ *  If ***null value*** will be passed - span's end will be in the end of the string.
+ * @return [CharSequence] child. If typeface span will be attached successfully it will be an instance of [SpannableString].
+ * If something went wrong,  [this] receiver will have a null value - original [String] will be returned
  */
 fun String?.applyBackgroundColor(@ColorInt color: Int,
                                  start: Int? = null,

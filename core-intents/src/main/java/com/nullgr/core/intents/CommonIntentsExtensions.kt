@@ -341,7 +341,7 @@ fun Intent?.launchForResult(context: Activity?): Observable<RxActivityResult> {
                             .newInstance(context, this)
                             .launch(context)
                 }.flatMap {
-                    SingletonRxBusProvider.BUS.observable(RxBus.KEYS.SINGLE)
+                    SingletonRxBusProvider.BUS.observable(RxBus.Keys.SINGLE)
                             .filter { it is RxActivityResult }
                             .map { it as RxActivityResult }
                             .flatMap { Observable.just(it) }
