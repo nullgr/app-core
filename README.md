@@ -166,7 +166,7 @@ For all new versions we will log changes in [CHANGELOG](https://github.com/nullg
 
 How to Contribute
 -----------------
-Please read carefully the file [CONTRIBUTION](https://github.com/nullgr/app-core/blob/develop/CONTRIBUTION.md)
+Please read carefully the file [CONTRIBUTION](https://github.com/nullgr/app-core/blob/develop/CONTRIBUTING.md)
 
 License
 =======
