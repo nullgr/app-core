@@ -27,7 +27,7 @@ Also you can create pull request for new features, new modules and additions to 
 [vchernyshov](https://github.com/vchernyshov) and [grishko188](https://github.com/grishko188)
 
 **Pull request must meet the requirements below:**
-* Fork the repo and create your branch from ```master.```
+* Fork the repo and create your branch from ```develop.```
 * For new features call branch feature/short_feature_description
 * For bug fixes call branch bugfix/short_fix_description
 * Report an issue for each PR before submit it. Commits in your PR must starts from **[#issue_number]**
