@@ -34,6 +34,8 @@ ext {
     jodaTimeVersion = '2.9.9.2'
     rxPermissionsVersion = '0.9.5@aar'
     playServicesVersion = '11.8.0'
+    picassoVersion = '2.71828'
+    colorPickerVersion = '1.2.0'
 
     //Testing
     robolectricVersion = '3.4.2'
@@ -94,6 +96,8 @@ ext {
             rxLocation            : "pl.charmas.android:android-reactive-location2:${rxLocationVersion}",
             jodaTime              : "net.danlew:android.joda:${jodaTimeVersion}",
             rxPermissions         : "com.tbruyelle.rxpermissions2:rxpermissions:${rxPermissionsVersion}",
+            picasso               : "com.squareup.picasso:picasso:${picassoVersion}",
+            colorPicker           : "com.pes.materialcolorpicker:library:${colorPickerVersion}"
     ]
 
     commonTestDependencies = [

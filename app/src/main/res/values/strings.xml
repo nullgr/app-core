@@ -1,3 +1,63 @@
 <resources>
     <string name="app_name">AndroidCore</string>
+    <string name="title_location_example">RxLocationManager example</string>
+    <string name="mask_location_result">Update № %d\nDetected: %s</string>
+    <string name="error_empty_location">Unable to get location</string>
+    <string name="permission_not_granted">Permission %s not granted</string>
+
+    <string name="title_intents_example">Common intents example</string>
+    <string name="btn_null_gr_web">https://nullgr.com/</string>
+    <string name="btn_null_gr_web_chrome">https://nullgr.com/ (Custom tabs)</string>
+    <string name="btn_null_gr_mail">we@nullgr.com</string>
+    <string name="btn_null_gr_phone">+380 44 372 8772</string>
+    <string name="btn_null_gr_location">11 Zroshuvalna, Floor 3–4 Kiev</string>
+    <string name="btn_null_gr_share">Share</string>
+    <string name="text_for_share">The only way to make digital revolution — is to make it.</string>
+    <string name="error_activity_not_found">Activity not found</string>
+
+    <string name="btn_select_contact">Reactive Select Contact</string>
+
+    <string name="title_date_utils_example">Date utils example</string>
+    <string name="btn_select_date">Select date</string>
+    <string name="btn_reformat_1">Format date to HH:mm</string>
+    <string name="btn_reformat_2">Format date to dd.MM.yyyy HH:mm</string>
+    <string name="btn_reformat_3">Format date to dd LLL yyyy</string>
+
+    <string name="btn_is_today">Check is today date</string>
+    <string name="btn_plus_month">Plus month</string>
+    <string name="btn_minus_3_days">Minus 3 days</string>
+    <string name="btn_without_time">Without time</string>
+    <string name="btn_ok">OK</string>
+
+    <string name="btn_fonts_and_spans_activity">Fonts and Spans</string>
+    <string name="fonts_example_text">Digital revolution</string>
+    <string name="fonts_example_text_2">Digital revolution. That\'s what we do.</string>
+
+    <string name="btn_res_example">Resources Example</string>
+    <string name="string_example_one">This is simple example № %d</string>
+    <string name="hint_enter_px_value">Enter value in pixels</string>
+    <string name="hint_enter_dp_value">Enter value in dp</string>
+    <string name="btn_convert">Convert</string>
+    <string name="btn_show_screen_size">Show screen size</string>
+    <string name="msg_screen_size" formatted="false">Size width = %d height %d</string>
+    <string name="btn_set_image_by_name">Set image by name</string>
+    <string name="msg_error_empty">Empty!</string>
+    <string name="btn_adapter_example">Adapter Example</string>
+    <string name="btn_pick_color">Pick color</string>
+    <string name="btn_apply_changes">Apply changes</string>
+    <string name="hint_title">Title</string>
+    <string name="hint_sub_title">Subtitle</string>
+    <string name="btn_adapter_example_with_payloads">Adapter with payloads example</string>
+    <string name="log">Log:</string>
+    <string name="item">Item:</string>
+    <string name="setup_section">Setup section:</string>
+    <string name="use_diff_utils">Use diff utils</string>
+
+    <string name="title_rx_contacts_activity">Rx Contacts Provider</string>
+    <string name="title_no_contacts_found">Empty</string>
+    <string name="title_fav_contacts">Favorites</string>
+    <string name="title_other_contacts">Other</string>
+    <string name="credentials_mask">%s\n%s</string>
+    <string name="execute">Execute</string>
+    <string name="btn_interactors_example">Interactors example</string>
 </resources>
