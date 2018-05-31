@@ -28,7 +28,7 @@ Also you can create pull request for new features, new modules and additions to 
 
 **Pull request must meet the requirements below:**
 * Fork the repo and create your branch from ```develop.```
-* For new features call branch feature/short_feature_description
-* For bug fixes call branch bugfix/short_fix_description
+* For new features call branch feature/short-feature-description
+* For bug fixes call branch bugfix/short-fix-description
 * Report an issue for each PR before submit it. Commits in your PR must starts from **[#issue_number]**
 * Also don’t forget to support your features with tests and/or examples how to use, to confirm the functionality.
