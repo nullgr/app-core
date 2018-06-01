@@ -2,16 +2,19 @@ How to Contribute
 -----------------
 We welcome your contributions to this project. There are various ways to contribute:
 
-**Reporting issues**
---------------------
+* **Reporting issues**
 
 Help improve the project by reporting issues that you find by filing a new issue at the
 [App Core issue tracker](https://github.com/nullgr/app-core/issues/new).
 
-**Features and ideas suggestions**
+* **Features and ideas suggestions**
 
 You can also add feature suggestions by filing a new issue at the
 [App Core issue tracker](https://github.com/nullgr/app-core/issues/new).
+
+* **Improving README and examples**
+
+Also, we would be happy with your help in improving the documentation, tests and examples of use.
 
 **Pull requests**
 -----------------
