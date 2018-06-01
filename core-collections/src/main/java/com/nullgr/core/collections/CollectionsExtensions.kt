@@ -45,7 +45,7 @@ fun <T> MutableCollection<T>?.replace(source: Collection<T>?) {
  * Extension function to add all unique elements
  * to destination collection with elements from [source] collection
  */
-fun <T> MutableCollection<T>?.addUnique(source: MutableCollection<T>?) {
+fun <T> MutableCollection<T>?.addUnique(source: Collection<T>?) {
     this?.let {
         source?.let {
             source.forEach { item ->

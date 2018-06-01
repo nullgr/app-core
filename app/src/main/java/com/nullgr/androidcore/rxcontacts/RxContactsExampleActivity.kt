@@ -35,8 +35,8 @@ import kotlinx.android.synthetic.main.activity_rx_contacts_example_activity.prog
  */
 class RxContactsExampleActivity : BaseAdapterExampleActivity() {
 
-    private val favoritesPredicates = arrayListOf(
-            Predicate<UserContact> { it.isStarred },
+    private val favoritesPredicates = arrayListOf<Predicate<UserContact>>(
+            Predicate { it.isStarred },
             Predicate { !it.isStarred }
     )
 
