@@ -67,7 +67,7 @@ fun FragmentManager.back(depth: Int) {
         for (i in 0 until if (depth > backStackEntryCount) backStackEntryCount else depth) {
             back()
         }
-    } catch (e: Exception) {
+    } catch (e: Throwable) {
         e.printStackTrace()
     }
 }
