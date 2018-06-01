@@ -40,4 +40,5 @@ val result:Boolean = date.isToday()
 val result:Boolean = date.isYesterday()
 val newDate:Date = date plusMonth 1
 ```
-For full list of methods, please look to the source code, or view documentation
+For full list of methods, please look to the source code, [example project](https://github.com/nullgr/app-core/tree/develop/app/src/main/java/com/nullgr/androidcore/date)
+or view documentation

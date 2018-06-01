@@ -28,4 +28,5 @@ selectContactIntent()
            .subscribe({it:RxAcitivtyResult -> processResult(it)},
                    {handleError(it)})
 ```
-For full list of functions, please look to the source code, or view documentation
+For full list of functions, please look to the source code,[example project](https://github.com/nullgr/app-core/tree/develop/app/src/main/java/com/nullgr/androidcore/intents)
+or view documentation
