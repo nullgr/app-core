@@ -23,7 +23,7 @@ between items of a ```android.support.v7.widget.LinearLayoutManager```
 It supports ```android.support.v7.widget.LinearLayoutManager.VERTICAL``` orientation.
 Can be used with custom divider drawable. 
 Also provides ability to notify if decoration for last item in list is needed.
-[See sample usage](https://github.com/nullgr/app-core/tree/develop/app/src/main/java/com/nullgr/androidcore/adapter)
+[See sample usage](../app/src/main/java/com/nullgr/androidcore/adapter)
 
 Extensions
 ----------
@@ -40,7 +40,7 @@ activity.showKeyboard()
 ```
 
 * ScreenExtensions, provides a set of functions to convert ```px``` to ```dp``` or ```sp``` in both way.
-[See sample usage](https://github.com/nullgr/app-core/blob/develop/app/src/main/java/com/nullgr/androidcore/resources/ResourcesExampleActivity.kt)
+[See sample usage](../app/src/main/java/com/nullgr/androidcore/resources/ResourcesExampleActivity.kt)
 
 * ViewExtensions, provides set of extensions for ```View```.
 ```kotlin

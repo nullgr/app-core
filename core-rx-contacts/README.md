@@ -47,5 +47,5 @@ RxContactsProvider.with(context)
           .fromUri(UserContact::class.java, contactUri)
 ```
 
-For full list of functions, please look to the source code,[example project](https://github.com/nullgr/app-core/tree/develop/app/src/main/java/com/nullgr/androidcore/rxcontacts)
+For full list of functions, please look to the source code,[example project](../app/src/main/java/com/nullgr/androidcore/rxcontacts)
 or view documentation

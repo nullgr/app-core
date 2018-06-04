@@ -65,6 +65,6 @@ SingletonRxBusProvider.BUS.post(RxBus.Keys.SINGLE, SomeEventClass()) // to use S
          .subscribe{// your code here}
 ```
 
-For full list of functions, please look to the source code,[example project](https://github.com/nullgr/app-core/tree/develop/app/src/main/java/com/nullgr/androidcore)
+For full list of functions, please look to the source code,[example project](../app/src/main/java/com/nullgr/androidcore)
 or view documentation
 

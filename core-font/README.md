@@ -84,5 +84,5 @@ TypeFaceSpan
 ------------
 Span class to set custom ```Typeface``` to string
 
-For full list of functions, please look to the source code,[example project](https://github.com/nullgr/app-core/tree/develop/app/src/main/java/com/nullgr/androidcore/fonts)
+For full list of functions, please look to the source code,[example project](../app/src/main/java/com/nullgr/androidcore/fonts)
 or view documentation

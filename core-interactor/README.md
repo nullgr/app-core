@@ -18,4 +18,4 @@ List of represented classes:
 * SingleListUseCase
 * SingleUseCase
 
-View[sample project](https://github.com/nullgr/app-core/tree/develop/app/src/main/java/com/nullgr/androidcore/interactor)for implementation guide.
+View[sample project](../app/src/main/java/com/nullgr/androidcore/interactor)for implementation guide.
