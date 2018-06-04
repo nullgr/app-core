@@ -8,4 +8,4 @@ but without necessity to create all AdapterDelegates with adapter creation.
 Delegates creates by necessity via factory depends on set of [ListItem] added to adapter.
 Also ```DynamicAdapter``` encapsulates logic of working with ```DiffUtil```.
 
-For full implementation guide, view [sample project.](https://github.com/nullgr/app-core/tree/develop/app/src/main/java/com/nullgr/androidcore/adapter)
+For full implementation guide, view [sample project.](../app/src/main/java/com/nullgr/androidcore/adapter)
