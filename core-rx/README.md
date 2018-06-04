@@ -29,7 +29,8 @@ which implemented in ```RxExtensions```
 
 RxBus
 ------
-Simple ***EVENT BUS*** built in a reactive manner. Provides publish-subscribe-style communication between components.
+Simple***EVENT BUS***built in a reactive manner. Provides publish-subscribe-style communication between components.
+This class build above[RxRelay.](https://github.com/JakeWharton/RxRelay)
 Can be used in two ways: with key or not. For each new key new ```Relay``` will be created.
 Without key all events will be posted in in general ```Relay```. The same behaviour if use ```Keys.GENERAL```.
 Usage of this class is thread safe.
