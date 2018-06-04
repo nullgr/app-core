@@ -19,7 +19,7 @@ webIntent(url).launch(context)
 
 Intent(SOME_ACTION).sendBroadcast(context)
 ```
-Also contains method to ```launchForResult``` activity in Rx way
+Also contains method to ```launchForResult``` activity in Rx way.
 
 Sample usage:
 ```kotlin

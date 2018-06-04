@@ -1,11 +1,11 @@
 Core Rx
 ============
 
-This module contains different extensions and utilities for RxJava2 
+This module contains different extensions and utilities for [RxJava](https://github.com/ReactiveX/RxJava/) 
 
 RxExtensions
 -----------
-Contains extension functions for RxJava2.
+Contains extension functions for [RxJava](https://github.com/ReactiveX/RxJava/).
 
 Sample:
 ```kotlin
