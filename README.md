@@ -53,7 +53,7 @@ var spannableText = (someStringText.applySpanSet()
 ```
 For full list of provided functions select one of detailed readme in list below:
 ----------------
-* [Adapter](../core-adapter/README.md)
+* [Adapter](./core-adapter/README.md)
 * <a href="https://github.com/nullgr/app-core/tree/develop/core-collections/README.md">Collections</a>
 * <a href="https://github.com/nullgr/app-core/tree/develop/core-common/README.md">Common</a>
 * <a href="https://github.com/nullgr/app-core/tree/develop/core-date/README.md">Date</a>
