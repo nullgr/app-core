@@ -4,7 +4,7 @@ import android.text.Spannable
 import java.util.*
 
 /**
- * Class that provides ability to build complicated span decor to text in easy way
+ * Class that provides ability to build and apply complicated span decor to text in easy way
  * Can be used as a method call chain (builder style) or in infix style
  *
  * Sample usage (Infix style):

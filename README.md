@@ -53,20 +53,20 @@ var spannableText = (someStringText.applySpanSet()
 ```
 For full list of provided functions select one of detailed readme in list below:
 ----------------
-* <a href="https://github.com/nullgr/app-core/tree/develop/core-adapter/README.md">Adapter</a>
-* <a href="https://github.com/nullgr/app-core/tree/develop/core-collections/README.md">Collections</a>
-* <a href="https://github.com/nullgr/app-core/tree/develop/core-common/README.md">Common</a>
-* <a href="https://github.com/nullgr/app-core/tree/develop/core-date/README.md">Date</a>
-* <a href="https://github.com/nullgr/app-core/tree/develop/core-font/README.md">Font</a>
-* <a href="https://github.com/nullgr/app-core/tree/develop/core-hardware/README.md">Hardware</a>
-* <a href="https://github.com/nullgr/app-core/tree/develop/core-intents/README.md">Intents</a>
-* <a href="https://github.com/nullgr/app-core/tree/develop/core-interactor/README.md">Interactor</a>
-* <a href="https://github.com/nullgr/app-core/tree/develop/core-preferences/README.md">Preferences</a>
-* <a href="https://github.com/nullgr/app-core/tree/develop/core-resources/README.md">Resources</a>
-* <a href="https://github.com/nullgr/app-core/tree/develop/core-rx/README.md">Rx</a>
-* <a href="https://github.com/nullgr/app-core/tree/develop/core-rx-contacts/README.md">Rx Contacts</a>
-* <a href="https://github.com/nullgr/app-core/tree/develop/core-rx-location/README.md">Rx Location</a>
-* <a href="https://github.com/nullgr/app-core/tree/develop/core-ui/README.md">UI</a>
+* [Adapter](./core-adapter/README.md)
+* [Collections](./core-collections/README.md)
+* [Common](./core-common/README.md)
+* [Date](./core-date/README.md)
+* [Font](./core-font/README.md)
+* [Hardware](./core-hardware/README.md)
+* [Intents](./core-intents/README.md)
+* [Interactor](./core-interactor/README.md)
+* [Preferences](./core-preferences/README.md)
+* [Resources](./core-resources/README.md)
+* [Rx](./core-rx/README.md)
+* [Rx Contacts](./core-rx-contacts/README.md)
+* [Rx Location](./core-rx-location/README.md)
+* [UI](./core-ui/README.md)
 
 For more information about how to use - look into <a href="https://github.com/nullgr/app-core/tree/develop/app">sample project</a>.</b>
 
@@ -159,14 +159,14 @@ We are open to suggestions for improvements and new ideas. Please see the
 
 During the preview period, the App Core APIs may change at anytime. 
 Of course, we will try to minimize such changes, but if this becomes necessary, all the necessary 
-migrations will be described in [CHANGELOG](https://github.com/nullgr/app-core/blob/develop/CHANGELOG.md)
+migrations will be described in [CHANGELOG](./CHANGELOG.md)
 When the project reaches a stable state, we will update it to version 1.0 (or later). 
-For all new versions we will log changes in [CHANGELOG](https://github.com/nullgr/app-core/blob/develop/CHANGELOG.md).
+For all new versions we will log changes in [CHANGELOG](./CHANGELOG.md).
 
 
 How to Contribute
 -----------------
-Please read carefully the file [CONTRIBUTION](https://github.com/nullgr/app-core/blob/develop/CONTRIBUTION.md)
+Please read carefully the file [CONTRIBUTION](./CONTRIBUTING.md)
 
 License
 =======

@@ -5,9 +5,7 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 
-/**
- * Created by Grishko Nikita on 01.02.18.
- */
+
 fun Activity?.hideKeyboard() {
     this?.let {
         val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
