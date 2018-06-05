@@ -11,10 +11,10 @@ ext {
     androidTargetSdkVersion = 27
     androidCompileSdkVersion = 27
 
-    supportLibraryVersion = '27.1.1'
+    supportLibraryVersion = '27.1.0'
     playServicesVersion = '11.8.0'
     constraintVersion = '1.0.2'
-    customTabsVersion = '27.1.1'
+    customTabsVersion = '27.1.0'
 
     //Libraries
     rxJavaVersion = '2.0.2'
