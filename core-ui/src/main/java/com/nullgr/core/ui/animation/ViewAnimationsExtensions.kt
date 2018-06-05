@@ -7,7 +7,6 @@ import com.nullgr.core.common.withVersion
 import com.nullgr.core.ui.extensions.disappear
 import com.nullgr.core.ui.extensions.show
 
-
 /**
  * Simple extension function, that provides cross fade animation between to views
  * @receiver Currently visible [View]

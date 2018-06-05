@@ -3,6 +3,7 @@ package com.nullgr.core.ui.animation
 import android.animation.Animator
 import android.support.annotation.RequiresApi
 
+// Copied from https://github.com/android/android-ktx
 /**
  * Add an action which will be invoked when the animation has ended.
  *

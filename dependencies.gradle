@@ -14,7 +14,7 @@ ext {
     supportLibraryVersion = '27.1.1'
     playServicesVersion = '11.8.0'
     constraintVersion = '1.0.2'
-    customTabsVersion = '27.1.0'
+    customTabsVersion = '27.1.1'
 
     //Libraries
     rxJavaVersion = '2.0.2'
