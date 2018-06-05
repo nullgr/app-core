@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TextView">
+        <attr name="fontPath" format="string" />
+        <attr name="translateToBottom" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="IndicatorsView">
+        <attr name="selectedDrawable" format="reference" />
+        <attr name="unSelectedDrawable" format="reference" />
+        <attr name="indicatorSize" format="dimension" />
+        <attr name="indicatorSelectedSize" format="dimension" />
+        <attr name="paddingBetweenIndicators" format="dimension" />
+        <attr name="numberOfIndicators" format="integer" />
+        <attr name="selectedIndicator" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="WidthAdjustedFrameLayout">
+        <attr name="leftOffset" format="dimension" />
+        <attr name="rightOffset" format="dimension" />
+    </declare-styleable>
+</resources>

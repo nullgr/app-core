@@ -1,18 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context="com.nullgr.androidcore.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/buttonLocationExample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_location_example" />
+
+        <Button
+            android:id="@+id/buttonCommonIntentsExample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_intents_example" />
+
+        <Button
+            android:id="@+id/buttonDateUtilsExample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_date_utils_example" />
+
+        <Button
+            android:id="@+id/buttonFontsAndSpans"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_fonts_and_spans_activity" />
+
+        <Button
+            android:id="@+id/buttonResourcesExample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_res_example" />
+
+        <Button
+            android:id="@+id/buttonAdapterExample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_adapter_example" />
+
+        <Button
+            android:id="@+id/buttonAdapterWithPayloadsExample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_adapter_example_with_payloads" />
+
+        <Button
+            android:id="@+id/buttonRxContactsProviderExample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_rx_contacts_activity" />
+
+        <Button
+            android:id="@+id/buttonInteractorsExample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_interactors_example" />
+
+    </LinearLayout>
+
+</ScrollView>
