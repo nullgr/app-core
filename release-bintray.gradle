@@ -1,6 +1,6 @@
 // Bintray release configuration
 ext {
-    bintrayRepo = 'maven-test'
+    bintrayRepo = 'maven'
     bintrayName = POM_BINTRAY_NAME
 
     publishedGroupId = 'com.nullgr.core'
@@ -14,7 +14,7 @@ ext {
     issueUrl = 'https://github.com/nullgr/app-core/issues'
     gitUrl = 'https://github.com/nullgr/app-core.git'
 
-    libraryVersion = '0.0.1-alpha.1'
+    libraryVersion = '1.0.0-alpha.1'
 
     developerId = 'nullgr-dev'
     developerName = 'Nullgravity Developer'

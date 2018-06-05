@@ -1,3 +1,3 @@
-# 0.0.1 (May 29, 2018)
+# 1.0.0-alpha.1 (Jun 5, 2018)
 
 * Initial release

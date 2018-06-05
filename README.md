@@ -68,7 +68,7 @@ For full list of provided functions select one of detailed readme in list below:
 * [Rx Location](./core-rx-location/README.md)
 * [UI](./core-ui/README.md)
 
-For more information about how to use - look into <a href="https://github.com/nullgr/app-core/tree/develop/app">sample project</a>.</b>
+For more information about how to use - look into [sample project](./app)
 
 Getting Started
 ---------------
@@ -160,7 +160,7 @@ We are open to suggestions for improvements and new ideas. Please see the
 During the preview period, the App Core APIs may change at anytime. 
 Of course, we will try to minimize such changes, but if this becomes necessary, all the necessary 
 migrations will be described in [CHANGELOG](./CHANGELOG.md)
-When the project reaches a stable state, we will update it to version 1.0 (or later). 
+When the project reaches a stable state, we will update it to version 1.0.0 (or later). 
 For all new versions we will log changes in [CHANGELOG](./CHANGELOG.md).
 
 
