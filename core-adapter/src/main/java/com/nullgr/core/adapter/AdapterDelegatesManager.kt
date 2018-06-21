@@ -13,7 +13,7 @@ import com.nullgr.core.adapter.items.ListItem
  * @author vchernyshov
  * @author a.komarovskyi
  */
-internal class AdapterDelegatesManager(private val delegatesFactory: AdapterDelegatesFactory) {
+class AdapterDelegatesManager(private val delegatesFactory: AdapterDelegatesFactory) {
 
     companion object {
         internal const val FALLBACK_DELEGATE_VIEW_TYPE = Integer.MAX_VALUE - 1
