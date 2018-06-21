@@ -20,7 +20,7 @@ fun FragmentManager.addScreen(fragment: Fragment,
                 }
             }
             .add(containerId, fragment, tag)
-            .also { if (addToBackStack) it.addToBackStack(null) }
+            .also { if (addToBackStack) it.addToBackStack(tag) }
             .commitAllowingStateLoss()
 }
 
@@ -37,7 +37,7 @@ fun FragmentManager.replaceScreen(fragment: Fragment,
                 }
             }
             .replace(containerId, fragment, tag)
-            .also { if (addToBackStack) it.addToBackStack(null) }
+            .also { if (addToBackStack) it.addToBackStack(tag) }
             .commitAllowingStateLoss()
 }
 
