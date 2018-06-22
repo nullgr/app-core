@@ -9,14 +9,14 @@ import android.os.Build
 /**
  * Extension function checks whether the [PackageManager.FEATURE_CAMERA] feature is available
  */
-fun Context?.isCammeraSupported(): Boolean {
+fun Context?.isCameraSupported(): Boolean {
     return this?.packageManager?.hasSystemFeature(PackageManager.FEATURE_CAMERA) ?: false
 }
 
 /**
  * Extension function checks whether the [PackageManager.FEATURE_CAMERA_AUTOFOCUS] feature is available
  */
-fun Context?.isCammeraAutoFocusSupported(): Boolean {
+fun Context?.isCameraAutoFocusSupported(): Boolean {
     return this?.packageManager?.hasSystemFeature(PackageManager.FEATURE_CAMERA_AUTOFOCUS) ?: false
 }
 
