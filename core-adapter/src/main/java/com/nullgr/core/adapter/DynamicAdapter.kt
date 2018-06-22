@@ -20,7 +20,7 @@ open class DynamicAdapter constructor(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     constructor(factory: AdapterDelegatesFactory, calculator: DiffCalculator? = null) :
-            this(AdapterDelegatesManager(factory), calculator)
+            this(HashCodeBasedAdapterDelegatesManager(factory), calculator)
 
     var items = arrayListOf<ListItem>()
 
