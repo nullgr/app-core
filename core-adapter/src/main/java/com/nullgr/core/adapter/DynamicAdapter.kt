@@ -15,11 +15,12 @@ import java.util.*
  * @author a.komarovskyi
  */
 open class DynamicAdapter constructor(
-        delegatesFactory: AdapterDelegatesFactory,
+        private val manager: AdapterDelegatesManager,
         private val diffCalculator: DiffCalculator? = null
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val manager = AdapterDelegatesManager(delegatesFactory)
+    constructor(factory: AdapterDelegatesFactory, calculator: DiffCalculator? = null) :
+            this(HashCodeBasedAdapterDelegatesManager(factory), calculator)
 
     var items = arrayListOf<ListItem>()
 
