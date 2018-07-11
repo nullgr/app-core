@@ -11,6 +11,7 @@ import com.nullgr.core.collections.replace
 import com.nullgr.core.ui.decor.DividerItemDecoration
 import kotlinx.android.synthetic.main.activity_adapter_example.addItemButton
 import kotlinx.android.synthetic.main.activity_adapter_example.itemsView
+import kotlinx.android.synthetic.main.activity_adapter_example.removeItemButton
 import java.util.*
 
 /**
@@ -35,6 +36,12 @@ class AdapterExampleActivity : BaseAdapterExampleActivity() {
             items.add(2, ExampleItem2(Data.URLS[random.nextInt(Data.URLS.size)],
                 "Added ExampleItem ${random.nextInt(100)}",
                 "SomeText2"))
+            adapter.updateData(newItems = items, enableDiffUtils = true, detectMoves = true)
+        }
+
+        removeItemButton.setOnClickListener {
+            if (items.size > 2)
+                items.removeAt(2)
             adapter.updateData(newItems = items, enableDiffUtils = true, detectMoves = true)
         }
     }
