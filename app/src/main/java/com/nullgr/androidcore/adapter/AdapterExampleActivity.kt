@@ -31,7 +31,6 @@ class AdapterExampleActivity : BaseAdapterExampleActivity() {
         items.replace(prepareExampleItems())
         adapter.updateData(newItems = items, enableDiffUtils = true, detectMoves = true)
 
-
         addItemButton.setOnClickListener {
             items.add(2, ExampleItem2(Data.URLS[random.nextInt(Data.URLS.size)],
                 "Added ExampleItem ${random.nextInt(100)}",
