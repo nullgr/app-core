@@ -1,4 +1,4 @@
-# 1.0.1-alpha.2
+# 1.0.1-alpha.2 (Jul 11, 2018)
 * [#33] - Fixed typo at SupportedFeaturesExtensions
 * Update kotlin and gradle version
 * [#40] - Fix addScreen and replaceScreen functions 
