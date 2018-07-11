@@ -7,12 +7,12 @@ allprojects {
 ext {
     //Android
     androidBuildToolsVersion = '27.0.3'
-    androidMinSdkVersion = 21
+    androidMinSdkVersion = 15
     androidTargetSdkVersion = 27
     androidCompileSdkVersion = 27
 
     supportLibraryVersion = '27.1.0'
-    playServicesVersion = '11.8.0'
+    playServicesVersion = '15.0.1'
     constraintVersion = '1.0.2'
     customTabsVersion = '27.1.0'
 

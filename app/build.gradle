@@ -8,7 +8,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.nullgr.androidcore"
-        minSdkVersion 21
+        minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -57,6 +57,7 @@ dependencies {
     implementation commonDependencies.supportCustomTabs
     implementation commonDependencies.picasso
     implementation commonDependencies.colorPicker
+    implementation commonDependencies.location
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
