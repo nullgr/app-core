@@ -5,6 +5,7 @@
 (pass tag to addToBackStack function instead of **null**)
 * [#38] - Improved DynamicAdapter
 * [#43] - Change min version of API
+* [#45] - Fix DynamicAdapter updateItems
 
 # 1.0.0-alpha.1 (Jun 5, 2018)
 
