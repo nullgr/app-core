@@ -4,7 +4,6 @@ import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.nullgr.core.adapter.items.ListItem
-import java.util.*
 
 /**
  * Adapter for [ListItem]s based on Hannes Dorfmann AdapterDelegates(https://github.com/sockeqwe/AdapterDelegates)
@@ -15,12 +14,12 @@ import java.util.*
  * @author a.komarovskyi
  */
 open class DynamicAdapter constructor(
-        private val manager: AdapterDelegatesManager,
-        private val diffCalculator: DiffCalculator? = null
+    private val manager: AdapterDelegatesManager,
+    private val diffCalculator: DiffCalculator? = null
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     constructor(factory: AdapterDelegatesFactory, calculator: DiffCalculator? = null) :
-            this(HashCodeBasedAdapterDelegatesManager(factory), calculator)
+        this(HashCodeBasedAdapterDelegatesManager(factory), calculator)
 
     var items = arrayListOf<ListItem>()
 
@@ -29,7 +28,7 @@ open class DynamicAdapter constructor(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-            manager.onCreateViewHolder(parent, viewType)
+        manager.onCreateViewHolder(parent, viewType)
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         manager.onBindViewHolder(items, position, holder)
@@ -65,7 +64,7 @@ open class DynamicAdapter constructor(
      */
     fun updateData(newItems: List<ListItem>, enableDiffUtils: Boolean = true, detectMoves: Boolean = true) {
         when (enableDiffUtils) {
-            true -> diffCalculator?.calculateDiff(this, items, newItems, detectMoves)
+            true -> diffCalculator?.calculateDiff(this, ArrayList(items), newItems, detectMoves)
             else -> {
                 setData(newItems)
                 notifyDataSetChanged()
@@ -75,7 +74,8 @@ open class DynamicAdapter constructor(
 
     fun setData(newItems: List<ListItem>) {
         manager.setDelegates(newItems)
-        this.items = newItems as ArrayList<ListItem>
+        this.items.clear()
+        this.items.addAll(newItems)
     }
 
     fun getItem(position: Int): ListItem? {
