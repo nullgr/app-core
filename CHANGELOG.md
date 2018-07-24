@@ -1,10 +1,13 @@
 # 1.0.2-alpha.3
 * [#47] - Fix EditText.applyFilterAllowedDigits behavior
 * [#48] - Add new extensions and classes for EditText:
-    - Added ```EditText.applyFilters(bindFunction: ArrayList<InputFilter>.() -> Unit)```
-    - Added ```inline fun EditText.listenTextChanges(crossinline function: (text: CharSequence?) -> Unit)```
-    - Added ```EditText.makeSecure()```
-    - Added ```EditText.toggleSecure()```
+    - Added extension```EditText.applyFilters(bindFunction: ArrayList<InputFilter>.() -> Unit)```
+    - Added extensions```EditText.doOnTextChanged```, ```EditText.doBeforeTextChanged```, ```EditText.doAfterTextChanged``` 
+    and ```EditText.addTextChangedListener(onTextChanged: ((text: CharSequence?, start: Int, before: Int, count: Int) -> Unit)? = null,
+                                               afterTextChanged: ((editable: Editable?) -> Unit)? = null,
+                                               beforeTextChanged: ((s: CharSequence?, start: Int, count: Int, after: Int) -> Unit)? = null):TextWatcher```
+    - Added extension```EditText.makeSecure()```
+    - Added extension ```EditText.toggleSecure()```
     - Created class ```AllowedCharactersInputFilter```
     - Created class ```OnlyDigitsInputFilter```
     - Created class ```OnlyLettersOrDigitsInputFilter```
