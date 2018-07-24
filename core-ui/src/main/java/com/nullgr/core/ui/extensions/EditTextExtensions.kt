@@ -8,9 +8,9 @@ import android.widget.EditText
  * Allowed characters is any character that is not specified in the [validationString]
  */
 fun EditText.applyFilterAllowedDigits(validationString: String) {
-    val filter = InputFilter { inputString, start, end, _, _, _ ->
-        for (i in start until end) {
-            if (!validationString.contains(inputString[i])) return@InputFilter ""
+    val filter = InputFilter { source, start, end, _, _, _ ->
+        if (end != 0 && !validationString.contains(source[end - 1])) {
+            return@InputFilter source.subSequence(start, end - 1)
         }
         null
     }
