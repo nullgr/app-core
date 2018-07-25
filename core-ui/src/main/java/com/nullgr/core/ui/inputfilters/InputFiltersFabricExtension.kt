@@ -2,7 +2,6 @@ package com.nullgr.core.ui.inputfilters
 
 import android.text.InputFilter
 
-
 /**
  * Factory function that creates [AllowedCharactersInputFilter]
  */
