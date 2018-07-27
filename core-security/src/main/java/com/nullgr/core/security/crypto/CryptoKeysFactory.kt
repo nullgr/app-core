@@ -23,6 +23,13 @@ import javax.crypto.SecretKeyFactory
 import javax.crypto.spec.PBEKeySpec
 import javax.security.auth.x500.X500Principal
 
+/**
+ * This class provides the functionality for generating various commonly used encryption keys.
+ * Note that this class dosen't provide a full list of encryption keys, and generally designed for
+ * classes inside this module
+ *
+ * @author Grishko Nikita
+ */
 object CryptoKeysFactory {
     private const val KEY_LENGTH = 256
     private const val KEY_LENGTH_AES = 192
@@ -35,6 +42,13 @@ object CryptoKeysFactory {
     private const val PKCS5_SALT_LENGTH = 8
     private val secureRandom by lazy { SecureRandom() }
 
+    /**
+     * Provides a secret (symmetric) key, depending on given [algorithm] and [keyLength]
+     * For full list of supported algorithm read [KeyGenerator] documentation.
+     * @return Newly created [SecretKey]
+     * @throws NoSuchAlgorithmException when incorrect algorithm is passed as parameter
+     * @throws InvalidParameterException when passed incorrect key length for given [algorithm]
+     */
     @Throws(NoSuchAlgorithmException::class, InvalidParameterException::class)
     fun createSecreteKey(algorithm: String, keyLength: Int): SecretKey {
         val kg = KeyGenerator.getInstance(algorithm)
@@ -42,9 +56,18 @@ object CryptoKeysFactory {
         return kg.generateKey()
     }
 
+    /**
+     * Provides AES [SecretKey] with ***192*** key length
+     * @return Newly created [SecretKey]
+     */
     @Throws(NoSuchAlgorithmException::class)
     fun createAESKey() = createSecreteKey(AES_ALGORITHM, KEY_LENGTH_AES)
 
+    /**
+     * Provides password-based [SecretKey]
+     * @param salt [ByteArray], for secure generation [CryptoKeysFactory.generateSalt] can be used
+     * @return Newly created [SecretKey]
+     */
     @Throws(InvalidKeySpecException::class)
     fun createPKCS12Key(salt: ByteArray, password: String): SecretKey {
         val keySpec = PBEKeySpec(password.toCharArray(), salt, ITERATION_COUNT, KEY_LENGTH)
@@ -52,6 +75,14 @@ object CryptoKeysFactory {
         return keyFactory.generateSecret(keySpec)
     }
 
+    /**
+     * Creates RSA key pair in AndroidKeyStore with given alias
+     * This method required android [Build.VERSION_CODES.KITKAT]
+     * @param ctx [Context]
+     * @param keyAlias alias for RSA key pair in AndroidKeyStore
+     *
+     * @return RSA [KeyPair]
+     */
     @RequiresApi(Build.VERSION_CODES.KITKAT)
     @Throws(IllegalArgumentException::class,
         InvalidAlgorithmParameterException::class,
@@ -75,11 +106,18 @@ object CryptoKeysFactory {
         return kpGenerator.generateKeyPair()
     }
 
+    /**
+     * Creates RSA key pair that requires user authorization in AndroidKeyStore with given alias
+     * This method required android [Build.VERSION_CODES.M]
+     * @param alias alias for RSA key pair in AndroidKeyStore
+     *
+     * @return RSA [KeyPair]
+     */
     @RequiresApi(Build.VERSION_CODES.M)
-    fun createRSAKeyPairUserAuthRequired(alias: String): KeyPair {
+    fun createRSAKeyPairUserAuthRequired(keyAlias: String): KeyPair {
         val keyPairGenerator = KeyPairGenerator.getInstance(KeyProperties.KEY_ALGORITHM_RSA, ANDROID_KEY_STORE)
         keyPairGenerator.initialize(
-            KeyGenParameterSpec.Builder(alias, KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT)
+            KeyGenParameterSpec.Builder(keyAlias, KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT)
                 .setDigests(KeyProperties.DIGEST_SHA256, KeyProperties.DIGEST_SHA512)
                 .setUserAuthenticationRequired(true)
                 .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_RSA_OAEP)
@@ -88,6 +126,13 @@ object CryptoKeysFactory {
         return keyPairGenerator.generateKeyPair()
     }
 
+    /**
+     * Creates AES [SecretKey] in AndroidKeyStore with given alias
+     * This method required android [Build.VERSION_CODES.M]
+     * @param keyAlias alias for AES key in AndroidKeyStore
+     *
+     * @return AES [SecretKey]
+     */
     @RequiresApi(Build.VERSION_CODES.M)
     fun createAESKeyInAndroidKeystore(keyAlias: String): SecretKey {
         val keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, ANDROID_KEY_STORE)
@@ -101,6 +146,14 @@ object CryptoKeysFactory {
         return keyGenerator.generateKey()
     }
 
+    /**
+     * Creates new RSA key pair in AndroidKeyStore with given alias or find it in keystore if it already exist.
+     * This method required android [Build.VERSION_CODES.KITKAT]
+     * @param ctx [Context]
+     * @param keyAlias alias for RSA key pair in AndroidKeyStore
+     *
+     * @return RSA [KeyPair]
+     */
     @RequiresApi(Build.VERSION_CODES.KITKAT)
     fun findOrCreateRSAKeyPair(ctx: Context, keyAlias: String): KeyPair {
         val keyStore = KeyStore.getInstance(ANDROID_KEY_STORE)
@@ -112,6 +165,14 @@ object CryptoKeysFactory {
         return KeyPair(entry.certificate.publicKey, entry.privateKey)
     }
 
+    /**
+     * Creates new RSA key pair that requires user authorization in AndroidKeyStore with given alias
+     * or find it in keystore if it already exist.
+     * This method required android [Build.VERSION_CODES.M]
+     * @param keyAlias alias for RSA key pair in AndroidKeyStore
+     *
+     * @return RSA [KeyPair]
+     */
     @RequiresApi(Build.VERSION_CODES.M)
     fun findOrCreateRSAKeyPairUserAuthRequired(keyAlias: String): KeyPair {
         val keyStore = KeyStore.getInstance(ANDROID_KEY_STORE)
@@ -123,6 +184,13 @@ object CryptoKeysFactory {
         return KeyPair(entry.certificate.publicKey, entry.privateKey)
     }
 
+    /**
+     * Creates AES [SecretKey] in AndroidKeyStore with given alias or find it in keystore if it already exist.
+     * This method required android [Build.VERSION_CODES.M]
+     * @param keyAlias alias for AES key in AndroidKeyStore
+     *
+     * @return AES [SecretKey]
+     */
     @RequiresApi(Build.VERSION_CODES.M)
     fun findOrCreateAESKey(keyAlias: String): SecretKey {
         val keyStore = KeyStore.getInstance(ANDROID_KEY_STORE)
@@ -133,12 +201,20 @@ object CryptoKeysFactory {
         return keyStore.getKey(keyAlias, null) as SecretKey
     }
 
+    /**
+     * Generates Initialization Vector with given [length]
+     * @return [ByteArray]
+     */
     fun generateIv(length: Int): ByteArray {
         val array = ByteArray(length)
         secureRandom.nextBytes(array)
         return array
     }
 
+    /**
+     * Generates salt
+     * @return [ByteArray]
+     */
     fun generateSalt(): ByteArray {
         val b = ByteArray(PKCS5_SALT_LENGTH)
         secureRandom.nextBytes(b)
