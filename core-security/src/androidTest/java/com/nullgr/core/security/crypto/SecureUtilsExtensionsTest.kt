@@ -51,7 +51,7 @@ class SecureUtilsExtensionsTest {
     fun toBase64_fromBase64EqualsOriginalString_Success() {
         val originalString = this::class.java.simpleName
         val base64String = originalString.toBase64()
-        Assert.assertEquals(base64String.fromBase64(), originalString)
+        Assert.assertEquals(base64String.fromBase64AsString(), originalString)
     }
 
     @Test

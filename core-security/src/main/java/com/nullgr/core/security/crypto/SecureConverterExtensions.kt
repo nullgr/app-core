@@ -53,7 +53,13 @@ fun String.toBase64(): String = Base64.encodeToString(this.toByteArray(), Base64
  * Decode the Base64-encoded data in input and return the data in
  * a newly allocated [String] with the result.
  */
-fun String.fromBase64() = String(Base64.decode(this, Base64.NO_WRAP))
+fun String.fromBase64AsString() = String(Base64.decode(this, Base64.NO_WRAP))
+
+/**
+ * Decode the Base64-encoded data in input and return the data in
+ * a newly allocated [ByteArray] with the result.
+ */
+fun String.fromBase64() = Base64.decode(this, Base64.NO_WRAP)
 
 /**
  * Base64-encode the given [ByteArray] and return a newly allocated [String] with the result.
@@ -63,6 +69,12 @@ fun ByteArray.toBase64(): String = Base64.encodeToString(this, Base64.NO_WRAP)
 /**
  * Decode the Base64-encoded data in input and return the data in
  * a newly allocated [String] with the result.
+ */
+fun ByteArray.fromBase64AsString() = String(Base64.decode(this, Base64.NO_WRAP))
+
+/**
+ * Decode the Base64-encoded data in input and return the data in
+ * a newly allocated [ByteArray] with the result.
  */
 fun ByteArray.fromBase64() = String(Base64.decode(this, Base64.NO_WRAP))
 
