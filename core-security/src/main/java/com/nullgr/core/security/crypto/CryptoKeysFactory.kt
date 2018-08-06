@@ -109,7 +109,7 @@ object CryptoKeysFactory {
     /**
      * Creates RSA key pair that requires user authorization in AndroidKeyStore with given alias
      * This method required android [Build.VERSION_CODES.M]
-     * @param alias alias for RSA key pair in AndroidKeyStore
+     * @param keyAlias alias for RSA key pair in AndroidKeyStore
      *
      * @return RSA [KeyPair]
      */
@@ -121,6 +121,7 @@ object CryptoKeysFactory {
                 .setDigests(KeyProperties.DIGEST_SHA256, KeyProperties.DIGEST_SHA512)
                 .setUserAuthenticationRequired(true)
                 .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_RSA_OAEP)
+                .setBlockModes(KeyProperties.BLOCK_MODE_ECB)
                 .build()
         )
         return keyPairGenerator.generateKeyPair()
