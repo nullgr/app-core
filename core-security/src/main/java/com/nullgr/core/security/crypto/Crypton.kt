@@ -6,6 +6,7 @@ import android.support.annotation.RequiresApi
 import java.security.GeneralSecurityException
 import java.security.InvalidKeyException
 import java.security.KeyPair
+import java.security.PublicKey
 import java.security.spec.MGF1ParameterSpec
 import javax.crypto.Cipher
 import javax.crypto.SecretKey
@@ -31,10 +32,10 @@ import javax.crypto.spec.PSource
  */
 object Crypton {
 
+    const val RSA_CIPHER_ALGORITHM = "RSA/ECB/OAEPWITHSHA-512ANDMGF1PADDING"
+    const val OAEP_PARAM_MD_NAME = "SHA-512"
+    const val OAEP_PARAM_MGF_NAME = "MGF1"
     private const val AES_CBC_PKCS7_CIPHER_ALGORITHM = "AES/CBC/PKCS7Padding"
-    private const val RSA_CIPHER_ALGORITHM = "RSA/ECB/OAEPWITHSHA-512ANDMGF1PADDING"
-    private const val OAEP_PARAM_MD_NAME = "SHA-512"
-    private const val OAEP_PARAM_MGF_NAME = "MGF1"
     private const val DELIMITER = "]"
 
     /**
@@ -171,6 +172,24 @@ object Crypton {
     }
 
     /**
+     * Encrypt given [originalText] with RSA [PublicKey] [publicKey] and returns result as [String].
+     * For encryption used RSA/ECB/OAEPWITHSHA-512ANDMGF1PADDING transformation.
+     * So given [KeyPair]'s [PublicKey] has to follow this specification.
+     *
+     * @param originalText text to be encrypted
+     * @param publicKey RSA [PublicKey]
+     * @return [String] encrypted text
+     *
+     * @throws GeneralSecurityException Exceptions specified by [Cipher]
+     * @throws InvalidKeyException if incorrect [KeyPair] were passed
+     */
+    @Throws(GeneralSecurityException::class, InvalidKeyException::class)
+    @RequiresApi(Build.VERSION_CODES.KITKAT)
+    fun encryptRsa(originalText: String, publicKey: PublicKey): String {
+        return encryptWithRSAKeyInternal(originalText.toByteArray(), publicKey)
+    }
+
+    /**
      * Encrypt given [originalText] with RSA [keyPair] and returns result as [String].
      * For encryption used RSA/ECB/OAEPWITHSHA-512ANDMGF1PADDING transformation.
      * So given [KeyPair] has to follow this specification.
@@ -209,7 +228,7 @@ object Crypton {
     @Throws(GeneralSecurityException::class, InvalidKeyException::class)
     @RequiresApi(Build.VERSION_CODES.KITKAT)
     fun encryptRsa(original: ByteArray, keyPair: KeyPair): String {
-        return encryptWithRSAKeyInternal(original, keyPair)
+        return encryptWithRSAKeyInternal(original, keyPair.public)
     }
 
     /**
@@ -379,11 +398,11 @@ object Crypton {
         return cipher.doFinal(cipherBytes)
     }
 
-    private fun encryptWithRSAKeyInternal(original: ByteArray, keyPair: KeyPair): String {
+    private fun encryptWithRSAKeyInternal(original: ByteArray, publicKey: PublicKey): String {
         val cipher = Cipher.getInstance(RSA_CIPHER_ALGORITHM)
         cipher.init(
             Cipher.ENCRYPT_MODE,
-            keyPair.public,
+            publicKey,
             OAEPParameterSpec(OAEP_PARAM_MD_NAME, OAEP_PARAM_MGF_NAME, MGF1ParameterSpec.SHA1, PSource.PSpecified.DEFAULT)
         )
         val cipherBytes = cipher.doFinal(original)

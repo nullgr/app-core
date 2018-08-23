@@ -1,4 +1,4 @@
-package com.nullgr.core.security.fingerprint.rx
+package com.nullgr.core.security.fingerprint.rx.view
 
 /**
  * Created by Grishko Nikita on 01.02.18.
