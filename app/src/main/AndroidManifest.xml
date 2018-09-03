@@ -40,6 +40,8 @@
 
         <activity android:name=".interactor.presentation.InteractorExampleActivity" />
 
+        <activity android:name=".fingerprint.FingerprintExampleActivity" />
+
     </application>
 
 </manifest>
