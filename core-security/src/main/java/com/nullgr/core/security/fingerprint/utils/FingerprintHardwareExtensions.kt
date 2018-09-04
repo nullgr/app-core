@@ -21,4 +21,4 @@ fun Context.isFingerprintHardwareDetected() = getFingerprintManger().isHardwareD
 fun Context.hasEnrolledFingerprints() = getFingerprintManger().hasEnrolledFingerprints()
 
 @SuppressLint("NewApi")
-fun Context.isKeyguardSecure() = getKeyguardManager()?.isKeyguardSecure
+fun Context.isKeyguardSecure() = getKeyguardManager()?.isKeyguardSecure ?: false

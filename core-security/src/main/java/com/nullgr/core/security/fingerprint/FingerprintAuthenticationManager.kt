@@ -4,12 +4,13 @@ import android.content.Context
 import android.os.Handler
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat
 import android.support.v4.os.CancellationSignal
-
+import com.nullgr.core.security.fingerprint.utils.isKeyguardSecure
 
 /**
  * Created by Grishko Nikita on 01.02.18.
  */
 open class FingerprintAuthenticationManager protected constructor(
+    private val context: Context,
     private val fingerprintManagerCompat: FingerprintManagerCompat,
     private val view: FingerprintView,
     private val resultListener: FingerprintResultListener,
@@ -31,12 +32,15 @@ open class FingerprintAuthenticationManager protected constructor(
     private val handler by lazy { Handler() }
     private val resetAfterErrorRunnable = Runnable { view.onResetFingerprintUiStateAfterError() }
 
-    fun isFingerprintAuthAvailable() =
-        fingerprintManagerCompat.isHardwareDetected
-            && fingerprintManagerCompat.hasEnrolledFingerprints()
+    fun checkFingerprintStatus() = when {
+        !fingerprintManagerCompat.isHardwareDetected -> FingerprintStatus.NO_HARDWARE
+        !context.isKeyguardSecure() -> FingerprintStatus.KEYGUARD_NOT_SECURE
+        !fingerprintManagerCompat.hasEnrolledFingerprints() -> FingerprintStatus.NO_ENROLLED_FINGERPRINTS
+        else -> FingerprintStatus.READY
+    }
 
     fun startListening(cryptoObject: FingerprintManagerCompat.CryptoObject?) {
-        if (!isFingerprintAuthAvailable()) {
+        if (checkFingerprintStatus() != FingerprintStatus.READY) {
             return
         }
         cancellationSignal = CancellationSignal()
@@ -81,7 +85,7 @@ open class FingerprintAuthenticationManager protected constructor(
         handler.postDelayed(resetAfterErrorRunnable, resetAfterErrorDelay)
     }
 
-    class Builder(context: Context) {
+    class Builder(private val context: Context) {
         private val fingerprintManagerCompat: FingerprintManagerCompat = FingerprintManagerCompat.from(context)
         private var view: FingerprintView? = null
         private var resultListener: FingerprintResultListener? = null
@@ -113,6 +117,7 @@ open class FingerprintAuthenticationManager protected constructor(
             if (resultListener == null) throw IllegalStateException("FingerprintResultListener dose not initialized")
 
             return FingerprintAuthenticationManager(
+                context,
                 fingerprintManagerCompat,
                 view!!,
                 resultListener!!,

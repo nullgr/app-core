@@ -62,7 +62,7 @@
     <string name="btn_interactors_example">Interactors example</string>
 
     <string name="btn_fingerprint_example">Fingerprint example</string>
-    <string name="alert_lower_api23">Sorry, but your version for Android should be greater than or equal to 6.0!</string>
+    <string name="alert_lower_api23">Sorry, but your version of Android should be greater than or equal to 6.0!</string>
     <string name="title_set_any_word_to_save">Enter any text for encryption that requires user authentication with a fingerprint</string>
     <string name="hint_secrete_word">Enter any text</string>
     <string name="btn_save_secure">Save</string>
@@ -71,4 +71,6 @@
     <string name="btn_fingerprint_dialog">Check simple fingerprint authorization</string>
     <string name="title_success">Success!</string>
     <string name="title_common_error">Not recognized.</string>
+    <string name="title_saved_success">Text saved successfully!</string>
+    <string name="title_default_help_text">Something went wrong</string>
 </resources>

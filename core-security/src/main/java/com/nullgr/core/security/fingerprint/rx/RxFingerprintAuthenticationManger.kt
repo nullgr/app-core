@@ -2,11 +2,12 @@ package com.nullgr.core.security.fingerprint.rx
 
 import android.content.Context
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat
-import com.jakewharton.rxrelay2.BehaviorRelay
 import com.nullgr.core.rx.asConsumer
 import com.nullgr.core.rx.asObservable
+import com.nullgr.core.rx.relay.SingleSubscriberRelay
 import com.nullgr.core.security.fingerprint.FingerprintAuthenticationManager
 import com.nullgr.core.security.fingerprint.FingerprintResultListener
+import com.nullgr.core.security.fingerprint.FingerprintStatus
 import com.nullgr.core.security.fingerprint.errors.FingerprintNotAvailableException
 import com.nullgr.core.security.fingerprint.rx.view.FingerprintViewState
 import com.nullgr.core.security.fingerprint.rx.view.RxFingerprintView
@@ -21,8 +22,8 @@ class RxFingerprintAuthenticationManger constructor(
     successMessageDelay: Long? = null,
     resetAfterErrorDelay: Long? = null
 ) {
-    private val viewStateRelay = BehaviorRelay.create<FingerprintViewState>()
-    private val resultRelay = BehaviorRelay.create<OptionalResult<FingerprintManagerCompat.CryptoObject?>>()
+    private val viewStateRelay = SingleSubscriberRelay.create<FingerprintViewState>()
+    private val resultRelay = SingleSubscriberRelay.create<OptionalResult<FingerprintManagerCompat.CryptoObject?>>()
 
     private val rxFingerprintView = RxFingerprintView(viewStateRelay.asConsumer())
 
@@ -40,7 +41,7 @@ class RxFingerprintAuthenticationManger constructor(
             .successResultDelay(successMessageDelay)
             .build()
 
-    fun isFingerprintAuthAvailable() = fingerprintAuthenticationManager.isFingerprintAuthAvailable()
+    fun checkFingerprintStatus() = fingerprintAuthenticationManager.checkFingerprintStatus()
 
     fun observeViewState(): Observable<FingerprintViewState> = viewStateRelay.asObservable()
 
@@ -64,8 +65,9 @@ class RxFingerprintAuthenticationManger constructor(
     private fun innerPrepareListening(cryptoObject: FingerprintManagerCompat.CryptoObject? = null): Observable<OptionalResult<FingerprintManagerCompat.CryptoObject?>> {
         return resultRelay.asObservable()
             .doOnSubscribe {
-                if (isFingerprintAuthAvailable()) fingerprintAuthenticationManager.startListening(cryptoObject)
-                else throw FingerprintNotAvailableException()
+                val status = checkFingerprintStatus()
+                if (status == FingerprintStatus.READY) fingerprintAuthenticationManager.startListening(cryptoObject)
+                else throw FingerprintNotAvailableException(status)
             }.doOnDispose {
                 fingerprintAuthenticationManager.stopListening()
             }
