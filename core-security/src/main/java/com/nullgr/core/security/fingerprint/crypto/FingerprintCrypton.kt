@@ -2,6 +2,7 @@ package com.nullgr.core.security.fingerprint.crypto
 
 import android.annotation.TargetApi
 import android.os.Build
+import android.security.keystore.KeyPermanentlyInvalidatedException
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat
 import com.nullgr.core.security.crypto.CryptoKeysFactory
 import com.nullgr.core.security.crypto.Crypton
@@ -25,7 +26,6 @@ import javax.crypto.spec.PSource
 
 /**
  * Created by Grishko Nikita on 01.02.18.
- * //TODO need to be tested!!!!
  */
 object FingerprintCrypton {
 
@@ -49,7 +49,17 @@ object FingerprintCrypton {
      * @param alias - alias of the key in [KeyStore]
      */
     @TargetApi(Build.VERSION_CODES.M)
-    @Throws(IOException::class, CertificateException::class, UnrecoverableKeyException::class, NoSuchAlgorithmException::class, KeyStoreException::class, InvalidAlgorithmParameterException::class, NoSuchPaddingException::class, InvalidKeyException::class)
+    @Throws(
+        KeyPermanentlyInvalidatedException::class,
+        IOException::class,
+        CertificateException::class,
+        UnrecoverableKeyException::class,
+        NoSuchAlgorithmException::class,
+        KeyStoreException::class,
+        InvalidAlgorithmParameterException::class,
+        NoSuchPaddingException::class,
+        InvalidKeyException::class
+    )
     fun prepareCryptoObject(alias: String): FingerprintManagerCompat.CryptoObject {
         val privateKey = CryptoKeysFactory.findOrCreateRSAKeyPairUserAuthRequired(alias).private
         val cipher = Cipher.getInstance(Crypton.RSA_CIPHER_ALGORITHM)

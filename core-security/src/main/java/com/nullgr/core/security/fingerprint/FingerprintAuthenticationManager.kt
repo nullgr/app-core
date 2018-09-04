@@ -39,7 +39,7 @@ open class FingerprintAuthenticationManager protected constructor(
         else -> FingerprintStatus.READY
     }
 
-    fun startListening(cryptoObject: FingerprintManagerCompat.CryptoObject?) {
+    fun startListening(cryptoObject: FingerprintManagerCompat.CryptoObject? = null) {
         if (checkFingerprintStatus() != FingerprintStatus.READY) {
             return
         }

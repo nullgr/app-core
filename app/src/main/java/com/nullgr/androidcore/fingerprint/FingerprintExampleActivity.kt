@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.nullgr.androidcore.R
+import com.nullgr.androidcore.fingerprint.dialog.SimpleFingerprintDialog
 import com.nullgr.core.preferences.defaultPrefs
 import com.nullgr.core.preferences.get
 import com.nullgr.core.preferences.remove
@@ -15,6 +16,7 @@ import com.nullgr.core.security.fingerprint.rx.RxFingerprintAuthenticationManger
 import com.nullgr.core.security.fingerprint.rx.view.FingerprintViewState
 import com.nullgr.core.ui.extensions.hide
 import com.nullgr.core.ui.extensions.show
+import com.nullgr.core.ui.fragments.showDialog
 import com.nullgr.core.ui.toast.showToast
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -58,13 +60,15 @@ class FingerprintExampleActivity : AppCompatActivity() {
         when (status) {
             FingerprintStatus.KEYGUARD_NOT_SECURE, FingerprintStatus.NO_ENROLLED_FINGERPRINTS, FingerprintStatus.NO_HARDWARE -> bindAsNotAvailable(status)
             else -> {
+                buttonFingerprintDialog.setOnClickListener {
+                    supportFragmentManager.showDialog(SimpleFingerprintDialog.getInstance())
+                }
                 when {
                     preferences.contains(KEY) -> bindAsListenFingerprint()
                     else -> bindAsSetupFingerprint()
                 }
             }
         }
-        buttonFingerprintDialog.setOnClickListener { }
     }
 
     private fun bindAsSetupFingerprint() {
@@ -106,7 +110,6 @@ class FingerprintExampleActivity : AppCompatActivity() {
                 showAlert(decryptedText)
             }, {
                 showAlert(it.toString())
-                //TODO show specified errors to be handled
             }).addTo(compositeDisposable)
 
         buttonResetFingerprint.setOnClickListener {
@@ -127,6 +130,7 @@ class FingerprintExampleActivity : AppCompatActivity() {
         fingerprintStatusImageView.setImageResource(R.drawable.ic_fingerprint_error)
         statusTextView.text = currentFingerprintStatus.toString()
         buttonResetFingerprint.hide()
+        buttonFingerprintDialog.hide()
     }
 
     private fun showAlert(result: String) {

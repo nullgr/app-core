@@ -45,7 +45,7 @@ class RxFingerprintAuthenticationManger constructor(
 
     fun observeViewState(): Observable<FingerprintViewState> = viewStateRelay.asObservable()
 
-    fun startListening(cryptoObject: FingerprintManagerCompat.CryptoObject) =
+    fun startListening(cryptoObject: FingerprintManagerCompat.CryptoObject): Observable<FingerprintManagerCompat.CryptoObject?> =
         innerPrepareListening(cryptoObject)
             .flatMap {
                 if (!it.isEmpty) Observable.just(it.value)
