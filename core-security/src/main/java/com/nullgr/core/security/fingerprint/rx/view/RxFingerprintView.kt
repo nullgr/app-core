@@ -4,7 +4,8 @@ import com.nullgr.core.security.fingerprint.FingerprintView
 import io.reactivex.functions.Consumer
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * Internal representation of [FingerprintView] for [com.nullgr.core.security.fingerprint.rx.RxFingerprintAuthenticationManger]
+ * @author Grishko Nikita
  */
 internal class RxFingerprintView(private val stateConsumer: Consumer<FingerprintViewState>) : FingerprintView {
 

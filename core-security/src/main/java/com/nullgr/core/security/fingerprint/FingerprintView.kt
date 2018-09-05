@@ -1,7 +1,9 @@
 package com.nullgr.core.security.fingerprint
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * Basic interface for any components that will represent fingerprint UI.
+ *
+ * @author Grishko Nikita
  */
 interface FingerprintView {
 

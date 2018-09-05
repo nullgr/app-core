@@ -23,14 +23,17 @@ import javax.crypto.NoSuchPaddingException
 import javax.crypto.spec.OAEPParameterSpec
 import javax.crypto.spec.PSource
 
-
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * Class that provides simple functionality of encryption/decryption that requires user authorization with
+ * fingerprint.
+ *
+ * @author Grishko Nikita
  */
 object FingerprintCrypton {
 
     /**
-     * Encrypt text with RSA key
+     * Encrypt text with RSA key that requires user authorization for decryption.
+     * Key will be generated with [CryptoKeysFactory.findOrCreateRSAKeyPairUserAuthRequired]
      *
      * @param alias       - alias of the key in [KeyStore]
      * @param initialText - text to be encrypted
@@ -44,7 +47,10 @@ object FingerprintCrypton {
     }
 
     /**
-     * Prepare instance of [Cipher] to be authorized by user/
+     * Prepare instance of [FingerprintManagerCompat.CryptoObject] with [Cipher] inside to be authorized by user.
+     * You need to pass this object
+     * to [com.nullgr.core.security.fingerprint.FingerprintAuthenticationManager.startListening] or
+     * [com.nullgr.core.security.fingerprint.rx.RxFingerprintAuthenticationManger.startListening].
      *
      * @param alias - alias of the key in [KeyStore]
      */
@@ -70,10 +76,10 @@ object FingerprintCrypton {
     }
 
     /**
-     * Decrypt with authorized instance of [Cipher]
+     * Decrypt with authorized [FingerprintManagerCompat.CryptoObject] with [Cipher] inside
      *
-     * @param cipher     - authorized by user instance of [Cipher]
-     * @param cipherText - text to be encrypted
+     * @param cryptoObject - authorized by user instance of [FingerprintManagerCompat.CryptoObject]
+     * @param cipherText - text to be decrypted.
      */
     @TargetApi(Build.VERSION_CODES.M)
     fun decrypt(cryptoObject: FingerprintManagerCompat.CryptoObject, cipherText: String): String? {

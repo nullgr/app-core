@@ -1,7 +1,8 @@
 package com.nullgr.core.security.fingerprint.rx
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * Utility class to pass nullable result throw the [com.jakewharton.rxrelay2.Relay].
+ * @author Grishko Nikita
  */
 internal class OptionalResult<T> constructor(val value: T?) {
 
