@@ -7,7 +7,36 @@ import android.support.v4.os.CancellationSignal
 import com.nullgr.core.security.fingerprint.utils.isKeyguardSecure
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * A class that provides simple and useful API to work with fingerprint.
+ *
+ * Simple usage:
+ * ```
+ * //Step 1: create new instance
+ * fingerprintAuthenticationManager = FingerprintAuthenticationManager
+ *      .from(it)
+ *      .successResultDelay(1000) // delay time in milliseconds before call onSuccess() callback after authorization complete
+ *      .resetAfterErrorDelay(1000) //delay time in milliseconds before restore UI after showing error.
+ *      .attachView(fingerprintView) // Implementation of FingerprintView interface
+ *      .withResultListener(object : FingerprintResultListener {
+ *              override fun onSuccess(cryptoObject: FingerprintManagerCompat.CryptoObject?) {
+ *                  // implement reaction for success fingerprint authorization
+ *              }
+ *      })
+ *      .build()
+ * //Step 2: Check current status of fingerprint hardware
+ * fingerprintAuthenticationManager.checkFingerprintStatus()
+ *
+ * //Step 3: start listening. Generally you should call this in onResume().
+ *
+ * fingerprintAuthenticationManager.startListening(cryptoObject)
+ * // if you have no need to authorize FingerprintMangerCompat.CryptoObject, you can call this method without arguments
+ *
+ * //Step 4: Don't forget to stop listening. Generally you should call this in onPause().
+ *
+ * fingerprintAuthenticationManager.stopListening()
+ * ```
+ *
+ * @author Grishko Nikita
  */
 open class FingerprintAuthenticationManager protected constructor(
     private val context: Context,
@@ -16,7 +45,7 @@ open class FingerprintAuthenticationManager protected constructor(
     private val resultListener: FingerprintResultListener,
     private val successMessageDelay: Long,
     private var resetAfterErrorDelay: Long
-) : FingerprintManagerCompat.AuthenticationCallback() {
+) {
 
     companion object {
         private const val DEFAULT_RESET_AFTER_ERROR_DELAY_MILLIS: Long = 1600
@@ -31,7 +60,41 @@ open class FingerprintAuthenticationManager protected constructor(
     private var selfCancelled: Boolean = false
     private val handler by lazy { Handler() }
     private val resetAfterErrorRunnable = Runnable { view.onResetFingerprintUiStateAfterError() }
+    private val authenticationCallback = object : FingerprintManagerCompat.AuthenticationCallback() {
 
+        override fun onAuthenticationError(errMsgId: Int, errString: CharSequence?) {
+            if (selfCancelled) return
+            view.onShowAuthenticationError(errMsgId, errString?.toString())
+            handler.removeCallbacks(resetAfterErrorRunnable)
+            handler.postDelayed(resetAfterErrorRunnable, resetAfterErrorDelay)
+        }
+
+        override fun onAuthenticationSucceeded(result: FingerprintManagerCompat.AuthenticationResult?) {
+            view.onShowAuthenticationSuccess()
+            handler.postDelayed({
+                resultListener.onSuccess(result?.cryptoObject)
+            }, successMessageDelay)
+        }
+
+        override fun onAuthenticationHelp(helpMsgId: Int, helpString: CharSequence) {
+            if (selfCancelled) return
+            view.onShowAuthenticationHelp(helpMsgId, helpString.toString())
+            handler.removeCallbacks(resetAfterErrorRunnable)
+            handler.postDelayed(resetAfterErrorRunnable, resetAfterErrorDelay)
+        }
+
+        override fun onAuthenticationFailed() {
+            if (selfCancelled) return
+            view.onShowAuthenticationError()
+            handler.removeCallbacks(resetAfterErrorRunnable)
+            handler.postDelayed(resetAfterErrorRunnable, resetAfterErrorDelay)
+        }
+    }
+
+    /**
+     * Check current status of fingerprint hardware.
+     * @return [FingerprintStatus]
+     */
     fun checkFingerprintStatus() = when {
         !fingerprintManagerCompat.isHardwareDetected -> FingerprintStatus.NO_HARDWARE
         !context.isKeyguardSecure() -> FingerprintStatus.KEYGUARD_NOT_SECURE
@@ -39,50 +102,30 @@ open class FingerprintAuthenticationManager protected constructor(
         else -> FingerprintStatus.READY
     }
 
+    /**
+     * Request authentication of a crypto object. This call warms up the fingerprint hardware
+     * and starts scanning for a fingerprint.
+     * @param cryptoObject instance of [FingerprintManagerCompat.CryptoObject] or null.
+     */
     fun startListening(cryptoObject: FingerprintManagerCompat.CryptoObject? = null) {
         if (checkFingerprintStatus() != FingerprintStatus.READY) {
             return
         }
         cancellationSignal = CancellationSignal()
         selfCancelled = false
-        fingerprintManagerCompat.authenticate(cryptoObject, 0, cancellationSignal, this, null)
+        fingerprintManagerCompat.authenticate(cryptoObject, 0, cancellationSignal, authenticationCallback, null)
         view.onShowFingerprintListening()
     }
 
+    /**
+     * Stops scanning for fingerprint.
+     */
     fun stopListening() {
         if (cancellationSignal != null) {
             selfCancelled = true
             cancellationSignal!!.cancel()
             cancellationSignal = null
         }
-    }
-
-    override fun onAuthenticationError(errMsgId: Int, errString: CharSequence?) {
-        if (selfCancelled) return
-        view.onShowAuthenticationError(errMsgId, errString?.toString())
-        handler.removeCallbacks(resetAfterErrorRunnable)
-        handler.postDelayed(resetAfterErrorRunnable, resetAfterErrorDelay)
-    }
-
-    override fun onAuthenticationSucceeded(result: FingerprintManagerCompat.AuthenticationResult?) {
-        view.onShowAuthenticationSuccess()
-        handler.postDelayed({
-            resultListener.onSuccess(result?.cryptoObject)
-        }, successMessageDelay)
-    }
-
-    override fun onAuthenticationHelp(helpMsgId: Int, helpString: CharSequence) {
-        if (selfCancelled) return
-        view.onShowAuthenticationHelp(helpMsgId, helpString.toString())
-        handler.removeCallbacks(resetAfterErrorRunnable)
-        handler.postDelayed(resetAfterErrorRunnable, resetAfterErrorDelay)
-    }
-
-    override fun onAuthenticationFailed() {
-        if (selfCancelled) return
-        view.onShowAuthenticationError()
-        handler.removeCallbacks(resetAfterErrorRunnable)
-        handler.postDelayed(resetAfterErrorRunnable, resetAfterErrorDelay)
     }
 
     class Builder(private val context: Context) {
