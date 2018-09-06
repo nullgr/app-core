@@ -15,7 +15,38 @@ import io.reactivex.Completable
 import io.reactivex.Observable
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * A class that provides simple and useful API in RX way to work with fingerprint.
+ *
+ * Simple usage:
+ * ```
+ * //Step 1: Initialize val
+ * val rxFingerprintManger = RxFingerprintAuthenticationManger(context)
+ *
+ * //Step 2: Check the status
+ * rxFingerprintManger.checkFingerprintStatus()
+ *
+ * //Step 3: Observe changes of view state
+ * rxFingerprintManger.observeViewState().subscribe {
+ *      when (it.state) {
+ *        //implement UI changes for each state
+ *      }
+ * }.addTo(compositeDisposable)
+ *
+ * //Step 3: start listening. It will starts automatically after subscribing
+ * rxFingerprintManger.startListening(cryptoObject)
+ *      .subscribe({
+ *            // implement reaction on success authorization
+ *      }, {
+ *              showAlert(it.toString())
+ *      }).addTo(compositeDisposable)
+ *
+ * //Step 4: Stop listening
+ * compositeDisposable.clear() //Scanning will terminate automatically when subscription dispose
+ * //or
+ * rxFingerprintManger.stopListening()
+ * ```
+ *
+ * @author Grishko Nikita
  */
 class RxFingerprintAuthenticationManger constructor(
     context: Context,
@@ -41,10 +72,23 @@ class RxFingerprintAuthenticationManger constructor(
             .successResultDelay(successMessageDelay)
             .build()
 
+    /**
+     * Check current status of fingerprint hardware.
+     * @return [FingerprintStatus]
+     */
     fun checkFingerprintStatus() = fingerprintAuthenticationManager.checkFingerprintStatus()
 
+    /**
+     * An observable that emits [FingerprintViewState]
+     */
     fun observeViewState(): Observable<FingerprintViewState> = viewStateRelay.asObservable()
 
+    /**
+     * Request authentication of a crypto object. This call warms up the fingerprint hardware
+     * and starts scanning for a fingerprint.
+     * @param cryptoObject instance of [FingerprintManagerCompat.CryptoObject]
+     * @return [Observable] that emits authorized [FingerprintManagerCompat.CryptoObject]
+     */
     fun startListening(cryptoObject: FingerprintManagerCompat.CryptoObject): Observable<FingerprintManagerCompat.CryptoObject?> =
         innerPrepareListening(cryptoObject)
             .flatMap {
@@ -52,12 +96,19 @@ class RxFingerprintAuthenticationManger constructor(
                 else Observable.error(IllegalStateException("Empty crypto object were returned"))
             }
 
-    fun startListening() =
+    /**
+     * This call warms up the fingerprint hardware and starts scanning for a fingerprint.
+     * @return [Completable]
+     */
+    fun startListening(): Completable =
         innerPrepareListening()
             .flatMapCompletable {
                 Completable.complete()
             }
-
+    
+    /**
+     * Stops scanning for fingerprint.
+     */
     fun stopListening() {
         fingerprintAuthenticationManager.stopListening()
     }
