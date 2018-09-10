@@ -92,12 +92,13 @@ internal class Api18PrefsCryptonImpl(context: Context, keyAlias: String) : Prefe
         private const val STORED_KEY = "prefs_stored_key"
     }
 
-    private val keyWrapper by lazy { KeyWrapper(context, keyAlias) }
-    private val secretKey by lazy { getEncryptionKey() }
+    private var keyWrapper = KeyWrapper(context, keyAlias)
+    private var secretKey = getEncryptionKey()
 
     override fun reset() {
         internalPreferences.clear()
-        CryptoKeysFactory.deleteKeyFromKeyStore(keyAlias)
+        keyWrapper.reset()
+        secretKey = getEncryptionKey()
     }
 
     override fun encrypt(value: String): String = Crypton.encrypt(value, secretKey)

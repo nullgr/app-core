@@ -18,7 +18,7 @@ internal class KeyWrapper(private val context: Context,
     }
 
     private val cipher by lazy { Cipher.getInstance(RSA_ALGORITHM) }
-    private val keyPair by lazy { CryptoKeysFactory.findOrCreateRSAKeyPair(context, keyAlias) }
+    private var keyPair = CryptoKeysFactory.findOrCreateRSAKeyPair(context, keyAlias)
 
     /**
      * Wrap a [javax.crypto.SecretKey] using the public key assigned to this wrapper.
@@ -45,5 +45,10 @@ internal class KeyWrapper(private val context: Context,
     fun unwrap(blob: ByteArray): SecretKey {
         cipher.init(Cipher.UNWRAP_MODE, keyPair.private)
         return cipher.unwrap(blob, "AES", Cipher.SECRET_KEY) as SecretKey
+    }
+
+    fun reset(){
+        CryptoKeysFactory.deleteKeyFromKeyStore(keyAlias)
+        keyPair = CryptoKeysFactory.findOrCreateRSAKeyPair(context, keyAlias)
     }
 }
