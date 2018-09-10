@@ -56,6 +56,7 @@ dependencies {
     def commonTestDependencies = rootProject.ext.commonTestDependencies
 
     implementation project(':core-rx')
+    implementation project(':core-preferences')
 
     compileOnly commonDependencies.supportCompatV7
     compileOnly commonDependencies.kotlin

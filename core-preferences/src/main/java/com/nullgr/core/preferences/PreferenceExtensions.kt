@@ -30,11 +30,11 @@ operator fun SharedPreferences.set(key: String, value: Any?) {
         edit { it.remove(key) }
     } else {
         when (value) {
-            is String? -> edit({ it.putString(key, value) })
-            is Int -> edit({ it.putInt(key, value) })
-            is Boolean -> edit({ it.putBoolean(key, value) })
-            is Float -> edit({ it.putFloat(key, value) })
-            is Long -> edit({ it.putLong(key, value) })
+            is String? -> edit { it.putString(key, value) }
+            is Int -> edit { it.putInt(key, value) }
+            is Boolean -> edit { it.putBoolean(key, value) }
+            is Float -> edit { it.putFloat(key, value) }
+            is Long -> edit { it.putLong(key, value) }
             else -> throw UnsupportedOperationException("Not yet implemented")
         }
     }

@@ -83,7 +83,7 @@ object CryptoKeysFactory {
      *
      * @return RSA [KeyPair]
      */
-    @RequiresApi(Build.VERSION_CODES.KITKAT)
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Throws(IllegalArgumentException::class,
         InvalidAlgorithmParameterException::class,
         NoSuchProviderException::class,
@@ -155,7 +155,7 @@ object CryptoKeysFactory {
      *
      * @return RSA [KeyPair]
      */
-    @RequiresApi(Build.VERSION_CODES.KITKAT)
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     fun findOrCreateRSAKeyPair(ctx: Context, keyAlias: String): KeyPair {
         val keyStore = KeyStore.getInstance(ANDROID_KEY_STORE)
         keyStore.load(null)
@@ -221,6 +221,11 @@ object CryptoKeysFactory {
         secureRandom.nextBytes(b)
         return b
     }
+
+    fun deleteKeyFromKeyStore(alias: String) {
+        KeyStore.getInstance(ANDROID_KEY_STORE)?.let {
+            it.load(null)
+            it.deleteEntry(alias)
+        }
+    }
 }
-
-
