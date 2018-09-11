@@ -8,7 +8,11 @@ import javax.crypto.Cipher
 import javax.crypto.SecretKey
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * A class that provides [SecretKey] wrapping functionality.
+ * For wrapping key RSA/ECB/PKCS1Padding transformation used.
+ * With this transformation its safe to store [SecretKey] in unsafe storage such as [android.content.SharedPreferences]
+ *
+ * @author Grishko Nikita
  */
 @TargetApi(18)
 internal class KeyWrapper(private val context: Context,
@@ -47,7 +51,10 @@ internal class KeyWrapper(private val context: Context,
         return cipher.unwrap(blob, "AES", Cipher.SECRET_KEY) as SecretKey
     }
 
-    fun reset(){
+    /**
+     * Delete previously created [java.security.KeyPair] and provide new one.
+     */
+    fun reset() {
         CryptoKeysFactory.deleteKeyFromKeyStore(keyAlias)
         keyPair = CryptoKeysFactory.findOrCreateRSAKeyPair(context, keyAlias)
     }

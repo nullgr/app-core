@@ -15,11 +15,12 @@ import java.security.GeneralSecurityException
  * Created by Grishko Nikita on 01.02.18.
  */
 @RunWith(AndroidJUnit4::class)
-class PrefsCryptonTest {
+class PreferencesCryptonTest {
 
     companion object {
         private const val ALIAS = "PrefsCryptonTest_Key_Alias"
         private const val ALIAS_RSA = "PrefsCryptonTest_Key_Alias_RSA"
+        private const val ALIAS_RSA_RESET = "PrefsCryptonTest_Key_Alias_RSA_will_be_reset"
         private const val TEXT_TO_BE_ENCRYPTED = "This is text to be encrypted."
         private const val LOG_TAG = "---- PrefsLogTag"
     }
@@ -97,5 +98,13 @@ class PrefsCryptonTest {
 
         val cryptonImpl2 = Api18PrefsCryptonImpl(InstrumentationRegistry.getTargetContext(), ALIAS_RSA + "SOMETHING")
         cryptonImpl2.decrypt(encrypted)
+    }
+
+    @Test(expected = GeneralSecurityException::class)
+    fun decrypt_afterEncryption__afterReset_Api18PrefsCryptonImpl_Fails() {
+        val cryptonImpl = Api18PrefsCryptonImpl(InstrumentationRegistry.getTargetContext(), ALIAS_RSA_RESET)
+        val encrypted = cryptonImpl.encrypt(TEXT_TO_BE_ENCRYPTED)
+        cryptonImpl.reset()
+        cryptonImpl.decrypt(encrypted)
     }
 }

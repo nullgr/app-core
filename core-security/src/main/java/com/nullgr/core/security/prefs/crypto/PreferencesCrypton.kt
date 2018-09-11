@@ -17,7 +17,12 @@ import javax.crypto.SecretKey
 
 
 /**
- * Created by Grishko Nikita on 01.02.18.
+ * This class provides the functionality of encryption/decryption for
+ * [com.nullgr.core.security.prefs.CryptoPreferences] depending on current SDK version.
+ * Note!!! For android versions before [Build.VERSION_CODES.JELLY_BEAN_MR2] its not bulletproof secure.
+ * For versions later ANDROID KEYSTORE used as keys storage.
+ *
+ * @author Grishko Nikita
  */
 internal abstract class PreferencesCrypton(protected val context: Context, protected val keyAlias: String) {
 
@@ -32,7 +37,7 @@ internal abstract class PreferencesCrypton(protected val context: Context, prote
     }
 
     protected val internalPreferences
-        by lazy { customPrefs(context, "${context.packageName}-crypton-preferences") }
+        by lazy { customPrefs(context, "${context.packageName}-crypton-internal-storage") }
 
     abstract fun encrypt(value: String): String
 
@@ -89,7 +94,7 @@ internal class Api23PrefsCryptonImpl(context: Context, keyAlias: String) : Prefe
 internal class Api18PrefsCryptonImpl(context: Context, keyAlias: String) : PreferencesCrypton(context, keyAlias) {
 
     companion object {
-        private const val STORED_KEY = "prefs_stored_key"
+        private const val STORED_KEY = "pref_wrapped_key"
     }
 
     private var keyWrapper = KeyWrapper(context, keyAlias)
