@@ -53,6 +53,49 @@ class CryptoPreferences(private val context: Context,
     }
 
     /**
+     * Operator function to easy save, primitive types values in [CryptoPreferences].
+     * Supported this types: [String], [Int], [Boolean], [Float], [Long], [Double]
+     * @param key [String] key for [CryptoPreferences]
+     * @param value value to save in [CryptoPreferences].
+     * Can be null. If null is passed, the entry with the specified [key] will be deleted
+     * @throws UnsupportedOperationException if any other type of [value] is set
+     */
+    operator fun set(key: String, value: Any?) {
+        if (value == null) {
+            remove(key)
+        } else {
+            when (value) {
+                is String? -> setString(key, value)
+                is Int -> setInt(key, value)
+                is Boolean -> setBoolean(key, value)
+                is Float -> setFloat(key, value)
+                is Double -> setDouble(key, value)
+                is Long -> setLong(key, value)
+                else -> throw UnsupportedOperationException("Not yet implemented")
+            }
+        }
+    }
+
+    /**
+     * Operator function to quick access for entry in [CryptoPreferences].
+     * Supported types: [String], [Int], [Boolean], [Float], [Long], [Double]
+     * @param key [String] key for [CryptoPreferences]
+     * @param defaultValue value to return if this preference does not exist.
+     * @throws UnsupportedOperationException
+     */
+    inline operator fun <reified T : Any> get(key: String, defaultValue: T? = null): T? {
+        return when (T::class) {
+            String::class -> getString(key, defaultValue as? String) as T?
+            Int::class -> getInt(key, defaultValue as? Int) as T?
+            Boolean::class -> getBoolean(key, defaultValue as? Boolean) as T?
+            Float::class -> getFloat(key, defaultValue as? Float) as T?
+            Long::class -> getLong(key, defaultValue as? Long) as T?
+            Double::class -> getDouble(key, defaultValue as? Double) as T?
+            else -> throw UnsupportedOperationException("Not yet implemented")
+        }
+    }
+
+    /**
      * Set an encrypted String value in the preferences.
      *
      * @param key The name of the preference to modify.
@@ -219,6 +262,8 @@ class CryptoPreferences(private val context: Context,
         innerPreferences.clear()
         prefsCrypton.reset()
     }
+
+    fun remove(key: String) = innerPreferences.remove(key)
 
     private fun setValue(key: String, value: String?) {
         try {
