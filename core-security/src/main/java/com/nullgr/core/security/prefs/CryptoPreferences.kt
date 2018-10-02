@@ -9,7 +9,7 @@ import com.nullgr.core.preferences.remove
 import com.nullgr.core.security.prefs.crypto.PreferencesCrypton
 
 /**
- * Secure version of [SharedPreferences].
+ * Secure wrapper for [SharedPreferences].
  * This class used to safe storing of secure needed information in simple [SharedPreferences].
  * All you need is to provide a unique [keyAlias].
  * There are several important things to know about:
