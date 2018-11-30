@@ -1,3 +1,5 @@
+* [#51] - Fixed API version checking for WindowExtensions
+
 # 1.0.2-alpha.3
 * [#47] - Fix EditText.applyFilterAllowedDigits behavior
 * [#48] - Add new extensions and classes for EditText:
