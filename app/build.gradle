@@ -13,6 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary=true
     }
     buildTypes {
         release {
@@ -39,6 +40,7 @@ dependencies {
     implementation project(':core-rx-location')
     implementation project(':core-ui')
     implementation project(':core-common')
+    implementation project(':core-security')
 
     implementation commonDependencies.rxKotlin
     implementation commonDependencies.rxAndroid
