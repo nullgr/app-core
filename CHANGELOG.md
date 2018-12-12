@@ -1,5 +1,7 @@
 # 1.1.0-alpha.4
 * Implement ***core-security*** module
+* [#51] - Fixed API version checking for WindowExtensions
+
 # 1.0.2-alpha.3
 * [#47] 
     - Fix EditText.applyFilterAllowedDigits behavior

@@ -25,12 +25,21 @@ fun Window.applyInsetsToContentView(fitsSystemWindows: Boolean) {
  * @param windowLightStatusBar [Boolean] flag that indicates, if dark or light theme should applied
  */
 fun Window.setStatusBarColor(@ColorRes color: Int, windowLightStatusBar: Boolean) {
-    clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-    addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+    }
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+    }
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         var flags = decorView.systemUiVisibility
-        flags = if (!windowLightStatusBar) flags.or(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR) else flags.and(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv())
+        flags = if (!windowLightStatusBar)
+            flags.or(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+        else
+            flags.and(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv())
         decorView.systemUiVisibility = flags
     }
-    statusBarColor = ContextCompat.getColor(context, color)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        statusBarColor = ContextCompat.getColor(context, color)
+    }
 }
