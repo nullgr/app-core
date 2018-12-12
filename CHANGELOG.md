@@ -1,8 +1,12 @@
+# 1.1.0-alpha.4
+* Implement ***core-security*** module
 * [#51] - Fixed API version checking for WindowExtensions
 
 # 1.0.2-alpha.3
-* [#47] - Fix EditText.applyFilterAllowedDigits behavior
-* [#48] - Add new extensions and classes for EditText:
+* [#47] 
+    - Fix EditText.applyFilterAllowedDigits behavior
+* [#48] 
+    - Add new extensions and classes for EditText:
     - Added extension```EditText.applyFilters(bindFunction: ArrayList<InputFilter>.() -> Unit)```
     - Added extensions```EditText.doOnTextChanged```, ```EditText.doBeforeTextChanged```, ```EditText.doAfterTextChanged``` 
     and ```EditText.addTextChangedListener(onTextChanged: ((text: CharSequence?, start: Int, before: Int, count: Int) -> Unit)? = null,

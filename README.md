@@ -67,6 +67,7 @@ For full list of provided functions select one of detailed readme in list below:
 * [Rx Contacts](./core-rx-contacts/README.md)
 * [Rx Location](./core-rx-location/README.md)
 * [UI](./core-ui/README.md)
+* [Security](./core-security/README.md)
 
 For more information about how to use - look into [sample project](./app)
 
@@ -147,6 +148,10 @@ dependencies {
     implementation "com.nullgr.core:core-ui:$CORE_VERSION"
     implementation "com.android.support:recyclerview-v7:$SUPPORT_VERSION"
     implementation "com.android.support:support-v4:$SUPPORT_VERSION"
+    implementation "com.android.support:appcompat-v7:$SUPPORT_VERSION"
+    
+    //core-security
+    implementation "com.nullgr.core:core-security:$CORE_VERSION"
     implementation "com.android.support:appcompat-v7:$SUPPORT_VERSION"
 }
 ```

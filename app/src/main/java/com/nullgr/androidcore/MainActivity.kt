@@ -1,19 +1,32 @@
 package com.nullgr.androidcore
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.nullgr.androidcore.adapter.AdapterExampleActivity
 import com.nullgr.androidcore.adapter.AdapterExampleWithPayloadsActivity
 import com.nullgr.androidcore.date.DateUtilsExampleActivity
+import com.nullgr.androidcore.fingerprint.FingerprintExampleActivity
 import com.nullgr.androidcore.fonts.FontsAndSpansExampleActivity
 import com.nullgr.androidcore.intents.CommonIntentsExampleActivity
 import com.nullgr.androidcore.interactor.presentation.InteractorExampleActivity
 import com.nullgr.androidcore.location.RxLocationManagerExampleActivity
 import com.nullgr.androidcore.resources.ResourcesExampleActivity
 import com.nullgr.androidcore.rxcontacts.RxContactsExampleActivity
+import com.nullgr.core.common.withVersion
 import com.nullgr.core.intents.launch
-import kotlinx.android.synthetic.main.activity_main.*
+import com.nullgr.core.ui.toast.showLongToast
+import kotlinx.android.synthetic.main.activity_main.buttonAdapterExample
+import kotlinx.android.synthetic.main.activity_main.buttonAdapterWithPayloadsExample
+import kotlinx.android.synthetic.main.activity_main.buttonCommonIntentsExample
+import kotlinx.android.synthetic.main.activity_main.buttonDateUtilsExample
+import kotlinx.android.synthetic.main.activity_main.buttonFingerprintExample
+import kotlinx.android.synthetic.main.activity_main.buttonFontsAndSpans
+import kotlinx.android.synthetic.main.activity_main.buttonInteractorsExample
+import kotlinx.android.synthetic.main.activity_main.buttonLocationExample
+import kotlinx.android.synthetic.main.activity_main.buttonResourcesExample
+import kotlinx.android.synthetic.main.activity_main.buttonRxContactsProviderExample
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,17 +35,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         buttonLocationExample.setOnClickListener {
             Intent(this@MainActivity, RxLocationManagerExampleActivity::class.java)
-                    .launch(this)
+                .launch(this)
         }
 
         buttonCommonIntentsExample.setOnClickListener {
             Intent(this, CommonIntentsExampleActivity::class.java)
-                    .launch(this)
+                .launch(this)
         }
 
         buttonFontsAndSpans.setOnClickListener {
             Intent(this, FontsAndSpansExampleActivity::class.java)
-                    .launch(this)
+                .launch(this)
         }
 
         buttonDateUtilsExample.setOnClickListener {
@@ -57,6 +70,14 @@ class MainActivity : AppCompatActivity() {
 
         buttonInteractorsExample.setOnClickListener {
             Intent(this, InteractorExampleActivity::class.java).launch(this)
+        }
+
+        buttonFingerprintExample.setOnClickListener {
+            withVersion(Build.VERSION_CODES.M) {
+                higherOrEqual { Intent(this@MainActivity, FingerprintExampleActivity::class.java)
+                    .launch(this@MainActivity) }
+                lower { getString(R.string.alert_lower_api23).showLongToast(this@MainActivity) }
+            }
         }
     }
 }
