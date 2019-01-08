@@ -7,6 +7,7 @@ import android.support.v4.hardware.fingerprint.FingerprintManagerCompat
 import com.nullgr.core.security.crypto.CryptoKeysFactory
 import com.nullgr.core.security.crypto.Crypton
 import com.nullgr.core.security.crypto.fromBase64
+import com.nullgr.core.security.crypto.internal.RsaCryptonImpl
 import java.io.IOException
 import java.security.InvalidAlgorithmParameterException
 import java.security.InvalidKeyException
@@ -43,7 +44,7 @@ object FingerprintCrypton {
         val publicKey = CryptoKeysFactory.findOrCreateRSAKeyPairUserAuthRequired(alias).public
         val unrestrictedPublicKey = KeyFactory.getInstance(publicKey.algorithm)
             .generatePublic(X509EncodedKeySpec(publicKey.encoded))
-        return Crypton.encryptRsa(initialText, unrestrictedPublicKey)
+        return Crypton.rsaEncryption().encrypt(initialText, unrestrictedPublicKey)
     }
 
     /**
@@ -53,6 +54,9 @@ object FingerprintCrypton {
      * [com.nullgr.core.security.fingerprint.rx.RxFingerprintAuthenticationManger.startListening].
      *
      * @param alias - alias of the key in [KeyStore]
+     * @throws KeyPermanentlyInvalidatedException - this exception should be handled manually in code.
+     * (For example, a dialogue should be shown about the need to re-enable authorization using a fingerprint)
+     * This exception will be caused if the user changes something in the security settings of the device (adds a new fingerprint, etc.)
      */
     @TargetApi(Build.VERSION_CODES.M)
     @Throws(
@@ -68,11 +72,25 @@ object FingerprintCrypton {
     )
     fun prepareCryptoObject(alias: String): FingerprintManagerCompat.CryptoObject {
         val privateKey = CryptoKeysFactory.findOrCreateRSAKeyPairUserAuthRequired(alias).private
-        val cipher = Cipher.getInstance(Crypton.RSA_CIPHER_ALGORITHM)
-        cipher.init(Cipher.DECRYPT_MODE,
-            privateKey,
-            OAEPParameterSpec(Crypton.OAEP_PARAM_MD_NAME, Crypton.OAEP_PARAM_MGF_NAME, MGF1ParameterSpec.SHA1, PSource.PSpecified.DEFAULT))
+        val cipher = Cipher.getInstance(RsaCryptonImpl.RSA_CIPHER_ALGORITHM)
+        try {
+            cipher.init(Cipher.DECRYPT_MODE,
+                privateKey,
+                OAEPParameterSpec(RsaCryptonImpl.OAEP_PARAM_MD_NAME, RsaCryptonImpl.OAEP_PARAM_MGF_NAME, MGF1ParameterSpec.SHA1, PSource.PSpecified.DEFAULT))
+        } catch (e: KeyPermanentlyInvalidatedException) {
+            CryptoKeysFactory.deleteKeyFromKeyStore(alias)
+            throw KeyPermanentlyInvalidatedException()
+        }
         return FingerprintManagerCompat.CryptoObject(cipher)
+    }
+
+    fun prepareCryptoObjectSafe(alias: String, errorHandlingFunction: (exception: Exception) -> Unit): FingerprintManagerCompat.CryptoObject? {
+        return try {
+            prepareCryptoObject(alias)
+        } catch (exception: Exception) {
+            errorHandlingFunction.invoke(exception)
+            null
+        }
     }
 
     /**

@@ -57,10 +57,10 @@ internal class LegacyPrefsCryptonImpl(context: Context, keyAlias: String) : Pref
     }
 
     @Throws(GeneralSecurityException::class)
-    override fun encrypt(value: String): String = Crypton.encrypt(value, getEncryptionKey())
+    override fun encrypt(value: String): String = Crypton.passwordBasedEncryption().encrypt(value, getEncryptionKey())
 
     @Throws(GeneralSecurityException::class)
-    override fun decrypt(value: String): String = Crypton.decryptAsString(value, getEncryptionKey())
+    override fun decrypt(value: String): String = Crypton.passwordBasedEncryption().decryptAsString(value, getEncryptionKey())
 
     private fun getEncryptionKey(): String {
         var keyPart2: String? = internalPreferences.getString(keyAlias, null)
@@ -83,9 +83,9 @@ internal class Api23PrefsCryptonImpl(context: Context, keyAlias: String) : Prefe
     }
 
     @Throws(GeneralSecurityException::class, InvalidKeyException::class)
-    override fun encrypt(value: String) = Crypton.encrypt(value, getEncryptionKey())
+    override fun encrypt(value: String) = Crypton.aesCbcEncryption().encrypt(value, getEncryptionKey())
 
-    override fun decrypt(value: String) = Crypton.decryptAsString(value, getEncryptionKey())
+    override fun decrypt(value: String) = Crypton.aesCbcEncryption().decryptAsString(value, getEncryptionKey())
 
     private fun getEncryptionKey() = CryptoKeysFactory.findOrCreateAESKey(keyAlias)
 }
@@ -106,9 +106,9 @@ internal class Api18PrefsCryptonImpl(context: Context, keyAlias: String) : Prefe
         secretKey = getEncryptionKey()
     }
 
-    override fun encrypt(value: String): String = Crypton.encrypt(value, secretKey)
+    override fun encrypt(value: String): String = Crypton.aesCbcEncryption().encrypt(value, secretKey)
 
-    override fun decrypt(value: String): String = Crypton.decryptAsString(value, secretKey)
+    override fun decrypt(value: String): String = Crypton.aesCbcEncryption().decryptAsString(value, secretKey)
 
     @Throws(GeneralSecurityException::class)
     private fun getEncryptionKey(): SecretKey {
