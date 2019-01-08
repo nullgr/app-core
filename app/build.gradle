@@ -23,10 +23,15 @@ android {
     }
 }
 
+androidExtensions {
+    experimental = true
+}
+
 dependencies {
     def commonDependencies = rootProject.ext.commonDependencies
 
     implementation project(':core-adapter')
+    implementation project(':core-adapter-ktx')
     implementation project(':core-collections')
     implementation project(':core-date')
     implementation project(':core-font')

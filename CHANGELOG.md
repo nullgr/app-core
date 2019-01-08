@@ -2,6 +2,7 @@
 * Implement ***core-security*** module
 * [#51] - Fixed API version checking for WindowExtensions
 * [#54] - Added functions to convert Date to Timestamp and compare fields of Date
+* [#56] - Added ***core-adapter-ktx*** module
 
 # 1.0.2-alpha.3
 * [#47] 
