@@ -3,7 +3,8 @@ package com.nullgr.core.date
 import org.joda.time.DateTime
 import org.joda.time.Interval
 import org.joda.time.LocalDateTime
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 import java.util.concurrent.TimeUnit
 
 /**
@@ -113,8 +114,8 @@ fun Date.minusAny(timeUnit: TimeUnit, count: Long): Date {
  */
 fun Date.withoutTime(): Date {
     return LocalDateTime(this.time)
-            .withTime(0, 0, 0, 0)
-            .toDate()
+        .withTime(0, 0, 0, 0)
+        .toDate()
 }
 
 /**
@@ -138,4 +139,31 @@ fun Date.isInRange(dateStart: Date, dateEnd: Date): Boolean {
  */
 fun Long.toDate(): Date {
     return Date(this)
+}
+
+/**
+ * Converts this [Date] object to [Long] that represents timestamp in seconds
+ *
+ * @return [Long]
+ */
+fun Date.toTimestamp(): Long = this.time / 1000
+
+/**
+ * Creates new [Date] from long that represents timestamp in seconds
+ *
+ * @return [Date]
+ */
+fun Long.dateFromTimestamp(): Date = Date(this * 1000)
+
+/**
+ * Compares [field] of this [Date] object with [other].
+ * [field] can be of [Calendar.ERA]..[Calendar.DST_OFFSET]
+ *
+ * @return True if [field] is same in this and other [Date] objects
+ */
+fun Date.areFieldsTheSame(other: Date, field: Int): Boolean {
+    val c = Calendar.getInstance()
+    val thisField = c.also { it.time = this }[field]
+    val otherField = c.also { it.time = other }[field]
+    return thisField == otherField
 }
