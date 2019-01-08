@@ -54,6 +54,7 @@ var spannableText = (someStringText.applySpanSet()
 For full list of provided functions select one of detailed readme in list below:
 ----------------
 * [Adapter](./core-adapter/README.md)
+* [Adapter KTX](./core-adapter-ktx/README.md)
 * [Collections](./core-collections/README.md)
 * [Common](./core-common/README.md)
 * [Date](./core-date/README.md)
@@ -98,6 +99,11 @@ dependencies {
     
     // core-adapter
     implementation "com.nullgr.core:core-adapter:$CORE_VERSION"
+    implementation "com.android.support:recyclerview-v7:$SUPPORT_VERSION"
+    
+    // core-adapter-ktx
+    implementation "com.nullgr.core:core-adapter:$CORE_VERSION"
+    implementation "com.nullgr.core:core-adapter-ktx:$CORE_VERSION"
     implementation "com.android.support:recyclerview-v7:$SUPPORT_VERSION"
     
     // core-collections
