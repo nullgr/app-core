@@ -3,6 +3,16 @@
 * [#51] - Fixed API version checking for WindowExtensions
 * [#54] - Added functions to convert Date to Timestamp and compare fields of Date
 * [#56] - Added ***core-adapter-ktx*** module
+* [#57] - Extract rxresult to core-intents module.
+  <br/> ***NOTE!*** path to RxResolveResultActivity should
+be changed as show below:
+```
+ <activity android:name="com.nullgr.core.intents.rxresult.RxResolveResultActivity" />
+```
+Also, if you use only core-rx, you no longer need to add:
+```
+ implementation "com.android.support:appcompat-v7:$SUPPORT_VERSION"
+```
 
 # 1.0.2-alpha.3
 * [#47] 

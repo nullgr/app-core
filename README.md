@@ -140,7 +140,6 @@ dependencies {
     
     // core-rx
     implementation "com.nullgr.core:core-rx:$CORE_VERSION"
-    implementation "com.android.support:appcompat-v7:$SUPPORT_VERSION"
     
     // core-rx-contacts
     implementation "com.nullgr.core:core-rx-contacts:$CORE_VERSION"
