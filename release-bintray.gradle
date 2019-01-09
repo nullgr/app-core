@@ -14,7 +14,7 @@ ext {
     issueUrl = 'https://github.com/nullgr/app-core/issues'
     gitUrl = 'https://github.com/nullgr/app-core.git'
 
-    libraryVersion = '1.0.1-alpha.2'
+    libraryVersion = '2.0.0-beta.1'
 
     developerId = 'nullgr-dev'
     developerName = 'Nullgravity Developer'

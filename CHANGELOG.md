@@ -1,4 +1,4 @@
-# 1.1.0-alpha.4
+# 2.0.0-beta.1
 * Implement ***core-security*** module
 * [#51] - Fixed API version checking for WindowExtensions
 * [#54] - Added functions to convert Date to Timestamp and compare fields of Date
