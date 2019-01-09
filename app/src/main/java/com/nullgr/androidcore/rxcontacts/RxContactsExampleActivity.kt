@@ -20,7 +20,6 @@ import com.nullgr.core.rx.bindProgress
 import com.nullgr.core.rx.contacts.RxContactsProvider
 import com.nullgr.core.rx.contacts.domain.UserContact
 import com.nullgr.core.rx.schedulers.IoToMainSchedulersFacade
-import com.nullgr.core.rx.zipWithTimer
 import com.nullgr.core.ui.decor.DividerItemDecoration
 import com.nullgr.core.ui.extensions.toggleView
 import com.nullgr.core.ui.toast.showToast
@@ -36,8 +35,8 @@ import kotlinx.android.synthetic.main.activity_rx_contacts_example_activity.prog
 class RxContactsExampleActivity : BaseAdapterExampleActivity() {
 
     private val favoritesPredicates = arrayListOf<Predicate<UserContact>>(
-            Predicate { it.isStarred },
-            Predicate { !it.isStarred }
+        Predicate { it.isStarred },
+        Predicate { !it.isStarred }
     )
 
     private lateinit var disposable: Disposable
@@ -51,21 +50,20 @@ class RxContactsExampleActivity : BaseAdapterExampleActivity() {
         itemsView.addItemDecoration(DividerItemDecoration(this, R.drawable.divider_adapter_item, false))
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
-                == PackageManager.PERMISSION_GRANTED) {
+            == PackageManager.PERMISSION_GRANTED) {
 
             disposable = RxContactsProvider.with(this)
-                    .fetchAll(UserContact::class.java)
-                    .applySchedulers(IoToMainSchedulersFacade())
-                    .zipWithTimer(1000)
-                    .bindProgress(Consumer { runOnUiThread { progressView.toggleView(it) } })
-                    .bindEmpty(Consumer { runOnUiThread { emptyView.toggleView(it) } })
-                    .map {
-                        mapToListItems(it.split(favoritesPredicates))
-                    }.subscribe({
-                        adapter.updateData(it)
-                    }, {
-                        "Error Occurred: $it".showToast(this)
-                    })
+                .fetchAll(UserContact::class.java)
+                .applySchedulers(IoToMainSchedulersFacade())
+                .bindProgress(Consumer { progressView.toggleView(it) })
+                .bindEmpty(Consumer { emptyView.toggleView(it) })
+                .map {
+                    mapToListItems(it.split(favoritesPredicates))
+                }.subscribe({
+                    adapter.updateData(it)
+                }, {
+                    "Error Occurred: $it".showToast(this)
+                })
         }
     }
 
@@ -94,12 +92,14 @@ class RxContactsExampleActivity : BaseAdapterExampleActivity() {
 
     private fun List<UserContact>.toContactItems(): List<ContactItem> {
         return asSequence().map {
-            ContactItem(it.id,
-                    it.displayName,
-                    it.isStarred,
-                    it.photo,
-                    it.phones?.map { it.phoneNumber!! },
-                    it.emails?.map { it.email!! })
+            ContactItem(
+                it.id,
+                it.displayName,
+                it.isStarred,
+                it.photo,
+                it.phones?.map { it.phoneNumber!! },
+                it.emails?.map { it.email!! }
+            )
         }.sortedBy {
             it.displayName
         }.toList()

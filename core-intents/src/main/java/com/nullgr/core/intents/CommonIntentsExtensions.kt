@@ -19,8 +19,8 @@ import android.text.TextUtils
 import android.widget.Toast
 import com.nullgr.core.rx.RxBus
 import com.nullgr.core.rx.SingletonRxBusProvider
-import com.nullgr.core.rx.rxresult.RxActivityResult
-import com.nullgr.core.rx.rxresult.RxResolveResultActivity
+import com.nullgr.core.intents.rxresult.RxActivityResult
+import com.nullgr.core.intents.rxresult.RxResolveResultActivity
 import io.reactivex.Observable
 import java.util.*
 
