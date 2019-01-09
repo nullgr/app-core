@@ -73,4 +73,5 @@
     <string name="title_common_error">Not recognized.</string>
     <string name="title_saved_success">Text saved successfully!</string>
     <string name="title_default_help_text">Something went wrong</string>
+    <string name="title_fingerprint_reset">Your security settings were changed! Please setup fingerprint authorization again</string>
 </resources>
