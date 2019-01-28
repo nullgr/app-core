@@ -73,9 +73,9 @@ open class DynamicAdapter constructor(
     }
 
     fun setData(newItems: List<ListItem>) {
-        val copy = ArrayList(newItems)
-        manager.setDelegates(copy)
-        items = copy
+        this.items.clear()
+        this.items.addAll(newItems)
+        manager.setDelegates(this.items)
     }
 
     fun getItem(position: Int): ListItem? {
