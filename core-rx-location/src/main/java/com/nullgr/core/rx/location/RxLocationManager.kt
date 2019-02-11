@@ -3,15 +3,16 @@ package com.nullgr.core.rx.location
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.location.Location
 import android.support.annotation.RequiresPermission
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsStatusCodes
-import com.nullgr.core.rx.RxBus
-import com.nullgr.core.rx.SingletonRxBusProvider
 import com.nullgr.core.intents.rxresult.RxActivityResult
 import com.nullgr.core.intents.rxresult.RxResolveResultActivity
+import com.nullgr.core.rx.RxBus
+import com.nullgr.core.rx.SingletonRxBusProvider
 import io.reactivex.Observable
 import pl.charmas.android.reactivelocation2.ReactiveLocationProvider
 
@@ -44,9 +45,9 @@ class RxLocationManager(private var context: Context,
 
     private val locationSettingsRequest: LocationSettingsRequest by lazy {
         LocationSettingsRequest.Builder()
-                .addLocationRequest(locationRequest)
-                .setAlwaysShow(true)
-                .build()
+            .addLocationRequest(locationRequest)
+            .setAlwaysShow(true)
+            .build()
     }
 
     /**
@@ -57,31 +58,33 @@ class RxLocationManager(private var context: Context,
     @RequiresPermission(android.Manifest.permission.ACCESS_FINE_LOCATION)
     fun requestLocation(): Observable<Location> {
         return rxLocationProvider.checkLocationSettings(locationSettingsRequest)
-                .flatMap {
-                    when (it.status.statusCode) {
-                        LocationSettingsStatusCodes.SUCCESS -> locationObservable()
-                        LocationSettingsStatusCodes.RESOLUTION_REQUIRED ->
-                            if (!it.status.hasResolution())
-                                Observable.just(EMPTY_LOCATION)
-                            else
-                                Observable.fromCallable {
-                                    val intent = RxResolveResultActivity.newInstance(context,
-                                            it.status.resolution.intentSender)
-                                    context.startActivity(intent)
-                                }.flatMap {
-                                    SingletonRxBusProvider.BUS.observable(RxBus.Keys.SINGLE)
-                                            .filter { it is RxActivityResult }
-                                            .map { it as RxActivityResult }
-                                            .flatMap {
-                                                when (it.resultCode) {
-                                                    Activity.RESULT_OK -> locationObservable()
-                                                    else -> Observable.just(EMPTY_LOCATION)
-                                                }
-                                            }
-                                }
-                        else -> Observable.just(EMPTY_LOCATION)
-                    }
+            .flatMap {
+                when (it.status.statusCode) {
+                    LocationSettingsStatusCodes.SUCCESS -> locationObservable()
+                    LocationSettingsStatusCodes.RESOLUTION_REQUIRED ->
+                        if (!it.status.hasResolution())
+                            Observable.just(EMPTY_LOCATION)
+                        else
+                            Observable.fromCallable {
+                                val intent = RxResolveResultActivity.newInstance(
+                                    context,
+                                    it.status.resolution.intentSender
+                                ).apply { addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) }
+                                context.startActivity(intent)
+                            }.flatMap {
+                                SingletonRxBusProvider.BUS.observable(RxBus.Keys.SINGLE)
+                                    .filter { it is RxActivityResult }
+                                    .map { it as RxActivityResult }
+                                    .flatMap {
+                                        when (it.resultCode) {
+                                            Activity.RESULT_OK -> locationObservable()
+                                            else -> Observable.just(EMPTY_LOCATION)
+                                        }
+                                    }
+                            }
+                    else -> Observable.just(EMPTY_LOCATION)
                 }
+            }
     }
 
     @SuppressLint("MissingPermission")
