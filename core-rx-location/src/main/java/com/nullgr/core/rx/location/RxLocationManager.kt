@@ -10,8 +10,8 @@ import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.nullgr.core.rx.RxBus
 import com.nullgr.core.rx.SingletonRxBusProvider
-import com.nullgr.core.rx.rxresult.RxActivityResult
-import com.nullgr.core.rx.rxresult.RxResolveResultActivity
+import com.nullgr.core.intents.rxresult.RxActivityResult
+import com.nullgr.core.intents.rxresult.RxResolveResultActivity
 import io.reactivex.Observable
 import pl.charmas.android.reactivelocation2.ReactiveLocationProvider
 

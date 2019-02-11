@@ -56,6 +56,7 @@ dependencies {
     def commonTestDependencies = rootProject.ext.commonTestDependencies
 
     implementation project(':core-rx')
+    implementation project(':core-intents')
 
     implementation commonDependencies.rxKotlin
     implementation commonDependencies.rxAndroid

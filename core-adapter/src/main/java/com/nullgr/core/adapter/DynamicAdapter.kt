@@ -64,7 +64,7 @@ open class DynamicAdapter constructor(
      */
     fun updateData(newItems: List<ListItem>, enableDiffUtils: Boolean = true, detectMoves: Boolean = true) {
         when (enableDiffUtils) {
-            true -> diffCalculator?.calculateDiff(this, ArrayList(items), newItems, detectMoves)
+            true -> diffCalculator?.calculateDiff(this, ArrayList(items), ArrayList(newItems), detectMoves)
             else -> {
                 setData(newItems)
                 notifyDataSetChanged()
@@ -73,9 +73,9 @@ open class DynamicAdapter constructor(
     }
 
     fun setData(newItems: List<ListItem>) {
-        manager.setDelegates(newItems)
         this.items.clear()
         this.items.addAll(newItems)
+        manager.setDelegates(this.items)
     }
 
     fun getItem(position: Int): ListItem? {

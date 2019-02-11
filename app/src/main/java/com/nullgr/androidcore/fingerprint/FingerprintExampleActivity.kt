@@ -1,7 +1,9 @@
 package com.nullgr.androidcore.fingerprint
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
+import android.security.keystore.KeyPermanentlyInvalidatedException
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.nullgr.androidcore.R
@@ -85,6 +87,7 @@ class FingerprintExampleActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("NewApi")
     private fun bindAsListenFingerprint() {
         setUpFingerprintContainer.hide()
         containerFingerprint.show()
@@ -104,13 +107,25 @@ class FingerprintExampleActivity : AppCompatActivity() {
             }
         }.addTo(compositeDisposable)
 
-        rxFingerprintManger.startListening(FingerprintCrypton.prepareCryptoObject(RSA_KEY_ALIAS))
-            .subscribe({
-                val decryptedText = FingerprintCrypton.decrypt(it, preferences[KEY]!!) ?: ""
-                showAlert(decryptedText)
-            }, {
-                showAlert(it.toString())
-            }).addTo(compositeDisposable)
+        val cryptoObject = FingerprintCrypton.prepareCryptoObjectSafe(RSA_KEY_ALIAS) {
+            if (it is KeyPermanentlyInvalidatedException) {
+                showAlert(getString(R.string.title_fingerprint_reset))
+            } else {
+                showAlert(getString(R.string.title_default_help_text))
+            }
+            bindAsSetupFingerprint()
+        }
+
+        cryptoObject?.let { nonNullCryptoObject ->
+            rxFingerprintManger.startListening(nonNullCryptoObject)
+                .subscribe({ cryptoObjectResult ->
+                    val decryptedText = FingerprintCrypton.decrypt(cryptoObjectResult, preferences[KEY]!!)
+                        ?: ""
+                    showAlert(decryptedText)
+                }, {
+                    showAlert(it.toString())
+                }).addTo(compositeDisposable)
+        }
 
         buttonResetFingerprint.setOnClickListener {
             compositeDisposable.clear()

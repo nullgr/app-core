@@ -1,11 +1,11 @@
-package com.nullgr.core.rx.rxresult
+package com.nullgr.core.intents.rxresult
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import android.support.v7.app.AppCompatActivity
-import com.nullgr.core.rx.rxresult.delegates.BaseResolveResultActivityDelegate
+import com.nullgr.core.intents.rxresult.delegates.BaseResolveResultActivityDelegate
 
 /**
  * Wraps calling [android.app.Activity.startActivityForResult] and returns [RxActivityResult]

@@ -13,7 +13,8 @@
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="16dp" />
 
     <TextView
         android:id="@+id/text1View"
@@ -35,6 +36,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/text1View"
-        app:layout_constraintTop_toBottomOf="@+id/text1View" />
+        app:layout_constraintTop_toBottomOf="@+id/text1View"
+        android:layout_marginRight="16dp" />
 
 </android.support.constraint.ConstraintLayout>
