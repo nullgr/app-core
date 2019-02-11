@@ -54,6 +54,7 @@ androidExtensions {
 dependencies {
     def commonDependencies = rootProject.ext.commonDependencies
 
+    compileOnly commonDependencies.supportCompatV7
     compileOnly commonDependencies.supportCustomTabs
     compileOnly commonDependencies.supportAnnotations
     compileOnly commonDependencies.kotlin

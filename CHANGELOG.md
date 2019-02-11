@@ -1,3 +1,8 @@
+# 2.0.1-beta.2
+* [#65] - Added FLAG_ACTIVITY_NEW_TASK to RxLocationManager
+* [#63] - Updated Copyright
+* [#61] - Improved DynamicAdapter: Copy collections
+
 # 2.0.0-beta.1
 * Implement ***core-security*** module
 * [#51] - Fixed API version checking for WindowExtensions

@@ -93,7 +93,7 @@ class SparseAdapterDelegatesManager(private val delegatesFactory: AdapterDelegat
     private fun getDelegateForPosition(items: List<ListItem>, position: Int): AdapterDelegate? {
         return (0 until delegates.size())
                 .map { delegates[it] }
-                .firstOrNull { it.isForViewType(items, position) }
+                .firstOrNull { delegate -> delegate?.let { it.isForViewType(items, position)} ?: false }
     }
 
     private fun addDelegate(delegate: AdapterDelegate): SparseAdapterDelegatesManager {

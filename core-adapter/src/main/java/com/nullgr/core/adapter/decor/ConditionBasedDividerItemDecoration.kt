@@ -61,7 +61,7 @@ class ConditionBasedDividerItemDecoration(context: Context, @DrawableRes resId: 
     }
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView,
-                                state: RecyclerView.State?) {
+                                state: RecyclerView.State) {
         if (divider == null) {
             outRect.set(0, 0, 0, 0)
             return
