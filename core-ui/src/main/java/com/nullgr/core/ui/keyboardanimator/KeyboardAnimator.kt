@@ -5,9 +5,11 @@ import android.os.Build
 import android.support.annotation.RequiresApi
 import android.view.View
 import android.view.Window
+import android.view.WindowManager
 
 /**
- * Class that encapsulates all the keyboard animation logic.
+ * Class that encapsulates all the keyboard animation logic. [WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE] will
+ * be set as soft input mode for [window] to provide proper obtaining of the insets.
  */
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -19,6 +21,10 @@ class KeyboardAnimator @JvmOverloads constructor(
 
     private val animatedView: View? by lazy(LazyThreadSafetyMode.NONE) {
         window.decorView.findViewById<View>(animatedViewId)
+    }
+
+    init {
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
     }
 
     /**
