@@ -11,6 +11,7 @@ import com.nullgr.androidcore.fingerprint.FingerprintExampleActivity
 import com.nullgr.androidcore.fonts.FontsAndSpansExampleActivity
 import com.nullgr.androidcore.intents.CommonIntentsExampleActivity
 import com.nullgr.androidcore.interactor.presentation.InteractorExampleActivity
+import com.nullgr.androidcore.keyboardanimator.KeyboardAnimatorExampleActivity
 import com.nullgr.androidcore.location.RxLocationManagerExampleActivity
 import com.nullgr.androidcore.resources.ResourcesExampleActivity
 import com.nullgr.androidcore.rxcontacts.RxContactsExampleActivity
@@ -27,6 +28,7 @@ import kotlinx.android.synthetic.main.activity_main.buttonInteractorsExample
 import kotlinx.android.synthetic.main.activity_main.buttonLocationExample
 import kotlinx.android.synthetic.main.activity_main.buttonResourcesExample
 import kotlinx.android.synthetic.main.activity_main.buttonRxContactsProviderExample
+import kotlinx.android.synthetic.main.activity_main.buttonKeyboardAnimatorExample
 
 class MainActivity : AppCompatActivity() {
 
@@ -76,7 +78,18 @@ class MainActivity : AppCompatActivity() {
             withVersion(Build.VERSION_CODES.M) {
                 higherOrEqual { Intent(this@MainActivity, FingerprintExampleActivity::class.java)
                     .launch(this@MainActivity) }
-                lower { getString(R.string.alert_lower_api23).showLongToast(this@MainActivity) }
+                lower { getString(R.string.alert_lower_api, versionCode).showLongToast(this@MainActivity) }
+            }
+        }
+
+        buttonKeyboardAnimatorExample.setOnClickListener {
+            withVersion(Build.VERSION_CODES.LOLLIPOP) {
+                higherOrEqual {
+                    Intent(this@MainActivity, KeyboardAnimatorExampleActivity::class.java).launch(this@MainActivity)
+                }
+                lower {
+                    getString(R.string.alert_lower_api, versionCode).showLongToast(this@MainActivity)
+                }
             }
         }
     }

@@ -44,6 +44,8 @@
 
         <activity android:name=".fingerprint.FingerprintExampleActivity" />
 
+        <activity android:name=".keyboardanimator.KeyboardAnimatorExampleActivity" />
+
     </application>
 
 </manifest>
