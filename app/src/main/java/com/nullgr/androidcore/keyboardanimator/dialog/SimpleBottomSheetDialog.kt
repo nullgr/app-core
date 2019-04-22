@@ -9,7 +9,7 @@ import android.support.design.widget.BottomSheetDialog
 import android.view.View
 import android.view.WindowManager
 import com.nullgr.androidcore.R
-import com.nullgr.core.ui.keyboardanimator.SimpleKeyboardAnimator
+import com.nullgr.core.ui.keyboardanimator.simple.SimpleKeyboardAnimator
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)

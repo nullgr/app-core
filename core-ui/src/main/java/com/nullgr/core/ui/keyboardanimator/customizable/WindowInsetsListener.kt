@@ -1,4 +1,4 @@
-package com.nullgr.core.ui.keyboardanimator
+package com.nullgr.core.ui.keyboardanimator.customizable
 
 import android.annotation.TargetApi
 import android.os.Build

@@ -1,4 +1,4 @@
-package com.nullgr.core.ui.keyboardanimator
+package com.nullgr.core.ui.keyboardanimator.customizable
 
 import android.annotation.TargetApi
 import android.os.Build
@@ -9,20 +9,20 @@ import android.view.View
 import android.view.ViewGroup
 
 /**
- * Default [Animator] which adds bottom margin to the animated view.
+ * Default [Animator] which sets bottom padding to the animated view.
  */
 @RequiresApi(Build.VERSION_CODES.KITKAT)
 @TargetApi(Build.VERSION_CODES.KITKAT)
-class MarginAnimator : Animator {
+class PaddingAnimator : Animator {
 
     override fun animate(view: View, offset: Int): Boolean {
-        val sceneRoot = view.parent as? ViewGroup
-        val params = view.layoutParams as? ViewGroup.MarginLayoutParams
-        if (sceneRoot != null && params != null) {
+        (view.parent as? ViewGroup)?.let { sceneRoot ->
             TransitionManager.beginDelayedTransition(sceneRoot, ChangeBounds())
-            view.layoutParams = params.apply { bottomMargin = offset }
+            view.setBottomPadding(offset)
             return true
         }
         return false
     }
+
+    private fun View.setBottomPadding(padding: Int) = setPadding(paddingLeft, paddingTop, paddingRight, padding)
 }
