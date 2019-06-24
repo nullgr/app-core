@@ -2,6 +2,7 @@ package com.nullgr.core.adapter
 
 import android.support.v7.util.DiffUtil
 import com.nullgr.core.adapter.items.ListItem
+import com.nullgr.core.adapter.items.ParentItem
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -52,6 +53,24 @@ fun Observable<List<ListItem>>.bindTo(
         .subscribe(adapter.consumer)
         .addTo(compositeUnbind)
 }
+
+fun <T : ListItem> List<T>.isChanged(other: List<T>): Boolean {
+    if (size != other.size) {
+        return true
+    }
+
+    forEachIndexed { index, item ->
+        if (!item.areItemsTheSame(other[index])) {
+            return true
+        } else if (!item.areContentsTheSame(other[index])) {
+            return true
+        }
+    }
+
+    return false
+}
+
+fun ParentItem.isChanged(other: ParentItem): Boolean = this.items.isChanged(other.items)
 
 /**
  * Represents strategy to choose how calculation results
