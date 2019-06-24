@@ -60,7 +60,7 @@ class RxContactsExampleActivity : BaseAdapterExampleActivity() {
                 .map {
                     mapToListItems(it.split(favoritesPredicates))
                 }.subscribe({
-                    adapter.updateData(it)
+                    itemsRelay.accept(it)
                 }, {
                     "Error Occurred: $it".showToast(this)
                 })

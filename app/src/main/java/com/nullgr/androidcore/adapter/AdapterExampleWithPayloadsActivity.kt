@@ -36,7 +36,7 @@ class AdapterExampleWithPayloadsActivity : BaseAdapterExampleActivity(), ColorPi
         itemsView.adapter = adapter
 
         val item = ExampleItemWithPayloads("Initial title", "Initial subtitle", itemColor)
-        adapter.updateData(arrayListOf(item))
+        itemsRelay.accept(arrayListOf(item))
 
         val disposable = bus.observable()
                 .filter { it is Event }
@@ -66,7 +66,8 @@ class AdapterExampleWithPayloadsActivity : BaseAdapterExampleActivity(), ColorPi
             val newTitle = titleInputView.text.toString()
             val newSubTitle = subTitleInputView.text.toString()
             val newItem = item.copy(title = newTitle, subTitle = newSubTitle, color = itemColor)
-            adapter.updateData(arrayListOf(newItem), useDiffUtils)
+            if(useDiffUtils) itemsRelay.accept(arrayListOf(newItem))
+            else adapter.updateData(arrayListOf(newItem), false)
         }
 
         logView.movementMethod = ScrollingMovementMethod()
