@@ -10,6 +10,10 @@ import com.nullgr.core.adapter.items.ListItem
  *
  * @author vchernyshov
  */
+@Deprecated(
+    message = "Use functions from DiffUtilsExtensions instead.",
+    replaceWith = ReplaceWith("DiffUtilsExtensions.calculate")
+)
 class DefaultDiffCalculator : DiffCalculator {
 
     override fun calculateDiff(adapter: DynamicAdapter, before: List<ListItem>, after: List<ListItem>, detectMoves: Boolean) {
