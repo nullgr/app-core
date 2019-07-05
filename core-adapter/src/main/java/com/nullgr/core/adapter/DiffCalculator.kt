@@ -8,6 +8,10 @@ import com.nullgr.core.adapter.items.ListItem
  *
  * @author vchernyshov
  */
+@Deprecated(
+    message = "Use functions from DiffUtilsExtensions instead.",
+    replaceWith = ReplaceWith("DiffUtilsExtensions.calculate")
+)
 interface DiffCalculator {
 
     /**

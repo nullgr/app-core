@@ -14,9 +14,8 @@ Example
 First need to init ```DynamicAdapter```:
 
 ```kotlin
-val diffCalculator = SomeDiffCalculator()
 val delegatesFactory = SomeAdapterDelegatesFactory()
-val adapter = DynamicAdapter(delegatesFactory, diffCalculator)
+val adapter = DynamicAdapter(delegatesFactory)
 ```
 
 ```AdapterDelegatesFactory``` could be like this:
@@ -101,7 +100,7 @@ For click handling you should override ```AdapterDelegate.onCreateViewHolder```
 override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         return super.onCreateViewHolder(parent).apply {
             val onClickListener = View.OnClickListener { view ->
-                this.withAdapterPosition { items, item, position ->
+                this.withAdapterPosition<SomeItem> { item, position ->
                     when (view.id) {
                         // handle click action depends on view id
                     }

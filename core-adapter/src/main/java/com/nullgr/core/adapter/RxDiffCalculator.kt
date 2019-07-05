@@ -17,6 +17,10 @@ import java.lang.ref.WeakReference
  *
  * @author vchernyshov
  */
+@Deprecated(
+    message = "Use functions from DiffUtilsExtensions instead.",
+    replaceWith = ReplaceWith("DiffUtilsExtensions.calculate, DiffUtilsExtensions.bindTo")
+)
 class RxDiffCalculator(
         private val schedulersFacade: SchedulersFacade = ComputationToMainSchedulersFacade()) : DiffCalculator {
 
