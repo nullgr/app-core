@@ -26,7 +26,7 @@ class RxResolveResultActivity : AppCompatActivity() {
     }
 
     private val delegate: BaseResolveResultActivityDelegate by lazy {
-        BaseResolveResultActivityDelegate.newInstance(intent.extras[EXTRA_KEY], this)
+        BaseResolveResultActivityDelegate.newInstance(intent.extras!![EXTRA_KEY]!!, this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

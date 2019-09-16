@@ -86,7 +86,7 @@ class CommonIntentsExampleActivity : AppCompatActivity() {
                                 {
                                     it.intent?.let { intent ->
                                         RxContactsProvider.with(this)
-                                                .fromUri(UserContact::class.java, intent.data)
+                                                .fromUri(UserContact::class.java, intent.data!!)
                                                 .subscribe(
                                                         {
                                                             ("Contact (${it.firstOrNull()?.displayName}) " +

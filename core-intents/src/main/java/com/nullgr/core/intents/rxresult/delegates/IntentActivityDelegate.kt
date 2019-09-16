@@ -12,7 +12,7 @@ internal class IntentActivityDelegate(activity: Activity) : BaseResolveResultAct
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (activity.intent.hasExtra(RxResolveResultActivity.EXTRA_KEY)) {
-            val intent = activity.intent.extras[RxResolveResultActivity.EXTRA_KEY] as Intent
+            val intent = activity.intent.extras!![RxResolveResultActivity.EXTRA_KEY] as Intent
             activity.startActivityForResult(intent, REQUEST_CODE)
         } else {
             sendResult(Activity.RESULT_CANCELED, null)
