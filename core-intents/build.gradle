@@ -6,8 +6,8 @@ dependencies {
     def commonDependencies = rootProject.ext.commonDependencies
 
     compileOnly commonDependencies.appCompat
-    compileOnly commonDependencies.supportCustomTabs
-    compileOnly commonDependencies.supportAnnotations
+    compileOnly commonDependencies.browser
+    compileOnly commonDependencies.annotations
 
     implementation project(':core-rx')
     implementation commonDependencies.rxKotlin

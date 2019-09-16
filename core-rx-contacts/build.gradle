@@ -8,21 +8,16 @@ dependencies {
 
     implementation project(':core-collections')
 
-    compileOnly commonDependencies.supportAnnotations
+    compileOnly commonDependencies.annotations
 
     implementation commonDependencies.rxKotlin
     implementation commonDependencies.rxAndroid
     implementation commonDependencies.rxRelay
 
-    // Instrumentation test dependencies
     androidTestImplementation commonTestDependencies.junit
-    androidTestImplementation commonTestDependencies.mockito
-    androidTestImplementation commonTestDependencies.mockitoAndroid
-    androidTestImplementation (commonTestDependencies.espressoCore)
-    androidTestImplementation (commonTestDependencies.androidRunner)
-    androidTestImplementation (commonTestDependencies.androidRules)
-    androidTestImplementation (commonTestDependencies.espressoIntents)
-    androidTestImplementation(commonTestDependencies.espressoContrib)
+    androidTestImplementation commonTestDependencies.androidXJunit
+    androidTestImplementation commonTestDependencies.androidRules
+    androidTestImplementation commonTestDependencies.androidRunner
 }
 
 apply from: rootProject.file('release-bintray.gradle')

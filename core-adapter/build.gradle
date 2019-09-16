@@ -13,11 +13,7 @@ dependencies {
     implementation commonDependencies.rxKotlin
     implementation commonDependencies.rxAndroid
 
-    testImplementation commonTestDependencies.supportRecyclerView
-    testImplementation commonTestDependencies.kotlinJUnit
     testImplementation commonTestDependencies.junit
-    testImplementation commonTestDependencies.mockito
-    testImplementation commonTestDependencies.assertj
 }
 
 apply from: rootProject.file('release-bintray.gradle')

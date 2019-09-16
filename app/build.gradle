@@ -37,7 +37,6 @@ androidExtensions {
 
 dependencies {
     def commonDependencies = rootProject.ext.commonDependencies
-    def commonTestDependencies = rootProject.ext.commonTestDependencies
 
     implementation project(':core-adapter')
     implementation project(':core-adapter-ktx')
@@ -62,17 +61,12 @@ dependencies {
     implementation commonDependencies.kotlin
     implementation commonDependencies.appCompat
     implementation commonDependencies.recyclerView
-    implementation commonDependencies.supportDesign
-    implementation commonDependencies.supportCardView
-    implementation commonDependencies.supportvectorDrawable
-    implementation commonDependencies.supportConstraint
-    implementation commonDependencies.supportCustomTabs
+    implementation commonDependencies.material
+    implementation commonDependencies.cardView
+    implementation commonDependencies.vectorDrawable
+    implementation commonDependencies.constraint
+    implementation commonDependencies.browser
     implementation commonDependencies.picasso
     implementation commonDependencies.colorPicker
     implementation commonDependencies.location
-
-    testImplementation commonTestDependencies.junit
-
-    androidTestImplementation commonTestDependencies.androidRunner
-    androidTestImplementation commonTestDependencies.espressoCore
 }

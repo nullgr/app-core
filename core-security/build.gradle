@@ -4,6 +4,7 @@ apply from: rootProject.file('android.gradle')
 
 dependencies {
     def commonDependencies = rootProject.ext.commonDependencies
+    def commonTestDependencies = rootProject.ext.commonTestDependencies
 
     implementation project(':core-rx')
     implementation project(':core-preferences')
@@ -13,6 +14,10 @@ dependencies {
     implementation commonDependencies.rxKotlin
     implementation commonDependencies.rxAndroid
     implementation commonDependencies.rxRelay
+
+    androidTestImplementation commonTestDependencies.junit
+    androidTestImplementation commonTestDependencies.androidXJunit
+    androidTestImplementation commonTestDependencies.androidRunner
 }
 
 apply from: rootProject.file('release-bintray.gradle')

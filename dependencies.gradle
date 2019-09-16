@@ -5,82 +5,77 @@ allprojects {
 }
 
 ext {
-    //Android
+    // android
     androidBuildToolsVersion = '29.0.0'
     androidMinSdkVersion = 16
     androidTargetSdkVersion = 29
     androidCompileSdkVersion = 29
 
-    supportLibraryVersion = '27.1.0'
-    playServicesVersion = '15.0.1'
-    constraintVersion = '1.0.2'
-    customTabsVersion = '27.1.0'
+    // androidx
+    androidxVersion = '1.0.0'
+    appCompatVersion = '1.1.0'
+    anotationVersion = '1.1.0'
+    constraintVersion = '1.1.3'
+    recyclerVersion = '1.0.0'
+    cardViewVersion = '1.0.0'
+    vectorVersion = '1.1.0'
+    browserVersion = '1.0.0'
 
-    //Libraries
+    // material
+    materialVersion = '1.0.0'
+
+    // rx
     rxJavaVersion = '2.2.12'
     rxKotlinVersion = '2.4.0'
     rxAndroidVersion = '2.1.1'
     rxRelay = '2.1.1'
-    androidAnnotationsVersion = '21.0.3'
+
+    // others
+    playServicesVersion = '15.0.1'
     rxLocationVersion = '2.1@aar'
     jodaTimeVersion = '2.9.9.2'
     picassoVersion = '2.71828'
     colorPickerVersion = '1.2.0'
 
-    //Testing
-    robolectricVersion = '3.4.2'
-    jUnitVersion = '4.12'
-    assertJVersion = '3.8.0'
-    mockitoVersion = '1.9.5'
-    dexmakerVersion = '1.0'
-    espressoVersion = '3.0.0'
-    testingSupportLibVersion = '0.1'
-    mockitoKotlinVersion = '1.5.0'
-    mockitoAndroidVersion = '2.8.47'
-    androidSupportRunnerVersion = '1.0.0'
-    androidSupportRulesVersion = '1.0.0'
-    dexmakerMockitoversion = '2.2.0'
-    runnerVersion = '0.5'
+    junitVersion = '4.12'
+    testVesrion = '1.1.0'
 
     commonDependencies = [
-            libs                 : fileTree(dir: 'libs', include: ['*.jar']),
-            appCompat            : 'androidx.appcompat:appcompat:1.0.0',
-            supportAnnotations   : 'androidx.annotation:annotation:1.0.0',
-            recyclerView         : 'androidx.recyclerview:recyclerview:1.0.0',
-            supportCardView      : 'androidx.cardview:cardview:1.0.0',
-            supportDesign        : 'com.google.android.material:material:1.0.0',
-            supportvectorDrawable: 'androidx.vectordrawable:vectordrawable:1.0.0',
-            supportConstraint    : 'androidx.constraintlayout:constraintlayout:1.1.3',
-            supportCustomTabs    : 'androidx.browser:browser:1.0.0',
+            libs          : fileTree(dir: 'libs', include: ['*.jar']),
 
-            rxJava               : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
-            rxKotlin             : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
-            rxAndroid            : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
-            rxRelay              : "com.jakewharton.rxrelay2:rxrelay:${rxRelay}",
+            // androidx
+            appCompat     : "androidx.appcompat:appcompat:${appCompatVersion}",
+            annotations   : "androidx.annotation:annotation:${anotationVersion}",
+            recyclerView  : "androidx.recyclerview:recyclerview:${recyclerVersion}",
+            cardView      : "androidx.cardview:cardview:${cardViewVersion}",
+            vectorDrawable: "androidx.vectordrawable:vectordrawable:${vectorVersion}",
+            constraint    : "androidx.constraintlayout:constraintlayout:${constraintVersion}",
+            browser       : "androidx.browser:browser:${browserVersion}",
 
-            kotlin               : "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}",
-            location             : "com.google.android.gms:play-services-location:${playServicesVersion}",
-            rxLocation           : "pl.charmas.android:android-reactive-location2:${rxLocationVersion}",
-            jodaTime             : "net.danlew:android.joda:${jodaTimeVersion}",
-            picasso              : "com.squareup.picasso:picasso:${picassoVersion}",
-            colorPicker          : "com.pes.materialcolorpicker:library:${colorPickerVersion}"
+            // material
+            material      : "com.google.android.material:material:${materialVersion}",
+
+            // rx
+            rxJava        : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxKotlin      : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
+            rxAndroid     : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            rxRelay       : "com.jakewharton.rxrelay2:rxrelay:${rxRelay}",
+
+            // kotlin
+            kotlin        : "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}",
+
+            // others
+            location      : "com.google.android.gms:play-services-location:${playServicesVersion}",
+            rxLocation    : "pl.charmas.android:android-reactive-location2:${rxLocationVersion}",
+            jodaTime      : "net.danlew:android.joda:${jodaTimeVersion}",
+            picasso       : "com.squareup.picasso:picasso:${picassoVersion}",
+            colorPicker   : "com.pes.materialcolorpicker:library:${colorPickerVersion}"
     ]
 
     commonTestDependencies = [
-            junit              : "junit:junit:${jUnitVersion}",
-            androidJunitRunner : "androidx.test.ext:junit:1.1.0",
-            kotlinJUnit        : "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}",
-            assertj            : "org.assertj:assertj-core:${assertJVersion}",
-            mockito            : "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
-            robolectric        : "org.robolectric:robolectric:${robolectricVersion}",
-            supportRunner      : "com.android.support.test:runner:${androidSupportRunnerVersion}",
-            supportRules       : "com.android.support.test:rules:${androidSupportRulesVersion}",
-            mockitoAndroid     : "org.mockito:mockito-android:${mockitoAndroidVersion}",
-            espressoCore       : 'androidx.test.espresso:espresso-core:3.1.0',
-            espressoIntents    : 'androidx.test.espresso:espresso-intents:3.1.0',
-            espressoContrib    : 'androidx.test.espresso:espresso-contrib:3.1.0',
-            androidRunner      : 'androidx.test:runner:1.1.0',
-            androidRules       : 'androidx.test:rules:1.1.0',
-            supportRecyclerView: 'androidx.recyclerview:recyclerview:1.0.0'
+            junit        : "junit:junit:${junitVersion}",
+            androidXJunit: "androidx.test.ext:junit:${testVesrion}",
+            androidRunner: "androidx.test:runner:${testVesrion}",
+            androidRules : "androidx.test:rules:${testVesrion}"
     ]
 }
