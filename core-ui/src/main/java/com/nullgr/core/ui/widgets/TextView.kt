@@ -2,7 +2,7 @@ package com.nullgr.core.ui.widgets
 
 import android.content.Context
 import android.graphics.Canvas
-import android.support.v7.widget.AppCompatTextView
+import androidx.appcompat.widget.AppCompatTextView
 import android.util.AttributeSet
 import com.nullgr.core.ui.R
 import com.nullgr.core.ui.widgets.extensions.initTypeface

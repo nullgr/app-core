@@ -6,10 +6,10 @@ allprojects {
 
 ext {
     //Android
-    androidBuildToolsVersion = '28.0.3'
-    androidMinSdkVersion = 15
-    androidTargetSdkVersion = 27
-    androidCompileSdkVersion = 27
+    androidBuildToolsVersion = '29.0.0'
+    androidMinSdkVersion = 16
+    androidTargetSdkVersion = 29
+    androidCompileSdkVersion = 29
 
     supportLibraryVersion = '27.1.0'
     playServicesVersion = '15.0.1'
@@ -44,16 +44,14 @@ ext {
 
     commonDependencies = [
             libs                 : fileTree(dir: 'libs', include: ['*.jar']),
-            supportAnnotations   : "com.android.support:support-annotations:${supportLibraryVersion}",
-            supportV4            : "com.android.support:support-v4:${supportLibraryVersion}",
-            supportV13           : "com.android.support:support-v13:${supportLibraryVersion}",
-            supportCompatV7      : "com.android.support:appcompat-v7:${supportLibraryVersion}",
-            supportRecyclerView  : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
-            supportCardView      : "com.android.support:cardview-v7:${supportLibraryVersion}",
-            supportDesign        : "com.android.support:design:${supportLibraryVersion}",
-            supportvectorDrawable: "com.android.support:support-vector-drawable:${supportLibraryVersion}",
-            supportConstraint    : "com.android.support.constraint:constraint-layout:${constraintVersion}",
-            supportCustomTabs    : "com.android.support:customtabs:${customTabsVersion}",
+            appCompat            : 'androidx.appcompat:appcompat:1.0.0',
+            supportAnnotations   : 'androidx.annotation:annotation:1.0.0',
+            recyclerView         : 'androidx.recyclerview:recyclerview:1.0.0',
+            supportCardView      : 'androidx.cardview:cardview:1.0.0',
+            supportDesign        : 'com.google.android.material:material:1.0.0',
+            supportvectorDrawable: 'androidx.vectordrawable:vectordrawable:1.0.0',
+            supportConstraint    : 'androidx.constraintlayout:constraintlayout:1.1.3',
+            supportCustomTabs    : 'androidx.browser:browser:1.0.0',
 
             rxKotlin             : "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}",
             rxAndroid            : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
@@ -69,6 +67,7 @@ ext {
 
     commonTestDependencies = [
             junit              : "junit:junit:${jUnitVersion}",
+            androidJunitRunner : "androidx.test.ext:junit:1.1.0",
             kotlinJUnit        : "org.jetbrains.kotlin:kotlin-test-junit:${kotlin_version}",
             assertj            : "org.assertj:assertj-core:${assertJVersion}",
             mockito            : "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
@@ -76,11 +75,11 @@ ext {
             supportRunner      : "com.android.support.test:runner:${androidSupportRunnerVersion}",
             supportRules       : "com.android.support.test:rules:${androidSupportRulesVersion}",
             mockitoAndroid     : "org.mockito:mockito-android:${mockitoAndroidVersion}",
-            espressoCore       : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
-            espressoIntents    : "com.android.support.test.espresso:espresso-intents:${espressoVersion}",
-            espressoContrib    : "com.android.support.test.espresso:espresso-contrib:${espressoVersion}",
-            androidRunner      : "com.android.support.test:runner:${runnerVersion}",
-            androidRules       : "com.android.support.test:rules:${runnerVersion}",
-            supportRecyclerView: "com.android.support:recyclerview-v7:${supportLibraryVersion}"
+            espressoCore       : 'androidx.test.espresso:espresso-core:3.1.0',
+            espressoIntents    : 'androidx.test.espresso:espresso-intents:3.1.0',
+            espressoContrib    : 'androidx.test.espresso:espresso-contrib:3.1.0',
+            androidRunner      : 'androidx.test:runner:1.1.0',
+            androidRules       : 'androidx.test:rules:1.1.0',
+            supportRecyclerView: 'androidx.recyclerview:recyclerview:1.0.0'
     ]
 }

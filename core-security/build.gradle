@@ -16,7 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.ext.junit.runners.AndroidJUnit4"
         multiDexEnabled true
     }
 
@@ -53,48 +53,16 @@ androidExtensions {
 
 dependencies {
     def commonDependencies = rootProject.ext.commonDependencies
-    def commonTestDependencies = rootProject.ext.commonTestDependencies
 
     implementation project(':core-rx')
     implementation project(':core-preferences')
 
-    compileOnly commonDependencies.supportCompatV7
     compileOnly commonDependencies.kotlin
+    compileOnly commonDependencies.appCompat
 
     implementation commonDependencies.rxKotlin
     implementation commonDependencies.rxAndroid
     implementation commonDependencies.rxRelay
-
-    testImplementation commonTestDependencies.kotlinJUnit
-    testImplementation commonTestDependencies.junit
-    testImplementation commonTestDependencies.mockito
-    testImplementation commonTestDependencies.assertj
-
-    // Instrumentation test dependencies
-    androidTestImplementation commonTestDependencies.junit
-    androidTestImplementation commonTestDependencies.mockito
-    androidTestImplementation commonTestDependencies.mockitoAndroid
-    androidTestImplementation (commonTestDependencies.espressoCore) {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
-    androidTestImplementation (commonTestDependencies.androidRunner) {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
-    androidTestImplementation (commonTestDependencies.androidRules) {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
-    androidTestImplementation (commonTestDependencies.espressoIntents) {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
-    androidTestImplementation(commonTestDependencies.espressoContrib) {
-        exclude module: 'appcompat'
-        exclude module: 'appcompat-v7'
-        exclude module: 'support-v4'
-        exclude module: 'support-v13'
-        exclude module: 'support-annotations'
-        exclude module: 'recyclerview-v7'
-        exclude module: 'design'
-    }
 }
 
 apply from: rootProject.file('release-bintray.gradle')

@@ -16,7 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
 
@@ -58,15 +58,15 @@ dependencies {
     compileOnly commonDependencies.kotlin
     implementation commonDependencies.jodaTime
 
+    // Instrumentation test dependencies
     androidTestImplementation commonTestDependencies.junit
     androidTestImplementation commonTestDependencies.mockito
     androidTestImplementation commonTestDependencies.mockitoAndroid
-    androidTestImplementation(commonTestDependencies.androidRunner) {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
-    androidTestImplementation(commonTestDependencies.androidRules) {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    }
+    androidTestImplementation (commonTestDependencies.espressoCore)
+    androidTestImplementation (commonTestDependencies.androidRunner)
+    androidTestImplementation (commonTestDependencies.androidRules)
+    androidTestImplementation (commonTestDependencies.espressoIntents)
+    androidTestImplementation(commonTestDependencies.espressoContrib)
 }
 
 apply from: rootProject.file('release-bintray.gradle')

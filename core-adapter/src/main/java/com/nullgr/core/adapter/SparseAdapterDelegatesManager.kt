@@ -1,7 +1,7 @@
 package com.nullgr.core.adapter
 
-import android.support.v4.util.SparseArrayCompat
-import android.support.v7.widget.RecyclerView
+import androidx.collection.SparseArrayCompat
+import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import com.nullgr.core.adapter.exceptions.DelegateNotFoundException
 import com.nullgr.core.adapter.items.ListItem
@@ -65,7 +65,7 @@ class SparseAdapterDelegatesManager(private val delegatesFactory: AdapterDelegat
             getDelegateForViewTypeOrThrowException(vh.itemViewType).onBindViewHolder(items, position, vh)
 
     override fun onBindViewHolder(items: List<ListItem>, position: Int, vh: RecyclerView.ViewHolder,
-                         payloads: List<Any>) {
+                                  payloads: List<Any>) {
             getDelegateForViewTypeOrThrowException(vh.itemViewType)
                     .onBindViewHolder(items, position, vh, payloads)
     }
@@ -93,7 +93,7 @@ class SparseAdapterDelegatesManager(private val delegatesFactory: AdapterDelegat
     private fun getDelegateForPosition(items: List<ListItem>, position: Int): AdapterDelegate? {
         return (0 until delegates.size())
                 .map { delegates[it] }
-                .firstOrNull { it.isForViewType(items, position) }
+                .firstOrNull { it!!.isForViewType(items, position) }
     }
 
     private fun addDelegate(delegate: AdapterDelegate): SparseAdapterDelegatesManager {

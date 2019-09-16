@@ -5,16 +5,24 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 27
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
+    buildToolsVersion globalConfiguration["androidBuildToolsVersion"]
+
     defaultConfig {
         applicationId "com.nullgr.androidcore"
-        minSdkVersion 16
-        targetSdkVersion 27
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
+
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
         vectorDrawables.useSupportLibrary=true
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -29,6 +37,7 @@ androidExtensions {
 
 dependencies {
     def commonDependencies = rootProject.ext.commonDependencies
+    def commonTestDependencies = rootProject.ext.commonTestDependencies
 
     implementation project(':core-adapter')
     implementation project(':core-adapter-ktx')
@@ -51,12 +60,8 @@ dependencies {
     implementation commonDependencies.rxAndroid
     implementation commonDependencies.rxRelay
     implementation commonDependencies.kotlin
-    implementation commonDependencies.supportCompatV7
-    implementation commonDependencies.supportAnnotations
-    implementation commonDependencies.supportV4
-    implementation commonDependencies.supportV13
-    implementation commonDependencies.supportCompatV7
-    implementation commonDependencies.supportRecyclerView
+    implementation commonDependencies.appCompat
+    implementation commonDependencies.recyclerView
     implementation commonDependencies.supportDesign
     implementation commonDependencies.supportCardView
     implementation commonDependencies.supportvectorDrawable
@@ -66,8 +71,8 @@ dependencies {
     implementation commonDependencies.colorPicker
     implementation commonDependencies.location
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    testImplementation commonTestDependencies.junit
 
+    androidTestImplementation commonTestDependencies.androidRunner
+    androidTestImplementation commonTestDependencies.espressoCore
 }

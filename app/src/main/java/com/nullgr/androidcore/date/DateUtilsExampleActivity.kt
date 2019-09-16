@@ -3,7 +3,7 @@ package com.nullgr.androidcore.date
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.nullgr.androidcore.R
 import com.nullgr.core.date.CommonFormats
 import com.nullgr.core.date.isToday

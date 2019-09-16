@@ -1,6 +1,6 @@
 package com.nullgr.core.adapter.ktx
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import com.nullgr.core.adapter.AdapterDelegatesFactory
 import com.nullgr.core.adapter.DynamicAdapter
 import com.nullgr.core.adapter.bindTo

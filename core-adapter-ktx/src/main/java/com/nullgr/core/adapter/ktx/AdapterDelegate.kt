@@ -1,6 +1,6 @@
 package com.nullgr.core.adapter.ktx
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import com.nullgr.core.adapter.AdapterDelegate
 import com.nullgr.core.adapter.items.ListItem

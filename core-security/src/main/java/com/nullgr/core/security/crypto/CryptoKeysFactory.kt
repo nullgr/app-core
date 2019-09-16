@@ -5,7 +5,7 @@ import android.os.Build
 import android.security.KeyPairGeneratorSpec
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
-import android.support.annotation.RequiresApi
+import androidx.annotation.RequiresApi
 import java.math.BigInteger
 import java.security.InvalidAlgorithmParameterException
 import java.security.InvalidParameterException

@@ -3,9 +3,9 @@ package com.nullgr.androidcore.keyboardanimator.dialog
 import android.annotation.TargetApi
 import android.content.Context
 import android.os.Build
-import android.support.annotation.RequiresApi
-import android.support.design.widget.BottomSheetBehavior
-import android.support.design.widget.BottomSheetDialog
+import androidx.annotation.RequiresApi
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import android.view.View
 import android.view.WindowManager
 import com.nullgr.androidcore.R
@@ -21,7 +21,7 @@ class SimpleBottomSheetDialog(context: Context, private val enableAnimation: Boo
 
     override fun onStart() {
         super.onStart()
-        val bottomSheet = findViewById<View>(android.support.design.R.id.design_bottom_sheet)
+        val bottomSheet = findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
         BottomSheetBehavior.from(bottomSheet).apply {
             state = BottomSheetBehavior.STATE_EXPANDED
             skipCollapsed = true

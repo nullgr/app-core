@@ -2,8 +2,8 @@ package com.nullgr.androidcore.adapter
 
 import android.graphics.Color
 import android.os.Bundle
-import android.support.annotation.ColorInt
-import android.support.v7.widget.LinearLayoutManager
+import androidx.annotation.ColorInt
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.method.ScrollingMovementMethod
 import android.widget.CompoundButton
 import android.widget.Toast

@@ -5,7 +5,7 @@ import android.graphics.BitmapShader
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Shader
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import com.nullgr.androidcore.R
 import com.nullgr.androidcore.rxcontacts.items.ContactItem
 import com.nullgr.core.adapter.AdapterDelegate

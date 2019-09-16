@@ -16,7 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
 
@@ -54,6 +54,7 @@ androidExtensions {
 dependencies {
     def commonDependencies = rootProject.ext.commonDependencies
 
+    compileOnly commonDependencies.appCompat
     compileOnly commonDependencies.supportCustomTabs
     compileOnly commonDependencies.supportAnnotations
     compileOnly commonDependencies.kotlin

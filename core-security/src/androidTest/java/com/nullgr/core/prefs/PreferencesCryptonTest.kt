@@ -1,7 +1,7 @@
 package com.nullgr.core.prefs
 
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import android.util.Log
 import com.nullgr.core.security.prefs.crypto.Api18PrefsCryptonImpl
 import com.nullgr.core.security.prefs.crypto.Api23PrefsCryptonImpl
@@ -27,7 +27,7 @@ class PreferencesCryptonTest {
 
     @Test
     fun encrypt_LegacyPrefsCryptonImpl_Success() {
-        val cryptonImpl = LegacyPrefsCryptonImpl(InstrumentationRegistry.getTargetContext(), ALIAS)
+        val cryptonImpl = LegacyPrefsCryptonImpl(InstrumentationRegistry.getInstrumentation().targetContext, ALIAS)
         val encrypted = cryptonImpl.encrypt(TEXT_TO_BE_ENCRYPTED)
         Log.d(LOG_TAG, "Legacy: $encrypted")
         Assert.assertNotEquals(TEXT_TO_BE_ENCRYPTED, encrypted)
@@ -35,7 +35,7 @@ class PreferencesCryptonTest {
 
     @Test
     fun decrypt_afterEncryption_LegacyPrefsCryptonImpl_Success() {
-        val cryptonImpl = LegacyPrefsCryptonImpl(InstrumentationRegistry.getTargetContext(), ALIAS)
+        val cryptonImpl = LegacyPrefsCryptonImpl(InstrumentationRegistry.getInstrumentation().targetContext, ALIAS)
         val encrypted = cryptonImpl.encrypt(TEXT_TO_BE_ENCRYPTED)
         val decrypted = cryptonImpl.decrypt(encrypted)
         Assert.assertEquals(TEXT_TO_BE_ENCRYPTED, decrypted)
@@ -43,16 +43,16 @@ class PreferencesCryptonTest {
 
     @Test(expected = GeneralSecurityException::class)
     fun decrypt_withOtherAlias_afterEncryption_LegacyPrefsCryptonImpl_Fails() {
-        val cryptonImpl1 = LegacyPrefsCryptonImpl(InstrumentationRegistry.getTargetContext(), ALIAS)
+        val cryptonImpl1 = LegacyPrefsCryptonImpl(InstrumentationRegistry.getInstrumentation().targetContext, ALIAS)
         val encrypted = cryptonImpl1.encrypt(TEXT_TO_BE_ENCRYPTED)
 
-        val cryptonImpl2 = LegacyPrefsCryptonImpl(InstrumentationRegistry.getTargetContext(), ALIAS + "SOMETHING")
+        val cryptonImpl2 = LegacyPrefsCryptonImpl(InstrumentationRegistry.getInstrumentation().targetContext, ALIAS + "SOMETHING")
         cryptonImpl2.decrypt(encrypted)
     }
 
     @Test
     fun encrypt_Api23PrefsCryptonImpl_Success() {
-        val cryptonImpl = Api23PrefsCryptonImpl(InstrumentationRegistry.getTargetContext(), ALIAS)
+        val cryptonImpl = Api23PrefsCryptonImpl(InstrumentationRegistry.getInstrumentation().targetContext, ALIAS)
         val encrypted = cryptonImpl.encrypt(TEXT_TO_BE_ENCRYPTED)
         Log.d(LOG_TAG, "Api23: $encrypted")
         Assert.assertNotEquals(TEXT_TO_BE_ENCRYPTED, encrypted)
@@ -60,7 +60,7 @@ class PreferencesCryptonTest {
 
     @Test
     fun decrypt_afterEncryption_Api23PrefsCryptonImpl_Success() {
-        val cryptonImpl = Api23PrefsCryptonImpl(InstrumentationRegistry.getTargetContext(), ALIAS)
+        val cryptonImpl = Api23PrefsCryptonImpl(InstrumentationRegistry.getInstrumentation().targetContext, ALIAS)
         val encrypted = cryptonImpl.encrypt(TEXT_TO_BE_ENCRYPTED)
         val decrypted = cryptonImpl.decrypt(encrypted)
         Assert.assertEquals(TEXT_TO_BE_ENCRYPTED, decrypted)
@@ -68,16 +68,16 @@ class PreferencesCryptonTest {
 
     @Test(expected = GeneralSecurityException::class)
     fun decrypt_withOtherAlias_afterEncryption_Api23PrefsCryptonImpl_Fails() {
-        val cryptonImpl1 = Api23PrefsCryptonImpl(InstrumentationRegistry.getTargetContext(), ALIAS)
+        val cryptonImpl1 = Api23PrefsCryptonImpl(InstrumentationRegistry.getInstrumentation().targetContext, ALIAS)
         val encrypted = cryptonImpl1.encrypt(TEXT_TO_BE_ENCRYPTED)
 
-        val cryptonImpl2 = Api23PrefsCryptonImpl(InstrumentationRegistry.getTargetContext(), ALIAS + "SOMETHING")
+        val cryptonImpl2 = Api23PrefsCryptonImpl(InstrumentationRegistry.getInstrumentation().targetContext, ALIAS + "SOMETHING")
         cryptonImpl2.decrypt(encrypted)
     }
 
     @Test
     fun encrypt_Api18PrefsCryptonImpl_Success() {
-        val cryptonImpl = Api18PrefsCryptonImpl(InstrumentationRegistry.getTargetContext(), ALIAS_RSA)
+        val cryptonImpl = Api18PrefsCryptonImpl(InstrumentationRegistry.getInstrumentation().targetContext, ALIAS_RSA)
         val encrypted = cryptonImpl.encrypt(TEXT_TO_BE_ENCRYPTED)
         Log.d(LOG_TAG, "Api18: $encrypted")
         Assert.assertNotEquals(TEXT_TO_BE_ENCRYPTED, encrypted)
@@ -85,7 +85,7 @@ class PreferencesCryptonTest {
 
     @Test
     fun decrypt_afterEncryption_Api18PrefsCryptonImpl_Success() {
-        val cryptonImpl = Api18PrefsCryptonImpl(InstrumentationRegistry.getTargetContext(), ALIAS_RSA)
+        val cryptonImpl = Api18PrefsCryptonImpl(InstrumentationRegistry.getInstrumentation().targetContext, ALIAS_RSA)
         val encrypted = cryptonImpl.encrypt(TEXT_TO_BE_ENCRYPTED)
         val decrypted = cryptonImpl.decrypt(encrypted)
         Assert.assertEquals(TEXT_TO_BE_ENCRYPTED, decrypted)
@@ -93,16 +93,16 @@ class PreferencesCryptonTest {
 
     @Test(expected = GeneralSecurityException::class)
     fun decrypt_withOtherAlias_afterEncryption_Api18PrefsCryptonImpl_Fails() {
-        val cryptonImpl1 = Api18PrefsCryptonImpl(InstrumentationRegistry.getTargetContext(), ALIAS_RSA)
+        val cryptonImpl1 = Api18PrefsCryptonImpl(InstrumentationRegistry.getInstrumentation().targetContext, ALIAS_RSA)
         val encrypted = cryptonImpl1.encrypt(TEXT_TO_BE_ENCRYPTED)
 
-        val cryptonImpl2 = Api18PrefsCryptonImpl(InstrumentationRegistry.getTargetContext(), ALIAS_RSA + "SOMETHING")
+        val cryptonImpl2 = Api18PrefsCryptonImpl(InstrumentationRegistry.getInstrumentation().targetContext, ALIAS_RSA + "SOMETHING")
         cryptonImpl2.decrypt(encrypted)
     }
 
     @Test(expected = GeneralSecurityException::class)
     fun decrypt_afterEncryption__afterReset_Api18PrefsCryptonImpl_Fails() {
-        val cryptonImpl = Api18PrefsCryptonImpl(InstrumentationRegistry.getTargetContext(), ALIAS_RSA_RESET)
+        val cryptonImpl = Api18PrefsCryptonImpl(InstrumentationRegistry.getInstrumentation().targetContext, ALIAS_RSA_RESET)
         val encrypted = cryptonImpl.encrypt(TEXT_TO_BE_ENCRYPTED)
         cryptonImpl.reset()
         cryptonImpl.decrypt(encrypted)
