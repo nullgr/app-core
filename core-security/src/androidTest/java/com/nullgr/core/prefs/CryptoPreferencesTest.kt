@@ -1,7 +1,7 @@
 package com.nullgr.core.prefs
 
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import com.nullgr.core.security.prefs.CryptoPreferences
 import org.junit.Assert
 import org.junit.Test

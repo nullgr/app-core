@@ -13,9 +13,11 @@ import org.junit.runners.Suite
  * @author Grishko Nikita
  */
 @RunWith(Suite::class)
-@Suite.SuiteClasses(value = [ExtensionFunctionsTest::class,
+@Suite.SuiteClasses(value = [
+    ExtensionFunctionsTest::class,
     UriToMethodValidatorTest::class,
     CursorFactoryTest::class,
     ProjectionFactoryTest::class,
-    SelectionArgsBuilderTest::class])
+    SelectionArgsBuilderTest::class
+])
 class RxContactsProviderTestSuite

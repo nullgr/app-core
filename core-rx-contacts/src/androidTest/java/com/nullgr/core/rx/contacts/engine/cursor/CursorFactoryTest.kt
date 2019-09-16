@@ -29,7 +29,7 @@ class CursorFactoryTest {
         @BeforeClass
         @JvmStatic
         fun init() {
-            contentResolver = InstrumentationRegistry.getContext().contentResolver
+            contentResolver = InstrumentationRegistry.getInstrumentation().context.contentResolver
         }
     }
 
