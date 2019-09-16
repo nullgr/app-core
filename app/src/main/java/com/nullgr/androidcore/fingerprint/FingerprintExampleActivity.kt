@@ -119,7 +119,7 @@ class FingerprintExampleActivity : AppCompatActivity() {
         cryptoObject?.let { nonNullCryptoObject ->
             rxFingerprintManger.startListening(nonNullCryptoObject)
                 .subscribe({ cryptoObjectResult ->
-                    val decryptedText = FingerprintCrypton.decrypt(cryptoObjectResult, preferences[KEY]!!)
+                    val decryptedText = FingerprintCrypton.decrypt(cryptoObjectResult!!, preferences[KEY]!!)
                         ?: ""
                     showAlert(decryptedText)
                 }, {
