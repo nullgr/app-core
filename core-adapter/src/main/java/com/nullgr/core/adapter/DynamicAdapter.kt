@@ -1,8 +1,8 @@
 package com.nullgr.core.adapter
 
+import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import android.view.ViewGroup
 import com.nullgr.core.adapter.items.ListItem
 
 /**
@@ -13,13 +13,9 @@ import com.nullgr.core.adapter.items.ListItem
  * @author vchernyshov
  * @author a.komarovskyi
  */
-open class DynamicAdapter constructor(
-    private val manager: AdapterDelegatesManager,
-    private val diffCalculator: DiffCalculator? = null
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+open class DynamicAdapter(factory: AdapterDelegatesFactory) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    constructor(factory: AdapterDelegatesFactory, calculator: DiffCalculator? = null) :
-        this(HashCodeBasedAdapterDelegatesManager(factory), calculator)
+    private val manager: AdapterDelegatesManager = HashCodeBasedAdapterDelegatesManager(factory)
 
     var items = arrayListOf<ListItem>()
 
@@ -55,23 +51,6 @@ open class DynamicAdapter constructor(
 
     fun getItemPosition(listItem: ListItem): Int = items.indexOf(listItem)
 
-    /**
-     * Updates items of adapter.
-     *
-     * @param newItems New list of items.
-     * @param enableDiffUtils True if you want use [DiffUtil] to calculate DiffResult, false otherwise.
-     * @param detectMoves True if DiffUtil should try to detect moved items, false otherwise.
-     */
-    fun updateData(newItems: List<ListItem>, enableDiffUtils: Boolean = true, detectMoves: Boolean = true) {
-        when (enableDiffUtils) {
-            true -> diffCalculator?.calculateDiff(this, ArrayList(items), ArrayList(newItems), detectMoves)
-            else -> {
-                setData(newItems)
-                notifyDataSetChanged()
-            }
-        }
-    }
-
     fun setData(newItems: List<ListItem>) {
         this.items.clear()
         this.items.addAll(newItems)
@@ -80,7 +59,7 @@ open class DynamicAdapter constructor(
 
     fun getItem(position: Int): ListItem? {
         return when {
-            !items.isEmpty() && position >= 0 -> items[position]
+            items.isNotEmpty() && position >= 0 -> items[position]
             else -> null
         }
     }
