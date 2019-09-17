@@ -12,28 +12,28 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 
 inline fun calculate(
-    adapter: DynamicAdapter,
+    oldItems: List<ListItem>,
     strategy: UpdateStrategy = UpdateStrategy.LATEST
 ): ObservableTransformer<List<ListItem>, Pair<List<ListItem>, DiffUtil.DiffResult>> {
     return ObservableTransformer { s ->
-        if (strategy == UpdateStrategy.LATEST) s.switchMap { calculateObservable(adapter, it) }
-        else s.concatMap { calculateObservable(adapter, it) }
+        if (strategy == UpdateStrategy.LATEST) s.switchMap { calculateObservable(oldItems, it) }
+        else s.concatMap { calculateObservable(oldItems, it) }
     }
 }
 
 inline fun calculateObservable(
-    adapter: DynamicAdapter,
-    items: List<ListItem>
+    oldItems: List<ListItem>,
+    newItems: List<ListItem>
 ): Observable<Pair<List<ListItem>, DiffUtil.DiffResult>> =
-    Observable.fromCallable { calculate(adapter, items) }
+    Observable.fromCallable { calculate(oldItems, newItems) }
 
 inline fun calculate(
-    adapter: DynamicAdapter,
-    items: List<ListItem>
+    oldItems: List<ListItem>,
+    newItems: List<ListItem>
 ): Pair<List<ListItem>, DiffUtil.DiffResult> {
-    val callback = Callback(ArrayList(adapter.items), ArrayList(items))
+    val callback = Callback(ArrayList(oldItems), ArrayList(newItems))
     val result = DiffUtil.calculateDiff(callback, true)
-    return Pair(items, result)
+    return Pair(newItems, result)
 }
 
 val DynamicAdapter.consumer: Consumer<Pair<List<ListItem>, DiffUtil.DiffResult>>
@@ -48,7 +48,7 @@ fun Observable<List<ListItem>>.bindTo(
     strategy: UpdateStrategy = UpdateStrategy.LATEST
 ) {
     this.observeOn(Schedulers.computation())
-        .compose(calculate(adapter, strategy))
+        .compose(calculate(adapter.items, strategy))
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(adapter.consumer)
         .addTo(compositeUnbind)
