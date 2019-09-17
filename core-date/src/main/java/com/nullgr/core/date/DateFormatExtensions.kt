@@ -1,34 +1,33 @@
 package com.nullgr.core.date
 
-import android.util.LruCache
-import java.text.SimpleDateFormat
-import java.util.*
+import org.threeten.bp.ZonedDateTime
+import org.threeten.bp.format.DateTimeFormatter
+import org.threeten.bp.format.DateTimeParseException
+import org.threeten.bp.temporal.TemporalAccessor
+import java.util.Locale
 
 /**
- * Class to cache and provide SimpleDateFormat objects.
+ * Class to cache and provide DateTimeFormatter objects.
  * @author Grishko Nikita
  */
-internal object SimpleDateFormatterCache {
-    private val cache = LruCache<String, SimpleDateFormat?>(16)
+object DateTimeFormatterCache {
+    private const val CACHE_SIZE = 16
+    private val cache = HashMap<String, DateTimeFormatter>(CACHE_SIZE)
 
-    operator fun get(name: String): SimpleDateFormat? {
-        return cache[name]
+    operator fun get(name: String): DateTimeFormatter? = cache[name]
+
+    operator fun set(name: String, formatter: DateTimeFormatter) {
+        cache.put(name, formatter)
     }
 
-    operator fun set(name: String, typeface: SimpleDateFormat) {
-        cache.put(name, typeface)
-    }
-
-    fun getOrCreateFormatter(dateFormat: String, timeZone: TimeZone? = null, locale: Locale = Locale.getDefault()): SimpleDateFormat {
-        val key = "$dateFormat${locale.displayName ?: ""}${timeZone?.displayName ?: ""}"
+    fun getOrCreateFormatter(pattern: String, locale: Locale = Locale.getDefault()): DateTimeFormatter {
+        val key = "$pattern${locale.displayName ?: ""}"
         var format = this[key]
         if (format == null) {
-            format = SimpleDateFormat(dateFormat, locale).apply {
-                timeZone?.let { this.timeZone = it }
-            }
+            format = DateTimeFormatter.ofPattern(pattern, locale)
             this[key] = format
         }
-        return format
+        return checkNotNull(format)
     }
 }
 
@@ -84,62 +83,57 @@ object CommonFormats {
 }
 
 /**
- * Format [Date] to date/time [String] with given format pattern.
- * SimpleDateFormatter objects will be created once and cached by params [dateFormat], [timeZone] and [locale].
+ * Format [TemporalAccessor] to date/time [String] with given format pattern.
+ * DateTimeFormatter objects will be created once and cached by params [dateFormat], [timeZone] and [locale].
  * For different params will be cached different objects
  *
  * @param dateFormat the pattern describing the date and time format
- * @param timeZone the given new time zone. Can be null
  * @param locale the locale whose date format symbols should be used. Can be null
  *
  * @return formatted date/time [String]
  */
-fun Date.toStringWithFormat(dateFormat: String, timeZone: TimeZone? = null, locale: Locale = Locale.getDefault()): String {
-    return SimpleDateFormatterCache.getOrCreateFormatter(dateFormat, timeZone, locale)
-            .format(this)
+inline fun TemporalAccessor.toStringWithFormat(pattern: String, locale: Locale = Locale.getDefault()): String {
+    return DateTimeFormatterCache.getOrCreateFormatter(pattern, locale)
+        .format(this)
 }
 
 /**
- * Format [Date] to date/time [String] with given instance of [SimpleDateFormat] without caching.
+ * Format [TemporalAccessor] to date/time [String] with given instance of [DateTimeFormatter] without caching.
  *
- * @param format instance of [SimpleDateFormat]
+ * @param format instance of [DateTimeFormatter]
  *
  * @return formatted date/time [String]
  */
-fun Date.toStringWithFormat(format: SimpleDateFormat): String =
-        format.format(this)
+inline fun TemporalAccessor.toStringWithFormat(format: DateTimeFormatter): String =
+    format.format(this)
 
 /**
- * Parse [String] to [Date] with given format pattern.
- * SimpleDateFormatter objects for parsing given string will be created
- * once and cached by params [dateFormat], [timeZone] and [locale].
- * For different params will be cached different objects
+ * Parse [String] to [ZonedDateTime] with given format pattern.
+ * DateTimeFormatter objects for parsing given string will be created
+ * once and cached by params [pattern].
+ * For different params will be cached different objects.
  *
- * @param dateFormat the pattern describing the date and time format
- * @param timeZone the given new time zone. Can be null
- * @param locale the locale whose date format symbols should be used. Can be null
+ * @param pattern the pattern describing the date and time format
  *
  * @return parsed [Date] object or <b>null</b> if something goes wrong while parsing date
  */
-fun String.toDate(dateFormat: String, timeZone: TimeZone? = null, locale: Locale = Locale.getDefault()): Date? {
-    return try {
-        SimpleDateFormatterCache.getOrCreateFormatter(dateFormat, timeZone, locale).parse(this)
-    } catch (t: Throwable) {
+inline fun String.toDate(pattern: String): ZonedDateTime? =
+    try {
+        ZonedDateTime.parse(this, DateTimeFormatterCache.getOrCreateFormatter(pattern))
+    } catch (e: DateTimeParseException) {
         null
     }
-}
 
 /**
- *  Parse [String] to [Date] with given [SimpleDateFormat] instance, without caching.
+ *  Parse [String] to [ZonedDateTime] with given [DateTimeFormatter] instance, without caching.
  *
- * @param format instance of [SimpleDateFormat]
+ * @param formatter instance of [DateTimeFormatter]
  *
- * @return parsed [Date] object or <b>null</b> if something goes wrong while parsing date
+ * @return parsed [ZonedDateTime] object or <b>null</b> if something goes wrong while parsing date
  */
-fun String.toDate(format: SimpleDateFormat): Date? {
-    return try {
-        format.parse(this)
-    } catch (t: Throwable) {
+inline fun String.toDate(formatter: DateTimeFormatter): ZonedDateTime? =
+    try {
+        ZonedDateTime.parse(this, formatter)
+    } catch (e: DateTimeParseException) {
         null
     }
-}

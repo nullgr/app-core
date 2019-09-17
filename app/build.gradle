@@ -69,4 +69,5 @@ dependencies {
     implementation commonDependencies.picasso
     implementation commonDependencies.colorPicker
     implementation commonDependencies.location
+    implementation commonDependencies.android310
 }

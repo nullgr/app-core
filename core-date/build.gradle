@@ -7,10 +7,11 @@ dependencies {
     def commonTestDependencies = rootProject.ext.commonTestDependencies
 
     compileOnly commonDependencies.kotlin
-    implementation commonDependencies.jodaTime
+    implementation commonDependencies.android310
 
-    androidTestImplementation commonTestDependencies.junit
-    androidTestImplementation commonTestDependencies.androidXJunit
+    testImplementation commonDependencies.kotlin
+    testImplementation commonTestDependencies.java310
+    testImplementation commonTestDependencies.junit
 }
 
 apply from: rootProject.file('release-bintray.gradle')
