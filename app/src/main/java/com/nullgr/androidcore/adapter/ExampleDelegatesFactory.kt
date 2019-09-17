@@ -10,17 +10,18 @@ import com.nullgr.androidcore.adapter.items.ExampleItem3
 import com.nullgr.androidcore.adapter.items.ExampleItemWithPayloads
 import com.nullgr.core.adapter.AdapterDelegate
 import com.nullgr.core.adapter.AdapterDelegatesFactory
+import com.nullgr.core.adapter.exceptions.DelegateNotDefinedException
 import com.nullgr.core.adapter.items.ListItem
 import com.nullgr.core.rx.RxBus
 
 class ExampleDelegatesFactory(val bus: RxBus) : AdapterDelegatesFactory {
 
     override fun createDelegate(clazz: Class<ListItem>): AdapterDelegate =
-            when (clazz) {
-                ExampleItem1::class.java -> ExampleDelegate1()
-                ExampleItem2::class.java -> ExampleDelegate2()
-                ExampleItem3::class.java -> ExampleDelegate3()
-                ExampleItemWithPayloads::class.java -> ExampleDelegateWithPayloads(bus)
-                else -> throw IllegalArgumentException("No delegate defined for ${clazz.simpleName}")
-            }
+        when (clazz) {
+            ExampleItem1::class.java -> ExampleDelegate1()
+            ExampleItem2::class.java -> ExampleDelegate2()
+            ExampleItem3::class.java -> ExampleDelegate3()
+            ExampleItemWithPayloads::class.java -> ExampleDelegateWithPayloads(bus)
+            else -> throw DelegateNotDefinedException(clazz)
+        }
 }
