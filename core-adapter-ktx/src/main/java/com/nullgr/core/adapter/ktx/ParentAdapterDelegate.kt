@@ -31,7 +31,8 @@ abstract class ParentAdapterDelegate(
             val disposable = createOrGetCompositeDisposable(parent)
             Observable.just(parent.items).bindTo(adapter, disposable)
         } else {
-            adapter.updateData(parent.items, false)
+            adapter.setData(parent.items)
+            adapter.notifyDataSetChanged()
         }
     }
 
