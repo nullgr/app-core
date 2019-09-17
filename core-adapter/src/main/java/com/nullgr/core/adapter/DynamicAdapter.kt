@@ -1,7 +1,6 @@
 package com.nullgr.core.adapter
 
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nullgr.core.adapter.items.ListItem
 
