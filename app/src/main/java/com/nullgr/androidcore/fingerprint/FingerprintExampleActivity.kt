@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
 import android.security.keystore.KeyPermanentlyInvalidatedException
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import com.nullgr.androidcore.R
 import com.nullgr.androidcore.fingerprint.dialog.SimpleFingerprintDialog
@@ -119,7 +119,7 @@ class FingerprintExampleActivity : AppCompatActivity() {
         cryptoObject?.let { nonNullCryptoObject ->
             rxFingerprintManger.startListening(nonNullCryptoObject)
                 .subscribe({ cryptoObjectResult ->
-                    val decryptedText = FingerprintCrypton.decrypt(cryptoObjectResult, preferences[KEY]!!)
+                    val decryptedText = FingerprintCrypton.decrypt(cryptoObjectResult!!, preferences[KEY]!!)
                         ?: ""
                     showAlert(decryptedText)
                 }, {

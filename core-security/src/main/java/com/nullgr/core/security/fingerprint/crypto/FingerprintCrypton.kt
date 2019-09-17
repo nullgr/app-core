@@ -3,7 +3,7 @@ package com.nullgr.core.security.fingerprint.crypto
 import android.annotation.TargetApi
 import android.os.Build
 import android.security.keystore.KeyPermanentlyInvalidatedException
-import android.support.v4.hardware.fingerprint.FingerprintManagerCompat
+import androidx.core.hardware.fingerprint.FingerprintManagerCompat
 import com.nullgr.core.security.crypto.CryptoKeysFactory
 import com.nullgr.core.security.crypto.Crypton
 import com.nullgr.core.security.crypto.fromBase64

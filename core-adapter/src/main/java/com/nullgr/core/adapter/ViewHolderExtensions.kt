@@ -2,7 +2,7 @@
 
 package com.nullgr.core.adapter
 
-import android.support.v7.widget.*
+import androidx.recyclerview.widget.RecyclerView
 import com.nullgr.core.adapter.items.*
 
 /**

@@ -3,8 +3,8 @@ package com.nullgr.androidcore.rxcontacts
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.LinearLayoutManager
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.SparseArray
 import com.nullgr.androidcore.R
 import com.nullgr.androidcore.adapter.BaseAdapterExampleActivity

@@ -1,7 +1,7 @@
 package com.nullgr.core.rx.contacts.engine.cursor
 
 import android.provider.ContactsContract
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nullgr.core.rx.contacts.domain.ContactEmail
 import com.nullgr.core.rx.contacts.domain.ContactPhone
 import com.nullgr.core.rx.contacts.domain.UserContact

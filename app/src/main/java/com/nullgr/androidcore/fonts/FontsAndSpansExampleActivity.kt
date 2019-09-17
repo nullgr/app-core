@@ -2,7 +2,7 @@ package com.nullgr.androidcore.fonts
 
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.nullgr.androidcore.R
 import com.nullgr.core.font.absSize
 import com.nullgr.core.font.applyForegroundColor

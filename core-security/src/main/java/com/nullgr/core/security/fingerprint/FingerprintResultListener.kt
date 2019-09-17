@@ -1,6 +1,6 @@
 package com.nullgr.core.security.fingerprint
 
-import android.support.v4.hardware.fingerprint.FingerprintManagerCompat
+import androidx.core.hardware.fingerprint.FingerprintManagerCompat
 
 /**
  * Callback for fingerprint authorization result.

@@ -1,7 +1,7 @@
 package com.nullgr.core.adapter
 
-import android.support.v7.util.DiffUtil
-import android.support.v7.util.ListUpdateCallback
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListUpdateCallback
 import com.nullgr.core.adapter.items.ListItem
 import com.nullgr.core.rx.schedulers.ComputationToMainSchedulersFacade
 import com.nullgr.core.rx.schedulers.SchedulersFacade

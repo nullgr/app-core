@@ -3,7 +3,7 @@ package com.nullgr.androidcore
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.nullgr.androidcore.adapter.AdapterExampleActivity
 import com.nullgr.androidcore.adapter.AdapterExampleWithPayloadsActivity
 import com.nullgr.androidcore.date.DateUtilsExampleActivity

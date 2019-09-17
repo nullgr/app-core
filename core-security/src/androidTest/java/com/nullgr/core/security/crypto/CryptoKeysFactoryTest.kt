@@ -1,7 +1,7 @@
 package com.nullgr.core.security.crypto
 
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -49,7 +49,7 @@ class CryptoKeysFactoryTest {
 
     @Test
     fun createRSAKeyPair_correctKey_Success() {
-        val rsaPair = CryptoKeysFactory.createRSAKeyPair(InstrumentationRegistry.getTargetContext(), "TestKeyAlias")
+        val rsaPair = CryptoKeysFactory.createRSAKeyPair(InstrumentationRegistry.getInstrumentation().targetContext, "TestKeyAlias")
         Assert.assertNotNull(rsaPair)
         Assert.assertEquals("RSA", rsaPair.public.algorithm)
         Assert.assertEquals("RSA", rsaPair.private.algorithm)
@@ -73,11 +73,11 @@ class CryptoKeysFactoryTest {
     @Test
     fun findOrCreateRSAKeyPair_sameAlias_Success() {
         val newRsaPair = CryptoKeysFactory.createRSAKeyPair(
-            InstrumentationRegistry.getTargetContext(),
+            InstrumentationRegistry.getInstrumentation().targetContext,
             "OneMore_RSA_Key"
         )
         val rsaPairFromKeyStore = CryptoKeysFactory.findOrCreateRSAKeyPair(
-            InstrumentationRegistry.getTargetContext(),
+            InstrumentationRegistry.getInstrumentation().targetContext,
             "OneMore_RSA_Key"
         )
         Assert.assertNotNull(newRsaPair)

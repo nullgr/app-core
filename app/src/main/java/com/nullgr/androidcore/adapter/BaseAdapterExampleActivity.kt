@@ -1,8 +1,8 @@
 package com.nullgr.androidcore.adapter
 
 import android.os.Bundle
-import android.support.annotation.CallSuper
-import android.support.v7.app.AppCompatActivity
+import androidx.annotation.CallSuper
+import androidx.appcompat.app.AppCompatActivity
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.nullgr.core.adapter.AdapterDelegatesFactory
 import com.nullgr.core.adapter.DynamicAdapter

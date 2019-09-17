@@ -1,7 +1,7 @@
 package com.nullgr.core.security.fingerprint.rx
 
 import android.content.Context
-import android.support.v4.hardware.fingerprint.FingerprintManagerCompat
+import androidx.core.hardware.fingerprint.FingerprintManagerCompat
 import com.nullgr.core.rx.asConsumer
 import com.nullgr.core.rx.asObservable
 import com.nullgr.core.rx.relay.SingleSubscriberRelay

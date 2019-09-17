@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.nullgr.core.intents.rxresult.delegates.BaseResolveResultActivityDelegate
 
 /**
@@ -26,7 +26,7 @@ class RxResolveResultActivity : AppCompatActivity() {
     }
 
     private val delegate: BaseResolveResultActivityDelegate by lazy {
-        BaseResolveResultActivityDelegate.newInstance(intent.extras[EXTRA_KEY], this)
+        BaseResolveResultActivityDelegate.newInstance(intent.extras!![EXTRA_KEY]!!, this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

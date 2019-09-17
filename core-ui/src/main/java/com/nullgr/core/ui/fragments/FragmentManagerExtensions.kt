@@ -1,18 +1,18 @@
 package com.nullgr.core.ui.fragments
 
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 
 /**
  * @author il_mov.
  */
 fun FragmentManager.addScreen(fragment: Fragment,
-                              containerId: Int,
-                              tag: String = fragment.javaClass.name,
-                              addToBackStack: Boolean = true,
-                              enterAnimation: Int = 0,
-                              exitAnimation: Int = 0) {
+                                                    containerId: Int,
+                                                    tag: String = fragment.javaClass.name,
+                                                    addToBackStack: Boolean = true,
+                                                    enterAnimation: Int = 0,
+                                                    exitAnimation: Int = 0) {
     beginTransaction()
             .also {
                 if (enterAnimation != 0 || exitAnimation != 0) {
@@ -25,11 +25,11 @@ fun FragmentManager.addScreen(fragment: Fragment,
 }
 
 fun FragmentManager.replaceScreen(fragment: Fragment,
-                                  containerId: Int,
-                                  tag: String = fragment.javaClass.name,
-                                  addToBackStack: Boolean = true,
-                                  enterAnimation: Int = 0,
-                                  exitAnimation: Int = 0) {
+                                                        containerId: Int,
+                                                        tag: String = fragment.javaClass.name,
+                                                        addToBackStack: Boolean = true,
+                                                        enterAnimation: Int = 0,
+                                                        exitAnimation: Int = 0) {
     beginTransaction()
             .also {
                 if (enterAnimation != 0 || exitAnimation != 0) {
@@ -95,7 +95,7 @@ inline fun <reified T> FragmentManager.findScreen(): T? {
 }
 
 fun FragmentManager.showDialog(dialog: DialogFragment,
-                               tag: String = dialog.javaClass.name) {
+                                                     tag: String = dialog.javaClass.name) {
     executePendingTransactions()
     findScreen<DialogFragment>()?.dismissAllowingStateLoss()
     dialog.show(this, tag)

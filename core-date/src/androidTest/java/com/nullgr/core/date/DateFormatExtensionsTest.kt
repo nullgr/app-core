@@ -1,14 +1,12 @@
 package com.nullgr.core.date
 
-import android.support.test.runner.AndroidJUnit4
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotEquals
-import org.junit.Assert.assertNotSame
-import org.junit.Assert.assertSame
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
+import java.util.TimeZone
 
 /**
  * @author Grishko Nikita
@@ -33,7 +31,7 @@ class DateFormatExtensionsTest {
         val dateFormat1 = SimpleDateFormatterCache.getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, TimeZone.getTimeZone("UTC"), Locale.getDefault())
         val dateFormat2 = SimpleDateFormatterCache.getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, TimeZone.getTimeZone("UTC"), Locale.getDefault())
         assertSame("getOrCreateFormatter function, must return equals formatter for equal format and time zone",
-                dateFormat1, dateFormat2)
+            dateFormat1, dateFormat2)
         assertEquals(dateFormat1, dateFormat2)
     }
 
@@ -42,7 +40,7 @@ class DateFormatExtensionsTest {
         val dateFormat1 = SimpleDateFormatterCache.getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, TimeZone.getDefault(), Locale.getDefault())
         val dateFormat2 = SimpleDateFormatterCache.getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, TimeZone.getTimeZone("UTC"), Locale.getDefault())
         assertNotSame("getOrCreateFormatter function, must return different formatter for equal format and diff time zone",
-                dateFormat1, dateFormat2)
+            dateFormat1, dateFormat2)
         assertNotEquals(dateFormat1, dateFormat2)
     }
 
@@ -51,7 +49,7 @@ class DateFormatExtensionsTest {
         val dateFormat1 = SimpleDateFormatterCache.getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE_TIME, TimeZone.getDefault(), Locale.getDefault())
         val dateFormat2 = SimpleDateFormatterCache.getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, TimeZone.getDefault(), Locale.getDefault())
         assertNotSame("getOrCreateFormatter function, must return different formatter for diff format and equal time zone",
-                dateFormat1, dateFormat2)
+            dateFormat1, dateFormat2)
         assertNotEquals(dateFormat1, dateFormat2)
     }
 
@@ -60,7 +58,7 @@ class DateFormatExtensionsTest {
         val dateFormat1 = SimpleDateFormatterCache.getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, null, Locale.getDefault())
         val dateFormat2 = SimpleDateFormatterCache.getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, null, Locale.getDefault())
         assertSame("getOrCreateFormatter function, must return equal formatter for equal format and null time zone",
-                dateFormat1, dateFormat2)
+            dateFormat1, dateFormat2)
         assertEquals(dateFormat1, dateFormat2)
     }
 
@@ -69,6 +67,6 @@ class DateFormatExtensionsTest {
         val dateFormat1 = SimpleDateFormatterCache.getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, TimeZone.getDefault(), Locale.ENGLISH)
         val dateFormat2 = SimpleDateFormatterCache.getOrCreateFormatter(CommonFormats.FORMAT_SIMPLE_DATE, TimeZone.getDefault(), Locale.FRANCE)
         assertNotEquals("getOrCreateFormatter function, must return different formatter for different locale",
-                dateFormat1, dateFormat2)
+            dateFormat1, dateFormat2)
     }
 }

@@ -6,7 +6,7 @@ import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
 import android.provider.ContactsContract
-import android.support.annotation.RequiresPermission
+import androidx.annotation.RequiresPermission
 import com.nullgr.core.rx.contacts.domain.BaseContact
 import com.nullgr.core.rx.contacts.domain.ContactEmail
 import com.nullgr.core.rx.contacts.domain.ContactPhone

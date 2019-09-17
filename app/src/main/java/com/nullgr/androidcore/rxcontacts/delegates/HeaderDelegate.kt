@@ -1,6 +1,6 @@
 package com.nullgr.androidcore.rxcontacts.delegates
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.widget.TextView
 import com.nullgr.androidcore.R
 import com.nullgr.androidcore.rxcontacts.items.HeaderItem

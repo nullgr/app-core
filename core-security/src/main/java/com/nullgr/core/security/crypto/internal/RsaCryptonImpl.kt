@@ -2,7 +2,7 @@ package com.nullgr.core.security.crypto.internal
 
 import android.content.Context
 import android.os.Build
-import android.support.annotation.RequiresApi
+import androidx.annotation.RequiresApi
 import com.nullgr.core.security.crypto.CryptoKeysFactory
 import com.nullgr.core.security.crypto.fromBase64
 import com.nullgr.core.security.crypto.toBase64

@@ -3,8 +3,8 @@ package com.nullgr.androidcore.intents
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
 import com.nullgr.androidcore.R
 import com.nullgr.core.intents.callIntent
@@ -86,7 +86,7 @@ class CommonIntentsExampleActivity : AppCompatActivity() {
                                 {
                                     it.intent?.let { intent ->
                                         RxContactsProvider.with(this)
-                                                .fromUri(UserContact::class.java, intent.data)
+                                                .fromUri(UserContact::class.java, intent.data!!)
                                                 .subscribe(
                                                         {
                                                             ("Contact (${it.firstOrNull()?.displayName}) " +

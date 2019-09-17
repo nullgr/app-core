@@ -2,7 +2,7 @@ package com.nullgr.androidcore.interactor.presentation
 
 import android.app.ProgressDialog
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.widget.Toast
 import com.jakewharton.rxrelay2.BehaviorRelay
 import com.nullgr.androidcore.R

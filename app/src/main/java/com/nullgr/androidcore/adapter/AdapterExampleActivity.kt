@@ -1,7 +1,7 @@
 package com.nullgr.androidcore.adapter
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nullgr.androidcore.R
 import com.nullgr.androidcore.adapter.items.ExampleItem1
 import com.nullgr.androidcore.adapter.items.ExampleItem2
