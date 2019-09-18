@@ -1,3 +1,12 @@
+# 3.0.0
+* [#61] - Copy collections before usage
+* [#68] - Create KeyboardAnimator and related classes
+* [#69] - Add generic withAdapterPosition /w stripped list argument
+* [#71] - Fix DiffUtils subscription issues
+* [#76] - Migrate to AndroidX
+* [#74] - Rework date module to use Android310
+* [#79] - Clean adapter module
+
 # 2.0.0-beta.1
 * Implement ***core-security*** module
 * [#51] - Fixed API version checking for WindowExtensions

@@ -14,11 +14,11 @@ ext {
     issueUrl = 'https://github.com/nullgr/app-core/issues'
     gitUrl = 'https://github.com/nullgr/app-core.git'
 
-    libraryVersion = '2.0.0-beta.1'
+    libraryVersion = '3.0.0'
 
     developerId = 'nullgr-dev'
     developerName = 'Nullgravity Developer'
-    developerEmail = 'dev@nullgr.com'
+    developerEmail = 'admin@nullgr.com'
 
     licenseName = 'MIT'
     licenseUrl = 'https://opensource.org/licenses/mit-license.php'
