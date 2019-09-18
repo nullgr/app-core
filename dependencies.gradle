@@ -33,9 +33,10 @@ ext {
     // others
     playServicesVersion = '15.0.1'
     rxLocationVersion = '2.1@aar'
-    jodaTimeVersion = '2.9.9.2'
     picassoVersion = '2.71828'
     colorPickerVersion = '1.2.0'
+    android310Version = '1.2.1'
+    java310Version = '1.3.1'
 
     junitVersion = '4.12'
     testVesrion = '1.1.0'
@@ -67,15 +68,16 @@ ext {
             // others
             location      : "com.google.android.gms:play-services-location:${playServicesVersion}",
             rxLocation    : "pl.charmas.android:android-reactive-location2:${rxLocationVersion}",
-            jodaTime      : "net.danlew:android.joda:${jodaTimeVersion}",
             picasso       : "com.squareup.picasso:picasso:${picassoVersion}",
-            colorPicker   : "com.pes.materialcolorpicker:library:${colorPickerVersion}"
+            colorPicker   : "com.pes.materialcolorpicker:library:${colorPickerVersion}",
+            android310    : "com.jakewharton.threetenabp:threetenabp:${android310Version}"
     ]
 
     commonTestDependencies = [
             junit        : "junit:junit:${junitVersion}",
             androidXJunit: "androidx.test.ext:junit:${testVesrion}",
             androidRunner: "androidx.test:runner:${testVesrion}",
-            androidRules : "androidx.test:rules:${testVesrion}"
+            androidRules : "androidx.test:rules:${testVesrion}",
+            java310      : "org.threeten:threetenbp:${java310Version}"
     ]
 }
