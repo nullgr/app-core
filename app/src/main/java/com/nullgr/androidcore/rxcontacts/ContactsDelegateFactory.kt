@@ -6,6 +6,7 @@ import com.nullgr.androidcore.rxcontacts.items.ContactItem
 import com.nullgr.androidcore.rxcontacts.items.HeaderItem
 import com.nullgr.core.adapter.AdapterDelegate
 import com.nullgr.core.adapter.AdapterDelegatesFactory
+import com.nullgr.core.adapter.exceptions.DelegateNotDefinedException
 import com.nullgr.core.adapter.items.ListItem
 
 /**
@@ -14,9 +15,9 @@ import com.nullgr.core.adapter.items.ListItem
 class ContactsDelegateFactory : AdapterDelegatesFactory {
 
     override fun createDelegate(clazz: Class<ListItem>): AdapterDelegate =
-            when (clazz) {
-                ContactItem::class.java -> ContactDelegate()
-                HeaderItem::class.java -> HeaderDelegate()
-                else -> throw IllegalArgumentException("No delegate defined for ${clazz.simpleName}")
-            }
+        when (clazz) {
+            ContactItem::class.java -> ContactDelegate()
+            HeaderItem::class.java -> HeaderDelegate()
+            else -> throw DelegateNotDefinedException(clazz)
+        }
 }
