@@ -10,7 +10,8 @@ import io.reactivex.Completable
  * @author vchernyshov
  */
 abstract class CompletableUseCase<in Params> protected constructor(
-        private val schedulersFacade: SchedulersFacade) {
+    private val schedulersFacade: SchedulersFacade
+) {
 
     /**
      * Builds a [Completable] which will be used when the current [CompletableUseCase] is executed.
@@ -20,7 +21,6 @@ abstract class CompletableUseCase<in Params> protected constructor(
     /**
      * Executes the current use case.
      */
-    open fun execute(params: Params? = null): Completable {
-        return buildUseCaseObservable(params).applyScheduler(schedulersFacade)
-    }
+    open fun execute(params: Params? = null): Completable =
+        buildUseCaseObservable(params).applyScheduler(schedulersFacade)
 }

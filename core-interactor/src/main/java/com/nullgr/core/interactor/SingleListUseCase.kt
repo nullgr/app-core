@@ -8,5 +8,5 @@ import com.nullgr.core.rx.schedulers.SchedulersFacade
  * @author vchernyshov
  */
 abstract class SingleListUseCase<T, in Params> constructor(
-        schedulersFacade: SchedulersFacade) :
-        SingleUseCase<List<T>, Params>(schedulersFacade)
+    schedulersFacade: SchedulersFacade
+) : SingleUseCase<List<T>, Params>(schedulersFacade)

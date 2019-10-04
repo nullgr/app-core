@@ -10,7 +10,8 @@ import io.reactivex.Flowable
  * @author vchernyshov
  */
 abstract class FlowableUseCase<T, in Params> protected constructor(
-        private val schedulersFacade: SchedulersFacade) {
+    private val schedulersFacade: SchedulersFacade
+) {
 
     /**
      * Builds a [Flowable] which will be used when the current [FlowableUseCase] is executed.
@@ -20,7 +21,6 @@ abstract class FlowableUseCase<T, in Params> protected constructor(
     /**
      * Executes the current use case.
      */
-    open fun execute(params: Params? = null): Flowable<T> {
-        return buildUseCaseObservable(params).applyScheduler(schedulersFacade)
-    }
+    open fun execute(params: Params? = null): Flowable<T> =
+        buildUseCaseObservable(params).applyScheduler(schedulersFacade)
 }
