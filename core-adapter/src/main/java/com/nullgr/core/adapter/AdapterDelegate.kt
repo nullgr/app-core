@@ -1,7 +1,7 @@
 package com.nullgr.core.adapter
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.nullgr.core.adapter.items.ListItem
 
 /**
@@ -31,14 +31,14 @@ abstract class AdapterDelegate {
      * @return True if class of item at [position] equals [itemType], false otherwise.
      */
     fun isForViewType(items: List<ListItem>, position: Int): Boolean =
-            items[position]::class == itemType
+        items[position]::class == itemType
 
     /**
      * Creates ViewHolder for delegate. By default creates [BaseViewHolder].
      * If you using Java create your own ViewHolder for each AdapterDelegate.
      */
     open fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder =
-            BaseViewHolder(parent, layoutResource)
+        BaseViewHolder(parent, layoutResource)
 
     /**
      * Place your bind logic here.
@@ -47,9 +47,11 @@ abstract class AdapterDelegate {
      * @param position Position of item in [items].
      * @param holder ViewHolder for this item type.
      */
-    open fun onBindViewHolder(items: List<ListItem>,
-                              position: Int,
-                              holder: RecyclerView.ViewHolder) {
+    open fun onBindViewHolder(
+        items: List<ListItem>,
+        position: Int,
+        holder: RecyclerView.ViewHolder
+    ) {
 
     }
 
@@ -67,10 +69,12 @@ abstract class AdapterDelegate {
      * @param holder ViewHolder for this item type.
      * @param payloads List of payloads objects.
      */
-    open fun onBindViewHolder(items: List<ListItem>,
-                              position: Int,
-                              holder: RecyclerView.ViewHolder,
-                              payloads: List<Any>) {
+    open fun onBindViewHolder(
+        items: List<ListItem>,
+        position: Int,
+        holder: RecyclerView.ViewHolder,
+        payloads: List<Any>
+    ) {
         payloads.forEach { payload ->
             when (payload) {
                 is Collection<*> -> payload.forEach { nestedPayload ->
@@ -91,10 +95,13 @@ abstract class AdapterDelegate {
      * @param holder ViewHolder for this item type.
      * @param payload Nested payload.
      */
-    open fun onBindViewHolder(items: List<ListItem>,
-                              position: Int,
-                              holder: RecyclerView.ViewHolder,
-                              payload: Any) {
+    open fun onBindViewHolder(
+        items: List<ListItem>,
+        position: Int,
+        holder: RecyclerView.ViewHolder,
+        payload: Any
+    ) {
+
     }
 
     /**
@@ -105,9 +112,7 @@ abstract class AdapterDelegate {
     /**
      * @see [RecyclerView.Adapter.onFailedToRecycleView]
      */
-    open fun onFailedToRecycleView(holder: RecyclerView.ViewHolder): Boolean {
-        return false
-    }
+    open fun onFailedToRecycleView(holder: RecyclerView.ViewHolder): Boolean = false
 
     /**
      * @see [RecyclerView.Adapter.onViewAttachedToWindow]
