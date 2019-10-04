@@ -37,11 +37,8 @@ interface ListItem {
     }
 
     /**
-     * Called in [areItemsTheSame] as a extra check for item uniquely.
-     * By default returns string representation of item class.
-     * If you list contains multiple items of same class you should override this method and return some unique property.
+     * Called in [areItemsTheSame] as an extra check for item uniqueness.
+     * You should return some unique property (id that won't change) for this item.
      */
-    fun getUniqueProperty(): Any {
-        return this::class.toString()
-    }
+    fun getUniqueProperty(): Any
 }
