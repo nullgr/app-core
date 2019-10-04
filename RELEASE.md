@@ -10,4 +10,3 @@ Releasing
  7. `git tag -a X.Y.X -m "Version X.Y.Z"` (where X.Y.Z is the new version)
  8. `./gradlew clean build bintrayUpload`
  9. `git push && git push --tags`
- 9. `git push && git push --tags`
