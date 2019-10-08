@@ -19,7 +19,7 @@ abstract class ParentAdapterDelegate(
 
     override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
         holder.withAdapterPosition<ListItem> { item, _ ->
-            disposables[item.getUniqueProperty()]?.clear()
+            disposables[item.uniqueProperty]?.clear()
         }
     }
 
@@ -36,10 +36,10 @@ abstract class ParentAdapterDelegate(
         }
     }
 
-    protected open fun createOrGetAdapter(item: ListItem): DynamicAdapter = adapters[item.getUniqueProperty()]
-        ?: DynamicAdapter(factory).also { adapters[item.getUniqueProperty()] = it }
+    protected open fun createOrGetAdapter(item: ListItem): DynamicAdapter = adapters[item.uniqueProperty]
+        ?: DynamicAdapter(factory).also { adapters[item.uniqueProperty] = it }
 
     protected open fun createOrGetCompositeDisposable(item: ListItem): CompositeDisposable =
-        disposables[item.getUniqueProperty()]
-            ?: CompositeDisposable().also { disposables[item.getUniqueProperty()] = it }
+        disposables[item.uniqueProperty]
+            ?: CompositeDisposable().also { disposables[item.uniqueProperty] = it }
 }

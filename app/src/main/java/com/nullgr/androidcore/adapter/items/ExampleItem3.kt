@@ -5,6 +5,9 @@ import com.nullgr.core.adapter.items.ListItem
 /**
  * @author vchernyshov.
  */
-data class ExampleItem3(val icon1: String, val text: String, val icon2: String) : ListItem {
-    override fun getUniqueProperty(): Any = text
-}
+data class ExampleItem3(
+    val icon1: String,
+    val text: String,
+    val icon2: String,
+    override val uniqueProperty: Any = text
+) : ListItem
