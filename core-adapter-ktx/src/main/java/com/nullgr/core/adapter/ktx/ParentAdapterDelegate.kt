@@ -30,17 +30,20 @@ abstract class ParentAdapterDelegate(
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         return super.onCreateViewHolder(parent).apply {
-            parent.findViewById<RecyclerView>(itemsViewId).addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            with(this as ViewHolder) {
+                containerView.findViewById<RecyclerView>(itemsViewId)
+                    .addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
-                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                    super.onScrollStateChanged(recyclerView, newState)
-                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                        recyclerView.layoutManager?.onSaveInstanceState()?.let {
-                            scrollStates[itemId] = it
+                    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                        super.onScrollStateChanged(recyclerView, newState)
+                        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                            recyclerView.layoutManager?.onSaveInstanceState()?.let {
+                                scrollStates[itemId] = it
+                            }
                         }
                     }
-                }
-            })
+                })
+            }
         }
     }
 
@@ -48,7 +51,7 @@ abstract class ParentAdapterDelegate(
         super.onViewRecycled(holder)
 
         with(holder as ViewHolder) {
-            itemView.findViewById<RecyclerView>(itemsViewId).layoutManager?.onSaveInstanceState()?.let {
+            containerView.findViewById<RecyclerView>(itemsViewId).layoutManager?.onSaveInstanceState()?.let {
                 scrollStates[itemId] = it
             }
         }
@@ -57,7 +60,7 @@ abstract class ParentAdapterDelegate(
     protected open fun setItems(holder: RecyclerView.ViewHolder, useDiffUtils: Boolean, parent: ParentItem) {
         with(holder as ViewHolder) {
             val adapter = createOrGetAdapter(parent)
-            val itemsView = itemView.findViewById<RecyclerView>(itemsViewId)
+            val itemsView = containerView.findViewById<RecyclerView>(itemsViewId)
             itemsView.adapter = adapter
 
             if (useDiffUtils) {
@@ -68,7 +71,9 @@ abstract class ParentAdapterDelegate(
                 adapter.notifyDataSetChanged()
             }
 
-            itemsView.layoutManager?.onRestoreInstanceState(scrollStates[itemId])
+            scrollStates[itemId]?.let {
+                itemsView.layoutManager?.onRestoreInstanceState(it)
+            }
         }
     }
 
