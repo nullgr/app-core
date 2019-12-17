@@ -22,6 +22,10 @@ open class DynamicAdapter(factory: AdapterDelegatesFactory) : RecyclerView.Adapt
         return manager.getItemViewType(items, position)
     }
 
+    override fun getItemId(position: Int): Long {
+        return items[position].getUniqueProperty().hashCode().toLong()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         manager.onCreateViewHolder(parent, viewType)
 
