@@ -12,11 +12,18 @@ import com.nullgr.core.adapter.items.ListItem
  * @author vchernyshov
  * @author a.komarovskyi
  */
-open class DynamicAdapter(factory: AdapterDelegatesFactory) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+open class DynamicAdapter(
+    factory: AdapterDelegatesFactory,
+    hasStableIds: Boolean = true
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val manager: AdapterDelegatesManager = HashCodeBasedAdapterDelegatesManager(factory)
 
     var items = arrayListOf<ListItem>()
+
+    init {
+        this.setHasStableIds(hasStableIds)
+    }
 
     override fun getItemViewType(position: Int): Int {
         return manager.getItemViewType(items, position)

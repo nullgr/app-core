@@ -31,18 +31,20 @@ abstract class ParentAdapterDelegate(
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         return super.onCreateViewHolder(parent).apply {
             with(this as ViewHolder) {
-                containerView.findViewById<RecyclerView>(itemsViewId)
-                    .addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                if (itemId != RecyclerView.NO_ID) {
+                    containerView.findViewById<RecyclerView>(itemsViewId)
+                        .addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
-                    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                        super.onScrollStateChanged(recyclerView, newState)
-                        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                            recyclerView.layoutManager?.onSaveInstanceState()?.let {
-                                scrollStates[itemId] = it
+                            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                                super.onScrollStateChanged(recyclerView, newState)
+                                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                                    recyclerView.layoutManager?.onSaveInstanceState()?.let {
+                                        scrollStates[itemId] = it
+                                    }
+                                }
                             }
-                        }
-                    }
-                })
+                        })
+                }
             }
         }
     }
@@ -51,8 +53,11 @@ abstract class ParentAdapterDelegate(
         super.onViewRecycled(holder)
 
         with(holder as ViewHolder) {
-            containerView.findViewById<RecyclerView>(itemsViewId).layoutManager?.onSaveInstanceState()?.let {
-                scrollStates[itemId] = it
+            if (itemId != RecyclerView.NO_ID) {
+                val itemsView = containerView.findViewById<RecyclerView>(itemsViewId)
+                itemsView.layoutManager?.onSaveInstanceState()?.let {
+                    scrollStates[itemId] = it
+                }
             }
         }
     }
