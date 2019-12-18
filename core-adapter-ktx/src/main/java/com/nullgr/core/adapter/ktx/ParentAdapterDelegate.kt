@@ -1,5 +1,7 @@
 package com.nullgr.core.adapter.ktx
 
+import android.os.Parcelable
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nullgr.core.adapter.AdapterDelegatesFactory
 import com.nullgr.core.adapter.DynamicAdapter
@@ -14,8 +16,11 @@ abstract class ParentAdapterDelegate(
     protected val factory: AdapterDelegatesFactory
 ) : AdapterDelegate() {
 
+    abstract val itemsViewId: Int
+
     protected val adapters = mutableMapOf<Any, DynamicAdapter>()
     protected val disposables = mutableMapOf<Any, CompositeDisposable>()
+    protected val scrollStates = mutableMapOf<Long, Parcelable>()
 
     override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
         holder.withAdapterPosition<ListItem> { item, _ ->
@@ -23,16 +28,57 @@ abstract class ParentAdapterDelegate(
         }
     }
 
-    protected open fun setItems(view: RecyclerView, useDiffUtils: Boolean, parent: ParentItem) {
-        val adapter = createOrGetAdapter(parent)
-        view.adapter = adapter
+    override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+        return super.onCreateViewHolder(parent).apply {
+            with(this as ViewHolder) {
+                if (itemId != RecyclerView.NO_ID) {
+                    containerView.findViewById<RecyclerView>(itemsViewId)
+                        .addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
-        if (useDiffUtils) {
-            val disposable = createOrGetCompositeDisposable(parent)
-            Observable.just(parent.items).bindTo(adapter, disposable)
-        } else {
-            adapter.setData(parent.items)
-            adapter.notifyDataSetChanged()
+                            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                                super.onScrollStateChanged(recyclerView, newState)
+                                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                                    recyclerView.layoutManager?.onSaveInstanceState()?.let {
+                                        scrollStates[itemId] = it
+                                    }
+                                }
+                            }
+                        })
+                }
+            }
+        }
+    }
+
+    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+        super.onViewRecycled(holder)
+
+        with(holder as ViewHolder) {
+            if (itemId != RecyclerView.NO_ID) {
+                val itemsView = containerView.findViewById<RecyclerView>(itemsViewId)
+                itemsView.layoutManager?.onSaveInstanceState()?.let {
+                    scrollStates[itemId] = it
+                }
+            }
+        }
+    }
+
+    protected open fun setItems(holder: RecyclerView.ViewHolder, useDiffUtils: Boolean, parent: ParentItem) {
+        with(holder as ViewHolder) {
+            val adapter = createOrGetAdapter(parent)
+            val itemsView = containerView.findViewById<RecyclerView>(itemsViewId)
+            itemsView.adapter = adapter
+
+            if (useDiffUtils) {
+                val disposable = createOrGetCompositeDisposable(parent)
+                Observable.just(parent.items).bindTo(adapter, disposable)
+            } else {
+                adapter.setData(parent.items)
+                adapter.notifyDataSetChanged()
+            }
+
+            scrollStates[itemId]?.let {
+                itemsView.layoutManager?.onRestoreInstanceState(it)
+            }
         }
     }
 
