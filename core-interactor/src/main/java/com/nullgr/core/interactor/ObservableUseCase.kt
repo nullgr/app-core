@@ -10,7 +10,8 @@ import io.reactivex.Observable
  * @author vchernyshov
  */
 abstract class ObservableUseCase<T, in Params> protected constructor(
-        private val schedulersFacade: SchedulersFacade) {
+    private val schedulersFacade: SchedulersFacade
+) {
 
     /**
      * Builds a [Observable] which will be used when the current [ObservableUseCase] is executed.
@@ -20,7 +21,6 @@ abstract class ObservableUseCase<T, in Params> protected constructor(
     /**
      * Executes the current use case.
      */
-    open fun execute(params: Params? = null): Observable<T> {
-        return buildUseCaseObservable(params).applyScheduler(schedulersFacade)
-    }
+    open fun execute(params: Params? = null): Observable<T> =
+        buildUseCaseObservable(params).applyScheduler(schedulersFacade)
 }

@@ -8,5 +8,5 @@ import com.nullgr.core.rx.schedulers.SchedulersFacade
  * @author vchernyshov
  */
 abstract class ObservableListUseCase<T, in Params> constructor(
-        schedulersFacade: SchedulersFacade) :
-        ObservableUseCase<List<T>, Params>(schedulersFacade)
+    schedulersFacade: SchedulersFacade
+) : ObservableUseCase<List<T>, Params>(schedulersFacade)
