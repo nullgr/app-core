@@ -5,7 +5,11 @@ import com.nullgr.core.adapter.items.ListItem
 /**
  * @author chernyshov.
  */
-data class InteractorItem(val type: Type, val title: String) : ListItem {
+data class InteractorItem(
+    val type: Type,
+    val title: String,
+    override val uniqueProperty: Any = type
+) : ListItem {
 
     enum class Type {
         OBSERVABLE, OBSERVABLE_LIST,

@@ -6,7 +6,12 @@ import com.nullgr.core.adapter.items.ListItem
 /**
  * @author chernyshov.
  */
-data class ExampleItemWithPayloads(val title: String, val subTitle: String, @ColorInt val color: Int) : ListItem {
+data class ExampleItemWithPayloads(
+    val title: String,
+    val subTitle: String,
+    @ColorInt val color: Int,
+    override val uniqueProperty: Any = title
+) : ListItem {
 
     override fun getChangePayload(other: ListItem): Any {
         if (this::class == other::class) {

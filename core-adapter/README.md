@@ -31,18 +31,20 @@ class SomeDelegatesFactory : AdapterDelegatesFactory {
 ```
 
 For ```ListItem``` subclasses we recommend to use Kotlin data classes.
-You need to override ```ListItem.getUniqueProperty``` if your list could contains more that one
-element of same ```ListItem```.
 
 If you need to updated some view that represents one of item property using DiffUtils - override
 ```ListItem.getChangePayload```.
 
 Example of ```ListItem``` with payloads:
 ```kotlin
-data class SomeItemWithPayloads(val id: String, val title: String, val subTitle: String, @ColorInt val color: Int) : ListItem {
+data class SomeItemWithPayloads(
+    val id: String,
+    val title: String,
+    val subTitle: String,
+    @ColorInt val color: Int,
+    override val uniqueProperty: Any = id
+) : ListItem {
 
-    override fun getUniqueProperty(): Any = id
-    
     override fun getChangePayload(other: ListItem): Any {
         if (this::class == other::class) {
             other as ExampleItemWithPayloads
