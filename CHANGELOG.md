@@ -1,3 +1,6 @@
+# 3.1.0
+* Improvements and code style fixes
+
 # 3.0.0
 * [#61] - Copy collections before usage
 * [#68] - Create KeyboardAnimator and related classes
