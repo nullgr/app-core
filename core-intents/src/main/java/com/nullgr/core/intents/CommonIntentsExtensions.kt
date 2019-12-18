@@ -11,9 +11,9 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.ContactsContract
 import android.provider.MediaStore
-import android.support.annotation.ColorInt
-import android.support.annotation.RequiresPermission
-import android.support.customtabs.CustomTabsIntent
+import androidx.annotation.ColorInt
+import androidx.annotation.RequiresPermission
+import androidx.browser.customtabs.CustomTabsIntent
 import android.telephony.PhoneNumberUtils
 import android.text.TextUtils
 import android.widget.Toast

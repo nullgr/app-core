@@ -2,7 +2,7 @@ package com.nullgr.core.font
 
 import android.content.Context
 import android.graphics.Typeface
-import android.support.v7.app.ActionBar
+import androidx.appcompat.app.ActionBar
 import android.util.Log
 import android.widget.Toolbar
 

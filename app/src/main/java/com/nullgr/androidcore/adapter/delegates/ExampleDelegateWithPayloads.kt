@@ -1,6 +1,6 @@
 package com.nullgr.androidcore.adapter.delegates
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.nullgr.androidcore.R
@@ -20,7 +20,7 @@ class ExampleDelegateWithPayloads(private val bus: RxBus) : AdapterDelegate() {
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         return super.onCreateViewHolder(parent).apply {
             val onClickListener = View.OnClickListener { view ->
-                this.withAdapterPosition { _, item, _ ->
+                this.withAdapterPosition<ExampleItemWithPayloads> {item, _ ->
                     when (view.id) {
                         R.id.colorView -> bus.post(Event.Click("child colorView"))
                         else -> bus.post(Event.Click(item))

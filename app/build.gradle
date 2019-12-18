@@ -5,16 +5,24 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
+    buildToolsVersion globalConfiguration["androidBuildToolsVersion"]
+
     defaultConfig {
         applicationId "com.nullgr.androidcore"
-        minSdkVersion 16
-        targetSdkVersion 27
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
+
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
         vectorDrawables.useSupportLibrary=true
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -55,23 +63,15 @@ dependencies {
     implementation commonDependencies.rxAndroid
     implementation commonDependencies.rxRelay
     implementation commonDependencies.kotlin
-    implementation commonDependencies.supportCompatV7
-    implementation commonDependencies.supportAnnotations
-    implementation commonDependencies.supportV4
-    implementation commonDependencies.supportV13
-    implementation commonDependencies.supportCompatV7
-    implementation commonDependencies.supportRecyclerView
-    implementation commonDependencies.supportDesign
-    implementation commonDependencies.supportCardView
-    implementation commonDependencies.supportvectorDrawable
-    implementation commonDependencies.supportConstraint
-    implementation commonDependencies.supportCustomTabs
+    implementation commonDependencies.appCompat
+    implementation commonDependencies.recyclerView
+    implementation commonDependencies.material
+    implementation commonDependencies.cardView
+    implementation commonDependencies.vectorDrawable
+    implementation commonDependencies.constraint
+    implementation commonDependencies.browser
     implementation commonDependencies.picasso
     implementation commonDependencies.colorPicker
     implementation commonDependencies.location
-
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
+    implementation commonDependencies.android310
 }

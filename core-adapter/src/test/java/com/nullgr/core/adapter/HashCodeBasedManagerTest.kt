@@ -1,8 +1,8 @@
 package com.nullgr.core.adapter
 
 import com.nullgr.core.adapter.items.ListItem
-import kotlin.test.Test
-import kotlin.test.assertTrue
+import org.junit.Assert.*
+import org.junit.Test
 
 class HashCodeBasedManagerTest {
 

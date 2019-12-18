@@ -2,11 +2,11 @@ package com.nullgr.androidcore.adapter
 
 import android.graphics.Color
 import android.os.Bundle
-import android.support.annotation.ColorInt
-import android.support.v7.widget.LinearLayoutManager
 import android.text.method.ScrollingMovementMethod
 import android.widget.CompoundButton
 import android.widget.Toast
+import androidx.annotation.ColorInt
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nullgr.androidcore.R
 import com.nullgr.androidcore.adapter.items.ExampleItemWithPayloads
 import com.pes.androidmaterialcolorpickerdialog.ColorPicker
@@ -36,20 +36,20 @@ class AdapterExampleWithPayloadsActivity : BaseAdapterExampleActivity(), ColorPi
         itemsView.adapter = adapter
 
         val item = ExampleItemWithPayloads("Initial title", "Initial subtitle", itemColor)
-        adapter.updateData(arrayListOf(item))
+        itemsRelay.accept(arrayListOf(item))
 
         val disposable = bus.observable()
-                .filter { it is Event }
-                .map { it as Event }
-                .subscribe { event ->
-                    when (event) {
-                        is Event.Click -> Toast.makeText(this, "Clicked ${event.item}", Toast.LENGTH_SHORT).show()
-                        is Event.Payload -> {
-                            val text = "${logView.text}\n${event.payload}"
-                            logView.text = text
-                        }
+            .filter { it is Event }
+            .map { it as Event }
+            .subscribe { event ->
+                when (event) {
+                    is Event.Click -> Toast.makeText(this, "Clicked ${event.item}", Toast.LENGTH_SHORT).show()
+                    is Event.Payload -> {
+                        val text = "${logView.text}\n${event.payload}"
+                        logView.text = text
                     }
                 }
+            }
 
         compositeDisposable.add(disposable)
 
@@ -66,7 +66,11 @@ class AdapterExampleWithPayloadsActivity : BaseAdapterExampleActivity(), ColorPi
             val newTitle = titleInputView.text.toString()
             val newSubTitle = subTitleInputView.text.toString()
             val newItem = item.copy(title = newTitle, subTitle = newSubTitle, color = itemColor)
-            adapter.updateData(arrayListOf(newItem), useDiffUtils)
+            if (useDiffUtils) itemsRelay.accept(arrayListOf(newItem))
+            else {
+                adapter.setData(arrayListOf(newItem))
+                adapter.notifyDataSetChanged()
+            }
         }
 
         logView.movementMethod = ScrollingMovementMethod()

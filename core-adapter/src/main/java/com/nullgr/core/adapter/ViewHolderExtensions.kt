@@ -2,7 +2,7 @@
 
 package com.nullgr.core.adapter
 
-import android.support.v7.widget.*
+import androidx.recyclerview.widget.RecyclerView
 import com.nullgr.core.adapter.items.*
 
 /**
@@ -15,15 +15,16 @@ inline fun RecyclerView.ViewHolder.items(): List<ListItem>? {
 }
 
 /**
- * Extension function that invoke given [block] if position not equals [RecyclerView.NO_POSITION],
- * list of items that returned by [items] extension not null and if position in [items] bounds.
+ * Extension function that invoke given [block] if position not equals [RecyclerView.NO_POSITION]
  */
-inline fun RecyclerView.ViewHolder.withAdapterPosition(block: (items: List<ListItem>, item: ListItem, position: Int) -> Unit) {
+inline fun <reified T : ListItem> RecyclerView.ViewHolder.withAdapterPosition(
+    block: (item: T, position: Int) -> Unit
+) {
     with(adapterPosition) {
         if (this != RecyclerView.NO_POSITION) {
             val items = items()
             if (items != null && this >= 0 && this < items.size) {
-                block.invoke(items, items[this], this)
+                block.invoke(items[this] as T, this)
             }
         }
     }

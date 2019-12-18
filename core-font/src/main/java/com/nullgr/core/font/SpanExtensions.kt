@@ -2,7 +2,7 @@ package com.nullgr.core.font
 
 import android.content.Context
 import android.graphics.Typeface
-import android.support.annotation.ColorInt
+import androidx.annotation.ColorInt
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.AbsoluteSizeSpan

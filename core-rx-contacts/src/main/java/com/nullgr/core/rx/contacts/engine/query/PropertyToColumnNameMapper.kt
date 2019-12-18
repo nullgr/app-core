@@ -1,7 +1,7 @@
 package com.nullgr.core.rx.contacts.engine.query
 
 import android.provider.ContactsContract
-import android.support.annotation.VisibleForTesting
+import androidx.annotation.VisibleForTesting
 import com.nullgr.core.rx.contacts.domain.ContactEmail
 import com.nullgr.core.rx.contacts.domain.ContactPhone
 import com.nullgr.core.rx.contacts.domain.UserContact

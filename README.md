@@ -86,25 +86,24 @@ repositories {
 
 dependencies {
     // for all modules
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$KOTLIN_VERSION"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$KOTLIN_VERSION"
     
     // core-all
     implementation "com.nullgr.core:core-all:$CORE_VERSION"
-    implementation "com.android.support:recyclerview-v7:$SUPPORT_VERSION"
-    implementation "com.android.support:appcompat-v7:$SUPPORT_VERSION"
-    implementation "com.android.support:customtabs:$SUPPORT_VERSION"
-    implementation "com.android.support:support-annotations:$SUPPORT_VERSION"
-    implementation "com.android.support:support-v4:$SUPPORT_VERSION"
+    implementation "androidx.recyclerview:recyclerview:$RECYCLER_VERSION"
+    implementation "androidx.appcompat:appcompat:$COMPAT_VERSION"
+    implementation "androidx.browser:browser:$BROWSER_VERSION"
+    implementation "androidx.annotation:annotation:$ANOTATION_VERSION"
     implementation "com.google.android.gms:play-services-location:$PLAY_SERVICES_VERSION"
     
     // core-adapter
     implementation "com.nullgr.core:core-adapter:$CORE_VERSION"
-    implementation "com.android.support:recyclerview-v7:$SUPPORT_VERSION"
+    implementation "androidx.recyclerview:recyclerview:$RECYCLER_VERSION"
     
     // core-adapter-ktx
     implementation "com.nullgr.core:core-adapter:$CORE_VERSION"
     implementation "com.nullgr.core:core-adapter-ktx:$CORE_VERSION"
-    implementation "com.android.support:recyclerview-v7:$SUPPORT_VERSION"
+    implementation "androidx.recyclerview:recyclerview:$RECYCLER_VERSION"
     
     // core-collections
     implementation "com.nullgr.core:core-collections:$CORE_VERSION"
@@ -117,15 +116,15 @@ dependencies {
     
     // core-font
     implementation "com.nullgr.core:core-font:$CORE_VERSION"
-    implementation "com.android.support:appcompat-v7:$SUPPORT_VERSION"
+    implementation "androidx.appcompat:appcompat:$COMPAT_VERSION"
     
     // core-hardware
     implementation "com.nullgr.core:core-hardware:$CORE_VERSION"
      
     // core-intents
     implementation "com.nullgr.core:core-intents:$CORE_VERSION"
-    implementation "com.android.support:customtabs:$SUPPORT_VERSION"
-    implementation "com.android.support:support-annotations:$SUPPORT_VERSION"
+    implementation "androidx.browser:browser:$BROWSER_VERSION"
+    implementation "androidx.annotation:annotation:$ANOTATION_VERSION"
     
     // core-interactor
     implementation "com.nullgr.core:core-interactor:$CORE_VERSION"
@@ -135,15 +134,14 @@ dependencies {
     
     // core-resources
     implementation "com.nullgr.core:core-resources:$CORE_VERSION"
-    implementation "com.android.support:support-v4:$SUPPORT_VERSION"
-    implementation "com.android.support:support-annotations:$SUPPORT_VERSION"
+    implementation "androidx.annotation:annotation:$ANOTATION_VERSION"
     
     // core-rx
     implementation "com.nullgr.core:core-rx:$CORE_VERSION"
     
     // core-rx-contacts
     implementation "com.nullgr.core:core-rx-contacts:$CORE_VERSION"
-    implementation "com.android.support:support-annotations:$SUPPORT_VERSION"
+    implementation "androidx.annotation:annotation:$ANOTATION_VERSION"
     
     // core-rx-location
     implementation "com.nullgr.core:core-rx-location:$CORE_VERSION"
@@ -151,13 +149,12 @@ dependencies {
     
     // core-ui
     implementation "com.nullgr.core:core-ui:$CORE_VERSION"
-    implementation "com.android.support:recyclerview-v7:$SUPPORT_VERSION"
-    implementation "com.android.support:support-v4:$SUPPORT_VERSION"
-    implementation "com.android.support:appcompat-v7:$SUPPORT_VERSION"
+    implementation "androidx.recyclerview:recyclerview:$RECYCLER_VERSION"
+    implementation "androidx.appcompat:appcompat:$COMPAT_VERSION"
     
     //core-security
     implementation "com.nullgr.core:core-security:$CORE_VERSION"
-    implementation "com.android.support:appcompat-v7:$SUPPORT_VERSION"
+    implementation "androidx.appcompat:appcompat:$COMPAT_VERSION"
 }
 ```
 

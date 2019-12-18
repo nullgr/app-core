@@ -1,6 +1,6 @@
 package com.nullgr.androidcore.interactor.presentation.adapter.delegates
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import com.nullgr.androidcore.R
 import com.nullgr.androidcore.interactor.presentation.adapter.items.InteractorItem
 import com.nullgr.core.adapter.AdapterDelegate

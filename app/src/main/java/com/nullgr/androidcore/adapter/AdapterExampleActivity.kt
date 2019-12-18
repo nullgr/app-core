@@ -1,7 +1,7 @@
 package com.nullgr.androidcore.adapter
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nullgr.androidcore.R
 import com.nullgr.androidcore.adapter.items.ExampleItem1
 import com.nullgr.androidcore.adapter.items.ExampleItem2
@@ -9,10 +9,8 @@ import com.nullgr.androidcore.adapter.items.ExampleItem3
 import com.nullgr.core.adapter.items.ListItem
 import com.nullgr.core.collections.replace
 import com.nullgr.core.ui.decor.DividerItemDecoration
-import kotlinx.android.synthetic.main.activity_adapter_example.addItemButton
-import kotlinx.android.synthetic.main.activity_adapter_example.itemsView
-import kotlinx.android.synthetic.main.activity_adapter_example.removeItemButton
-import java.util.*
+import kotlinx.android.synthetic.main.activity_adapter_example.*
+import java.util.Random
 
 /**
  * @author chernyshov.
@@ -22,6 +20,7 @@ class AdapterExampleActivity : BaseAdapterExampleActivity() {
     private val random = Random()
     private val items = arrayListOf<ListItem>()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_adapter_example)
@@ -30,19 +29,19 @@ class AdapterExampleActivity : BaseAdapterExampleActivity() {
         itemsView.addItemDecoration(DividerItemDecoration(this, R.drawable.divider_adapter_item))
 
         items.replace(prepareExampleItems())
-        adapter.updateData(newItems = items, enableDiffUtils = true, detectMoves = true)
+        itemsRelay.accept(items)
 
         addItemButton.setOnClickListener {
             items.add(2, ExampleItem2(Data.URLS[random.nextInt(Data.URLS.size)],
                 "Added ExampleItem ${random.nextInt(100)}",
                 "SomeText2"))
-            adapter.updateData(newItems = items, enableDiffUtils = true, detectMoves = true)
+            itemsRelay.accept(items)
         }
 
         removeItemButton.setOnClickListener {
             if (items.size > 2)
                 items.removeAt(2)
-            adapter.updateData(newItems = items, enableDiffUtils = true, detectMoves = true)
+            itemsRelay.accept(items)
         }
     }
 

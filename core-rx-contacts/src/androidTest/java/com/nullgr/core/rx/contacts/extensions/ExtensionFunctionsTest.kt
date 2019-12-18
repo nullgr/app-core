@@ -1,6 +1,6 @@
 package com.nullgr.core.rx.contacts.extensions
 
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.nullgr.core.rx.contacts.domain.BaseContact
 import com.nullgr.core.rx.contacts.domain.UserContact
 import org.junit.Assert
