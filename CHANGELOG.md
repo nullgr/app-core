@@ -1,3 +1,6 @@
+# 3.1.1
+* [#87] - Remove error prone check, add multiple id support
+
 # 3.1.0
 * Improvements and code style fixes
 
